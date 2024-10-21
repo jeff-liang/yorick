@@ -8,6 +8,7 @@ import {
 
 declare global {
   interface Window {
+    revision?: number;
     rootset?: HTMLFrameSetElement;
     charpane?: Window;
     chatpane?: Window;
@@ -17,7 +18,16 @@ declare global {
   }
 }
 
+const SINCE_REVISION = 28097;
+
 function load() {
+  const revision = window.parent.parent.revision;
+  // Skip version check for custom build.
+  if (revision !== undefined && 0 < revision && revision < SINCE_REVISION) {
+    document.body.innerHTML = `<h1>Need KoLmafia at least version ${SINCE_REVISION} for YORICK (you have ${revision}).</h1>`;
+    return;
+  }
+
   const allFrames = getFrames();
   if (!allFrames) {
     console.error("YORICK: Failed to load. Can't find frames.");

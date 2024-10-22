@@ -41,14 +41,10 @@ const BookOfFacts = () => {
       node:
         habitatMonster && habitatMonsterName !== "none" && fightsLeft > 0 ? (
           <Tile
-            header={`Fight ${plural(fightsLeft, `more non-native ${habitatMonsterName}`)}`}
+            header={`Fight ${plural(fightsLeft, `habitat ${habitatMonsterName}`)}`}
             id="habitat-nag"
             imageUrl="/images/itemimages/factbook.gif"
           >
-            <Line>
-              Neaaaar, faaaaaaar, wherever you spaaaaaaar, I believe that the
-              heart does go onnnnn.
-            </Line>
             <Line>
               Appears as a wandering monster in any zone. Try a place with few
               competing monsters{olfactionString}.{eagleString}

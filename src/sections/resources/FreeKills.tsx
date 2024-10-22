@@ -78,6 +78,12 @@ const freeKillSources: FreeKillSource[] = [
         5 - get("_powderedMadnessUses"),
       ),
   },
+  {
+    source: $item`power pill`,
+    thing: $item`power pill`,
+    remaining: () =>
+      Math.min(availableAmount($item`power pill`), 20 - get("_powerPillUses")),
+  },
 ];
 
 const FreeKills: React.FC = () => {

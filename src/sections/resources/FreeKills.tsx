@@ -6,14 +6,23 @@ import {
   Skill,
   spleenLimit,
 } from "kolmafia";
-import { $effect, $item, $skill, clamp, get, have, sum } from "libram";
+import { $effect, $item, $items, $skill, clamp, get, have, sum } from "libram";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { plural } from "../../util/text";
 
+// Item, Skill, or [name, have()]
+type Source = Item | Skill | [string, () => boolean];
+
+function haveSource(source: Source) {
+  return Array.isArray(source) ? source[1]() : have(source);
+}
+
 interface FreeKillSource {
-  source: Item | Skill;
+  // What gives your account access to this free kill.
+  source: Source;
+  // How to immediately use this free kill source.
   thing: Item | Skill;
   caption?: () => string;
   captionPlural?: () => string;
@@ -22,7 +31,8 @@ interface FreeKillSource {
 
 // TODO: Add mafia middle finger ring, tennis ball
 
-const freeKillSources: FreeKillSource[] = [
+const SHERIFF_PIECES = $items`Sheriff pistol, Sheriff badge, Sheriff moustache`;
+const FREE_KILL_SOURCES: FreeKillSource[] = [
   {
     source: $skill`Shattering Punch`,
     thing: $skill`Shattering Punch`,
@@ -60,6 +70,15 @@ const freeKillSources: FreeKillSource[] = [
     remaining: () => (have($effect`Everything Looks Red`) ? 0 : 1),
   },
   {
+    source: [
+      "Sheriff Outfit",
+      () => SHERIFF_PIECES.every((item) => have(item)),
+    ],
+    thing: $skill`Assert your Authority`,
+    caption: () => "authority assertion",
+    remaining: () => 3 - get("_authorityUsed", 0),
+  },
+  {
     source: $item`Breathitin™`,
     thing: $item`Breathitin™`,
     remaining: () =>
@@ -87,8 +106,8 @@ const freeKillSources: FreeKillSource[] = [
 ];
 
 const FreeKills: React.FC = () => {
-  const count = sum(freeKillSources, ({ source, remaining }) =>
-    have(source) ? remaining() : 0,
+  const count = sum(FREE_KILL_SOURCES, ({ source, remaining }) =>
+    haveSource(source) ? remaining() : 0,
   );
   return (
     count > 0 && (
@@ -97,11 +116,13 @@ const FreeKills: React.FC = () => {
         id="free-kills"
         imageUrl="/images/itemimages/kneestick.gif"
       >
-        {freeKillSources.map(
+        {FREE_KILL_SOURCES.map(
           ({ source, thing, caption, captionPlural, remaining }) =>
-            !have(source) || remaining() <= 0 ? null : (
+            !haveSource(source) || remaining() <= 0 ? null : (
               <Line
-                key={source.identifierString}
+                key={
+                  Array.isArray(source) ? source[0] : source.identifierString
+                }
                 color={have(thing) ? undefined : "gray.500"}
               >
                 {plural(

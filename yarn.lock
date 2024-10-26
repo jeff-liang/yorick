@@ -2678,14 +2678,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.9.13":
-  version: 0.9.13
-  resolution: "libram@npm:0.9.13"
+"libram@npm:^0.9.15":
+  version: 0.9.15
+  resolution: "libram@npm:0.9.15"
   dependencies:
     html-entities: "npm:^2.5.2"
   peerDependencies:
-    kolmafia: ^5.27668.0
-  checksum: 10c0/a37b7a2ba6ec51fed1aeb7d6d8b207c465d619001caed54177a28b261325af5fba62ebdc070c27c35443c6d943c057d60b4674db84b100b0c3f991860077bfa9
+    kolmafia: ^5.28100.0
+  checksum: 10c0/0654a266e995cced15f3f6c980e5d7f532162db3b43b037d41a91b201c7b6fb3038cbd39c81f9d65294203bee10bcab70a103c38f525fd0c2325076405c5186b
   languageName: node
   linkType: hard
 
@@ -3697,15 +3697,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia@npm:^0.1.7":
-  version: 0.1.7
-  resolution: "tome-kolmafia@npm:0.1.7"
+"tome-kolmafia@portal:/Users/phulin/Documents/Projects/kol/tome::locator=yorick%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "tome-kolmafia@portal:/Users/phulin/Documents/Projects/kol/tome::locator=yorick%40workspace%3A."
   peerDependencies:
     dataloader: ^2.2.2
     react: ^18.3.1
-  checksum: 10c0/7f2b5b8d722e7b1de4a4b522052adf98af129a06a3fd3c13264069c62d50f079555b47d375bffae66dbc43e5642c57949f0a5d75d69cc44318e6ec9e8b43a682
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "ts-api-utils@npm:^1.3.0":
   version: 1.3.0
@@ -3996,7 +3995,7 @@ __metadata:
     framer-motion: "npm:^11.3.29"
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
-    libram: "npm:^0.9.13"
+    libram: "npm:^0.9.15"
     postcss: "npm:^8.4.41"
     prettier: "npm:^3.3.3"
     react: "npm:^18.3.1"

@@ -36,10 +36,12 @@ import PatrioticEagle from "./resources/2023/PatrioticEagle";
 import RockGarden from "./resources/2023/RockGarden";
 import SITCertificate from "./resources/2023/SITCourseCertificate";
 import AprilingBandHelmet from "./resources/2024/AprilingBandHelmet";
+import BatWings from "./resources/2024/BatWings";
 import ChestMimic from "./resources/2024/ChestMimic";
 import EverfullDartHolster from "./resources/2024/EverfullDartHolster";
 import MayamCalendar from "./resources/2024/MayamCalendar";
 import MiniKiwi from "./resources/2024/MiniKiwi";
+import PhotoBooth from "./resources/2024/PhotoBooth";
 import RomanCandelabra from "./resources/2024/RomanCandelabra";
 import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
 import SpringShoes from "./resources/2024/SpringShoes";
@@ -115,6 +117,8 @@ const ResourceSection = () => (
       RomanCandelabra,
       TearawayPants,
       SeptEmberCenser,
+      BatWings,
+      PhotoBooth,
 
       /* Nags only */
       BeatenUp,

@@ -14,6 +14,7 @@ import Chevrons from "../../../components/Chevrons";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import Requirement from "../../../components/Requirement";
+import { plural } from "../../../util/text";
 
 const TwinPeak = () => {
   const step = questStep("questL09Topping");
@@ -27,6 +28,10 @@ const TwinPeak = () => {
   const itemDone = (progress & 2) > 0;
   const jarDone = (progress & 4) > 0;
   const initDone = (progress & 8) > 0;
+
+  const ncsDone = +stenchDone + +itemDone + +jarDone + +initDone;
+  const trimmersNeeded =
+    4 - ncsDone - availableAmount($item`rusty hedge trimmers`);
 
   const famWeight =
     familiarWeight(myFamiliar()) + numericModifier("familiar weight");
@@ -43,9 +48,15 @@ const TwinPeak = () => {
   const nonFamItemDrop =
     itemDropModifier() - famItemDrop + numericModifier("food drop");
 
-  const myArr: number[] = [stenchDone, itemDone, jarDone, initDone].map(
-    (done) => (done ? 1 : 0),
-  );
+  const stenchMet = res >= 4;
+  const itemMet = nonFamItemDrop >= 50;
+  const jarMet = jars >= 1;
+  const initMet = init >= 40;
+  const ncsReady =
+    +(stenchMet && !stenchDone) +
+    +(itemMet && !itemDone) +
+    +(jarMet && !jarDone) +
+    +(initMet && !initDone);
 
   if (initDone) return null;
 
@@ -57,36 +68,42 @@ const TwinPeak = () => {
       imageUrl="/images/adventureimages/mansion.gif"
       disabled={step < 2}
     >
-      <Line>
-        <i>-combat, +item, olfact topiary animal</i>
-      </Line>
+      {haveTrimmers &&
+        (ncsReady > 0 ? (
+          <Line href={`/inv_use.php?pwd=${myHash()}&which=3&whichitem=5115`}>
+            Use hedge trimmers for next NC.
+          </Line>
+        ) : (
+          <Line>Meet one of the NC requirements, then use hedge trimmers.</Line>
+        ))}
+      {trimmersNeeded > 0 && (
+        <>
+          <Line fontStyle="italic">-combat, +item, olfact topiary animal</Line>
+          <Line>
+            Need {plural(trimmersNeeded, "more hedge trimmer")} from topiary
+            animals.
+          </Line>
+        </>
+      )}
       <Line display="flex" flex="row" flexWrap="wrap" gap={1} rowGap={1}>
-        <Chevrons
-          ml={2}
-          mr={-1}
-          usesLeft={myArr.reduce((prev, cur) => prev + cur, 0)}
-          totalUses={4}
-        />
+        <Chevrons ml={2} mr={-1} usesLeft={ncsDone} totalUses={4} />
         {!stenchDone && (
-          <Requirement met={res >= 4}>{res}/4 stench res</Requirement>
+          <Requirement met={stenchMet}>{res}/4 stench res</Requirement>
         )}
         {!itemDone && (
-          <Requirement met={nonFamItemDrop >= 50}>
+          <Requirement met={itemMet}>
             {nonFamItemDrop.toFixed(0)}/50 non-fam +item/food
           </Requirement>
         )}
         {!jarDone && (
-          <Requirement met={jars >= 1}>{jars}/1 jar of oil</Requirement>
+          <Requirement met={jarMet}>{jars}/1 jar of oil</Requirement>
         )}
         {!initDone && (
-          <Requirement met={init >= 40}>{init}/40 +init</Requirement>
+          <Requirement disabled={ncsDone < 3} met={initMet}>
+            {init}/40 +init
+          </Requirement>
         )}
       </Line>
-      {haveTrimmers && (
-        <Line href={`/inv_use.php?pwd=${myHash()}&which=3&whichitem=5115`}>
-          Use hedge trimmers.
-        </Line>
-      )}
     </QuestTile>
   );
 };

@@ -3697,14 +3697,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia@portal:/Users/phulin/Documents/Projects/kol/tome::locator=yorick%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "tome-kolmafia@portal:/Users/phulin/Documents/Projects/kol/tome::locator=yorick%40workspace%3A."
+"tome-kolmafia@npm:^0.1.7":
+  version: 0.1.8
+  resolution: "tome-kolmafia@npm:0.1.8"
   peerDependencies:
     dataloader: ^2.2.2
     react: ^18.3.1
+  checksum: 10c0/11c18ea5861bf91c1854d98cf05230b4059e1ac7840c4e3c64d88e1428c4349dc0fa17a32082792667d8613155353ad64d6fa68ef60232f1ff6242bddc98add1
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "ts-api-utils@npm:^1.3.0":
   version: 1.3.0

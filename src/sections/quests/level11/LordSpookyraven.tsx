@@ -115,7 +115,12 @@ const LordSpookyraven: React.FC = () => {
 
   return (
     <QuestTile
-      header="Fight Lord Spookyraven"
+      header={
+        missingSearchables.length === 0 || haveWineBomb || step === 3
+          ? "Fight Lord Spookyraven"
+          : "Find Lord Spookyraven"
+      }
+      id="lord-spookyraven-quest"
       imageUrl="/images/adventureimages/lordspooky.gif"
       minLevel={11}
       disabled={!hauntedBallroomAvailable}
@@ -208,7 +213,7 @@ const LordSpookyraven: React.FC = () => {
           <Line>Fight Lord Spookyraven.</Line>
           {!have($effect`Red Door Syndrome`) &&
             myMeat() > 1000 &&
-            haveUnrestricted($item`can of black paint`) && (
+            !haveUnrestricted($item`can of black paint`) && (
               <Line>
                 A can of black paint can help with fighting him.
                 {myMeat() < 20000 && " Bit pricy. (1k meat)"}

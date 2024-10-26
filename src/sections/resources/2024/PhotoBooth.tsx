@@ -1,5 +1,5 @@
+import { getClanName } from "kolmafia";
 import { $items, get, have } from "libram";
-import { getClanName } from "tome-kolmafia/dist/kolmafia";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

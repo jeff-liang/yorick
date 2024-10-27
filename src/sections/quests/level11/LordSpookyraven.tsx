@@ -4,6 +4,7 @@ import {
   getProperty,
   haveEquipped,
   inHardcore,
+  Location,
   myLocation,
   myMeat,
   myPath,
@@ -13,6 +14,7 @@ import { $effect, $item, $location, $path, get, have, questStep } from "libram";
 import React from "react";
 
 import Line from "../../../components/Line";
+import MainLink from "../../../components/MainLink";
 import QuestTile from "../../../components/QuestTile";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -20,7 +22,9 @@ import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { questFinished, Step } from "../../../util/quest";
-import { plural } from "../../../util/text";
+import { commaOr, plural } from "../../../util/text";
+
+const CELLAR_LINK = "/place.php?whichplace=manor4";
 
 const LordSpookyraven: React.FC = () => {
   const step = questStep("questL11Manor");
@@ -141,7 +145,7 @@ const LordSpookyraven: React.FC = () => {
             Ballroom.
           </Line>
         ) : (
-          <Line>All delay burned. Finish the Black Forest.</Line>
+          <Line>All delay burned. Find your dad's diary.</Line>
         )
       ) : useFastRoute && !haveSpectacles && !recipeWasAutoread ? (
         <Line href={parentPlaceLink($location`The Haunted Bedroom`)}>
@@ -149,30 +153,39 @@ const LordSpookyraven: React.FC = () => {
         </Line>
       ) : !recipeWasAutoread &&
         !have($item`recipe: mortar-dissolving solution`) ? (
-        <Line>
-          {recipeWillBeAutoread ? (
-            "Click on the suspicious masonry in the basement."
-          ) : useFastRoute && !haveSpectaclesEquipped ? (
-            <>
-              Equip Lord Spookyraven's Spectacles, click on the suspicious
-              masonry in the basement, then read the recipe.
-            </>
-          ) : (
-            "Click on the suspicious masonry in the basement, then read the recipe."
-          )}
-        </Line>
+        recipeWillBeAutoread ? (
+          <Line href={CELLAR_LINK}>
+            Click on the suspicious masonry in the basement.
+          </Line>
+        ) : useFastRoute && !haveSpectaclesEquipped ? (
+          <Line command="equip Lord Spookyraven's spectacles">
+            Equip Lord Spookyraven's Spectacles, click on the suspicious masonry
+            in the basement, then read the recipe.
+          </Line>
+        ) : (
+          <Line href={CELLAR_LINK}>
+            Click on the suspicious masonry in the basement, then read the
+            recipe.
+          </Line>
+        )
       ) : useFastRoute && haveWineBomb ? (
-        <Line>Fight Lord Spookyraven.</Line>
+        <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
       ) : useFastRoute && haveUnstableFulminate ? (
         <>
-          <Line>Adventure in the haunted boiler room with +{mlNeeded} ML.</Line>
-          <Line>
+          <Line href={CELLAR_LINK}>
+            Adventure in the haunted boiler room with +{mlNeeded} ML.
+          </Line>
+          <Line href={CELLAR_LINK}>
             ~{Math.ceil(50.1 / (10 + Math.floor(Math.max(currentMl, 0) / 2)))}{" "}
-            total turns to charge fulminate.
+            total boiler fights to charge fulminate.
           </Line>
         </>
       ) : useFastRoute && !recipeWasAutoreadWithGlasses ? (
-        <Line>
+        <Line
+          command={
+            haveSpectacles ? "equip Lord Spookyraven's spectacles" : undefined
+          }
+        >
           Need to {!haveSpectacles ? "acquire and " : ""}equip Lord
           Spookyraven's spectacles and read the recipe before you can use the
           quick route.
@@ -180,13 +193,13 @@ const LordSpookyraven: React.FC = () => {
       ) : useFastRoute ? (
         <>
           {!haveChateauDeVinegar && (
-            <Line>
+            <Line href={CELLAR_LINK}>
               Find bottle of Chateau de Vinegar from possessed wine rack in the
               Haunted Wine Cellar.
             </Line>
           )}
           {!haveBlastingSoda && (
-            <Line>
+            <Line href={CELLAR_LINK}>
               Find blasting soda from the cabinet in the Haunted Laundry Room.
             </Line>
           )}
@@ -197,24 +210,29 @@ const LordSpookyraven: React.FC = () => {
       ) : missingSearchables.length > 0 ? (
         <Line>
           Go search in the Haunted{" "}
-          {missingSearchables
-            .map(([location]) =>
-              location.toString().replace("The Haunted ", ""),
-            )
-            .join(", ")}
+          {commaOr(
+            missingSearchables.map(([location]) => (
+              <MainLink
+                key={location}
+                href={parentPlaceLink(Location.get(location))}
+              >
+                location.replace("The Haunted ", "")
+              </MainLink>
+            )),
+          )}
           .
         </Line>
       ) : isPathActuallyEdTheUndying ? (
-        <Line>Talk to Lord Spookyraven.</Line>
+        <Line href={CELLAR_LINK}>Talk to Lord Spookyraven.</Line>
       ) : isPathVampire ? (
-        <Line>Fight the path-specific boss.</Line>
+        <Line href={CELLAR_LINK}>Fight the path-specific boss.</Line>
       ) : (
         <>
-          <Line>Fight Lord Spookyraven.</Line>
+          <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
           {!have($effect`Red Door Syndrome`) &&
             myMeat() > 1000 &&
             !haveUnrestricted($item`can of black paint`) && (
-              <Line>
+              <Line href="/shop.php?whichshop=blackmarket">
                 A can of black paint can help with fighting him.
                 {myMeat() < 20000 && " Bit pricy. (1k meat)"}
               </Line>

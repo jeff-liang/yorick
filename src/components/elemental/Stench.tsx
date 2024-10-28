@@ -6,7 +6,7 @@ export interface SpecificElementProps {
   children?: ReactNode;
 }
 
-export const Stench: React.FC<SpecificElementProps> = ({ ...props }) => {
+const Stench: React.FC<SpecificElementProps> = ({ ...props }) => {
   return <ElementName element="stench" {...props} />;
 };
 

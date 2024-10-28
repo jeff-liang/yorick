@@ -7,10 +7,7 @@ export interface ElementNameProps {
   children?: ReactNode;
 }
 
-export const ElementName: React.FC<ElementNameProps> = ({
-  element,
-  children,
-}) => {
+const ElementName: React.FC<ElementNameProps> = ({ element, children }) => {
   const elementColors: Record<string, string> = {
     cold: "blue.500",
     hot: "red.500",

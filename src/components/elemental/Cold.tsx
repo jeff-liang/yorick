@@ -6,7 +6,7 @@ export interface SpecificElementProps {
   children?: ReactNode;
 }
 
-export const Cold: React.FC<SpecificElementProps> = ({ ...props }) => {
+const Cold: React.FC<SpecificElementProps> = ({ ...props }) => {
   return <ElementName element="cold" {...props} />;
 };
 

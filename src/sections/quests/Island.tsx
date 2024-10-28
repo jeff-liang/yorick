@@ -6,7 +6,7 @@ import QuestTile from "../../components/QuestTile";
 import { haveUnrestricted } from "../../util/available";
 import { commaAnd, plural, pluralItem } from "../../util/text";
 
-const Island: React.FC = () => {
+const Island: FC = () => {
   const shoreScrip = availableAmount($item`Shore Inc. Ship Trip Scrip`);
   const haveCcsc = haveUnrestricted($item`candy cane sword cane`);
   const requiredTrips = haveCcsc ? 2 : 3;

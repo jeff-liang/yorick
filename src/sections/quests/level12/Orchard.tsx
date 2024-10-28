@@ -22,7 +22,7 @@ import { commaAnd } from "../../../util/text";
 
 const ORCHARD_URL = "/bigisland.php?place=orchard";
 
-const GlandAdvice: React.FC = () => {
+const GlandAdvice: FC = () => {
   const currentLocation = myLocation();
   if (currentLocation.toString().includes("filthworm")) {
     const effectiveItemDrop = itemDropModifier() / 100;
@@ -38,7 +38,7 @@ const GlandAdvice: React.FC = () => {
   return null;
 };
 
-const PickpocketAdvice: React.FC = () => {
+const PickpocketAdvice: FC = () => {
   const totalInitiativeNeeded = $monster`filthworm drone`.baseInitiative;
   const initiativeNeeded = totalInitiativeNeeded - initiativeModifier();
 
@@ -60,7 +60,7 @@ const PickpocketAdvice: React.FC = () => {
   return null;
 };
 
-const Orchard: React.FC = () => {
+const Orchard: FC = () => {
   const heartOfFilthwormQueen = $item`heart of the filthworm queen`;
   const guardGland = $item`filthworm royal guard scent gland`;
   const guardStench = $effect`Filthworm Guard Stench`;

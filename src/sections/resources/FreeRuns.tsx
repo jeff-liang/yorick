@@ -64,7 +64,7 @@ const freeRunSources: FreeRunSource[] = [
   },
 ];
 
-const FreeRuns: React.FC = () => {
+const FreeRuns: FC = () => {
   const count = sum(freeRunSources, ({ source, remaining }) =>
     have(source) ? remaining() : 0,
   );

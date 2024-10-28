@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import ElementName from "../ElementName";
 
@@ -6,7 +6,7 @@ export interface SpecificElementProps {
   children?: ReactNode;
 }
 
-const Sleaze: React.FC<SpecificElementProps> = ({ ...props }) => {
+const Sleaze: FC<SpecificElementProps> = ({ ...props }) => {
   return <ElementName element="sleaze" {...props} />;
 };
 

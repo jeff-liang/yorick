@@ -105,7 +105,7 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
   },
 ];
 
-const FreeKills: React.FC = () => {
+const FreeKills: FC = () => {
   const count = sum(FREE_KILL_SOURCES, ({ source, remaining }) =>
     haveSource(source) ? remaining() : 0,
   );

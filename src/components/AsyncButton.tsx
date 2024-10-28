@@ -1,5 +1,12 @@
 import { ButtonProps, forwardRef, Tooltip } from "@chakra-ui/react";
-import { MouseEvent, useCallback, useContext, useMemo, useState } from "react";
+import {
+  FC,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { RefreshContext, remoteCliExecute } from "tome-kolmafia";
 
 import HeaderButton from "./HeaderButton";
@@ -9,7 +16,7 @@ export interface AsyncButtonProps extends ButtonProps {
   command?: string;
 }
 
-const AsyncButton: React.FC<AsyncButtonProps> = forwardRef(
+const AsyncButton: FC<AsyncButtonProps> = forwardRef(
   ({ href, command, onClick, children, ...props }, ref) => {
     const { triggerHardRefresh } = useContext(RefreshContext);
     const [isLoading, setIsLoading] = useState(false);

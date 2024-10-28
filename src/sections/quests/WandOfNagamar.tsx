@@ -8,7 +8,7 @@ import { commaAnd } from "../../util/text";
 
 const INGREDIENTS = $items`ruby W, metallic A, lowercase N, heavy D`;
 
-const Wand: React.FC = () => {
+const Wand: FC = () => {
   const haveWand = have($item`Wand of Nagamar`);
   const haveIngredients = INGREDIENTS.every((item) => have(item));
   const basement = $location`The Castle in the Clouds in the Sky (Basement)`;

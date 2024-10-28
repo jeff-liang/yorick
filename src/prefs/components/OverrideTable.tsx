@@ -1,4 +1,5 @@
 import { Heading, Table, Tbody } from "@chakra-ui/react";
+import { FC } from "react";
 
 import OverrideRow from "./OverrideRow";
 
@@ -10,7 +11,7 @@ interface OverrideTableProps {
   getCurrent: (row: string) => string;
 }
 
-const OverrideTable: React.FC<OverrideTableProps> = ({
+const OverrideTable: FC<OverrideTableProps> = ({
   heading,
   filterRegex,
   data,

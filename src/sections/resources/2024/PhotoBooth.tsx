@@ -5,7 +5,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { commaAnd, plural } from "../../../util/text";
 
-const PhotoBooth: React.FC = () => {
+const PhotoBooth: FC = () => {
   const clanName = getClanName();
   // TODO: Support other clans (but we'd have to check unlocks)
   const hasPhotoBooth = clanName === "Bonus Adventures from Hell";

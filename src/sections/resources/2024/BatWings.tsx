@@ -7,7 +7,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 
-const BatWings: React.FC = () => {
+const BatWings: FC = () => {
   const batWings = $item`bat wings`;
   const batWingsEquipped = haveEquipped(batWings);
   const batWingSwoopsLeft = Math.max(0, 11 - get("_batWingsSwoopUsed"));

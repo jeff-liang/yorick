@@ -5,7 +5,7 @@ import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { activeBanishes } from "../../util/banish";
 
-const ActiveBanishes: React.FC = () => {
+const ActiveBanishes: FC = () => {
   const banishes = activeBanishes();
   return (
     <Tile header="Active Banishes" imageUrl="/images/itemimages/ballbat.gif">

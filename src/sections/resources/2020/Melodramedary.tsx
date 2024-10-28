@@ -14,7 +14,7 @@ interface SpitTargetProps {
 }
 
 // Generates a ListItem for a given spit target
-const SpitTargetItem: React.FC<SpitTargetProps> = ({ userLevel, target }) => {
+const SpitTargetItem: FC<SpitTargetProps> = ({ userLevel, target }) => {
   if (!target.accessible(userLevel)) return <></>;
   return (
     <ListItem

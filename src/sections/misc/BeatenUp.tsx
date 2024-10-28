@@ -7,7 +7,7 @@ import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
 
-const BeatenUp: React.FC = () => {
+const BeatenUp: FC = () => {
   let method = "";
   let url: string | null = null;
   let command: string | null = null;

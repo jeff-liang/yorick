@@ -5,7 +5,7 @@ export interface ChatButtonProps extends ButtonProps {
   direction: "left" | "right";
 }
 
-const ChatButton: React.FC<ChatButtonProps> = ({ direction, ...props }) => (
+const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
   <IconButton
     icon={direction === "left" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
     aria-label="Refresh"

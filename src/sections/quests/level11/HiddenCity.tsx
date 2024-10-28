@@ -45,7 +45,7 @@ interface UnlockProps {
   shrine: Location;
   location: Location;
 }
-const Unlock: React.FC<UnlockProps> = ({ shrine, location }) => {
+const Unlock: FC<UnlockProps> = ({ shrine, location }) => {
   const lianasLeft = 3 - lianasFought(shrine);
   return (
     <Line href={CITY_LINK}>
@@ -401,7 +401,7 @@ const Hospital = () => {
   );
 };
 
-const Ziggurat: React.FC = () => {
+const Ziggurat: FC = () => {
   const stoneTriangle = $item`stone triangle`;
 
   const atLastSpirit = availableAmount(stoneTriangle) === 4;

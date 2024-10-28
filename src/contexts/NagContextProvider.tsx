@@ -6,9 +6,7 @@ export interface NagContextProviderProps {
   children?: ReactNode;
 }
 
-const NagContextProvider: React.FC<NagContextProviderProps> = ({
-  children,
-}) => {
+const NagContextProvider: FC<NagContextProviderProps> = ({ children }) => {
   const [nags, setNags] = useState<Record<string, NagWithPriority>>({});
 
   const withNag = useCallback(

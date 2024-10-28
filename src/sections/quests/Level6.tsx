@@ -8,7 +8,7 @@ import QuestTile from "../../components/QuestTile";
 import { turnsToSeeSingleNoncombatCapped } from "../../util/calc";
 import { atStep, Step } from "../../util/quest";
 
-const Level6: React.FC = () => {
+const Level6: FC = () => {
   const step = questStep("questL06Friar");
   const hash = myHash();
   const hasCartography = have($skill`Comprehensive Cartography`);

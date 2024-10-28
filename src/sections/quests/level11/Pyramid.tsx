@@ -13,7 +13,7 @@ interface ChamberProps {
   extraSpinsNeeded: number;
 }
 
-const UpperChamber: React.FC<ChamberProps> = () => {
+const UpperChamber: FC<ChamberProps> = () => {
   const upperChamberTurns = $location`The Upper Chamber`.turnsSpent;
   const turnsRemaining = Math.max(0, 6 - upperChamberTurns);
   return (
@@ -25,7 +25,7 @@ const UpperChamber: React.FC<ChamberProps> = () => {
   );
 };
 
-const MiddleChamber: React.FC<ChamberProps> = ({ extraSpinsNeeded }) => {
+const MiddleChamber: FC<ChamberProps> = ({ extraSpinsNeeded }) => {
   const middleChamberTurns = $location`The Middle Chamber`.turnsSpent;
   const turnsRemaining = Math.max(0, 11 - middleChamberTurns);
   const tangles = availableAmount($item`tangle of rat tails`);
@@ -52,7 +52,7 @@ interface ControlRoomProps extends ChamberProps {
   spinsNeeded: number;
 }
 
-const ControlRoom: React.FC<ControlRoomProps> = ({
+const ControlRoom: FC<ControlRoomProps> = ({
   task,
   spinsNeeded,
   extraSpinsNeeded,
@@ -75,7 +75,7 @@ const ControlRoom: React.FC<ControlRoomProps> = ({
   );
 };
 
-const Pyramid: React.FC = () => {
+const Pyramid: FC = () => {
   const step = questStep("questL11Pyramid");
 
   const haveStaffOfEd =

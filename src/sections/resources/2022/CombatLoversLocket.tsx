@@ -1,6 +1,6 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { $item, CombatLoversLocket, get } from "libram";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
@@ -183,7 +183,7 @@ function getOptions(): string[] {
   ];
 }
 
-const CombatLoversLocketTile: React.FC = () => {
+const CombatLoversLocketTile: FC = () => {
   const combatLoversLocket = $item`combat lover's locket`;
 
   if (!haveUnrestricted(combatLoversLocket)) {

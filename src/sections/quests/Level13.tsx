@@ -6,7 +6,7 @@ import Tile from "../../components/Tile";
 import { AdviceTooltip } from "../../components/Tooltips";
 import { Step } from "../../util/quest";
 
-const Level13: React.FC = () => {
+const Level13: FC = () => {
   const step = questStep("questL13Final");
   const inAftercore = get("kingLiberated");
   const inBugbearInvasion = myPath() === $path`Bugbear Invasion`;

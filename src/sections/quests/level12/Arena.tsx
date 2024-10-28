@@ -9,7 +9,7 @@ export interface ArenaProps {
   disabled?: boolean;
 }
 
-const Arena: React.FC<ArenaProps> = ({ disabled }) => {
+const Arena: FC<ArenaProps> = ({ disabled }) => {
   const currentPath = myPath();
   const flyeredML = get("flyeredML");
   const percentDone = Math.min((flyeredML / 10000) * 100, 100);

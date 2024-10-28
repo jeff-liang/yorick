@@ -62,7 +62,7 @@ interface MapTargetProps {
  * @param target A "MapTarget" entry.
  * @returns <ListItem> covering monster, zone, & accessibility.
  */
-const MapTargetItem: React.FC<MapTargetProps> = ({ target }) => {
+const MapTargetItem: FC<MapTargetProps> = ({ target }) => {
   if (!target.accessible()) return <></>;
   if (target.monster === "Green Ops Soldier") {
     // We want to output special text for GROP availability. There are two possible states:

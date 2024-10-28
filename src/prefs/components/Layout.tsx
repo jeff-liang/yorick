@@ -1,7 +1,7 @@
 import { Container, Heading, Stack } from "@chakra-ui/react";
 import { Effect, Item, Location } from "kolmafia";
 import { KnownProperty } from "libram";
-import { ChangeEvent, useCallback, useContext, useState } from "react";
+import { ChangeEvent, FC, useCallback, useContext, useState } from "react";
 import { makePlaceholder, RefreshContext, remoteCall } from "tome-kolmafia";
 
 import effects from "../data/effects.json";
@@ -17,7 +17,7 @@ interface GenericTableProps {
   filterRegex: RegExp | null;
 }
 
-const PreferencesTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
+const PreferencesTable: FC<GenericTableProps> = ({ filterRegex }) => (
   <OverrideTable
     heading="Preferences"
     filterRegex={filterRegex}
@@ -27,7 +27,7 @@ const PreferencesTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
   />
 );
 
-const TurnsSpentTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
+const TurnsSpentTable: FC<GenericTableProps> = ({ filterRegex }) => (
   <OverrideTable
     heading="Turns Spent"
     filterRegex={filterRegex}
@@ -44,7 +44,7 @@ const TurnsSpentTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
   />
 );
 
-const NoncombatQueueTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
+const NoncombatQueueTable: FC<GenericTableProps> = ({ filterRegex }) => (
   <OverrideTable
     heading="Noncombat Queue"
     filterRegex={filterRegex}
@@ -61,7 +61,7 @@ const NoncombatQueueTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
   />
 );
 
-const ItemsTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
+const ItemsTable: FC<GenericTableProps> = ({ filterRegex }) => (
   <OverrideTable
     heading="Items"
     filterRegex={filterRegex}
@@ -78,7 +78,7 @@ const ItemsTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
   />
 );
 
-const EffectsTable: React.FC<GenericTableProps> = ({ filterRegex }) => (
+const EffectsTable: FC<GenericTableProps> = ({ filterRegex }) => (
   <OverrideTable
     heading="Effects"
     filterRegex={filterRegex}

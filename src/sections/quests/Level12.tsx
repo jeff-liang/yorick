@@ -29,7 +29,7 @@ function pluralEnemyCount(
   );
 }
 
-const Level12: React.FC = () => {
+const Level12: FC = () => {
   const islandUnlocked = get("lastIslandUnlock") === myAscensions();
   if (!islandUnlocked) {
     return (

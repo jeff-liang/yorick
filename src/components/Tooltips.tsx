@@ -10,14 +10,14 @@ import {
   TooltipProps,
   VStack,
 } from "@chakra-ui/react";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 interface AdviceIconProps {
   text: string;
   icon?: ComponentWithAs<"svg", IconProps>;
 }
 
-const AdviceTip: React.FC<TooltipProps> = ({ ...props }) => (
+const AdviceTip: FC<TooltipProps> = ({ ...props }) => (
   <Tooltip
     bg="white"
     color="gray.600"
@@ -39,12 +39,9 @@ const AdviceTip: React.FC<TooltipProps> = ({ ...props }) => (
  * A tooltip generated on an icon hoverover with a skull that states whatever text you want for the player.
  * @param text The text you want displayed in this tooltip.
  * @param icon (optional) Defaults to a filled-in ? info icon. Can be any icon within chakra-ui/icon.
- * @returns A React.FC Tooltip object where the displayed icon generates the tooltip on hoverover.
+ * @returns A FC Tooltip object where the displayed icon generates the tooltip on hoverover.
  */
-export const AdviceTooltipIcon: React.FC<AdviceIconProps> = ({
-  text,
-  icon,
-}) => {
+export const AdviceTooltipIcon: FC<AdviceIconProps> = ({ text, icon }) => {
   const toolTip = (
     <HStack px={2}>
       <Image
@@ -77,13 +74,9 @@ interface AdviceProps extends Omit<TooltipProps, "children"> {
  * A tooltip generated on text for a quick descriptive tooltip.
  * @param text The text you want displayed inside this tooltip.
  * @param label The text you want displayed that users hover over to get the tooltip
- * @returns A React.FC Tooltip object where the label generates the tooltip on hoverover.
+ * @returns A FC Tooltip object where the label generates the tooltip on hoverover.
  */
-export const AdviceTooltip: React.FC<AdviceProps> = ({
-  text,
-  label,
-  ...props
-}) => {
+export const AdviceTooltip: FC<AdviceProps> = ({ text, label, ...props }) => {
   const toolTip = (
     <Box bg="gray.100" p={2} rounded="md" fontSize={12}>
       {typeof text === "string" ? <Text>{text}</Text> : text}
@@ -108,7 +101,7 @@ export const AdviceTooltip: React.FC<AdviceProps> = ({
 //   End goal is a tooltip that displays actual effect info on hoverover for a skill/effect.
 //   Currently styled as blue because that's how effects are spawned in the game.
 
-const EffectTip: React.FC<TooltipProps> = ({ ...props }) => (
+const EffectTip: FC<TooltipProps> = ({ ...props }) => (
   <Tooltip
     bg="white"
     color="blue.500"
@@ -131,10 +124,7 @@ interface EffectSummaryProps {
   text: string | JSX.Element;
 }
 
-export const EffectTooltip: React.FC<EffectSummaryProps> = ({
-  effectName,
-  text,
-}) => {
+export const EffectTooltip: FC<EffectSummaryProps> = ({ effectName, text }) => {
   return (
     <EffectTip label={text}>
       <Text

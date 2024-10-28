@@ -13,11 +13,7 @@ interface ChevronProps extends TextProps {
  * @param usesLeft How many casts/uses you have left of the resource
  * @param totalUses Total number of uses the users has
  */
-const Chevrons: React.FC<ChevronProps> = ({
-  usesLeft,
-  totalUses,
-  ...props
-}) => {
+const Chevrons: FC<ChevronProps> = ({ usesLeft, totalUses, ...props }) => {
   return (
     <Text as="span" verticalAlign="middle" whiteSpace="nowrap" {...props}>
       {new Array(totalUses).fill(null).map((_, index) => (

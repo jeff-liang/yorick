@@ -29,7 +29,7 @@ interface SpaceJellyfishAdviceProps {
   linesNeeded: number;
 }
 
-const SpaceJellyfishAdvice: React.FC<SpaceJellyfishAdviceProps> = ({
+const SpaceJellyfishAdvice: FC<SpaceJellyfishAdviceProps> = ({
   turnsSpent,
   starChartsNeeded,
   starsNeeded,
@@ -71,7 +71,7 @@ const SpaceJellyfishAdvice: React.FC<SpaceJellyfishAdviceProps> = ({
   }
 };
 
-const StarKey: React.FC = () => {
+const StarKey: FC = () => {
   const richardsStarKey = $item`Richard's star key`;
   const starChart = $item`star chart`;
   const star = $item`star`;

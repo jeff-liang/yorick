@@ -26,7 +26,7 @@ interface LeafySummon {
   prefName: string;
 }
 
-const BurningLeaves: React.FC = () => {
+const BurningLeaves: FC = () => {
   const guideToLeaves = $item`A Guide to Burning Leaves`;
   const inflammableLeaf = $item`inflammable leaf`;
   const leafCount = availableAmount(inflammableLeaf);

@@ -6,7 +6,7 @@ import React from "react";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 
-const Farm: React.FC = () => {
+const Farm: FC = () => {
   const barn = $location`McMillicancuddy's Barn`;
 
   const knownNCs = [

@@ -7,7 +7,7 @@ import QuestTile from "../../components/QuestTile";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd } from "../../util/text";
 
-const Level3: React.FC = () => {
+const Level3: FC = () => {
   const step = questStep("questL03Rat");
 
   const cold = numericModifier("Cold Damage");

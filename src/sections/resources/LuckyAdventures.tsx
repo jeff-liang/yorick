@@ -177,7 +177,7 @@ const luckyAdventureUses: [string, () => ReactNode][] = [
   ],
 ];
 
-const LuckyAdventures: React.FC = () => {
+const LuckyAdventures: FC = () => {
   // TODO: suggest actual uses for adventures
 
   const isLucky = have($effect`Lucky!`);

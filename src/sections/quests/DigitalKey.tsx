@@ -10,7 +10,7 @@ import { plural } from "../../util/text";
 
 type Color = "black" | "red" | "blue" | "green";
 
-const DigitalKeyQuest: React.FC = () => {
+const DigitalKeyQuest: FC = () => {
   const continuumTransfunctioner = $item`continuum transfunctioner`;
   const digitalKey = $item`digital key`;
 

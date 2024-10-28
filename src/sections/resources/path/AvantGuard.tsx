@@ -7,7 +7,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 
-const AvantGuard: React.FC = () => {
+const AvantGuard: FC = () => {
   const pathCheck = myPath() === $path`Avant Guard`;
   const charged = get("bodyguardCharge") >= 50;
   const monster = get("bodyguardChatMonster");

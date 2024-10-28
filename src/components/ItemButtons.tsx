@@ -17,7 +17,7 @@ interface ItemButtonsProps extends ButtonProps {
   linkedContent: Item;
 }
 
-const ItemButtons: React.FC<ItemButtonsProps> = ({
+const ItemButtons: FC<ItemButtonsProps> = ({
   linkedContent,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClick,

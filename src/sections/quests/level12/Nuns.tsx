@@ -73,7 +73,7 @@ export interface NunsProps {
   disabled?: boolean;
 }
 
-const Nuns: React.FC<NunsProps> = ({ disabled }) => {
+const Nuns: FC<NunsProps> = ({ disabled }) => {
   const currentPath = myPath();
   const meatGotten = get("currentNunneryMeat");
   const meatRemaining = 100000 - meatGotten;

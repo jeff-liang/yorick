@@ -16,7 +16,7 @@ import {
   have,
   questStep,
 } from "libram";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -26,7 +26,7 @@ import { plural } from "../../../util/text";
 
 const augustScepter = $item`august scepter`;
 
-const AugustScepter: React.FC = () => {
+const AugustScepter: FC = () => {
   const skillsAvailable = 5 - get("_augSkillsCast");
   if (!have(augustScepter) || skillsAvailable < 1) return null;
 

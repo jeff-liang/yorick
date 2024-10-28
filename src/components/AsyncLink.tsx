@@ -1,5 +1,6 @@
 import { Link, LinkProps, Spinner, Tooltip } from "@chakra-ui/react";
 import {
+  FC,
   forwardRef,
   MouseEvent,
   useCallback,
@@ -14,7 +15,7 @@ export interface AsyncLinkProps extends Omit<LinkProps, "href"> {
   command?: string;
 }
 
-const AsyncLink: React.FC<AsyncLinkProps> = forwardRef(
+const AsyncLink: FC<AsyncLinkProps> = forwardRef(
   ({ href, command, onClick, children, ...props }, ref) => {
     const { triggerHardRefresh } = useContext(RefreshContext);
     const [isLoading, setIsLoading] = useState(false);

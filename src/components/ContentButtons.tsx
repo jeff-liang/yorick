@@ -10,7 +10,7 @@ interface ContentButtonsProps extends LinkProps {
   linkedContent: Item | Familiar | Skill;
 }
 
-const ContentButtons: React.FC<ContentButtonsProps> = ({ linkedContent }) => {
+const ContentButtons: FC<ContentButtonsProps> = ({ linkedContent }) => {
   if (!have(linkedContent)) return <></>;
 
   switch (linkedContent.objectType) {

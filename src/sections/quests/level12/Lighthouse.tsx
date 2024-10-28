@@ -6,7 +6,7 @@ import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import { commaOr, plural, truthy } from "../../../util/text";
 
-const Lighthouse: React.FC = () => {
+const Lighthouse: FC = () => {
   const lighthouseFinished = get("lighthouseQuestState") === "finished";
   const gunpowderNeeded = Math.max(
     0,

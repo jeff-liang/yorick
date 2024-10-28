@@ -9,7 +9,7 @@ interface Props extends TextProps {
   async?: boolean;
 }
 
-const Line: React.FC<Props> = ({
+const Line: FC<Props> = ({
   href,
   command,
   async = false,

@@ -10,7 +10,7 @@ import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
 
-const JurassicParka: React.FC = () => {
+const JurassicParka: FC = () => {
   const jurassicParka = $item`Jurassic Parka`;
   const haveParka = haveUnrestricted(jurassicParka);
   const parkaMode = get("parkaMode");

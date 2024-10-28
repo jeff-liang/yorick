@@ -17,7 +17,7 @@ export interface MonstersLineProps {
   target?: Monster | Monster[];
 }
 
-const Monsters: React.FC<MonstersLineProps> = ({ location, target = [] }) => {
+const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
   const targets = Array.isArray(target) ? target : [target];
   const monsters = getMonsters(location);
   const appearingMonsters = monsters.filter(

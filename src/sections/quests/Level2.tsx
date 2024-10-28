@@ -4,7 +4,7 @@ import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { atStep, Step } from "../../util/quest";
 
-const Level2: React.FC = () => {
+const Level2: FC = () => {
   const step = questStep("questL02Larva");
 
   if (step === Step.FINISHED) return null;

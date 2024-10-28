@@ -40,7 +40,7 @@ interface MonsterTextProps {
   isBanished: boolean;
 }
 
-const MonsterText: React.FC<MonsterTextProps> = ({ monster, isBanished }) => (
+const MonsterText: FC<MonsterTextProps> = ({ monster, isBanished }) => (
   <Text as="span" color={isBanished ? "gray.500" : "inherit"}>
     {monster}
   </Text>
@@ -51,7 +51,7 @@ function gremlinShortName(monster: Monster) {
   return `${name.includes("(tool)") ? "tool " : ""}${name.split(" ")[0]}`;
 }
 
-const Junkyard: React.FC = () => {
+const Junkyard: FC = () => {
   const isQuestFinished = false; // Replace with actual quest state check
 
   const getStasisAdvice = () => {

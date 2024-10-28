@@ -7,7 +7,7 @@ import { haveUnrestricted } from "../../util/available";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, plural } from "../../util/text";
 
-const Level10: React.FC = () => {
+const Level10: FC = () => {
   const step = questStep("questL10Garbage");
   const airship = $location`The Penultimate Fantasy Airship`;
   const groundFloor = $location`The Castle in the Clouds in the Sky (Ground Floor)`;

@@ -37,8 +37,9 @@ import { turnsToSeeNoncombat } from "../../util/calc";
 import { inventoryLink, parentPlaceLink } from "../../util/links";
 import { questFinished } from "../../util/quest";
 import { commaAnd, commaOr, plural, truthy } from "../../util/text";
+import { FC } from "react";
 
-const HauntedKitchen: React.FC = () => {
+const HauntedKitchen: FC = () => {
   const kitchen = $location`The Haunted Kitchen`;
   const hotResistance = Math.min(
     Math.floor(numericModifier("Hot Resistance")),
@@ -103,7 +104,7 @@ const HauntedKitchen: React.FC = () => {
   );
 };
 
-const HauntedBilliardsRoom: React.FC = () => {
+const HauntedBilliardsRoom: FC = () => {
   const billiards = $location`The Haunted Billiards Room`;
 
   const poolSkill = get("poolSkill") + numericModifier("Pool Skill");
@@ -160,7 +161,7 @@ const HauntedBilliardsRoom: React.FC = () => {
   );
 };
 
-const HauntedLibrary: React.FC = () => {
+const HauntedLibrary: FC = () => {
   const library = $location`The Haunted Library`;
 
   const gnasirProgress = get("gnasirProgress");
@@ -194,7 +195,7 @@ const HauntedLibrary: React.FC = () => {
   );
 };
 
-const SecondFloor: React.FC = () => {
+const SecondFloor: FC = () => {
   const shoes = $item`Lady Spookyraven's dancing shoes`;
   const puff = $item`Lady Spookyraven's powder puff`;
   const gown = $item`Lady Spookyraven's finest gown`;
@@ -260,7 +261,7 @@ const SecondFloor: React.FC = () => {
   );
 };
 
-const HauntedBallroom: React.FC = () => {
+const HauntedBallroom: FC = () => {
   const ballroom = $location`The Haunted Ballroom`;
   const ballroomDelay = 5 - ballroom.turnsSpent;
   const needBallroomSongSet =
@@ -293,7 +294,7 @@ const HauntedBallroom: React.FC = () => {
   );
 };
 
-const Manor: React.FC = () => {
+const Manor: FC = () => {
   const billiardsKey = $item`Spookyraven billiards room key`;
   const libraryKey = $item`[7302]Spookyraven library key`;
   const ballroom = $location`The Haunted Ballroom`;

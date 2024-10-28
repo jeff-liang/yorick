@@ -7,7 +7,7 @@ interface FamiliarButtonsProps extends AsyncButtonProps {
   linkedContent: Familiar;
 }
 
-const FamiliarButtons: React.FC<FamiliarButtonsProps> = ({
+const FamiliarButtons: FC<FamiliarButtonsProps> = ({
   linkedContent,
   ...props
 }) => {

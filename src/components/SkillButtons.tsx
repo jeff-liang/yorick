@@ -7,7 +7,7 @@ interface SkillButtonsProps extends ButtonProps {
   linkedContent: Skill;
 }
 
-const SkillButtons: React.FC<SkillButtonsProps> = ({
+const SkillButtons: FC<SkillButtonsProps> = ({
   linkedContent,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onClick,

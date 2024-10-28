@@ -11,7 +11,7 @@ import {
   numericModifier,
 } from "kolmafia";
 import { $effect, $item, $location, $path, get, have, questStep } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
@@ -26,7 +26,7 @@ import { commaOr, plural } from "../../../util/text";
 
 const CELLAR_LINK = "/place.php?whichplace=manor4";
 
-const LordSpookyraven: React.FC = () => {
+const LordSpookyraven: FC = () => {
   const step = questStep("questL11Manor");
 
   const isPathBoris = myPath() === $path`Avatar of Boris`;

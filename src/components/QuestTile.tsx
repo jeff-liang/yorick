@@ -6,7 +6,7 @@ interface QuestTileProps extends TileProps {
   minLevel?: number;
 }
 
-const QuestTile: React.FC<QuestTileProps> = ({
+const QuestTile: FC<QuestTileProps> = ({
   header,
   href,
   minLevel,

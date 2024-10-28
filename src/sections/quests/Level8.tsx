@@ -10,7 +10,7 @@ import { commaAnd, commaOr, plural, truthy } from "../../util/text";
 
 const TRAPPER_URL = "/place.php?whichplace=mclargehuge&action=trappercabin";
 
-const Level8: React.FC = () => {
+const Level8: FC = () => {
   const step = questStep("questL08Trapper");
 
   const goatCheese = itemAmount($item`goat cheese`);

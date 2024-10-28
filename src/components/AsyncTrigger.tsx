@@ -1,4 +1,5 @@
 import {
+  FC,
   ForwardedRef,
   forwardRef,
   MouseEvent,
@@ -28,7 +29,7 @@ const AsyncTrigger = <
   ElementType extends Element,
   ComponentProps extends MandatoryProps<ElementType>,
 >(
-  Component: React.FC<ComponentProps>,
+  Component: FC<ComponentProps>,
 ) =>
   forwardRef<ElementType, AsyncTriggerProps<ElementType, ComponentProps>>(
     (

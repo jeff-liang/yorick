@@ -9,7 +9,7 @@ import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
 
-const GreyGoose: React.FC = () => {
+const GreyGoose: FC = () => {
   const greyGoose = $familiar`Grey Goose`;
   const gooseDrones = get("gooseDronesRemaining");
   const gooseWeight = Math.min(Math.floor(Math.sqrt(greyGoose.experience)), 20);

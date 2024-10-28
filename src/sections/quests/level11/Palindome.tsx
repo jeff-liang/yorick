@@ -20,7 +20,7 @@ import { commaAnd, plural, pluralJustDesc } from "../../../util/text";
 const PALINDOME_URL = "/place.php?whichplace=palindome";
 const WHITEYS_GROVE_URL = "/place.php?whichplace=woods";
 
-const Level11Palindome: React.FC = () => {
+const Level11Palindome: FC = () => {
   const step = questStep("questL11Palindome");
   const talisman = $item`Talisman o' Namsilat`;
   const megaGem = $item`Mega Gem`;

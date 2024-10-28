@@ -1,13 +1,13 @@
 import { Text } from "@chakra-ui/react";
 import { ElementType } from "kolmafia";
-import React, { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 export interface ElementNameProps {
   element: ElementType;
   children?: ReactNode;
 }
 
-const ElementName: React.FC<ElementNameProps> = ({ element, children }) => {
+const ElementName: FC<ElementNameProps> = ({ element, children }) => {
   const elementColors: Record<string, string> = {
     cold: "blue.500",
     hot: "red.500",

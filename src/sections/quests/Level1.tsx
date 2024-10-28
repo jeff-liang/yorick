@@ -4,7 +4,7 @@ import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { Step } from "../../util/quest";
 
-const Level1: React.FC = () => {
+const Level1: FC = () => {
   const step = questStep("questM05Toot");
 
   if (step === Step.FINISHED) return null;

@@ -9,7 +9,7 @@ interface EquipButtonProps extends ButtonProps {
   accessorySlot?: 1 | 2 | 3;
 }
 
-const EquipButton: React.FC<EquipButtonProps> = ({
+const EquipButton: FC<EquipButtonProps> = ({
   item,
   action,
   accessorySlot,

@@ -13,7 +13,7 @@ interface MayamSymbol {
   description: string;
 }
 
-const MayamCalendar: React.FC = () => {
+const MayamCalendar: FC = () => {
   const mayamCalendar = $item`Mayam Calendar`;
 
   const mayamSymbols: MayamSymbol[] = [

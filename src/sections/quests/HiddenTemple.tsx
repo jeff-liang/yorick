@@ -7,7 +7,7 @@ import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { inventoryLink } from "../../util/links";
 
-const HiddenTemple: React.FC = () => {
+const HiddenTemple: FC = () => {
   if (hiddenTempleUnlocked()) return null;
 
   const haveItems =

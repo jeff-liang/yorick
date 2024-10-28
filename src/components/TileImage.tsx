@@ -5,12 +5,7 @@ interface Props extends ImageProps {
   imageAlt?: string;
 }
 
-const TileImage: React.FC<Props> = ({
-  imageUrl,
-  imageAlt,
-  boxSize,
-  ...props
-}) =>
+const TileImage: FC<Props> = ({ imageUrl, imageAlt, boxSize, ...props }) =>
   imageUrl ? (
     <Image src={imageUrl} alt={imageAlt} fit="contain" {...props} />
   ) : (

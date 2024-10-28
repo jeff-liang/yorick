@@ -1,6 +1,6 @@
 import { Heading, Image } from "@chakra-ui/react";
 
-const BrandHeading: React.FC = () => (
+const BrandHeading: FC = () => (
   <Heading as="h1" size="xl" textAlign="center">
     Y
     <Image

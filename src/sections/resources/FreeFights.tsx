@@ -7,7 +7,7 @@ import {
   myPath,
 } from "kolmafia";
 import { $item, $path, $skill, get, have } from "libram";
-import { Fragment, ReactNode } from "react";
+import { FC, Fragment, ReactNode } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
@@ -127,7 +127,7 @@ const freeFights: [string, () => ReactNode][] = [
   ],
 ];
 
-const FreeFights: React.FC = () => {
+const FreeFights: FC = () => {
   if (myPath() === $path`Avant Guard`) return null;
 
   const renderedFights = freeFights.map(([name, fight]) => {

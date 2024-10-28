@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { Familiar, Item, Skill } from "kolmafia";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
 import useLocalStorage from "../hooks/useLocalStorage";
 import { inDevMode } from "../util/env";
@@ -38,7 +38,7 @@ export interface TileProps extends StackProps {
   children?: ReactNode;
 }
 
-const Tile: React.FC<TileProps> = ({
+const Tile: FC<TileProps> = ({
   header,
   headerSuffix,
   id,

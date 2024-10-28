@@ -1,7 +1,7 @@
 import { EditIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
 
-const PrefsButton: React.FC = () => {
+const PrefsButton: FC = () => {
   return (
     <IconButton
       onClick={() => {

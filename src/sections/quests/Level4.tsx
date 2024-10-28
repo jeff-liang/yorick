@@ -5,7 +5,7 @@ import QuestTile from "../../components/QuestTile";
 import { atStep, Step } from "../../util/quest";
 import { plural } from "../../util/text";
 
-const Level4: React.FC = () => {
+const Level4: FC = () => {
   const step = questStep("questL04Bat");
   const bodyguards = $location`The Boss Bat's Lair`.turnsSpent;
   const beanstalk = questStep("questL10Garbage") >= 1;

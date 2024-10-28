@@ -79,7 +79,7 @@ const skeletonBoneSources: Source[] = [
   },
 ] as const;
 
-const HeroKeys: React.FC = () => {
+const HeroKeys: FC = () => {
   const fatLootTokens = availableAmount($item`fat loot token`);
   const towerKeysUsed = get("nsTowerDoorKeysUsed")
     .split(",")

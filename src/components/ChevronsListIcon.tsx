@@ -7,7 +7,7 @@ interface ChevronsListIconProps extends IconProps {
   totalUses: number;
 }
 
-const ChevronsListIcon: React.FC<ChevronsListIconProps> = (props) => (
+const ChevronsListIcon: FC<ChevronsListIconProps> = (props) => (
   <ListIcon
     as={Chevrons}
     display="inline-flex"

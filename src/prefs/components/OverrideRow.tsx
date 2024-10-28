@@ -1,5 +1,5 @@
 import { Td, Text, Tr } from "@chakra-ui/react";
-import { ChangeEvent, useCallback, useState } from "react";
+import { ChangeEvent, FC, useCallback, useState } from "react";
 
 import { validityType, validValue } from "../util/valid";
 
@@ -12,11 +12,7 @@ interface OverrideRowProps {
   current: string;
 }
 
-const OverrideRow: React.FC<OverrideRowProps> = ({
-  label,
-  override,
-  current,
-}) => {
+const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
   const [value, setValue] = useState(localStorage.getItem(override) ?? "");
 
   const handleChangeProperty = useCallback(

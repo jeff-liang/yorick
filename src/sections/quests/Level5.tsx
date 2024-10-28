@@ -7,7 +7,7 @@ import { inventoryLink, parentPlaceLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
 import { plural } from "../../util/text";
 
-const Level5: React.FC = () => {
+const Level5: FC = () => {
   const step = questStep("questL05Goblin");
 
   const turnsSpent = $location`The Outskirts of Cobb's Knob`.turnsSpent;

@@ -25,7 +25,7 @@ import Monsters from "./Monsters";
 
 const MAX_AUTOCOMPLETE = 10;
 
-const LocationBar: React.FC<StackProps> = (props) => {
+const LocationBar: FC<StackProps> = (props) => {
   const { triggerHardRefresh } = useContext(RefreshContext);
   const [showDetails, setShowDetails] = useState(false);
   const [autoValue, setAutoValue] = useState("");

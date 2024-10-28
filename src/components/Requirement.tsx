@@ -5,7 +5,7 @@ interface RequirementProps extends Omit<BadgeProps, "colorScheme"> {
   disabled?: boolean;
 }
 
-const Requirement: React.FC<RequirementProps> = ({
+const Requirement: FC<RequirementProps> = ({
   met,
   disabled = false,
   children,

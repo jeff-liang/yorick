@@ -19,6 +19,6 @@
       "kolmafia": ["./node_modules/tome-kolmafia/dist/kolmafia"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "node_modules/tome-kolmafia"],
   "exclude": ["**/node_modules", "**/.*/"]
 }

@@ -25,6 +25,7 @@ import {
   have,
   questStep,
 } from "libram";
+import { FC } from "react";
 
 import Hot from "../../components/elemental/Hot";
 import Stench from "../../components/elemental/Stench";
@@ -37,7 +38,6 @@ import { turnsToSeeNoncombat } from "../../util/calc";
 import { inventoryLink, parentPlaceLink } from "../../util/links";
 import { questFinished } from "../../util/quest";
 import { commaAnd, commaOr, plural, truthy } from "../../util/text";
-import { FC } from "react";
 
 const HauntedKitchen: FC = () => {
   const kitchen = $location`The Haunted Kitchen`;

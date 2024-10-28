@@ -1,5 +1,3 @@
-/* eslint-env commonjs */
-
 const { getRevision, write } = require("kolmafia");
 
 function main() {

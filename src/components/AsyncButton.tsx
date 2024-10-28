@@ -1,5 +1,5 @@
 import { ButtonProps, forwardRef, Tooltip } from "@chakra-ui/react";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { MouseEvent, useCallback, useContext, useMemo, useState } from "react";
 import { RefreshContext, remoteCliExecute } from "tome-kolmafia";
 
 import HeaderButton from "./HeaderButton";
@@ -25,7 +25,7 @@ const AsyncButton: React.FC<AsyncButtonProps> = forwardRef(
     );
 
     const handleClick = useCallback(
-      async (event: React.MouseEvent<HTMLButtonElement>) => {
+      async (event: MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
         setIsLoading(true);
         await (onClickWithCommand

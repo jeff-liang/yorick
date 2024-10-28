@@ -8,7 +8,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@chakra-ui/react";
-import { ChangeEvent, forwardRef, useCallback, useState } from "react";
+import {
+  ChangeEvent,
+  forwardRef,
+  KeyboardEvent,
+  MouseEvent,
+  useCallback,
+  useState,
+} from "react";
 
 function mod(n: number, k: number): number {
   const naive = n % k;
@@ -47,7 +54,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     const matchingValues = getMatchingValues(value, allValues, maxOptions);
 
     const handleAutocompleteKeyDown = useCallback(
-      (event: React.KeyboardEvent<HTMLInputElement>) => {
+      (event: KeyboardEvent<HTMLInputElement>) => {
         if (
           event.key === "ArrowUp" ||
           event.key === "ArrowDown" ||
@@ -75,7 +82,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     );
 
     const handleAutocompleteClick = useCallback(
-      (event: React.MouseEvent<HTMLLIElement>) => {
+      (event: MouseEvent<HTMLLIElement>) => {
         onSubmit(event.currentTarget.getAttribute("data-current"));
       },
       [onSubmit],

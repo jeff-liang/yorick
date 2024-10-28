@@ -1,5 +1,12 @@
 import { Link, LinkProps, Spinner, Tooltip } from "@chakra-ui/react";
-import { forwardRef, useCallback, useContext, useMemo, useState } from "react";
+import {
+  forwardRef,
+  MouseEvent,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { RefreshContext, remoteCliExecute } from "tome-kolmafia";
 
 export interface AsyncLinkProps extends Omit<LinkProps, "href"> {
@@ -23,7 +30,7 @@ const AsyncLink: React.FC<AsyncLinkProps> = forwardRef(
     );
 
     const handleClick = useCallback(
-      async (event: React.MouseEvent<HTMLAnchorElement>) => {
+      async (event: MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         setIsLoading(true);
         await (onClickWithCommand

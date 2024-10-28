@@ -43,20 +43,7 @@
     "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint . && prettier --check ."
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "http://127.0.0.1:60080",
-  "homepage": "/yorick"
+    "lint": "eslint KoLmafia scripts src && prettier --check .",
+    "lint:fix": "eslint --fix KoLmafia scripts src && prettier --write ."
+  }
 }

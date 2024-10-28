@@ -1,6 +1,7 @@
-import React, {
+import {
   ForwardedRef,
   forwardRef,
+  MouseEvent,
   PropsWithoutRef,
   ReactNode,
   useCallback,
@@ -15,7 +16,7 @@ type MandatoryProps<ElementType> = {
   isLoading: boolean;
   href?: string;
   command?: string;
-  onClick?: (event: React.MouseEvent<ElementType>) => void | Promise<void>;
+  onClick?: (event: MouseEvent<ElementType>) => void | Promise<void>;
 };
 
 type AsyncTriggerProps<
@@ -56,7 +57,7 @@ const AsyncTrigger = <
       );
 
       const handleClick = useCallback(
-        async (event: React.MouseEvent<ElementType>) => {
+        async (event: MouseEvent<ElementType>) => {
           event.preventDefault();
           setIsLoading(true);
           await (onClickWithCommand

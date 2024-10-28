@@ -1,5 +1,3 @@
-/* eslint-env commonjs */
-
 const { write } = require("kolmafia");
 
 function main() {

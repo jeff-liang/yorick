@@ -1,8 +1,8 @@
-import { myLocation } from "kolmafia";
 import {
   combatRateModifier,
   haveEquipped,
   myFamiliar,
+  myLocation,
   npcPrice,
 } from "kolmafia";
 import { $familiar, $item, $location, get, have, questStep } from "libram";

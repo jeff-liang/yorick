@@ -18,6 +18,7 @@ import {
 import { getFrames } from "../util/frames";
 import { parentPlaceLink } from "../util/links";
 import { plural } from "../util/text";
+
 import AutocompleteInput from "./AutocompleteInput";
 import MainLink from "./MainLink";
 import Monsters from "./Monsters";

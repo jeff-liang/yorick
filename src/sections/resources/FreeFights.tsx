@@ -7,7 +7,7 @@ import {
   myPath,
 } from "kolmafia";
 import { $item, $path, $skill, get, have } from "libram";
-import React, { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
@@ -17,7 +17,7 @@ import { skillLink } from "../../util/links";
 import { questStarted } from "../../util/quest";
 import { plural } from "../../util/text";
 
-const freeFights: [string, () => React.ReactNode][] = [
+const freeFights: [string, () => ReactNode][] = [
   [
     "NEP",
     () => {

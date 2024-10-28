@@ -1,8 +1,8 @@
 import { Td, Text, Tr } from "@chakra-ui/react";
-import { ChangeEvent, useCallback } from "react";
-import React from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 
 import { validityType, validValue } from "../util/valid";
+
 import ValidatedInput from "./ValidatedInput";
 
 // override is the key in localStorage
@@ -17,9 +17,7 @@ const OverrideRow: React.FC<OverrideRowProps> = ({
   override,
   current,
 }) => {
-  const [value, setValue] = React.useState(
-    localStorage.getItem(override) ?? "",
-  );
+  const [value, setValue] = useState(localStorage.getItem(override) ?? "");
 
   const handleChangeProperty = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

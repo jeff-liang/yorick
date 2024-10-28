@@ -13,7 +13,7 @@ export default [
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   {
-    ignores: ["node_modules/**/*", "build/**/*", "KoLmafia/**/*"],
+    ignores: ["node_modules/", "build/"],
   },
   {
     languageOptions: {
@@ -69,6 +69,17 @@ export default [
         },
       ],
       "libram/verify-constants": "error",
+    },
+  },
+  {
+    files: ["KoLmafia/**/*.js"],
+    languageOptions: {
+      globals: {
+        ...globals.commonjs,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-require-imports": "off",
     },
   },
 ];

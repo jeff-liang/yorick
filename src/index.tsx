@@ -1,6 +1,6 @@
 import "./index.css";
 
-import React from "react";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import Prefs from "./prefs/App";
 const content = <App />;
 
 const app = (
-  <React.StrictMode>
+  <StrictMode>
     <BrowserRouter basename="/yorick">
       <Routes>
         <Route path="/" element={content} />
@@ -18,7 +18,7 @@ const app = (
         <Route path="prefs" element={<Prefs />} />{" "}
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </StrictMode>
 );
 
 const root = document.getElementById("root");

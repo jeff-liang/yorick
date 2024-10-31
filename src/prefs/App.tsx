@@ -1,5 +1,5 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { RefreshContextProvider } from "tome-kolmafia";
+import { RefreshContextProvider } from "tome-kolmafia-react";
 
 import Layout from "./components/Layout";
 

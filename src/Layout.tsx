@@ -1,6 +1,6 @@
 import { Box, Container, Divider, Stack } from "@chakra-ui/react";
 import { useCallback, useContext, useEffect, useState } from "react";
-import { RefreshContext } from "tome-kolmafia";
+import { RefreshContext } from "tome-kolmafia-react";
 
 import BrandHeading from "./components/BrandHeading";
 import ChatButton from "./components/ChatButton";

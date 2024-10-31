@@ -1,6 +1,6 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { RefreshContextProvider } from "tome-kolmafia";
+import { RefreshContextProvider } from "tome-kolmafia-react";
 
 import NagContextProvider from "./contexts/NagContextProvider";
 import Layout from "./Layout";

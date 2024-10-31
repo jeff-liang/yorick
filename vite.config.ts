@@ -1,6 +1,7 @@
-import react from "@vitejs/plugin-react";
 import fs from "fs";
 import path from "path";
+
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 const publicFiles = fs.readdirSync(path.resolve(__dirname, "public"));
@@ -11,18 +12,6 @@ const publicFilesRegex = publicFiles
 export default defineConfig({
   base: "/yorick/",
   plugins: [react()],
-  resolve: {
-    alias: {
-      kolmafia: path.resolve(
-        __dirname,
-        "node_modules/tome-kolmafia/dist/kolmafia/index.js",
-      ),
-    },
-  },
-  optimizeDeps: {
-    include: ["kolmafia > dataloader", "tome-kolmafia > dataloader"],
-    exclude: ["kolmafia", "tome-kolmafia"],
-  },
   build: {
     outDir: "build",
     rollupOptions: {

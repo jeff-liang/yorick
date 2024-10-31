@@ -8,7 +8,8 @@ import {
   useMemo,
   useState,
 } from "react";
-import { RefreshContext, remoteCliExecute } from "tome-kolmafia";
+import { remoteCliExecute } from "tome-kolmafia-lib";
+import { RefreshContext } from "tome-kolmafia-react";
 
 export interface AsyncLinkProps extends Omit<LinkProps, "href"> {
   href?: string;

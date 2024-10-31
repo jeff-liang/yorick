@@ -3,18 +3,17 @@ import { myLocation } from "kolmafia";
 import { $location } from "libram";
 import {
   ChangeEvent,
+  FC,
   useCallback,
   useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
-import {
-  LOCATION_NAMES,
-  RefreshContext,
-  remoteCliExecute,
-} from "tome-kolmafia";
+import { remoteCliExecute } from "tome-kolmafia-lib";
+import { RefreshContext } from "tome-kolmafia-react";
 
+import LOCATION_NAMES from "../generated/locationNames";
 import { getFrames } from "../util/frames";
 import { parentPlaceLink } from "../util/links";
 import { plural } from "../util/text";

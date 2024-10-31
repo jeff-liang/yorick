@@ -1,6 +1,6 @@
 import { availableAmount, Item } from "kolmafia";
 import { Fragment, ReactNode } from "react";
-import { AnyIdentified, isIdentified } from "tome-kolmafia";
+import { AnyIdentified, isIdentified } from "tome-kolmafia-lib";
 
 export function pluralJustDesc(
   count: number,

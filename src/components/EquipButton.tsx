@@ -1,5 +1,6 @@
 import { ButtonProps } from "@chakra-ui/react";
-import { getHashIfAvailable } from "tome-kolmafia";
+import { FC } from "react";
+import { getHashIfAvailable } from "tome-kolmafia-lib";
 
 import AsyncButton from "./AsyncButton";
 

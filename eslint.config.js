@@ -5,6 +5,7 @@ import libramPlugin from "eslint-plugin-libram";
 import reactHooksPlugin from "eslint-plugin-react-hooks";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
+// eslint-disable-next-line import/no-unresolved
 import tseslint from "typescript-eslint";
 
 export default [
@@ -27,13 +28,6 @@ export default [
       "react-hooks": fixupPluginRules(reactHooksPlugin),
       libram: libramPlugin,
       "unused-imports": unusedImports,
-    },
-    settings: {
-      "import/resolver": {
-        alias: {
-          map: [["kolmafia", "./node_modules/tome-kolmafia/dist/kolmafia"]],
-        },
-      },
     },
     rules: {
       "block-scoped-var": "error",

@@ -3,7 +3,7 @@ import {
   isIdentifiedType,
   Override,
   OverrideListener,
-} from "tome-kolmafia";
+} from "tome-kolmafia-lib";
 
 export function addDevelopmentListeners() {
   addOverrideListener(<T>(name: string, args: unknown[]) => {

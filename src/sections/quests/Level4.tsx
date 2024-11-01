@@ -21,7 +21,6 @@ const Level4: FC = () => {
         [Step.UNSTARTED, "/council.php"],
         [Step.STARTED, "/place.php?whichplace=bathole"],
         [4, "/council.php"],
-        [Step.FINISHED, undefined],
       ])}
       minLevel={4}
     >
@@ -42,8 +41,14 @@ const Level4: FC = () => {
         [
           3,
           <Line>
-            Face the fearsome Boss Bat in his lair! You must fight at least{" "}
-            {Math.max(0, 4 - bodyguards)} bodyguards to find him.
+            Face the fearsome Boss Bat in his lair!{" "}
+            {bodyguards < 4
+              ? `You must fight at least ${Math.max(0, 4 - bodyguards)} bodyguards to find him.`
+              : bodyguards === 4
+                ? "Appears in the next three turns."
+                : bodyguards === 5
+                  ? "Appears in the next two turns."
+                  : "Appears next turn."}
           </Line>,
         ],
         [4, <Line>Return to the council with news of your defeated foe.</Line>],

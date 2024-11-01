@@ -115,7 +115,7 @@ const Level7: FC = () => {
   const dragonReady =
     nookEvil === 0 && nicheEvil === 0 && crannyEvil === 0 && alcoveEvil === 0;
 
-  let mainElement = <Line>Kill the Bonerdagon</Line>;
+  let mainElement = <Line>Kill the Bonerdagon.</Line>;
   if (!dragonReady) {
     mainElement = (
       <>

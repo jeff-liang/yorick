@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { ListItem, UnorderedList } from "@chakra-ui/react";
 import { canAdventure, haveEquipped } from "kolmafia";
 import { $item, $location, get } from "libram";
 import { FC } from "react";
@@ -45,45 +45,23 @@ const BatWings: FC = () => {
   return (
     <Tile linkedContent={batWings}>
       {batWingsEquipped && (
-        <Line>
-          <Text as="span" color="purple.500">
-            Nanananananananana Battyman!
-          </Text>
-        </Line>
+        <Line color="purple.500">Nanananananananana Battyman!</Line>
       )}
       {!batWingsEquipped &&
         !canAdventure(
           $location`The Castle in the Clouds in the Sky (Basement)`,
         ) && (
-          <Line>
-            <Text as="span" color="blue.500">
-              Equip your bat wings. This saves turns in the Airship!
-            </Text>
+          <Line color="blue.500">
+            Equip your bat wings. This saves turns in the Airship!
           </Line>
         )}
-      <Line>Swoop Evilpockets: {batWingSwoopsLeft} left.</Line>
-      <Line>
-        Rest +1000 HP/MP:{" "}
-        <Text
-          as="span"
-          color={batWingRestsLeft === 0 ? "red.500" : undefined}
-          fontWeight="bold"
-        >
-          {batWingRestsLeft} left
-        </Text>
-        .
-      </Line>
-      <Line>
-        Free flaps:{" "}
-        <Text
-          as="span"
-          color={batWingFreeFightsLeft === 0 ? "red.500" : undefined}
-          fontWeight="bold"
-        >
-          {batWingFreeFightsLeft} left
-        </Text>
-        .
-      </Line>
+      <Line>Swoop evilpockets: {batWingSwoopsLeft} left.</Line>
+      {batWingRestsLeft > 0 && (
+        <Line>Rest +1000 HP/MP: {batWingRestsLeft} left.</Line>
+      )}
+      {batWingFreeFightsLeft > 0 && (
+        <Line>Free flaps: {batWingFreeFightsLeft} left.</Line>
+      )}
       {bridge >= 25 && !canAdventure($location`Oil Peak`) && (
         <Line>You can skip the rest of the bridge!</Line>
       )}

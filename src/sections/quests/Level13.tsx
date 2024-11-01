@@ -47,6 +47,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Find the Naughty Sorceress"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/ns_tower.gif"
       >
         <Line>Complete the races at the registration desk.</Line>
@@ -64,6 +65,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Hedge Maze"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/hedgemaze.gif"
       >
         <Line>Navigate the Hedge Maze in the Naughty Sorceress' Tower.</Line>
@@ -83,6 +85,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Tower Door"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/nstower_door.gif"
       >
         <Line>Open the tower door.</Line>
@@ -97,6 +100,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Wall of Skin"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/ns_wall1.gif"
       >
         <Line>Defeat the Wall of Skin.</Line>
@@ -115,6 +119,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Wall of Meat"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/ns_wall2.gif"
       >
         <Line>Defeat the Wall of Meat.</Line>
@@ -132,6 +137,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Wall of Bones"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/ns_wall3.gif"
       >
         <Line>Defeat the Wall of Bones.</Line>
@@ -149,7 +155,11 @@ const Level13: FC = () => {
 
   if (!pastTowerLevel4) {
     return (
-      <Tile header="Mirror" imageUrl="/images/adventureimages/mirror.gif">
+      <Tile
+        header="Mirror"
+        id="level-13-quest"
+        imageUrl="/images/adventureimages/mirror.gif"
+      >
         <Line>Face the looking glass.</Line>
         <Line>
           Gazing upon the looking glass will cost a turn, but makes the Naughty
@@ -165,7 +175,11 @@ const Level13: FC = () => {
 
   if (!pastTowerLevel5) {
     return (
-      <Tile header="Your Shadow" imageUrl="/images/adventureimages/shadow.gif">
+      <Tile
+        header="Your Shadow"
+        id="level-13-quest"
+        imageUrl="/images/adventureimages/shadow.gif"
+      >
         <Line>Fight your shadow.</Line>
         <Line>
           <AdviceTooltip
@@ -181,6 +195,7 @@ const Level13: FC = () => {
     return (
       <Tile
         header="Naughty Sorceress"
+        id="level-13-quest"
         imageUrl="/images/adventureimages/ns.gif"
       >
         <Line>Defeat the Naughty Sorceress.</Line>

@@ -1,6 +1,7 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
 import { Location, myLevel } from "kolmafia";
 import { $item, $skill, get, have } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";

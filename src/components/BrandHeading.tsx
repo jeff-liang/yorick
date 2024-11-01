@@ -1,4 +1,5 @@
 import { Heading, Image } from "@chakra-ui/react";
+import { FC } from "react";
 
 const BrandHeading: FC = () => (
   <Heading as="h1" size="xl" textAlign="center">

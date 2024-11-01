@@ -1,5 +1,6 @@
 import { itemAmount, numericModifier, toItem } from "kolmafia";
 import { $item, $location, $monster, get, have, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import Monsters from "../../components/Monsters";

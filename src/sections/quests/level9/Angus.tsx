@@ -1,9 +1,10 @@
 import { questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 
-const Angus = () => {
+const Angus: FC = () => {
   const step = questStep("questL09Topping");
 
   if (step !== 1 && step !== 3) return null;

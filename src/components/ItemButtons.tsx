@@ -9,6 +9,7 @@ import {
   weaponType,
 } from "kolmafia";
 import { have } from "libram";
+import { FC } from "react";
 
 import EquipButton from "./EquipButton";
 import HeaderButton from "./HeaderButton";

@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { Familiar, Item, Skill } from "kolmafia";
-import { ReactNode, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 
 import useLocalStorage from "../hooks/useLocalStorage";
 import { inDevMode } from "../util/env";

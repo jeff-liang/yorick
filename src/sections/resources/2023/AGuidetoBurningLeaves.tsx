@@ -1,11 +1,11 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { availableAmount, getCampground, myLevel } from "kolmafia";
 import { $familiar, $item, $skill, get, have } from "libram";
-import React from "react";
+import { FC } from "react";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { haveUnrestricted } from "../../../util/available";
 import { isNormalCampgroundPath } from "../../../util/paths";
 import { plural } from "../../../util/text";

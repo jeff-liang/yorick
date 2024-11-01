@@ -1,4 +1,5 @@
 import { myLevel } from "kolmafia";
+import { FC } from "react";
 
 import Tile, { TileProps } from "./Tile";
 

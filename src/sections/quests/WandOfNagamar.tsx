@@ -1,5 +1,6 @@
 import { canAdventure } from "kolmafia";
 import { $effect, $item, $items, $location, have } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

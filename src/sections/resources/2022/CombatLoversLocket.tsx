@@ -1,6 +1,10 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { $item, CombatLoversLocket, get } from "libram";
-import { ReactNode } from "react";
+import {
+  $item,
+  CombatLoversLocket as CombatLoversLocketLibram,
+  get,
+} from "libram";
+import { FC, ReactNode } from "react";
 
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
@@ -183,7 +187,7 @@ function getOptions(): string[] {
   ];
 }
 
-const CombatLoversLocketTile: FC = () => {
+const CombatLoversLocket: FC = () => {
   const combatLoversLocket = $item`combat lover's locket`;
 
   if (!haveUnrestricted(combatLoversLocket)) {
@@ -192,7 +196,7 @@ const CombatLoversLocketTile: FC = () => {
 
   const locketPhylum = get("locketPhylum")?.identifierString ?? "none";
   const locketEnchantment = getLocketEnchantment(locketPhylum);
-  const reminiscesLeft = CombatLoversLocket.reminiscesLeft();
+  const reminiscesLeft = CombatLoversLocketLibram.reminiscesLeft();
 
   const options = getOptions();
 
@@ -224,4 +228,4 @@ const CombatLoversLocketTile: FC = () => {
   );
 };
 
-export default CombatLoversLocketTile;
+export default CombatLoversLocket;

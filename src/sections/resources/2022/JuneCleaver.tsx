@@ -1,9 +1,9 @@
 import { ListItem, OrderedList, UnorderedList } from "@chakra-ui/react";
 import { $item, get } from "libram";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { haveUnrestricted } from "../../../util/available";
 
 const cleaverChoiceAdventures = [

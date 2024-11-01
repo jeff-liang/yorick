@@ -9,6 +9,7 @@ import {
   numericModifier,
 } from "kolmafia";
 import { $item, get, have, questStep } from "libram";
+import { FC } from "react";
 
 import Chevrons from "../../../components/Chevrons";
 import Line from "../../../components/Line";
@@ -16,7 +17,7 @@ import QuestTile from "../../../components/QuestTile";
 import Requirement from "../../../components/Requirement";
 import { plural } from "../../../util/text";
 
-const TwinPeak = () => {
+const TwinPeak: FC = () => {
   const step = questStep("questL09Topping");
   const res = Math.floor(numericModifier("stench resistance"));
   const jars = availableAmount($item`jar of oil`);

@@ -1,6 +1,7 @@
 import { Badge, Flex, ListItem, UnorderedList } from "@chakra-ui/react";
 import { haveEquipped, myAscensions, myFamiliar, myLevel } from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

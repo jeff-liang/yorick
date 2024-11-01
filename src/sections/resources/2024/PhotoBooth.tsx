@@ -1,5 +1,6 @@
 import { getClanName } from "kolmafia";
 import { $items, get, have } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

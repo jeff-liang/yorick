@@ -1,3 +1,5 @@
+import { FC } from "react";
+
 import { questFinished } from "../../util/quest";
 
 import BlackForest from "./level11/BlackForest";
@@ -9,7 +11,7 @@ import Palindome from "./level11/Palindome";
 import Pyramid from "./level11/Pyramid";
 import Zeppelin from "./level11/Zeppelin";
 
-const Level11 = () => {
+const Level11: FC = () => {
   if (questFinished("questL11MacGuffin")) {
     return null;
   }

@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { myClass, myLevel, myPrimestat, numericModifier } from "kolmafia";
 import { $class, $familiar, get } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

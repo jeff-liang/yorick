@@ -7,12 +7,13 @@ import {
   myPathId,
 } from "kolmafia";
 import { $item, get, have, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import { commaSeparate } from "../../../util/text";
 
-const OilPeak = () => {
+const OilPeak: FC = () => {
   const step = questStep("questL09Topping");
   const lit = get("oilPeakLit");
 

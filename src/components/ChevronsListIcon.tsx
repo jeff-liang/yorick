@@ -1,4 +1,5 @@
 import { IconProps, ListIcon } from "@chakra-ui/react";
+import { FC } from "react";
 
 import Chevrons from "./Chevrons";
 

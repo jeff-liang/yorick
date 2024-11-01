@@ -1,6 +1,7 @@
 import { List, ListIcon, ListItem } from "@chakra-ui/react";
 import { combatRateModifier, myHash, myLocation } from "kolmafia";
 import { $location, $skill, have, questStep } from "libram";
+import { FC } from "react";
 
 import Chevrons from "../../components/Chevrons";
 import Line from "../../components/Line";

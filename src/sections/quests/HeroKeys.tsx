@@ -20,7 +20,7 @@ import {
   have,
   sum,
 } from "libram";
-import { Fragment, ReactNode, useMemo } from "react";
+import { FC, Fragment, ReactNode, useMemo } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

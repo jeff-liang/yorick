@@ -1,6 +1,7 @@
 import { LinkProps } from "@chakra-ui/react";
 import { Familiar, Item, Skill } from "kolmafia";
 import { have } from "libram";
+import { FC } from "react";
 
 import FamiliarButtons from "./FamiliarButtons";
 import ItemButtons from "./ItemButtons";

@@ -1,4 +1,5 @@
 import { $item, $location, have, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

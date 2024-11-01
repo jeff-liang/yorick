@@ -7,6 +7,7 @@ import {
   myHp,
 } from "kolmafia";
 import { $element, $item, get, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
@@ -19,7 +20,7 @@ const elementalDamage = (base: number, element: Element) => {
   return Math.max(1, Math.ceil(base - (base * res) / 100));
 };
 
-const AbooPeak = () => {
+const AbooPeak: FC = () => {
   const step = questStep("questL09Topping");
   const haunt = get("booPeakProgress");
   const lit = get("booPeakLit");

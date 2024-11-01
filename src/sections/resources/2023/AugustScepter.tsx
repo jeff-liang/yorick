@@ -16,11 +16,11 @@ import {
   have,
   questStep,
 } from "libram";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { haveUnrestricted } from "../../../util/available";
 import { plural } from "../../../util/text";
 

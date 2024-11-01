@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { canEquip, haveEquipped, myPath } from "kolmafia";
 import { $effect, $item, $path, $skill, clamp, get, have } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import AsyncButton from "../../../components/AsyncButton";
 import Line from "../../../components/Line";

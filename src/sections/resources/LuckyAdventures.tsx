@@ -10,7 +10,7 @@ import {
   have,
   questStep,
 } from "libram";
-import { Fragment, ReactNode } from "react";
+import { FC, Fragment, ReactNode } from "react";
 
 import AsyncLink from "../../components/AsyncLink";
 import Line from "../../components/Line";

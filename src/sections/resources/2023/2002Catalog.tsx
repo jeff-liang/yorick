@@ -2,9 +2,9 @@ import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { availableAmount, myHash, totalTurnsPlayed } from "kolmafia";
 import { $item, get, getTodaysHolidayWanderers, have } from "libram";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { haveUnrestricted } from "../../../util/available";
 
 const MrStore2002 = () => {

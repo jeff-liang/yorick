@@ -1,8 +1,8 @@
 import { questStep } from "libram";
 
+import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
-import { AdviceTooltipIcon } from "../../../components/Tooltips";
 import { atStep, questFinished, Step } from "../../../util/quest";
 
 import ZeppelinMob from "./ZeppelinMob";

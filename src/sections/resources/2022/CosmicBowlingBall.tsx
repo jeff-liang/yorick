@@ -1,9 +1,9 @@
 import { Text } from "@chakra-ui/react";
 import { $item, $location, get } from "libram";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";

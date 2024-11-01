@@ -7,6 +7,7 @@ import {
   spleenLimit,
 } from "kolmafia";
 import { $effect, $item, $items, $skill, clamp, get, have, sum } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";

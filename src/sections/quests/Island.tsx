@@ -1,5 +1,6 @@
 import { availableAmount, Item, myAscensions } from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

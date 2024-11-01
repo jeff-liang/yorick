@@ -1,6 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { haveEquipped, myPath, numericModifier, toInt } from "kolmafia";
 import { $item, $path, get, have, maxBy, NumericModifier } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

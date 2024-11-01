@@ -6,7 +6,7 @@ import {
   npcPrice,
 } from "kolmafia";
 import { $familiar, $item, $location, get, have, questStep } from "libram";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import { Fragment } from "react/jsx-runtime";
 
 import Line from "../../../components/Line";
@@ -16,7 +16,7 @@ import useNag from "../../../hooks/useNag";
 import { atStep, Step } from "../../../util/quest";
 import { plural } from "../../../util/text";
 
-const BlackForest = () => {
+const BlackForest: FC = () => {
   const step = questStep("questL11Black");
   const forestProgress = get("blackForestProgress");
   const blackForest = $location`The Black Forest`;

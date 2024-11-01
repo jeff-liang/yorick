@@ -1,5 +1,6 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { ButtonProps, IconButton } from "@chakra-ui/react";
+import { FC } from "react";
 
 export interface ChatButtonProps extends ButtonProps {
   direction: "left" | "right";

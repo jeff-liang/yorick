@@ -1,9 +1,10 @@
 import { Modifier, myPath } from "kolmafia";
 import { $item, $path, get, have, questStep } from "libram";
+import { FC } from "react";
 
+import AdviceTooltip from "../../components/AdviceTooltip";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
-import { AdviceTooltip } from "../../components/Tooltips";
 import { Step } from "../../util/quest";
 
 const Level13: FC = () => {

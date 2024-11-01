@@ -1,6 +1,6 @@
 import { availableAmount } from "kolmafia";
 import { $item, $location, get, have, questStep } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";

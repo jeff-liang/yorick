@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useState } from "react";
+import { FC, ReactNode, useCallback, useState } from "react";
 
 import NagContext, { NagWithPriority } from "./NagContext";
 

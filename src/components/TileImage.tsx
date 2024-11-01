@@ -1,4 +1,5 @@
 import { Box, Image, ImageProps } from "@chakra-ui/react";
+import { FC } from "react";
 
 interface Props extends ImageProps {
   imageUrl?: string;

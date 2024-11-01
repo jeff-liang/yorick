@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { getMonsters, isBanished, Location, Monster, myPath } from "kolmafia";
 import { $item, $location, $monster, $path, $skill, have } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";

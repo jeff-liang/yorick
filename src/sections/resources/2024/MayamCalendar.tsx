@@ -1,6 +1,7 @@
 import { ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
 import { myAscensions, myLevel } from "kolmafia";
 import { $item, get } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

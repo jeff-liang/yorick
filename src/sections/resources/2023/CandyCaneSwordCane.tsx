@@ -8,9 +8,9 @@ import {
 } from "kolmafia";
 import { $item, $location, $locations, get, have, questStep } from "libram";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 

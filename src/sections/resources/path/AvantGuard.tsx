@@ -1,6 +1,7 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
 import { Monster, myPath } from "kolmafia";
 import { $item, $monster, $path, get, have, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";

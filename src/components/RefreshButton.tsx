@@ -1,5 +1,6 @@
 import { RepeatIcon } from "@chakra-ui/icons";
 import { ButtonProps, IconButton } from "@chakra-ui/react";
+import { FC } from "react";
 
 const RefreshButton: FC<ButtonProps> = (props) => (
   <IconButton

@@ -9,6 +9,7 @@ import {
   trackIgnoreQueue,
 } from "kolmafia";
 import { $monster, getBanishedMonsters, sum } from "libram";
+import { FC } from "react";
 
 import { separate } from "../util/text";
 

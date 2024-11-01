@@ -1,6 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { availableAmount, Item, Skill } from "kolmafia";
 import { $item, $skill, get, have, sum } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";

@@ -9,10 +9,11 @@ import {
   have,
   questStep,
 } from "libram";
+import { FC } from "react";
 
+import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
-import { AdviceTooltipIcon } from "../../../components/Tooltips";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { atStep, questFinished, Step } from "../../../util/quest";
 import { commaList } from "../../../util/text";
@@ -76,7 +77,7 @@ const shenDays: Snake[][] = [
   [FROZEN_SOLID_SNAKE, BATSNAKE, BURNING_SNAKE_OF_FIRE],
 ];
 
-const Copperhead = () => {
+const Copperhead: FC = () => {
   const step = questStep("questL11Shen");
   const initiationDay = get("shenInitiationDay");
   const questItem = get("shenQuestItem");

@@ -1,5 +1,6 @@
 import { haveEquipped, Item } from "kolmafia";
 import { $item, $items, $location, $skill, have, questStep } from "libram";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";

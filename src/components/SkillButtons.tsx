@@ -1,5 +1,6 @@
 import { ButtonProps } from "@chakra-ui/react";
 import { mpCost, myHash, myMp, Skill } from "kolmafia";
+import { FC } from "react";
 
 import HeaderButton from "./HeaderButton";
 

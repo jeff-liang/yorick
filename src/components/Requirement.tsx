@@ -1,4 +1,5 @@
 import { Badge, BadgeProps } from "@chakra-ui/react";
+import { FC } from "react";
 
 interface RequirementProps extends Omit<BadgeProps, "colorScheme"> {
   met: boolean;

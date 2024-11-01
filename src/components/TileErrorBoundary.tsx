@@ -1,5 +1,5 @@
 import { Code, Link, Text } from "@chakra-ui/react";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
 import Tile from "./Tile";
@@ -9,7 +9,7 @@ interface TileErrorBoundaryProps {
   children: ReactNode;
 }
 
-const TileErrorBoundary = ({ name, children }: TileErrorBoundaryProps) => {
+const TileErrorBoundary: FC<TileErrorBoundaryProps> = ({ name, children }) => {
   return (
     <ErrorBoundary
       fallbackRender={({ error }) => (

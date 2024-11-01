@@ -2,9 +2,9 @@ import { Stack, Text, UnorderedList } from "@chakra-ui/react";
 import { availableAmount } from "kolmafia";
 import { $familiar, $item, clamp, get } from "libram";
 
+import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
-import { AdviceTooltip } from "../../../components/Tooltips";
 import { haveUnrestricted } from "../../../util/available";
 import { plural } from "../../../util/text";
 

@@ -12,7 +12,7 @@ import {
   monsterLevelAdjustment,
 } from "kolmafia";
 import { $item, $location, $monster, get, have, questStep } from "libram";
-import { ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 import Line from "../../components/Line";
 import MainLink from "../../components/MainLink";
@@ -67,7 +67,7 @@ const getZoneDisplay = (
   );
 };
 
-const Level7 = () => {
+const Level7: FC = () => {
   const evilEye = $item`evil eye`;
   const evilEyeCount = availableAmount(evilEye);
   const evilEyePlural =

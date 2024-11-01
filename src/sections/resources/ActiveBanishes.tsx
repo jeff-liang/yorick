@@ -1,5 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import { decode } from "html-entities";
+import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";

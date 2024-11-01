@@ -1,4 +1,5 @@
 import { Text, TextProps } from "@chakra-ui/react";
+import { FC } from "react";
 
 import AsyncLink from "./AsyncLink";
 import MainLink from "./MainLink";

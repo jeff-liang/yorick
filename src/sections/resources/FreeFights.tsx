@@ -9,9 +9,9 @@ import {
 import { $item, $path, $skill, get, have } from "libram";
 import { FC, Fragment, ReactNode } from "react";
 
+import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
-import { AdviceTooltipIcon } from "../../components/Tooltips";
 import { haveUnrestricted } from "../../util/available";
 import { skillLink } from "../../util/links";
 import { questStarted } from "../../util/quest";

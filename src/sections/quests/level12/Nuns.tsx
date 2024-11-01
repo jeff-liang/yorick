@@ -10,7 +10,7 @@ import {
   pullsRemaining,
 } from "kolmafia";
 import { $effect, $item, $path, $skill, get, have, SongBoom } from "libram";
-import React from "react";
+import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";

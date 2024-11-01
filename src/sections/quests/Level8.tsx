@@ -29,21 +29,18 @@ const Level8: FC = () => {
 
   if (step === Step.FINISHED) return null;
 
-  // TODO: Find image URL.
+  // TODO: Support eXtreme slope path.
   return (
     <QuestTile
       header="Trapper"
       imageUrl={atStep(step, [
         [Step.UNSTARTED, "/images/otherimages/thetrapper.gif"],
       ])}
-      // TODO: double check these links are right...
       href={atStep(step, [
         [Step.UNSTARTED, "/council.php"],
         [Step.STARTED, TRAPPER_URL],
         [1, undefined],
         [2, "/place.php?whichplace=mclargehuge"],
-        [4, "/place.php?whichplace=mclargehuge"],
-        [Step.FINISHED, undefined],
       ])}
       minLevel={8}
     >
@@ -66,17 +63,19 @@ const Level8: FC = () => {
                 .
               </Line>
               {goatCheese < 3 && (
-                <Monsters
-                  location={$location`The Goatlet`}
-                  target={$monster`dairy goat`}
-                />
+                <Line>
+                  <Monsters
+                    location={$location`The Goatlet`}
+                    target={$monster`dairy goat`}
+                  />
+                </Line>
               )}
               {ore < 3 && faxLikes.length > 0 && (
                 <Line>Could use {commaOr(faxLikes())} for a mountain man.</Line>
               )}
             </>
           ) : (
-            <Line href={TRAPPER_URL}>Return to the trapper</Line>
+            <Line href={TRAPPER_URL}>Return to the trapper.</Line>
           ),
         ],
         [

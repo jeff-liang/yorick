@@ -1,10 +1,11 @@
 import { ElementType, numericModifier } from "kolmafia";
 import { questStep } from "libram";
+import { FC } from "react";
 
 import ElementName from "../../components/ElementName";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
-import { atStep, Step } from "../../util/quest";
+import { atStep, questFinished, Step } from "../../util/quest";
 import { commaAnd } from "../../util/text";
 
 const Level3: FC = () => {
@@ -40,6 +41,7 @@ const Level3: FC = () => {
         [Step.FINISHED, undefined],
       ])}
       minLevel={3}
+      disabled={!questFinished("questL02Larva")}
     >
       {atStep(step, [
         [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],

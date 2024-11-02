@@ -48,6 +48,8 @@ import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
 import SpringShoes from "./resources/2024/SpringShoes";
 import TearawayPants from "./resources/2024/TearawayPants";
 import ActiveBanishes from "./resources/ActiveBanishes";
+import Copies from "./resources/Copies";
+import Faxes from "./resources/Faxes";
 import FreeFights from "./resources/FreeFights";
 import FreeKills from "./resources/FreeKills";
 import FreeRuns from "./resources/FreeRuns";
@@ -63,6 +65,8 @@ const ResourceSection = () => (
       FreeFights,
       FreeKills,
       FreeRuns,
+      Faxes,
+      Copies,
       LuckyAdventures,
 
       /* 2020 */

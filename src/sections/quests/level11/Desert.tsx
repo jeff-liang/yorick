@@ -228,7 +228,7 @@ const DesertQuest = () => {
       )}
 
       {haveMelodramedary && !usingMelodramedary && (
-        <Line command="familiar Melodramedary">
+        <Line takeFamiliar={$familiar`Melodramedary`}>
           Consider using Melodramedary for faster exploration.
         </Line>
       )}

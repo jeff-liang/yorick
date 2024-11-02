@@ -1,4 +1,5 @@
 import { Text, TextProps } from "@chakra-ui/react";
+import { Familiar, myFamiliar } from "kolmafia";
 import { FC } from "react";
 
 import AsyncLink from "./AsyncLink";
@@ -7,16 +8,21 @@ import MainLink from "./MainLink";
 interface Props extends TextProps {
   href?: string;
   command?: string;
+  takeFamiliar?: Familiar;
   async?: boolean;
 }
 
 const Line: FC<Props> = ({
   href,
   command,
+  takeFamiliar,
   async = false,
   children,
   ...props
 }) => {
+  if (takeFamiliar && myFamiliar() !== takeFamiliar) {
+    command = `familiar ${takeFamiliar.identifierString}`;
+  }
   return (
     <Text mt={0} {...props}>
       {command ? (

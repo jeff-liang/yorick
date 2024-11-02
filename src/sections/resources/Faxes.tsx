@@ -78,9 +78,12 @@ const FAX_SOURCES: FaxSource[] = [
               ? "/place.php?whichplace=town_right&action=townright_dna"
               : undefined
           }
+          takeFamiliar={xp < 100 ? $familiar`Chest Mimic` : undefined}
         >
           {plural(remaining, "Chest Mimic egg")}
-          {xp < remaining * 100 ? ` (${100 - (xp % 100)} xp to next)` : null}.
+          {xp < remaining * 100
+            ? ` (${Math.floor(xp / 100)} ready, ${100 - (xp % 100)} xp to next)`
+            : null}
         </Line>
       );
     },

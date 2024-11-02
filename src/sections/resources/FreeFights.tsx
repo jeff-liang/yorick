@@ -2,11 +2,10 @@ import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import {
   availableAmount,
   getCampground,
-  haveEquipped,
   isUnrestricted,
   myPath,
 } from "kolmafia";
-import { $item, $path, $skill, get, have } from "libram";
+import { $item, $path, $skill, get, sum } from "libram";
 import { FC, Fragment, ReactNode } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
@@ -17,128 +16,111 @@ import { skillLink } from "../../util/links";
 import { questStarted } from "../../util/quest";
 import { plural } from "../../util/text";
 
-const freeFights: [string, () => ReactNode][] = [
-  [
-    "NEP",
-    () => {
-      const nepToday = get("_neverendingPartyToday", false);
-      const nepAlways = get("neverendingPartyAlways", false);
-      const nepFreeTurns = get("_neverendingPartyFreeTurns");
-      return (
-        (nepToday || nepAlways) &&
-        isUnrestricted($item`Neverending Party invitation envelope`) &&
-        nepFreeTurns < 10 && (
-          <Line href="/place.php?whichplace=town_wrong">
-            {plural(10 - nepFreeTurns, "free NEP fight")}.
-          </Line>
-        )
-      );
-    },
-  ],
-  [
-    "Witchess",
-    () => {
-      const campground = getCampground() ?? {};
+interface FreeFightSource {
+  name: string;
+  remaining: () => number;
+  render: (props: { remaining: number }) => ReactNode;
+}
 
-      const witchessFights = get("_witchessFights");
-
-      return (
-        !!campground["Witchess Set"] &&
-        isUnrestricted($item`Witchess Set`) &&
-        witchessFights < 5 && (
-          <Line href="/campground.php?action=witchess">
-            {plural(5 - witchessFights, "Witchess fight")}.
-          </Line>
-        )
-      );
-    },
-  ],
-  [
-    "CMG",
-    () => {
-      const voidFreeFights = get("_voidFreeFights");
-      const haveCmg = have($item`cursed magnifying glass`);
-      const haveCmgEquipped = haveEquipped($item`cursed magnifying glass`);
-      return (
-        haveCmg &&
-        voidFreeFights < 5 && (
-          <Line
-            href={
-              haveCmgEquipped
-                ? undefined
-                : "/inventory.php?ftext=cursed magnifying glass"
-            }
-          >
-            {plural(5 - voidFreeFights, "free void fight")} (
-            {get("cursedMagnifyingGlassCount")}/13 charge).
-          </Line>
-        )
-      );
-    },
-  ],
-  [
-    "Burning Leaves",
-    () => {
-      const fightsRemaining = Math.max(0, 5 - get("_leafMonstersFought"));
+const FREE_FIGHTS: FreeFightSource[] = [
+  {
+    name: "NEP",
+    remaining: () =>
+      +(
+        (isUnrestricted($item`Neverending Party invitation envelope`) &&
+          get("_neverendingPartyToday")) ||
+        get("neverendingPartyAlways")
+      ) && 10 - get("_neverendingPartyFreeTurns"),
+    render: ({ remaining }) => (
+      <Line href="/place.php?whichplace=town_wrong">
+        {plural(remaining, "free NEP fight")}.
+      </Line>
+    ),
+  },
+  {
+    name: "Witchess",
+    remaining: () =>
+      +(
+        getCampground()["Witchess Set"] && isUnrestricted($item`Witchess Set`)
+      ) && 5 - get("_witchessFights"),
+    render: ({ remaining }) => (
+      <Line href="/campground.php?action=witchess">
+        {plural(remaining, "Witchess fight")}.
+      </Line>
+    ),
+  },
+  {
+    name: "CMG",
+    remaining: () =>
+      +haveUnrestricted($item`cursed magnifying glass`) &&
+      5 - get("_voidFreeFights"),
+    render: ({ remaining }) => (
+      <Line equipItem={$item`cursed magnifying glass`}>
+        {plural(remaining, "free void fight")} (
+        {get("cursedMagnifyingGlassCount")}/13 charge).
+      </Line>
+    ),
+  },
+  {
+    name: "Burning Leaves",
+    remaining: () =>
+      +!!getCampground()["A Guide to Burning Leaves"] &&
+      5 - get("_leafMonstersFought"),
+    render: ({ remaining }) => {
       const leaves = availableAmount($item`inflammable leaf`);
-      const leavesNeeded = 5 * fightsRemaining;
+      const leavesNeeded = 5 * remaining;
       return (
         getCampground()["A Guide to Burning Leaves"] &&
-        fightsRemaining > 0 && (
+        remaining > 0 && (
           <Line href="/campground.php?preaction=burningleaves">
-            {fightsRemaining} burning leaf fights
+            {remaining} burning leaf fights
             {leaves < leavesNeeded ? ` (${leaves}/${leavesNeeded} leaves)` : ""}
             .
           </Line>
         )
       );
     },
-  ],
-  [
-    "Forest Tentacle",
-    () => {
-      const larvaQuest = questStarted("questL02Larva");
-      const groveQuest = questStarted("questG02Whitecastle");
-      const tentacleFought = !get("_eldritchTentacleFought", false);
-      return (
-        (larvaQuest || groveQuest) &&
-        tentacleFought && (
-          <Line href="/place.php?whichplace=forestvillage&action=fv_scientest">
-            1 free eldritch tentacle in the forest.
-          </Line>
-        )
-      );
-    },
-  ],
-  [
-    "Evoke Horror",
-    () => {
-      const haveEvoke = haveUnrestricted($skill`Evoke Eldritch Horror`);
-      const evoked = get("_eldritchHorrorEvoked", false);
-      return (
-        haveEvoke &&
-        !evoked && (
-          <Line href={skillLink($skill`Evoke Eldritch Horror`)}>
-            1 free eldritch horror via Evoke Eldritch Horror.
-          </Line>
-        )
-      );
-    },
-  ],
+  },
+  {
+    name: "Forest Tentacle",
+    remaining: () =>
+      +(questStarted("questL02Larva") && questStarted("questG02Whitecastle")) &&
+      1 - +get("_eldritchTentacleFought"),
+    render: () => (
+      <Line href="/place.php?whichplace=forestvillage&action=fv_scientist">
+        1 free eldritch tentacle in the forest.
+      </Line>
+    ),
+  },
+  {
+    name: "Evoke Horror",
+    remaining: () =>
+      +haveUnrestricted($skill`Evoke Eldritch Horror`) &&
+      1 - +get("_eldritchHorrorEvoked"),
+    render: () => (
+      <Line href={skillLink($skill`Evoke Eldritch Horror`)}>
+        1 free eldritch horror via Evoke Eldritch Horror.
+      </Line>
+    ),
+  },
 ];
 
 const FreeFights: FC = () => {
   if (myPath() === $path`Avant Guard`) return null;
 
-  const renderedFights = freeFights.map(([name, fight]) => {
-    const rendered = fight();
-    return rendered ? <Fragment key={name}>{rendered}</Fragment> : false;
-  });
+  const sources = FREE_FIGHTS.map((source): [FreeFightSource, number] => [
+    source,
+    source.remaining(),
+  ]).filter(([, remaining]) => remaining > 0);
+  if (sources.length === 0) return null;
 
-  return renderedFights.some((fight) => fight) ? (
+  const total = sum(sources, ([, remaining]) => remaining);
+
+  return (
     <Tile
-      header="Free Fights"
-      imageUrl="/images/itemimages/shatter.gif"
+      header={`${plural(total, "free fight")}`}
+      id="free-fights-tile"
+      imageUrl="/images/adventureimages/eldtentacle.gif"
       tooltip={
         <AdviceTooltipIcon
           text={`These are inherently free fights. They do not cost a turn, nor do they
@@ -149,10 +131,10 @@ const FreeFights: FC = () => {
         />
       }
     >
-      {renderedFights}
+      {sources.map(([{ name, render }, remaining]) => (
+        <Fragment key={name}>{render({ remaining })}</Fragment>
+      ))}
     </Tile>
-  ) : (
-    <></>
   );
 };
 

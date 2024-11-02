@@ -1,5 +1,5 @@
 import { Text, TextProps } from "@chakra-ui/react";
-import { Familiar, myFamiliar } from "kolmafia";
+import { Familiar, haveEquipped, Item, myFamiliar } from "kolmafia";
 import { FC } from "react";
 
 import AsyncLink from "./AsyncLink";
@@ -9,6 +9,7 @@ interface Props extends TextProps {
   href?: string;
   command?: string;
   takeFamiliar?: Familiar;
+  equipItem?: Item;
   async?: boolean;
 }
 
@@ -16,12 +17,16 @@ const Line: FC<Props> = ({
   href,
   command,
   takeFamiliar,
+  equipItem,
   async = false,
   children,
   ...props
 }) => {
   if (takeFamiliar && myFamiliar() !== takeFamiliar) {
     command = `familiar ${takeFamiliar.identifierString}`;
+  }
+  if (equipItem && !haveEquipped(equipItem)) {
+    command = `equip ${equipItem.identifierString}`;
   }
   return (
     <Text mt={0} {...props}>

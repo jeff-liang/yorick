@@ -119,7 +119,10 @@ const Copies: FC = () => {
           return (
             <Line takeFamiliar={$familiar`Chest Mimic`}>
               {pluralCopies(remaining, "Chest Mimic egg")}
-              {xp < remaining * 50 ? ` (${50 - (xp % 50)} xp to next)` : null}.
+              {xp < remaining * 50
+                ? ` (${Math.floor(xp / 50)} ready, ${50 - (xp % 50)} xp to next)`
+                : null}
+              .
             </Line>
           );
         },

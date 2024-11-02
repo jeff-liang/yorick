@@ -132,6 +132,7 @@ const FreeKills: FC = () => {
                   captionPlural?.() ??
                     ("plural" in thing ? thing.plural : `${thing.name}s`),
                 )}
+                .
               </Line>
             ),
         )}

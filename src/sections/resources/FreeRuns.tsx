@@ -87,6 +87,7 @@ const FreeRuns: FC = () => {
                     captionPlural?.() ??
                       ("plural" in thing ? thing.plural : `${thing.name}s`),
                   )}
+                  .
                 </Text>
               </Line>
             ),

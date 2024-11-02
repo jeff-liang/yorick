@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { ListItem, UnorderedList } from "@chakra-ui/react";
 import { availableAmount, toItem } from "kolmafia";
 import {
   $effect,
@@ -9,6 +9,7 @@ import {
   get,
   have,
   questStep,
+  sum,
 } from "libram";
 import { FC, Fragment, ReactNode } from "react";
 
@@ -20,21 +21,28 @@ import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink, parentPlaceLink, skillLink } from "../../util/links";
-import { pluralJustDescItem } from "../../util/text";
+import { questFinished } from "../../util/quest";
+import { plural } from "../../util/text";
 
-const luckyAdventureSources: [string, () => ReactNode][] = [
-  [
-    "Hermit",
-    () => {
+interface LuckySource {
+  name: string;
+  remaining: () => number;
+  render: (props: { remaining: number }) => ReactNode;
+}
+
+const LUCKY_SOURCES: LuckySource[] = [
+  {
+    name: "Hermit",
+    remaining: () =>
+      3 - get("_cloversPurchased") + availableAmount($item`11-leaf clover`),
+    render: () => {
       const clover = $item`11-leaf clover`;
       const cloversAvailableToday = 3 - get("_cloversPurchased");
       const cloversInInventory = availableAmount(clover);
-      if (cloversAvailableToday <= 0 && cloversInInventory === 0) return null;
       return (
         <Line>
           <MainLink href={inventoryLink(clover)}>
-            <Text as="b">{cloversInInventory}</Text>x{" "}
-            {pluralJustDescItem(clover)}
+            {plural(cloversInInventory, clover)}
           </MainLink>
           {cloversAvailableToday > 0 && (
             <>
@@ -50,47 +58,43 @@ const luckyAdventureSources: [string, () => ReactNode][] = [
         </Line>
       );
     },
-  ],
-  [
-    "Apriling Sax",
-    () => {
-      const saxophone = $item`Apriling band saxophone`;
-      const saxophoneUses = 3 - get("_aprilBandSaxophoneUses");
-      if (!haveUnrestricted(saxophone) || saxophoneUses <= 0) return null;
-      return (
-        <Line href={inventoryLink(saxophone)}>
-          <Text as="b">{saxophoneUses}</Text>x Apriling Sax uses.
-        </Line>
-      );
-    },
-  ],
-  [
-    "August Scepter",
-    () => {
+  },
+  {
+    name: "Apriling Sax",
+    remaining: () =>
+      +haveUnrestricted($item`Apriling band saxophone`) &&
+      3 - get("_aprilBandSaxophoneUses"),
+    render: ({ remaining }) => (
+      <Line href={inventoryLink($item`Apriling band saxophone`)}>
+        {plural(remaining, "Apriling Sax use")}.
+      </Line>
+    ),
+  },
+  {
+    name: "August Scepter",
+    remaining: () =>
+      +haveUnrestricted($skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`) &&
+      +!get("_aug2Cast"),
+    render: () => {
       const aug2Skill = $skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`;
-      const aug2Used = get("_aug2Cast");
-      if (!haveUnrestricted(aug2Skill) || aug2Used) return null;
-      return (
-        <Line href={skillLink(aug2Skill)}>
-          <Text as="b">{aug2Used ? 0 : 1}</Text>x August 16th uses.
-        </Line>
-      );
+      return <Line href={skillLink(aug2Skill)}>1 August 16th use.</Line>;
     },
-  ],
-  [
-    "Energy Drinks",
-    () => {
-      const carton = $item`[10882]carton of astral energy drinks`;
+  },
+  {
+    name: "Energy Drinks",
+    remaining: () =>
+      6 * availableAmount($item`[10882]carton of astral energy drinks`) +
+      availableAmount($item`[10883]astral energy drink`),
+    render: ({ remaining }) => {
       const drink = $item`[10883]astral energy drink`;
-      const energyDrinks = 6 * availableAmount(carton) + availableAmount(drink);
-      if (energyDrinks <= 0) return null;
+      const carton = $item`[10882]carton of astral energy drinks`;
       return (
         <Line href={inventoryLink(have(drink) ? drink : carton)}>
-          <Text as="b">{energyDrinks}</Text>x energy drinks
+          {remaining} energy drinks.
         </Line>
       );
     },
-  ],
+  },
 ];
 
 const WAND_INGREDIENTS = $items`ruby W, metallic A, lowercase N, heavy D`;
@@ -156,7 +160,8 @@ const luckyAdventureUses: [string, () => ReactNode][] = [
   [
     "Castle Top Floor",
     () =>
-      get("sidequestNunsCompleted") === "none" && (
+      get("sidequestNunsCompleted") === "none" &&
+      !questFinished("questL12War") && (
         <MainLink
           href={parentPlaceLink(
             $location`The Castle in the Clouds in the Sky (Top Floor)`,
@@ -198,22 +203,28 @@ const LuckyAdventures: FC = () => {
     [isLucky],
   );
 
-  const renderedSources = luckyAdventureSources.map(([name, source]) => {
-    const rendered = source();
-    return rendered ? <Fragment key={name}>{rendered}</Fragment> : false;
-  });
+  const sources = LUCKY_SOURCES.map((source): [LuckySource, number] => [
+    source,
+    source.remaining(),
+  ]).filter(([, remaining]) => remaining > 0);
+  if (sources.length === 0) return null;
+
+  const total = sum(sources, ([, remaining]) => remaining);
 
   const renderedUses = luckyAdventureUses.map(([name, use]) => {
     const rendered = use();
     return rendered ? <ListItem key={name}>{rendered}</ListItem> : false;
   });
 
-  return renderedSources.some((source) => source) ? (
+  return (
     <Tile
-      header="Lucky Adventures"
+      header={plural(total, "Lucky! adventure")}
+      id="lucky-adventure-tile"
       imageUrl="/images/itemimages/11leafclover.gif"
     >
-      {renderedSources}
+      {sources.map(([{ name, render }, remaining]) => (
+        <Fragment key={name}>{render({ remaining })}</Fragment>
+      ))}
       {renderedUses.some((use) => use) ? (
         <>
           <Line>Ideas for uses:</Line>
@@ -223,7 +234,7 @@ const LuckyAdventures: FC = () => {
         <Line>No ideas for how to use these. Get creative!</Line>
       )}
     </Tile>
-  ) : null;
+  );
 };
 
 export default LuckyAdventures;

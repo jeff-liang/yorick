@@ -142,7 +142,7 @@ const Copies: FC = () => {
     <Tile
       header={`${total} monster copies`}
       id="copies-tile"
-      imageUrl="/images/itemimages/photocopy.gif"
+      imageUrl="/images/itemimages/sputtysheet.gif"
     >
       {sources.map(([{ name, render }, remaining]) => (
         <Fragment key={name}>{render({ remaining })}</Fragment>

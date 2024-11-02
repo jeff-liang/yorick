@@ -20,7 +20,7 @@ const PhotoBooth: FC = () => {
   return (
     <Tile
       header="Clan Photo Booth"
-      href="/clanphoto.php"
+      href="/clan_viplounge.php?action=photobooth"
       imageUrl="/images/adventureimages/photobooth.gif"
     >
       {!hasPhotoBooth && (
@@ -29,10 +29,10 @@ const PhotoBooth: FC = () => {
         </Line>
       )}
       {photosRemaining > 0 && (
-        <>
-          <Line>{plural(photosRemaining, "clan photo")} remaining.</Line>
-          <Line>50-turn -combat, +combat </Line>
-        </>
+        <Line>
+          {plural(photosRemaining, "clan photo")} remaining: 50-turn -combat,
+          +combat buff.
+        </Line>
       )}
       {potentialSheriff === 3 && sheriffPiecesMissing.length > 0 && (
         <>

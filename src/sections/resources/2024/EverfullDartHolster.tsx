@@ -28,7 +28,11 @@ const EverfullDartHolster = () => {
       id: "everfull-dart-holster-nag",
       priority: NagPriority.MID,
       node: !haveELR && haveHolster && (
-        <Tile header="Throw a Bullseye" linkedContent={everfullDartHolster}>
+        <Tile
+          header="Throw a Bullseye"
+          id="bullseye-nag"
+          linkedContent={everfullDartHolster}
+        >
           <Line>
             <Text as="span" color="red.500">
               Shoot a bullseye! ({dartCooldown} turns ELR)

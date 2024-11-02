@@ -1,4 +1,3 @@
-import { Text } from "@chakra-ui/react";
 import { FC } from "react";
 
 import Section, { SectionProps } from "./Section";
@@ -14,19 +13,13 @@ const TileSection = ({ tiles, ...props }: TileSectionProps) => {
     <SpecificTile />,
   ]);
 
-  if (!rendered.some(([, tile]) => tile)) return null;
-
   return (
     <Section {...props}>
-      {rendered.every(([, tile]) => !tile) ? (
-        <Text as="i">No information to display.</Text>
-      ) : (
-        rendered.map(([name, tile]) => (
-          <TileErrorBoundary key={name} name={name}>
-            {tile}
-          </TileErrorBoundary>
-        ))
-      )}
+      {rendered.map(([name, tile]) => (
+        <TileErrorBoundary key={name} name={name}>
+          {tile}
+        </TileErrorBoundary>
+      ))}
     </Section>
   );
 };

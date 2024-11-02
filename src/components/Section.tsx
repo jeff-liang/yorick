@@ -11,7 +11,19 @@ const Section: FC<SectionProps> = ({ name, children, ...props }) => (
     <Heading as="h2" size="md" px={2}>
       {name}
     </Heading>
-    {children}
+    <Stack
+      spacing={3}
+      _empty={{
+        _after: {
+          content: '"Nothing to display."',
+          px: 2,
+          fontWeight: "bold",
+          fontStyle: "italic",
+        },
+      }}
+    >
+      {children}
+    </Stack>
   </Stack>
 );
 

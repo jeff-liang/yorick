@@ -9,6 +9,8 @@ import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { NagPriority } from "../../contexts/NagContext";
+import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
 import { renderSourceList, Source } from "../../util/source";
@@ -117,6 +119,23 @@ const FORCE_SOURCES: Source[] = [
 ];
 
 const NoncombatForces: FC = () => {
+  const active = get("noncombatForcerActive");
+  useNag(
+    () => ({
+      id: "nc-forces-nag",
+      priority: NagPriority.HIGH,
+      node: active && (
+        <Tile
+          header="Noncombat Forced"
+          imageUrl="/images/itemimages/clarabell.gif"
+        >
+          <Line>Visit a zone with a key noncombat.</Line>
+        </Tile>
+      ),
+    }),
+    [active],
+  );
+
   const { total, rendered } = renderSourceList(FORCE_SOURCES);
   if (total === 0) return null;
 

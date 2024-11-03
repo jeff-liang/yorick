@@ -4,15 +4,15 @@ import {
   $skill,
   get,
   have,
-  sum,
   totalFamiliarWeight,
 } from "libram";
-import { FC, Fragment, ReactNode, useEffect, useMemo, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
+import { renderSourceList } from "../../util/source";
 import { plural } from "../../util/text";
 
 function pluralCopies(count: number, description: string) {
@@ -131,12 +131,8 @@ const Copies: FC = () => {
     [maxObservedProfWeight],
   );
 
-  const sources = copySources
-    .map((source): [CopySource, number] => [source, source.remaining()])
-    .filter(([, remaining]) => remaining > 0);
-  if (sources.length === 0) return null;
-
-  const total = sum(sources, ([, remaining]) => remaining);
+  const { total, rendered } = renderSourceList(copySources);
+  if (total === 0) return null;
 
   return (
     <Tile
@@ -144,9 +140,7 @@ const Copies: FC = () => {
       id="copies-tile"
       imageUrl="/images/itemimages/sputtysheet.gif"
     >
-      {sources.map(([{ name, render }, remaining]) => (
-        <Fragment key={name}>{render({ remaining })}</Fragment>
-      ))}
+      {rendered}
     </Tile>
   );
 };

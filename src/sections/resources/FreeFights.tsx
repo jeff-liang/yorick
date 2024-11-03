@@ -5,8 +5,8 @@ import {
   isUnrestricted,
   myPath,
 } from "kolmafia";
-import { $item, $path, $skill, get, sum } from "libram";
-import { FC, Fragment, ReactNode } from "react";
+import { $item, $path, $skill, get } from "libram";
+import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
 import Line from "../../components/Line";
@@ -14,15 +14,10 @@ import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { skillLink } from "../../util/links";
 import { questStarted } from "../../util/quest";
+import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
 
-interface FreeFightSource {
-  name: string;
-  remaining: () => number;
-  render: (props: { remaining: number }) => ReactNode;
-}
-
-const FREE_FIGHTS: FreeFightSource[] = [
+const FREE_FIGHTS: Source[] = [
   {
     name: "NEP",
     remaining: () =>
@@ -108,13 +103,8 @@ const FREE_FIGHTS: FreeFightSource[] = [
 const FreeFights: FC = () => {
   if (myPath() === $path`Avant Guard`) return null;
 
-  const sources = FREE_FIGHTS.map((source): [FreeFightSource, number] => [
-    source,
-    source.remaining(),
-  ]).filter(([, remaining]) => remaining > 0);
-  if (sources.length === 0) return null;
-
-  const total = sum(sources, ([, remaining]) => remaining);
+  const { total, rendered } = renderSourceList(FREE_FIGHTS);
+  if (total === 0) return null;
 
   return (
     <Tile
@@ -131,9 +121,7 @@ const FreeFights: FC = () => {
         />
       }
     >
-      {sources.map(([{ name, render }, remaining]) => (
-        <Fragment key={name}>{render({ remaining })}</Fragment>
-      ))}
+      {rendered}
     </Tile>
   );
 };

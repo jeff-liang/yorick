@@ -9,9 +9,8 @@ import {
   get,
   have,
   questStep,
-  sum,
 } from "libram";
-import { FC, Fragment, ReactNode } from "react";
+import { FC, ReactNode } from "react";
 
 import AsyncLink from "../../components/AsyncLink";
 import Line from "../../components/Line";
@@ -22,6 +21,7 @@ import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink, parentPlaceLink, skillLink } from "../../util/links";
 import { questFinished } from "../../util/quest";
+import { renderSourceList } from "../../util/source";
 import { plural } from "../../util/text";
 
 interface LuckySource {
@@ -203,13 +203,9 @@ const LuckyAdventures: FC = () => {
     [isLucky],
   );
 
-  const sources = LUCKY_SOURCES.map((source): [LuckySource, number] => [
-    source,
-    source.remaining(),
-  ]).filter(([, remaining]) => remaining > 0);
-  if (sources.length === 0) return null;
-
-  const total = sum(sources, ([, remaining]) => remaining);
+  const { total: totalSources, rendered: renderedSources } =
+    renderSourceList(LUCKY_SOURCES);
+  if (totalSources === 0) return null;
 
   const renderedUses = luckyAdventureUses.map(([name, use]) => {
     const rendered = use();
@@ -218,13 +214,11 @@ const LuckyAdventures: FC = () => {
 
   return (
     <Tile
-      header={plural(total, "Lucky! adventure")}
+      header={plural(totalSources, "Lucky! adventure")}
       id="lucky-adventure-tile"
       imageUrl="/images/itemimages/11leafclover.gif"
     >
-      {sources.map(([{ name, render }, remaining]) => (
-        <Fragment key={name}>{render({ remaining })}</Fragment>
-      ))}
+      {renderedSources}
       {renderedUses.some((use) => use) ? (
         <>
           <Line>Ideas for uses:</Line>

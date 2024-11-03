@@ -1,11 +1,12 @@
 import { availableAmount } from "kolmafia";
-import { $familiar, $item, get, sum } from "libram";
-import { FC, Fragment, ReactNode } from "react";
+import { $familiar, $item, get } from "libram";
+import { FC, ReactNode } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
+import { renderSourceList } from "../../util/source";
 import { plural } from "../../util/text";
 
 interface FaxSource {
@@ -91,13 +92,8 @@ const FAX_SOURCES: FaxSource[] = [
 ];
 
 const Faxes: FC = () => {
-  const sources = FAX_SOURCES.map((source): [FaxSource, number] => [
-    source,
-    source.remaining(),
-  ]).filter(([, remaining]) => remaining > 0);
-  if (sources.length === 0) return null;
-
-  const total = sum(sources, ([, remaining]) => remaining);
+  const { total, rendered } = renderSourceList(FAX_SOURCES);
+  if (total === 0) return null;
 
   return (
     <Tile
@@ -105,9 +101,7 @@ const Faxes: FC = () => {
       id="fax-tile"
       imageUrl="/images/itemimages/photocopy.gif"
     >
-      {sources.map(([{ name, render }, remaining]) => (
-        <Fragment key={name}>{render({ remaining })}</Fragment>
-      ))}
+      {rendered}
     </Tile>
   );
 };

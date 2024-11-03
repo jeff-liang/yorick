@@ -20,36 +20,52 @@ const EmotionChip = () => {
 
   // Associating skills with the # remaining of each of them.
   const emoChipSkills = {
-    "Envy (all drops)": 3 - get("_feelEnvyUsed"),
     "Lonely (NC)": 3 - get("_feelLonelyUsed"),
+    "Peaceful (res)": 3 - get("_feelPeacefulUsed"),
+    "Envy (all drops)": 3 - get("_feelEnvyUsed"),
     "Nostalgic (copy drops)": 3 - get("_feelNostalgicUsed"),
     "Pride (stats)": 3 - get("_feelPrideUsed"),
-    "Peaceful (res)": 3 - get("_feelPeacefulUsed"),
   };
 
   // Turning the skills into list items w/ chevron coloring based on # left
-  const listItems = Object.entries(emoChipSkills).map(([skillName, casts]) => {
-    const text = `${plural(casts, "Feel")} ${skillName}${
-      skillName === "Nostalgic (copy drops)" ? ` [${nostalgiaMonster}]` : ""
-    }`;
-    return (
-      <ListItem
-        key={skillName}
-        pl="1"
-        display="flex"
-        color={casts === 0 ? "gray.500" : undefined}
-      >
-        <ListIcon as={Chevrons} usesLeft={casts} totalUses={3} />
-        {casts === 0 ? (
-          text
-        ) : (
-          <MainLink href={skillLink(`Feel ${skillName.split(" ")[0]}`)}>
-            {text}
-          </MainLink>
-        )}
-      </ListItem>
-    );
-  });
+  const listItems = Object.entries(emoChipSkills).map(
+    ([skillDescription, casts]) => {
+      const text = `${plural(casts, "Feel")} ${skillDescription}${
+        skillDescription === "Nostalgic (copy drops)"
+          ? ` [${nostalgiaMonster}]`
+          : ""
+      }`;
+      const skillName = `Feel ${skillDescription.split(" ")[0]}`;
+      return (
+        <ListItem
+          key={skillDescription}
+          pl="1"
+          display="flex"
+          color={casts === 0 ? "gray.500" : undefined}
+        >
+          <ListIcon
+            as={Chevrons}
+            usesLeft={casts}
+            totalUses={3}
+            marginInlineEnd={1}
+          />
+          {casts === 0 ? (
+            text
+          ) : (
+            <MainLink
+              href={
+                ["Feel Peaceful", "Feel Lonely"].includes(skillName)
+                  ? skillLink(skillName)
+                  : undefined
+              }
+            >
+              {text}
+            </MainLink>
+          )}
+        </ListItem>
+      );
+    },
+  );
 
   if (!playerIsChipped) {
     return null;

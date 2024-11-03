@@ -73,14 +73,22 @@ const Copies: FC = () => {
         },
       },
       {
+        name: "LOV Enamorang",
+        remaining: () =>
+          +(haveUnrestricted($item`LOV Enamorang`) && !get("_enamorangs")),
+        render: () => <Line>1 LOV Enamorang copy.</Line>,
+      },
+      {
         name: "Pocket Professor",
         remaining: () =>
           +haveUnrestricted($familiar`Pocket Professor`) &&
           Math.ceil(Math.sqrt(maxObservedProfWeight)) +
-            (+haveUnrestricted($item`Pocket Professor memory chip`) && 2),
+            (+haveUnrestricted($item`Pocket Professor memory chip`) && 2) -
+            get("_pocketProfessorLectures"),
         render: ({ remaining }) => (
           <Line takeFamiliar={$familiar`Pocket Professor`}>
-            {pluralCopies(remaining, "(?) Pocket Professor")}.
+            {pluralCopies(remaining, "(?) Pocket Professor")} (used{" "}
+            {get("_pocketProfessorLectures")}).
           </Line>
         ),
       },

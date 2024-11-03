@@ -89,14 +89,14 @@ const JurassicParka: FC = () => {
   })();
 
   return (
-    <Tile linkedContent={jurassicParka}>
-      <Line>
-        <Text as="b">Current enchantment: </Text>
-        {parkaMode}
-      </Line>
+    <Tile
+      header={`Jurassic Parka (${parkaMode})`}
+      id="jurassic-parka-tile"
+      linkedContent={jurassicParka}
+    >
       <Line color="blue.500">{parkaEnchantment}</Line>
       {spikolodonSpikesLeft > 0 && (
-        <Line>
+        <Line command="parka spikolodon">
           <Text as="b">{spikolodonSpikesLeft}</Text> spikolodon spikes
           available.
         </Line>

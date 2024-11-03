@@ -35,10 +35,13 @@ const PhotoBooth: FC = () => {
         </Line>
       )}
       {potentialSheriff === 3 && sheriffPiecesMissing.length > 0 && (
-        <>
-          <Line>Get sheriff outift for 3 free kills.</Line>
-          <Line>Need {commaAnd(sheriffPiecesMissing)}.</Line>
-        </>
+        <Line>
+          Get sheriff outift for 3 free kills. Need{" "}
+          {commaAnd(
+            sheriffPiecesMissing.map((item) => item.name.split(" ")[1]),
+          )}
+          .
+        </Line>
       )}
     </Tile>
   );

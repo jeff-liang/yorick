@@ -55,16 +55,10 @@ const CinchoDeMayo = () => {
       )}
       <UnorderedList>
         {totalCinch > 25 && (
-          <>
-            <ListItem>
-              <Text as="b">Dispense Salt & Lime (25%):</Text> Add stats to your
-              next drink.
-            </ListItem>
-            <ListItem>
-              <Text as="b">Party Soundtrack (25%):</Text> 30 advs of +5 fam
-              weight.
-            </ListItem>
-          </>
+          <ListItem>
+            <Text as="b">Party Soundtrack (25%):</Text> 30 advs of +5 fam
+            weight.
+          </ListItem>
         )}
         {totalCinch > 5 && (
           <>
@@ -73,15 +67,8 @@ const CinchoDeMayo = () => {
               in-combat
             </ListItem>
             <ListItem>
-              <Text as="b">Projectile Piñata (5%):</Text> 50 damage, complex
-              candy, in-combat
-            </ListItem>
-            <ListItem>
-              <Text as="b">Party Foul (5%):</Text>{" "}
-              <Text as="span" color="purple.500">
-                100 sleaze
-              </Text>{" "}
-              damage, stun, in-combat
+              <Text as="b">Projectile Piñata (5%):</Text> complex candy,
+              in-combat
             </ListItem>
           </>
         )}

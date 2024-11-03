@@ -20,8 +20,10 @@ import { FC, ReactNode } from "react";
 
 import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
+import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
+import { skillLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
 const augustScepter = $item`august scepter`;
@@ -31,7 +33,7 @@ const AugustScepter: FC = () => {
   if (!have(augustScepter) || skillsAvailable < 1) return null;
 
   const buffString = (
-    <Text as="span" size="xs" color="gray.500">
+    <Text as="span" color="gray.500">
       {" "}
       (buff)
     </Text>
@@ -88,7 +90,9 @@ const AugustScepter: FC = () => {
     const augSkillNumber = grabNumber(augSkillName);
     const augSkillPref = `_aug${augSkillNumber}Cast`;
 
-    if ([3, 4, 5, 8, 14, 15, 19, 20, 21, 25, 26, 29].includes(augSkillNumber)) {
+    if (
+      [3, 4, 5, 8, 14, 15, 19, 20, 21, 25, 26, 27, 29].includes(augSkillNumber)
+    ) {
       return;
     }
     if (get(augSkillPref)) return;
@@ -127,7 +131,7 @@ const AugustScepter: FC = () => {
         usefulAugustSkills[30] = (
           <>
             +7 advs rollover accessory{" "}
-            <Text as="span" size="xs" color="gray.500">
+            <Text as="span" color="gray.500">
               (melting)
             </Text>
           </>
@@ -139,18 +143,28 @@ const AugustScepter: FC = () => {
       questStep("questL11Manor") < 3 && get("manorDrawerCount") >= 21;
     const blastingAddendum =
       manorCheck && !have($item`blasting soda`) ? (
-        <Text as="span" fontSize="0.9em" color="gray.500">
+        <Text as="span" color="gray.500">
+          {" "}
           (blasting soda!)
         </Text>
       ) : null;
 
     if (augSkillNumber === 16) {
-      usefulAugustSkills[16] = `-1 fullness, +100% food drop ${blastingAddendum}`;
+      usefulAugustSkills[16] = (
+        <>-1 fullness, +100% food drop{blastingAddendum}</>
+      );
     }
 
     if (manorCheck && !have($item`bottle of Chateau de Vinegar`)) {
       if (augSkillNumber === 31) {
-        usefulAugustSkills[31] = `+100% booze drop wine <Text as="span" fontSize="0.9em" color="gray.500">(chateau de vinegar!)</Text>`;
+        usefulAugustSkills[31] = (
+          <>
+            +100% booze drop wine{" "}
+            <Text as="span" color="gray.500">
+              (chateau de vinegar!)
+            </Text>
+          </>
+        );
       }
     }
 
@@ -204,33 +218,6 @@ const AugustScepter: FC = () => {
       }
     }
 
-    if (augSkillNumber === 27) {
-      usefulAugustSkills[27] = (
-        <>
-          +3{" "}
-          <Text as="span" color="red.500">
-            r
-          </Text>
-          <Text as="span" color="green.500">
-            a
-          </Text>
-          <Text as="span" color="purple.500">
-            n
-          </Text>
-          <Text as="span" color="blue.500">
-            d
-          </Text>
-          <Text as="span" color="gray.500">
-            o
-          </Text>
-          <Text as="span" color="red.500">
-            m
-          </Text>{" "}
-          effects{buffString}
-        </>
-      );
-    }
-
     if (
       have($skill`Transcendent Olfaction`) &&
       (have($familiar`Pair of Stomping Boots`) ||
@@ -242,7 +229,7 @@ const AugustScepter: FC = () => {
           usefulAugustSkills[28] = (
             <>
               +10 weight familiar equipment{" "}
-              <Text as="span" fontSize="0.9em" color="gray.500">
+              <Text as="span" size="xs" color="gray.500">
                 (melting)
               </Text>
             </>
@@ -252,16 +239,25 @@ const AugustScepter: FC = () => {
     }
   });
 
-  const table = Object.entries(usefulAugustSkills).map(([day, reason]) => (
-    <Tr key={day}>
-      <Td px={1} py={1}>
-        {day}
-      </Td>
-      <Td px={1} py={1}>
-        {reason}
-      </Td>
-    </Tr>
-  ));
+  const table = Object.entries(usefulAugustSkills).map(([day, reason]) => {
+    const skillName = Object.keys(augSkillsToValue).find((name) =>
+      name.startsWith(`Aug. ${day}`),
+    );
+    return (
+      <Tr key={day}>
+        <Td px={1} py={0.5}>
+          {day}
+        </Td>
+        <Td px={1} py={0.5}>
+          {skillName ? (
+            <MainLink href={skillLink(skillName)}>{reason}</MainLink>
+          ) : (
+            reason
+          )}
+        </Td>
+      </Tr>
+    );
+  });
 
   const summarizeAugust =
     "Celebrate August tidings; cast skills corresponding to the given day to get valuable benefits.";
@@ -270,7 +266,7 @@ const AugustScepter: FC = () => {
     table.length > 0 ? (
       <>
         <Text>{summarizeAugust}</Text>
-        <Table size="sm">
+        <Table size="sm" variant="unstyled">
           <Tbody>{table}</Tbody>
         </Table>
       </>
@@ -278,7 +274,7 @@ const AugustScepter: FC = () => {
       <Text>{summarizeAugust}</Text>
     );
 
-  const title = `Cast ${plural(skillsAvailable, "August Scepter skill", "August Scepter skills")}`;
+  const title = `Cast ${plural(skillsAvailable, "August Scepter skill")}`;
   const subtitle = "All buffs are 30 turns.";
 
   const allSkills = Object.entries(augSkillsToValue)

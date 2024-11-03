@@ -1,7 +1,6 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { $item, get } from "libram";
 
-import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { plural } from "../../../util/text";
@@ -16,23 +15,11 @@ const DesignerSweatpants = () => {
   }
 
   return (
-    <Tile linkedContent={designerSweatpants}>
-      {sweatOMeter < 100 ? (
-        <Line>
-          <Text
-            as="span"
-            color="purple.500"
-          >{`${sweatOMeter}% sweatpants Sweatiness`}</Text>
-        </Line>
-      ) : (
-        <>
-          <Line>
-            <Text as="span" color="purple.500">
-              Designer sweatpants: 100% sweaty!
-            </Text>
-          </Line>
-        </>
-      )}
+    <Tile
+      header={`${sweatOMeter}% sweaty sweatpants`}
+      id="designer-sweatpants-tile"
+      linkedContent={designerSweatpants}
+    >
       <UnorderedList>
         <ListItem>
           <Text as="b">Sweat Sip (5% sweat):</Text> Regain 50 MP

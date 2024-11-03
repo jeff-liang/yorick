@@ -17,6 +17,7 @@ const TranscendentOlfaction: FC = () => {
   return (
     <Tile
       header={plural(remaining, "transcendent olfaction")}
+      id="olfaction-tile"
       imageUrl="/images/itemimages/snout.gif"
     >
       <Line>Make encountering a zone monster much more likely.</Line>

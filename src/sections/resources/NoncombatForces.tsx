@@ -4,7 +4,7 @@ import {
   mySpleenUse,
   spleenLimit,
 } from "kolmafia";
-import { $item, CinchoDeMayo, get } from "libram";
+import { $item, $skill, CinchoDeMayo, get } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
@@ -12,7 +12,7 @@ import Tile from "../../components/Tile";
 import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
-import { inventoryLink } from "../../util/links";
+import { inventoryLink, skillLink } from "../../util/links";
 import { renderSourceList, Source } from "../../util/source";
 import { plural, truthy } from "../../util/text";
 
@@ -71,7 +71,13 @@ const FORCE_SOURCES: Source[] = [
       +haveUnrestricted($item`Cincho de Mayo`) &&
       Math.floor(CinchoDeMayo.totalAvailableCinch() / 60),
     render: ({ remaining }) => (
-      <Line href={inventoryLink($item`Cincho de Mayo`)}>
+      <Line
+        href={
+          haveEquipped($item`Cincho de Mayo`)
+            ? skillLink($skill`Cincho: Fiesta Exit`)
+            : inventoryLink($item`Cincho de Mayo`)
+        }
+      >
         {plural(remaining, "Cincho de Mayo force")}.
       </Line>
     ),

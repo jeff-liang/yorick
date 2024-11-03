@@ -6,7 +6,7 @@ export const BLACK_MARKET_URL = "/shop.php?whichshop=blackmarket";
 
 export function inventoryLink(filter: string | Item) {
   if (typeof filter !== "string") {
-    filter = filter.name;
+    filter = filter.identifierString;
     filter = filter.replace(/^\[[0-9]+\]/, "");
   }
   return `/inventory.php?ftext=${filter}`;
@@ -14,7 +14,7 @@ export function inventoryLink(filter: string | Item) {
 
 export function skillLink(filter: string | Skill) {
   if (typeof filter !== "string") {
-    filter = filter.name;
+    filter = filter.identifierString;
   }
   return `/skillz.php#:~:text=${encodeURIComponent(filter)}`;
 }

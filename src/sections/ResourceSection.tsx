@@ -54,7 +54,9 @@ import FreeFights from "./resources/FreeFights";
 import FreeKills from "./resources/FreeKills";
 import FreeRuns from "./resources/FreeRuns";
 import LuckyAdventures from "./resources/LuckyAdventures";
+import NoncombatForces from "./resources/NoncombatForces";
 import AvantGuard from "./resources/path/AvantGuard";
+import TranscendentOlfaction from "./resources/TranscendentOlfaction";
 
 // TODO: Organize by functionality, not release.
 const ResourceSection = () => (
@@ -67,6 +69,8 @@ const ResourceSection = () => (
       FreeRuns,
       Faxes,
       Copies,
+      NoncombatForces,
+      TranscendentOlfaction,
       LuckyAdventures,
 
       /* 2020 */

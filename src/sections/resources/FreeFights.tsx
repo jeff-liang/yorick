@@ -1,11 +1,12 @@
 import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import {
   availableAmount,
+  canAdventure,
   getCampground,
   isUnrestricted,
   myPath,
 } from "kolmafia";
-import { $item, $path, $skill, get } from "libram";
+import { $item, $location, $path, $skill, get } from "libram";
 import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
@@ -18,6 +19,17 @@ import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
 
 const FREE_FIGHTS: Source[] = [
+  {
+    name: "Snojo",
+    remaining: () =>
+      +canAdventure($location`The X-32-F Combat Training Snowman`) &&
+      10 - get("_snojoFreeFights"),
+    render: ({ remaining }) => (
+      <Line href="/place.php?whichplace=snojo">
+        {plural(remaining, "free Snojo fight")}.
+      </Line>
+    ),
+  },
   {
     name: "NEP",
     remaining: () =>
@@ -65,14 +77,10 @@ const FREE_FIGHTS: Source[] = [
       const leaves = availableAmount($item`inflammable leaf`);
       const leavesNeeded = 5 * remaining;
       return (
-        getCampground()["A Guide to Burning Leaves"] &&
-        remaining > 0 && (
-          <Line href="/campground.php?preaction=burningleaves">
-            {remaining} burning leaf fights
-            {leaves < leavesNeeded ? ` (${leaves}/${leavesNeeded} leaves)` : ""}
-            .
-          </Line>
-        )
+        <Line href="/campground.php?preaction=burningleaves">
+          {remaining} burning leaf fights
+          {leaves < leavesNeeded ? ` (${leaves}/${leavesNeeded} leaves)` : ""}.
+        </Line>
       );
     },
   },

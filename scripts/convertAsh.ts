@@ -115,7 +115,7 @@ async function convertAshToTypeScript(
     // Prepare the request payload
     const payload = {
       // model: "claude-3-haiku-20240307",
-      model: "claude-3-5-sonnet-20240620",
+      model: "claude-3-5-sonnet-20241022",
       messages: [
         {
           role: "user",

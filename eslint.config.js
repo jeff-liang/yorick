@@ -34,6 +34,8 @@ export default [
       curly: ["error", "multi-line"],
       "eol-last": "error",
       eqeqeq: "error",
+      "import/default": "off", // performance in editor
+      "import/namespace": "off", // performance in editor
       "import/order": [
         "error",
         {

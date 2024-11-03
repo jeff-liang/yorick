@@ -20,6 +20,24 @@ function haveSource(source: Source) {
   return Array.isArray(source) ? source[1]() : have(source);
 }
 
+function nineVoltCount() {
+  return Math.floor(
+    (sum(
+      [
+        [$item`battery (AAA)`, 1],
+        [$item`battery (AA)`, 2],
+        [$item`battery (D)`, 3],
+        [$item`battery (9-Volt)`, 4],
+        [$item`battery (lantern)`, 4],
+        [$item`battery (car)`, 4],
+      ] as [Item, number][],
+      ([item, multiplier]) => multiplier * availableAmount(item),
+    ) +
+      sum(get("_pottedPowerPlant").split(","), (s) => +s && parseInt(s))) /
+      4,
+  );
+}
+
 interface FreeKillSource {
   // What gives your account access to this free kill.
   source: Source;
@@ -29,8 +47,6 @@ interface FreeKillSource {
   captionPlural?: () => string;
   remaining: () => number;
 }
-
-// TODO: Add mafia middle finger ring, tennis ball
 
 const SHERIFF_PIECES = $items`Sheriff pistol, Sheriff badge, Sheriff moustache`;
 const FREE_KILL_SOURCES: FreeKillSource[] = [
@@ -63,6 +79,11 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
     source: $item`replica bat-oomerang`,
     thing: $item`replica bat-oomerang`,
     remaining: () => 3 - get("_usedReplicaBatoomerang"),
+  },
+  {
+    source: ["Shocking Lick", () => true],
+    thing: $skill`Shocking Lick`,
+    remaining: () => get("shockingLickCharges") + nineVoltCount(),
   },
   {
     source: $item`Everfull Dart Holster`,

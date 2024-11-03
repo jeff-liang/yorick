@@ -1,3 +1,4 @@
+import { availableAmount } from "kolmafia";
 import {
   $familiar,
   $item,
@@ -7,6 +8,7 @@ import {
   totalFamiliarWeight,
 } from "libram";
 import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { getHashIfAvailable } from "tome-kolmafia-lib";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
@@ -114,6 +116,25 @@ const Copies: FC = () => {
             {get("_monsterHabitatsFightsLeft") > 0
               ? ` (current ${get("_monsterHabitatsMonster")})`
               : null}
+          </Line>
+        ),
+      },
+      {
+        name: "Spooky VHS Tape",
+        remaining: () =>
+          availableAmount($item`Spooky VHS Tape`) +
+          (+!get("_2002MrStoreCreditsCollected") && 3) +
+          get("availableMrStore2002Credits"),
+        render: ({ remaining }) => (
+          <Line
+            href={
+              !have($item`Spooky VHS Tape`)
+                ? `/inv_use.php?whichitem=11257&pwd=${getHashIfAvailable()}`
+                : undefined
+            }
+          >
+            {plural(remaining, "Spooky VHS Tape")}
+            {have($item`Spooky VHS Tape`) ? null : " (buy some)"}.
           </Line>
         ),
       },

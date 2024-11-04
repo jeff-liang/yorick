@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import { haveEquipped, myPath, numericModifier, toInt } from "kolmafia";
+import { haveEquipped, myPath, numericModifier } from "kolmafia";
 import { $item, $path, get, have, maxBy, NumericModifier } from "libram";
 import { FC } from "react";
 
@@ -54,7 +54,7 @@ const DigitalKeyQuest: FC = () => {
     green: "red",
   };
 
-  const bonusTurnsRemaining = 5 - toInt(get("8BitBonusTurns"));
+  const bonusTurnsRemaining = 5 - get("8BitBonusTurns");
 
   const userModifier: Record<Color, number> = Object.fromEntries(
     Object.entries(helpfulModifier).map(([key, value]) => [

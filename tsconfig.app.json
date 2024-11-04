@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "outDir": "types",
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@chakra-ui", "node_modules/@types"]
   },

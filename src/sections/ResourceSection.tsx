@@ -56,7 +56,8 @@ import FreeRuns from "./resources/FreeRuns";
 import LuckyAdventures from "./resources/LuckyAdventures";
 import NoncombatForces from "./resources/NoncombatForces";
 import AvantGuard from "./resources/path/AvantGuard";
-import TranscendentOlfaction from "./resources/TranscendentOlfaction";
+import Numberology from "./resources/skill/Numberology";
+import TranscendentOlfaction from "./resources/skill/TranscendentOlfaction";
 
 // TODO: Organize by functionality, not release.
 const ResourceSection = () => (
@@ -71,6 +72,7 @@ const ResourceSection = () => (
       Copies,
       NoncombatForces,
       TranscendentOlfaction,
+      Numberology,
       LuckyAdventures,
 
       /* 2020 */

@@ -195,6 +195,7 @@ export const DeckOfEveryCard = () => {
   return (
     <Tile
       header={`${plural(cheatsLeft, "card")} drawable`}
+      id="deck-of-every-card-tile"
       href={inventoryLink(deckOfEveryCard)}
     >
       {unusedSummons.map((summon) => (

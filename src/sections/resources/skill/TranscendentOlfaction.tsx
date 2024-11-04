@@ -1,10 +1,10 @@
 import { $skill, get } from "libram";
 import { FC } from "react";
 
-import Line from "../../components/Line";
-import Tile from "../../components/Tile";
-import { haveUnrestricted } from "../../util/available";
-import { plural } from "../../util/text";
+import Line from "../../../components/Line";
+import Tile from "../../../components/Tile";
+import { haveUnrestricted } from "../../../util/available";
+import { plural } from "../../../util/text";
 
 // TODO: Add some suggestions.
 const TranscendentOlfaction: FC = () => {

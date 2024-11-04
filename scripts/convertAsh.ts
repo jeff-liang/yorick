@@ -78,6 +78,12 @@ There should not be any piece to fill in later.
 
 Here are some type definitions from the project for context.
 ${typeDefinitions()}
+
+Here are all the relevant "kolmafia" package exports.
+${CODE}typescript
+${fs.readFileSync(path.resolve(__dirname, "kolmafia-used.d.ts"))}
+${CODE}
+
 Here are some example components in TypeScript.
 File: CosmicBowlingBall.tsx
 ${CODE}typescript

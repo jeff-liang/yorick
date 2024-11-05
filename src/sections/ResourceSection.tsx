@@ -1,6 +1,15 @@
 import TileSection from "../components/TileSection";
 
+import ActiveBanishes from "./misc/ActiveBanishes";
 import BeatenUp from "./misc/BeatenUp";
+import Copies from "./misc/Copies";
+import Faxes from "./misc/Faxes";
+import FreeFights from "./misc/FreeFights";
+import FreeKills from "./misc/FreeKills";
+import FreeRuns from "./misc/FreeRuns";
+import LuckyAdventures from "./misc/LuckyAdventures";
+import NoncombatForces from "./misc/NoncombatForces";
+import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
 import Floundry from "./resources/2016/Floundry";
 import SourceTerminal from "./resources/2016/SourceTerminal";
@@ -52,14 +61,6 @@ import RomanCandelabra from "./resources/2024/RomanCandelabra";
 import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
 import SpringShoes from "./resources/2024/SpringShoes";
 import TearawayPants from "./resources/2024/TearawayPants";
-import ActiveBanishes from "./resources/ActiveBanishes";
-import Copies from "./resources/Copies";
-import Faxes from "./resources/Faxes";
-import FreeFights from "./resources/FreeFights";
-import FreeKills from "./resources/FreeKills";
-import FreeRuns from "./resources/FreeRuns";
-import LuckyAdventures from "./resources/LuckyAdventures";
-import NoncombatForces from "./resources/NoncombatForces";
 import AvantGuard from "./resources/path/AvantGuard";
 import Numberology from "./resources/skill/Numberology";
 import TranscendentOlfaction from "./resources/skill/TranscendentOlfaction";
@@ -79,6 +80,9 @@ const ResourceSection = () => (
       TranscendentOlfaction,
       Numberology,
       LuckyAdventures,
+
+      /* 2009 */
+      FrumiousBandersnatch,
 
       /* 2015 */
       DeckOfEveryCard,

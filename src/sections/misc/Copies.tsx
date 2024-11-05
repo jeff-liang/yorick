@@ -1,17 +1,11 @@
 import { availableAmount } from "kolmafia";
-import {
-  $familiar,
-  $item,
-  $skill,
-  get,
-  have,
-  totalFamiliarWeight,
-} from "libram";
-import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { $familiar, $item, $skill, get, have } from "libram";
+import { FC, ReactNode, useMemo } from "react";
 import { getHashIfAvailable } from "tome-kolmafia-lib";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import useMaxObservedWeight from "../../hooks/useMaxObservedWeight";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
 import { renderSourceList } from "../../util/source";
@@ -28,14 +22,9 @@ interface CopySource {
 }
 
 const Copies: FC = () => {
-  const [maxObservedProfWeight, setMaxObservedProfWeight] = useState(20);
-  const profWeight = totalFamiliarWeight($familiar`Pocket Professor`, true);
-
-  useEffect(() => {
-    if (profWeight > maxObservedProfWeight) {
-      setMaxObservedProfWeight(profWeight);
-    }
-  }, [profWeight, maxObservedProfWeight]);
+  const maxObservedProfWeight = useMaxObservedWeight(
+    $familiar`Pocket Professor`,
+  );
 
   const copySources = useMemo(
     (): CopySource[] => [

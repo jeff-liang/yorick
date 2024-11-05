@@ -8,8 +8,8 @@ import Tile from "../../components/Tile";
 import { plural } from "../../util/text";
 
 interface FreeRunSource {
-  source: Item | Skill;
-  thing: Item | Skill;
+  source: Item | Skill; // what do you need to have for this to be relevant?
+  thing: Item | Skill; // what do you need to use to trigger this?
   caption?: () => string;
   captionPlural?: () => string;
   remaining: () => number;
@@ -52,6 +52,11 @@ const freeRunSources: FreeRunSource[] = [
     caption: () => "scrapbook banish",
     captionPlural: () => "scrapbook banishes",
     remaining: () => Math.floor(get("scrapbookCharges") / 100),
+  },
+  {
+    source: $item`stuffed yam stinkbomb`,
+    thing: $item`stuffed yam stinkbomb`,
+    remaining: () => availableAmount($item`stuffed yam stinkbomb`),
   },
   {
     source: $item`tennis ball`,

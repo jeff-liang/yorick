@@ -37,7 +37,7 @@ function makeSummon(cards: string | string[], reason: string): CardSummon {
   };
 }
 
-export const DeckOfEveryCard = () => {
+const DeckOfEveryCard = () => {
   const deckOfEveryCard = $item`Deck of Every Card`;
   const replicaDeckOfEveryCard = $item`replica Deck of Every Card`;
 
@@ -215,3 +215,5 @@ export const DeckOfEveryCard = () => {
     </Tile>
   );
 };
+
+export default DeckOfEveryCard;

@@ -34,13 +34,13 @@ const AsdonMartin = () => {
     () => ({
       id: "asdon-martin-bumper",
       priority: NagPriority.MID,
-      node: workshedAsdon && (
+      node: workshedAsdon && !banisherActive && (
         <Tile
           header="Cast Spring-Loaded Front Bumper"
           imageUrl="/images/itemimages/am_keyfob.gif"
         >
           <Line>
-            {banisherActive ? (
+            {currentFuel >= 50 ? (
               `Banish${freeRunsUsable ? "/free run" : ""}, costs 50 fuel.`
             ) : (
               <Text as="span" color="red.500">
@@ -56,7 +56,13 @@ const AsdonMartin = () => {
         </Tile>
       ),
     }),
-    [workshedAsdon, banisherActive, freeRunsUsable, inFamiliarsPath],
+    [
+      workshedAsdon,
+      banisherActive,
+      currentFuel,
+      freeRunsUsable,
+      inFamiliarsPath,
+    ],
   );
 
   if (workshedAsdon) return null;

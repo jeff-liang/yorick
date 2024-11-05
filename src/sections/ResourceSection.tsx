@@ -1,6 +1,10 @@
 import TileSection from "../components/TileSection";
 
 import BeatenUp from "./misc/BeatenUp";
+import { DeckOfEveryCard } from "./resources/2015/DeckOfEveryCard";
+import Floundry from "./resources/2016/Floundry";
+import SourceTerminal from "./resources/2016/SourceTerminal";
+import Thanksgarden from "./resources/2016/Thanksgarden";
 import Cartography from "./resources/2020/Cartography";
 import CommerceGhost from "./resources/2020/CommerceGhost";
 import Melodramedary from "./resources/2020/Melodramedary";
@@ -74,6 +78,14 @@ const ResourceSection = () => (
       TranscendentOlfaction,
       Numberology,
       LuckyAdventures,
+
+      /* 2015 */
+      DeckOfEveryCard,
+
+      /* 2016 */
+      Floundry,
+      SourceTerminal,
+      Thanksgarden,
 
       /* 2020 */
       PowerfulGlove,

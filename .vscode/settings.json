@@ -8,6 +8,7 @@
   "editor.tabSize": 2,
   "typescript.preferences.autoImportSpecifierExcludeRegexes": [
     "^tome-kolmafia-lib/kolmafia$",
+    "^libram/",
     "^https?$"
   ]
 }

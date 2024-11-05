@@ -58,7 +58,7 @@ const RockGarden = () => {
 
   return (
     <Tile
-      header="Rock garden resources"
+      header="Rock Garden Resources"
       href="/campground.php"
       imageUrl="/images/itemimages/rockgardenbook.gif"
     >

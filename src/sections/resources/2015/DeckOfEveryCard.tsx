@@ -4,13 +4,25 @@ import {
   canAdventure,
   myAscensions,
   myPath,
+  myPrimestat,
   numericModifier,
 } from "kolmafia";
-import { $item, $location, $path, $skill, get, have, questStep } from "libram";
+import {
+  $item,
+  $location,
+  $path,
+  $skill,
+  $stat,
+  DeckOfEveryCard as DeckLibram,
+  get,
+  have,
+  questStep,
+} from "libram";
 
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink } from "../../../util/links";
+import { inRun } from "../../../util/quest";
 import { plural } from "../../../util/text";
 
 interface CardSummon {
@@ -33,22 +45,18 @@ export const DeckOfEveryCard = () => {
     ? replicaDeckOfEveryCard
     : deckOfEveryCard;
 
-  if (!haveUnrestricted(activeDeck)) {
-    return null;
-  }
+  if (!haveUnrestricted(activeDeck)) return null;
+  if (myPath() === $path`G-Lover`) return null;
 
-  if (myPath() === $path`G-Lover`) {
-    return null; // Cannot use in G-Lover.
-  }
+  const cardSummonsLeft = DeckLibram.getRemainingDraws();
+  const cheatsLeft = DeckLibram.getRemainingCheats();
 
-  const cardSummonsLeft = Math.max(15 - get("_deckCardsDrawn"), 0);
-  const cheatsLeft = Math.floor(cardSummonsLeft / 5);
-  const inRun = !get("kingLiberated");
+  if (cardSummonsLeft === 0) return null;
 
   const summons: CardSummon[] = [];
 
   // Daily Dungeon key logic
-  if (inRun) {
+  if (inRun()) {
     summons.push(makeSummon("XVI - The Tower", "Daily Dungeon key."));
   }
 
@@ -61,7 +69,7 @@ export const DeckOfEveryCard = () => {
           "+3 adventures via Ancestral Recall.",
         ),
       );
-    } else if (!inRun) {
+    } else if (!inRun()) {
       summons.push(
         makeSummon("Ancestral Recall", "Gives +adventure summoning skill."),
       );
@@ -74,21 +82,21 @@ export const DeckOfEveryCard = () => {
   }
 
   // Item drop buff
-  if (inRun) {
+  if (inRun()) {
     summons.push(
       makeSummon("X - The Wheel of Fortune", "+100% item for 20 turns."),
     );
   }
 
   // Mainstat gains
-  if (inRun && myPath() !== $path`The Source`) {
-    const mainstat = get("mainStat");
+  if (inRun() && myPath() !== $path`The Source`) {
+    const mainstat = myPrimestat();
     let cardName = "Cardiff";
-    if (mainstat === "Muscle") {
+    if (mainstat === $stat`Muscle`) {
       cardName = "XXI - The World";
-    } else if (mainstat === "Mysticality") {
+    } else if (mainstat === $stat`Mysticality`) {
       cardName = "III - The Empress";
-    } else if (mainstat === "Moxie") {
+    } else if (mainstat === $stat`Moxie`) {
       cardName = "VI - The Lovers";
     }
 
@@ -99,18 +107,18 @@ export const DeckOfEveryCard = () => {
   }
 
   // Mine ore logic
-  if (inRun && questStep("questL08Trapper")) {
+  if (inRun() && questStep("questL08Trapper")) {
     summons.push(makeSummon("Mine", "One of every ore."));
   }
 
   // Knife for meat farming
-  if (!inRun && !have($item`knife`)) {
+  if (!inRun() && !have($item`knife`)) {
     summons.push(makeSummon("Knife", "+50% meat farming weapon."));
   }
 
   // Weapon choices
   const weaponChoices: CardSummon[] = [];
-  if (inRun) {
+  if (inRun()) {
     const mainstat = get("mainStat");
     if (mainstat === "Muscle" && !have($skill`Summon Smithsness`)) {
       weaponChoices.push(makeSummon("Lead pipe", "+100% muscle, +HP club."));
@@ -143,7 +151,7 @@ export const DeckOfEveryCard = () => {
   summons.push(makeSummon("1952 Mickey Mantle", "Autosells for 10k."));
 
   // Stone wool logic
-  if (inRun && myPath() !== $path`Community Service`) {
+  if (inRun() && myPath() !== $path`Community Service`) {
     let woolNeeded = 0;
     if (
       haveUnrestricted($item`Mayam Calendar`) &&
@@ -166,7 +174,7 @@ export const DeckOfEveryCard = () => {
   }
 
   // Emperor's outfit
-  if (!inRun) {
+  if (!inRun()) {
     // TODO: Convert outfit checking logic
     summons.push(
       makeSummon("IV - The Emperor", "The Emperor's New Clothes outfit."),
@@ -175,7 +183,7 @@ export const DeckOfEveryCard = () => {
   }
 
   // Random cards
-  if (!inRun && cardSummonsLeft >= 5) {
+  if (!inRun() && cardSummonsLeft >= 5) {
     summons.push(
       makeSummon(
         "Random card",
@@ -184,7 +192,7 @@ export const DeckOfEveryCard = () => {
     );
   }
 
-  const cardsAlreadyDrawn = get("_deckCardsSeen").split("|");
+  const cardsAlreadyDrawn: string[] = DeckLibram.getCardsSeen();
   const unusedSummons = summons
     .map(({ cards, reason }) => ({
       cards: cards.filter((card) => !cardsAlreadyDrawn.includes(card)),
@@ -197,6 +205,7 @@ export const DeckOfEveryCard = () => {
       header={`${plural(cheatsLeft, "card")} drawable`}
       id="deck-of-every-card-tile"
       href={inventoryLink(deckOfEveryCard)}
+      imageUrl="/images/itemimages/deckdeck.gif"
     >
       {unusedSummons.map((summon) => (
         <Text key={summon.cards.join(" / ")}>

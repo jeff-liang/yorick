@@ -223,8 +223,8 @@ const SecondFloor: FC = () => {
           {!have(puff) && (
             <Line href={parentPlaceLink(bathroom)}>
               Find Lady Spookyraven's powder puff in the Bathroom.{" "}
-              {gallery.turnsSpent < 5
-                ? `${plural(5 - gallery.turnsSpent, "more turn")} of delay.`
+              {bathroom.turnsSpent < 5
+                ? `${plural(5 - bathroom.turnsSpent, "more turn")} of delay.`
                 : `At ${combatRateModifier()}% combat, expected ${turnsToSeeNoncombat(85).toFixed(1)} turns.`}
             </Line>
           )}

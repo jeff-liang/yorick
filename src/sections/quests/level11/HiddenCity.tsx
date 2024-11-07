@@ -1,3 +1,4 @@
+import { Stack } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -14,7 +15,9 @@ import {
   $item,
   $items,
   $location,
+  $monster,
   $path,
+  $skill,
   get,
   have,
   questStep,
@@ -28,9 +31,10 @@ import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { atStep, questFinished, Step } from "../../../util/quest";
-import { commaAnd, plural } from "../../../util/text";
+import { commaAnd, plural, pluralItem } from "../../../util/text";
 
 const CITY_LINK = "/place.php?whichplace=hiddencity";
+const TAVERN_LINK = "/shop.php?whichshop=hiddentavern";
 
 function tavernUnlocked(): boolean {
   return get("hiddenTavernUnlock") >= myAscensions();
@@ -175,17 +179,14 @@ const Apartment = () => {
                 </Line>
               )
             ) : (
-              <Line href={CITY_LINK}>
+              <Line href={CITY_LINK} color="red.500">
                 Apartment NC next turn! Try to get Thrice-Cursed first.
               </Line>
             )
           ) : (
             <Line href={CITY_LINK}>
-              Burn {nextElevator - apartmentTurns} turns
-              {apartment.noncombatQueue?.includes("Action Elevator")
-                ? " (we think) "
-                : " "}
-              of delay in the Apartment Building.
+              Burn {nextElevator - apartmentTurns} turns of delay in the
+              Apartment Building.
             </Line>
           )}
         </>,
@@ -227,39 +228,42 @@ const Office = () => {
       ],
       [
         Step.STARTED,
-        <>
-          <Line href={CITY_LINK} fontWeight="bold">
-            Hidden Office Building
-          </Line>
-          {needToUseClip ? (
-            <Line
-              href={inventoryLink($item`boring binder clip`)}
-              fontWeight="bold"
-              color="red.500"
-            >
-              Use the boring binder clip to complete the McClusky file.
-            </Line>
-          ) : neededFiles > 0 || !haveClip ? (
-            <Line href={CITY_LINK}>
-              Find{" "}
-              {commaAnd([
-                neededFiles > 0 &&
-                  `${plural(neededFiles, "more McClusky file")} from pygmy
+        <MainLink href={CITY_LINK}>
+          <Stack spacing={0.5}>
+            <Line fontWeight="bold">Hidden Office Building</Line>
+            {needToUseClip ? (
+              <Line
+                href={inventoryLink($item`boring binder clip`)}
+                fontWeight="bold"
+                color="red.500"
+              >
+                Use the boring binder clip to complete the McClusky file.
+              </Line>
+            ) : neededFiles > 0 || !haveClip ? (
+              <Line>
+                Find{" "}
+                {commaAnd([
+                  neededFiles > 0 &&
+                    `${plural(neededFiles, "more McClusky file")} from pygmy
               accountants`,
-                !haveClip && "the boring binder clip from the NC",
-              ])}
-              .
-            </Line>
-          ) : null}
-          {officeReady ? (
-            <Line>Office NC next turn!</Line>
-          ) : (
-            <Line href={CITY_LINK}>
-              Burn {nextHoliday - office.turnsSpent} turns of delay in the
-              Office Building.
-            </Line>
-          )}
-        </>,
+                  !haveClip && "the boring binder clip from the NC",
+                ])}
+                .
+              </Line>
+            ) : null}
+            {officeReady ? (
+              <Line color="red.500">
+                Office NC {get("noncombatForcerActive") ? "(forced) " : ""}next
+                turn!
+              </Line>
+            ) : (
+              <Line>
+                Burn {nextHoliday - office.turnsSpent} turns of delay in the
+                Office Building.
+              </Line>
+            )}
+          </Stack>
+        </MainLink>,
       ],
     ]) ?? null
   );
@@ -317,16 +321,12 @@ const BowlingAlley = () => {
       {tavernUnlocked() ? (
         !get("banishedMonsters").includes("drunk pygmy") ? (
           !have(bowlOfScorpions) ? (
-            <Line
-              href="/shop.php?whichshop=hiddentavern"
-              fontWeight="bold"
-              color="red.500"
-            >
-              Buy bowl of scorpions from the Hidden Tavern to free run.
+            <Line href={TAVERN_LINK} fontWeight="bold" color="red.500">
+              Buy Bowl of Scorpions from the Hidden Tavern to free run.
             </Line>
           ) : (
-            <Line href={inventoryLink(bowlOfScorpions)}>
-              Use bowl of scorpions on drunk pygmy for free run.
+            <Line>
+              Use {pluralItem(bowlOfScorpions)} on drunk pygmy for free run.
             </Line>
           )
         ) : null
@@ -375,7 +375,11 @@ const Hospital = () => {
         Hidden Hospital
       </Line>
       {unequippedOutfitPieces.length > 0 && (
-        <Line fontWeight="bold" color="red.500">
+        <Line
+          command={`equip ${unequippedOutfitPieces[0].name}`}
+          fontWeight="bold"
+          color="red.500"
+        >
           Equip your {commaAnd(unequippedOutfitPieces)} first.
         </Line>
       )}
@@ -389,7 +393,11 @@ const Hospital = () => {
                 • {item.name}
               </Line>
             ))}
-          <Line>olfact surgeon</Line>
+          {have($skill`Transcendent Olfaction`) &&
+            get("_olfactionsUsed") < 3 &&
+            get("olfactedMonster") !== $monster`pygmy witch surgeon` && (
+              <Line>Olfact pygmy witch surgeon.</Line>
+            )}
         </>
       )}
       <Line>{numberOfEquippedPieces * 10}% chance to fight spirit.</Line>

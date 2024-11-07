@@ -28,7 +28,7 @@ const AsdonMartin = () => {
   const currentFuel = getFuel();
   const missileLauncherUsed = get("_missileLauncherUsed");
 
-  const workshedAsdon = getWorkshed() !== asdonMartinKeyfob;
+  const workshedAsdon = getWorkshed() === asdonMartinKeyfob;
 
   useNag(
     () => ({
@@ -65,7 +65,7 @@ const AsdonMartin = () => {
     ],
   );
 
-  if (workshedAsdon) return null;
+  if (!workshedAsdon) return null;
 
   return (
     <Tile header="Asdon Martin" imageUrl="/images/itemimages/asdonfob.gif">

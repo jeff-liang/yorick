@@ -32,6 +32,7 @@ export interface TileProps extends StackProps {
   disabled?: boolean;
   linkedContent?: Item | Familiar | Skill;
   linkHide?: boolean;
+  linkEntireTile?: boolean;
   extraLinks?: ReactNode;
   tooltip?: ReactNode;
   nonCollapsible?: boolean;
@@ -49,7 +50,8 @@ const Tile: FC<TileProps> = ({
   disabled,
   children,
   linkedContent,
-  linkHide,
+  linkHide = false,
+  linkEntireTile = false,
   extraLinks,
   tooltip,
   nonCollapsible,
@@ -86,6 +88,37 @@ const Tile: FC<TileProps> = ({
 
   const imageSize = collapsed || disabled ? "20px" : "30px";
 
+  const tileContents = (
+    <>
+      <HStack spacing={1} align="center">
+        <Heading as="h3" size="sm">
+          {!collapsed && !disabled && !linkEntireTile && href ? (
+            <MainLink href={href}>{heading}</MainLink>
+          ) : (
+            heading
+          )}
+        </Heading>
+        {!collapsed && tooltip}
+        {!collapsed && linkedContent && !linkHide && (
+          <ContentButtons linkedContent={linkedContent} />
+        )}
+        {!collapsed && extraLinks}
+        {disabled || nonCollapsible || (
+          <IconButton
+            icon={collapsed ? <ChevronUpIcon /> : <ChevronDownIcon />}
+            aria-label="Collapse"
+            h={4}
+            minW={4}
+            fontSize="20px"
+            variant="ghost"
+            onClick={() => setCollapsed((collapsed) => !collapsed)}
+          />
+        )}
+      </HStack>
+      {!collapsed && !disabled && children}
+    </>
+  );
+
   return (
     <HStack
       align="stretch"
@@ -114,32 +147,11 @@ const Tile: FC<TileProps> = ({
         )}
       </Flex>
       <VStack align="stretch" spacing={0.5}>
-        <HStack spacing={1} align="center">
-          <Heading as="h3" size="sm">
-            {!collapsed && !disabled && href ? (
-              <MainLink href={href}>{heading}</MainLink>
-            ) : (
-              heading
-            )}
-          </Heading>
-          {!collapsed && tooltip}
-          {!collapsed && linkedContent && !linkHide && (
-            <ContentButtons linkedContent={linkedContent} />
-          )}
-          {!collapsed && extraLinks}
-          {disabled || nonCollapsible || (
-            <IconButton
-              icon={collapsed ? <ChevronUpIcon /> : <ChevronDownIcon />}
-              aria-label="Collapse"
-              h={4}
-              minW={4}
-              fontSize="20px"
-              variant="ghost"
-              onClick={() => setCollapsed((collapsed) => !collapsed)}
-            />
-          )}
-        </HStack>
-        {!collapsed && !disabled && children}
+        {!collapsed && !disabled && linkEntireTile ? (
+          <MainLink href={href}>{tileContents}</MainLink>
+        ) : (
+          tileContents
+        )}
       </VStack>
     </HStack>
   );

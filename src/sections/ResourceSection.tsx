@@ -11,6 +11,7 @@ import LuckyAdventures from "./misc/LuckyAdventures";
 import NoncombatForces from "./misc/NoncombatForces";
 import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
+import PuckMan from "./resources/2015/PuckMan";
 import Floundry from "./resources/2016/Floundry";
 import SourceTerminal from "./resources/2016/SourceTerminal";
 import Thanksgarden from "./resources/2016/Thanksgarden";
@@ -88,6 +89,7 @@ const ResourceSection = () => (
 
       /* 2015 */
       DeckOfEveryCard,
+      PuckMan,
 
       /* 2016 */
       Floundry,

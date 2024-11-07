@@ -107,10 +107,10 @@ const Level7: FC = () => {
     !get("fireExtinguisherCyrptUsed");
 
   // get all current evilness
-  const nookEvil = get("cyrptNookEvilness", 0);
-  const nicheEvil = get("cyrptNicheEvilness", 0);
-  const crannyEvil = get("cyrptCrannyEvilness", 0);
-  const alcoveEvil = get("cyrptAlcoveEvilness", 0);
+  const nookEvil = get("cyrptNookEvilness");
+  const nicheEvil = get("cyrptNicheEvilness");
+  const crannyEvil = get("cyrptCrannyEvilness");
+  const alcoveEvil = get("cyrptAlcoveEvilness");
 
   const dragonReady =
     nookEvil === 0 && nicheEvil === 0 && crannyEvil === 0 && alcoveEvil === 0;

@@ -15,6 +15,8 @@ import Floundry from "./resources/2016/Floundry";
 import SourceTerminal from "./resources/2016/SourceTerminal";
 import Thanksgarden from "./resources/2016/Thanksgarden";
 import AsdonMartin from "./resources/2017/AsdonMartin";
+import TunnelOfLove from "./resources/2017/TunnelOfLove";
+import Zatara from "./resources/2018/Zatara";
 import Cartography from "./resources/2020/Cartography";
 import CommerceGhost from "./resources/2020/CommerceGhost";
 import Melodramedary from "./resources/2020/Melodramedary";
@@ -94,6 +96,10 @@ const ResourceSection = () => (
 
       /* 2017 */
       AsdonMartin,
+      TunnelOfLove,
+
+      /* 2018 */
+      Zatara,
 
       /* 2020 */
       PowerfulGlove,

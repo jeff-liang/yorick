@@ -65,7 +65,7 @@ const FrumiousBandersnatch = () => {
     <Tile
       header={familiar === bander ? "Bandersnatch Runaways" : "Boots Runaways"}
       id="bander-runs-resource"
-      imageUrl={familiar.image}
+      imageUrl={`/images/itemimages/${familiar.image}`}
     >
       {familiar.experience < 400 &&
         have($skill`Cannelloni Cannon`) &&
@@ -77,7 +77,7 @@ const FrumiousBandersnatch = () => {
           </Line>
         )}
       <Line>
-        Used {plural(runs, "runs")} out of at least {maxRuns} possible (at{" "}
+        Used {plural(runs, "run")} out of at least {maxRuns} possible (at{" "}
         {maxObservedWeight} lbs).
       </Line>
       {possibleWeight > 0 && (

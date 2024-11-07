@@ -77,12 +77,26 @@ const FREE_FIGHTS: Source[] = [
       const leaves = availableAmount($item`inflammable leaf`);
       const leavesNeeded = 5 * remaining;
       return (
-        <Line href="/campground.php?preaction=burningleaves">
+        <Line href="/campground.php?preaction=leaves">
           {remaining} burning leaf fights
           {leaves < leavesNeeded ? ` (${leaves}/${leavesNeeded} leaves)` : ""}.
         </Line>
       );
     },
+  },
+  {
+    name: "LOV Tunnel",
+    remaining: () =>
+      +(
+        get("loveTunnelAvailable") &&
+        !get("_loveTunnelUsed") &&
+        isUnrestricted($item`LOV Entrance Pass`)
+      ) && 3,
+    render: () => (
+      <Line href="/place.php?whichplace=town_wrong">
+        3 free LOV Tunnel fights.
+      </Line>
+    ),
   },
   {
     name: "Forest Tentacle",

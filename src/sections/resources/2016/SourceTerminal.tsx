@@ -83,7 +83,7 @@ const SourceTerminalTile = () => {
       {!enquiry && (
         <Tile
           header="Set Source Terminal Enquiry"
-          imageUrl="/images/itemimages/sourceterm.gif"
+          imageUrl="/images/itemimages/sourceterminal.gif"
         >
           <Line>Set an enquiry for rollover buffs.</Line>
           <Line>
@@ -102,7 +102,7 @@ const SourceTerminalTile = () => {
         <Tile
           header={plural(enhancementsRemaining, "enhancement")}
           id="source-terminal-enhance-resource"
-          imageUrl="/images/itemimages/sourceterm.gif"
+          imageUrl="/images/itemimages/10101.gif"
         >
           <Line>items.enh: +30% item ({turnDuration} turns).</Line>
           <Line>meat.enh: +60% meat ({turnDuration} turns).</Line>
@@ -114,14 +114,15 @@ const SourceTerminalTile = () => {
         <Tile
           header={plural(digitizesLeft, "digitization")}
           id="source-terminal-digitize-resource"
-          imageUrl="/images/itemimages/sourceterm.gif"
+          imageUrl="/images/itemimages/watch.gif"
         >
           {targetMonsters.map((monster, i) => (
             <Line key={i}>Could target a {monster}.</Line>
           ))}
-          {digitizesLeft > 0 && (
-            <Line>Could re-digitize to reset the window.</Line>
-          )}
+          {0 < digitizesLeft &&
+            SourceTerminal.getDigitizeMonster() !== null && (
+              <Line>Could re-digitize to reset the window.</Line>
+            )}
         </Tile>
       )}
 
@@ -129,7 +130,7 @@ const SourceTerminalTile = () => {
         <Tile
           header={plural(3 - extrudes, "extrusion")}
           id="source-terminal-extrude-resource"
-          imageUrl="/images/itemimages/sourceterm.gif"
+          imageUrl="/images/itemimages/browsercookie.gif"
         >
           <Line>Food: 4 fullness epic food.</Line>
           <Line>Drink: 4 drunkenness epic booze.</Line>

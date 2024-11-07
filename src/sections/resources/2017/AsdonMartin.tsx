@@ -37,7 +37,7 @@ const AsdonMartin = () => {
       node: workshedAsdon && !banisherActive && (
         <Tile
           header="Cast Spring-Loaded Front Bumper"
-          imageUrl="/images/itemimages/am_keyfob.gif"
+          imageUrl="/images/itemimages/asdonfob.gif"
         >
           <Line>
             {currentFuel >= 50 ? (
@@ -68,7 +68,7 @@ const AsdonMartin = () => {
   if (workshedAsdon) return null;
 
   return (
-    <Tile header="Asdon Martin" imageUrl="/images/itemimages/am_keyfob.gif">
+    <Tile header="Asdon Martin" imageUrl="/images/itemimages/asdonfob.gif">
       <Line>Current Fuel: {currentFuel}</Line>
       {!canInteract() && <Line>Can create and feed loaf of soda breads.</Line>}
 

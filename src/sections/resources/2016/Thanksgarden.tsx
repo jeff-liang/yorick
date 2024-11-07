@@ -51,7 +51,7 @@ const Thanksgarden = () => {
   return (
     <Tile
       header="Thanksgarden Resources"
-      imageUrl="/images/itemimages/cornucop.gif"
+      imageUrl="/images/itemimages/cornucopia.gif"
     >
       {cornucopiaCount > 0 && (
         <Line href="/campground.php">

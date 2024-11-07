@@ -112,7 +112,9 @@ const Copies: FC = () => {
         name: "Spooky VHS Tape",
         remaining: () =>
           availableAmount($item`Spooky VHS Tape`) +
-          (+!get("_2002MrStoreCreditsCollected") && 3) +
+          (+have($item`2002 Mr. Store Catalog`) &&
+            +!get("_2002MrStoreCreditsCollected") &&
+            3) +
           get("availableMrStore2002Credits"),
         render: ({ remaining }) => (
           <Line
@@ -123,7 +125,10 @@ const Copies: FC = () => {
             }
           >
             {plural(remaining, "Spooky VHS Tape")}
-            {have($item`Spooky VHS Tape`) ? null : " (buy some)"}.
+            {!have($item`Spooky VHS Tape`) &&
+              haveUnrestricted($item`2002 Mr. Store Catalog`) &&
+              " (buy some)"}
+            .
           </Line>
         ),
       },

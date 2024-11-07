@@ -1,9 +1,10 @@
-import { getClanName } from "kolmafia";
-import { $items, get, have } from "libram";
+import { getClanName, isUnrestricted } from "kolmafia";
+import { $item, $items, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
+import { haveUnrestricted } from "../../../util/available";
 import { commaAnd, plural } from "../../../util/text";
 
 const PhotoBooth: FC = () => {
@@ -16,6 +17,13 @@ const PhotoBooth: FC = () => {
   const sheriffPieces = $items`Sheriff pistol, Sheriff badge, Sheriff moustache`;
   const sheriffPiecesMissing = sheriffPieces.filter((item) => !have(item));
   const potentialSheriff = 3 - sheriffPiecesMissing.length + propsRemaining;
+
+  if (
+    !haveUnrestricted($item`Clan VIP Lounge key`) ||
+    !isUnrestricted($item`photo booth sized crate`)
+  ) {
+    return null;
+  }
 
   return (
     <Tile

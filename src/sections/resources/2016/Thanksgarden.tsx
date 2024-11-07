@@ -1,7 +1,6 @@
 import { Box, Text } from "@chakra-ui/react";
 import {
   availableAmount,
-  canInteract,
   getCampground,
   mySpleenUse,
   spleenLimit,
@@ -19,7 +18,7 @@ const Thanksgarden = () => {
   const stuffingFluffer = $item`stuffing fluffer`;
   const cashew = $item`cashew`;
   const cornucopia = $item`cornucopia`;
-  const cornucopiaCount = getCampground()["cornucopia"];
+  const cornucopiaCount = getCampground()["cornucopia"] ?? 0;
 
   const availableSpleen = spleenLimit() - mySpleenUse();
 
@@ -59,12 +58,12 @@ const Thanksgarden = () => {
           for more.
         </Line>
       )}
-      {have(cornucopia) && !canInteract() && (
+      {have(cornucopia) && (
         <Line href={inventoryLink(cornucopia)}>
           Open for thanksgarden food.
         </Line>
       )}
-      {have(cashew) && !canInteract() && (
+      {have(cashew) && (
         <Line href="/shop.php?whichshop=thankshop">
           Could make into{" "}
           <Box as="span">

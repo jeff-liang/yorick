@@ -1,4 +1,4 @@
-import { ButtonProps, forwardRef, Tooltip } from "@chakra-ui/react";
+import { ButtonProps, forwardRef, Tooltip, useToast } from "@chakra-ui/react";
 import {
   FC,
   MouseEvent,
@@ -21,15 +21,25 @@ const AsyncButton: FC<AsyncButtonProps> = forwardRef(
   ({ href, command, onClick, children, ...props }, ref) => {
     const { triggerHardRefresh } = useContext(RefreshContext);
     const [isLoading, setIsLoading] = useState(false);
+    const toast = useToast();
 
     const onClickWithCommand = useMemo(
       () =>
         command && !onClick
           ? async () => {
-              await remoteCliExecute(command);
+              const result = await remoteCliExecute(command);
+              if (result?.functions?.[0] === false) {
+                toast({
+                  title: "Command failed.",
+                  description: `Failed to execute "${command}".`,
+                  status: "error",
+                  duration: 5000,
+                  isClosable: true,
+                });
+              }
             }
           : onClick,
-      [command, onClick],
+      [command, onClick, toast],
     );
 
     const handleClick = useCallback(

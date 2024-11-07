@@ -51,6 +51,8 @@ const FrumiousBandersnatch = () => {
     have(bander) && bander.experience > boots.experience ? bander : boots;
   const maxObservedWeight = useMaxObservedWeight(familiar);
 
+  if (!have(familiar)) return null;
+
   const availableBuffs = LIMITED_BUFFS.filter(
     ([, effect, available]) => !have(effect) && available(),
   );

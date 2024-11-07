@@ -1,9 +1,4 @@
-import {
-  availableAmount,
-  canInteract,
-  myAscensions,
-  myDaycount,
-} from "kolmafia";
+import { availableAmount, myAscensions, myDaycount } from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
 
 import Line from "../../../components/Line";
@@ -15,17 +10,15 @@ const PuckMan = () => {
   const puckMan = have($familiar`Ms. Puck Man`)
     ? $familiar`Ms. Puck Man`
     : $familiar`Puck Man`;
-  const powerPillsEaten = get("_powerPillUses");
   const powerPillDrops = get("_powerPillDrops");
   const powerPillMaxDrops = myDaycount() + 1;
   const yellowPixels = availableAmount($item`yellow pixel`);
 
-  if (!have(puckMan)) return null;
+  if (!have(puckMan) || !(powerPillDrops < powerPillMaxDrops)) return null;
 
   return (
     <Tile linkedContent={puckMan} imageUrl="/images/itemimages/puckman.gif">
-      {canInteract() && <Line>Power Pills: {powerPillsEaten}/20 used.</Line>}
-      {inRun() && (
+      {powerPillDrops < powerPillMaxDrops && (
         <Line>
           {powerPillDrops}/{powerPillMaxDrops} power pill{" "}
           {pluralJustDesc(powerPillDrops, "drop")}.

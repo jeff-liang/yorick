@@ -332,7 +332,7 @@ const BowlingAlley = () => {
         ) : null
       ) : (
         <Line color="gray.500">
-          Unlock the hidden tavern for free runs from drunk pygmies.
+          Unlock the Hidden Tavern for free runs from drunk pygmies.
         </Line>
       )}
     </>

@@ -1,4 +1,12 @@
-import { Box, Container, Divider, Stack } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Divider,
+  Flex,
+  Heading,
+  Stack,
+} from "@chakra-ui/react";
+import { myDaycount, myTurncount } from "kolmafia";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { RefreshContext } from "tome-kolmafia-react";
 
@@ -44,35 +52,46 @@ const Layout = () => {
   }, [triggerHardRefresh]);
 
   return (
-    <Container paddingX={0} fontSize="sm">
-      <Stack
-        direction="row"
-        spacing={1}
-        position="absolute"
-        top={1}
-        right={1}
-        zIndex={200}
-      >
-        {inDevMode() && <PrefsButton />}
-        <RefreshButton onClick={triggerHardRefresh} />
-      </Stack>
-      <ChatButton
-        direction={chatFrameOpen ? "right" : "left"}
-        onClick={toggleChatFrame}
-        position="absolute"
-        bottom="calc(var(--chakra-space-1) + 2rem)"
-        right={1}
-        zIndex={200}
-      />
-      <Box overflow="scroll" h="calc(100vh - 2rem)">
-        <BrandHeading />
-        <Stack>
-          {Object.keys(nags).length > 0 && <NagSection />}
-          <QuestSection />
-          <Divider />
-          <ResourceSection />
+    <Container
+      paddingX={0}
+      fontSize="sm"
+      h="100vh"
+      display="flex"
+      flexDirection="column"
+    >
+      <Flex position="relative" minH={0}>
+        <Stack
+          direction="row"
+          spacing={1}
+          position="absolute"
+          top={1}
+          right={1}
+          zIndex={200}
+        >
+          {inDevMode() && <PrefsButton />}
+          <RefreshButton onClick={triggerHardRefresh} />
         </Stack>
-      </Box>
+        <Box overflow="scroll">
+          <BrandHeading />
+          <Heading as="h4" size="sm" textAlign="center">
+            Day {myDaycount()} / Turn {myTurncount()}
+          </Heading>
+          <Stack>
+            {Object.keys(nags).length > 0 && <NagSection />}
+            <QuestSection />
+            <Divider />
+            <ResourceSection />
+          </Stack>
+        </Box>
+        <ChatButton
+          direction={chatFrameOpen ? "right" : "left"}
+          onClick={toggleChatFrame}
+          position="absolute"
+          bottom={1}
+          right={1}
+          zIndex={200}
+        />
+      </Flex>
       <LocationBar />
     </Container>
   );

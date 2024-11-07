@@ -7,11 +7,23 @@ import {
 } from "@chakra-ui/react";
 import {
   availableAmount,
+  equippedItem,
+  haveEquipped,
   initiativeModifier,
   itemDropModifier,
+  itemType,
   monsterLevelAdjustment,
 } from "kolmafia";
-import { $item, $location, $monster, get, have, questStep } from "libram";
+import {
+  $item,
+  $location,
+  $locations,
+  $monster,
+  $slot,
+  get,
+  have,
+  questStep,
+} from "libram";
 import { FC, ReactNode } from "react";
 
 import Line from "../../components/Line";
@@ -73,14 +85,26 @@ const Level7: FC = () => {
   const evilEyePlural =
     evilEyeCount === 1 ? "evil eye" : evilEyeCount > 1 ? "evil eyes" : "";
   const header = `Use your ${evilEyePlural}`;
-  const nookEvilness = get("cyrptNookEvilness");
-  const cyrptBossEvilness = 13;
+  const retroCape = $item`unwrapped knock-off retro superhero cape`;
+  const retroCapeEquipped = haveEquipped(retroCape);
+  const haveRetroCape = have(retroCape);
+  const swordEquipped = itemType(equippedItem($slot`weapon`)) === "sword";
+  const inCyrpt =
+    $locations`The Defiled Nook, The Defiled Niche, The Defiled Cranny, The Defiled Alcove`.includes(
+      get("lastAdventure") ?? $location.none,
+    );
+
+  // get all current evilness
+  const nookEvil = get("cyrptNookEvilness");
+  const nicheEvil = get("cyrptNicheEvilness");
+  const crannyEvil = get("cyrptCrannyEvilness");
+  const alcoveEvil = get("cyrptAlcoveEvilness");
 
   useNag(
     () => ({
       id: "level-7-evil-eye-nag",
       priority: NagPriority.MID,
-      node: evilEyeCount > 0 && nookEvilness > cyrptBossEvilness + 1 && (
+      node: evilEyeCount > 0 && nookEvil > 13 && (
         <Tile
           header={header}
           imageUrl="/images/itemimages/zomboeye.gif"
@@ -94,7 +118,40 @@ const Level7: FC = () => {
         </Tile>
       ),
     }),
-    [cyrptBossEvilness, evilEyeCount, header, nookEvilness],
+    [evilEyeCount, header, nookEvil],
+  );
+
+  useNag(
+    () => ({
+      id: "level-7-retrocape-nag",
+      priority: NagPriority.MID,
+      node: inCyrpt &&
+        (nookEvil > 13 ||
+          nicheEvil > 13 ||
+          crannyEvil > 13 ||
+          alcoveEvil > 13) &&
+        haveRetroCape &&
+        (!retroCapeEquipped || !swordEquipped) && (
+          <Tile
+            header={header}
+            imageUrl="/images/itemimages/zomboeye.gif"
+            linkedContent={$item`evil eye`}
+          >
+            <Line>Equip your retro cape and a sword to Slay the Dead.</Line>
+          </Tile>
+        ),
+    }),
+    [
+      alcoveEvil,
+      crannyEvil,
+      haveRetroCape,
+      header,
+      inCyrpt,
+      nicheEvil,
+      nookEvil,
+      retroCapeEquipped,
+      swordEquipped,
+    ],
   );
 
   // get quest status
@@ -105,12 +162,6 @@ const Level7: FC = () => {
     have($item`industrial fire extinguisher`) &&
     get("_fireExtinguisherCharge") > 20 &&
     !get("fireExtinguisherCyrptUsed");
-
-  // get all current evilness
-  const nookEvil = get("cyrptNookEvilness");
-  const nicheEvil = get("cyrptNicheEvilness");
-  const crannyEvil = get("cyrptCrannyEvilness");
-  const alcoveEvil = get("cyrptAlcoveEvilness");
 
   const dragonReady =
     nookEvil === 0 && nicheEvil === 0 && crannyEvil === 0 && alcoveEvil === 0;
@@ -144,10 +195,10 @@ const Level7: FC = () => {
           "Pick 4th option in NC.",
         ])}
         {getZoneDisplay("Alcove", alcoveEvil, "+init, -combat", [
-          `${Math.min(100, 15 + initiativeModifier() / 10).toFixed(
+          `${Math.min(100, 150 + initiativeModifier() / 100).toFixed(
             0,
           )}% chance of modern zmobie (${Math.ceil(
-            (alcoveEvil - 25) / 5,
+            (alcoveEvil - 13) / 5,
           )} needed)`,
           "Pick 4th option in NC.",
         ])}

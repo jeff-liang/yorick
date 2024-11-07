@@ -27,6 +27,8 @@ import { BLACK_MARKET_URL, inventoryLink } from "../../../util/links";
 import { questFinished, Step } from "../../../util/quest";
 import { commaAnd, commaOr, plural } from "../../../util/text";
 
+const BEACH_URL = "/place.php?whichplace=desertbeach";
+
 function currentExplorationPerTurn(): number {
   let exploration = 1;
   if (haveEquipped($item`ornate dowsing rod`)) {
@@ -117,22 +119,23 @@ const DesertQuest = () => {
       header="Explore the Desert"
       imageUrl="/images/adventureimages/sandcactus.gif"
       imageAlt="Desert"
+      href={BEACH_URL}
       minLevel={11}
       disabled={!questFinished("questL11Black")}
     >
-      <Line href="/place.php?whichplace=desertbeach">
+      <Line href={BEACH_URL}>
         {100 - desertExploration}% exploration remaining.
       </Line>
 
       {desertExploration < 10 && (
-        <Line>
+        <Line href={BEACH_URL}>
           Find Gnasir after{" "}
           {Math.ceil((10 - desertExploration) / currentExploration)} turns.
         </Line>
       )}
 
       {needStoneRose && (
-        <Line>
+        <Line href={BEACH_URL}>
           {have($item`stone rose`) &&
             desertExploration >= 10 &&
             "Give stone rose to Gnasir (15%)."}
@@ -141,25 +144,29 @@ const DesertQuest = () => {
         </Line>
       )}
 
-      {needBlackPaint &&
-        desertExploration >= 10 &&
-        (have($item`can of black paint`) ||
-          npcPrice($item`can of black paint`) > 0) && (
-          <Line href={BLACK_MARKET_URL}>
-            {have($item`can of black paint`)
-              ? "Give can of black paint to Gnasir (15%)."
-              : "Buy can of black paint from Black Market and give to Gnasir (15%)."}
-          </Line>
-        )}
+      {needBlackPaint && desertExploration >= 10 && (
+        <>
+          {have($item`can of black paint`) && (
+            <Line href={BEACH_URL}>
+              Give can of black paint to Gnasir (15%).
+            </Line>
+          )}
+          {npcPrice($item`can of black paint`) > 0 && (
+            <Line href={BLACK_MARKET_URL}>
+              Buy can of black paint from Black Market and give to Gnasir (15%).
+            </Line>
+          )}
+        </>
+      )}
 
       {needKillingJar && (
         <>
           {have($item`killing jar`) && desertExploration >= 10 && (
-            <Line>"Give killing jar to Gnasir (15%)."</Line>
+            <Line>Give killing jar to Gnasir (15%).</Line>
           )}
           {!have($item`killing jar`) && (
             <Line>
-              "Find killing jar (10% drop from banshee librarian) (15%)."
+              Find killing jar (10% drop from banshee librarian) (15%).
             </Line>
           )}
         </>

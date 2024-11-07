@@ -93,19 +93,17 @@ const LocationBar: FC<StackProps> = (props) => {
       w="100%"
       onMouseOver={() => setShowDetails(true)}
       onMouseOut={() => setShowDetails(false)}
+      backgroundColor="white"
+      borderTop="1px solid"
+      borderColor="gray.200"
     >
       <Stack
         w="100%"
         py={2}
         px={3}
-        position="absolute"
-        bottom="2rem"
         zIndex={300}
-        backgroundColor="white"
-        borderTop="1px solid"
-        borderColor="gray.200"
         fontSize="xs"
-        visibility={showDetails || autoHasFocus ? undefined : "hidden"}
+        display={showDetails || autoHasFocus ? "flex" : "none"}
       >
         <Monsters location={location} />
         <Text>
@@ -131,13 +129,11 @@ const LocationBar: FC<StackProps> = (props) => {
         />
       </Stack>
       <Stack
-        h="2rem"
         w="100%"
+        py={2}
         px={3}
         direction="row"
-        align="center"
         justify="space-between"
-        backgroundColor="white"
         borderTop="1px solid"
         borderColor="gray.200"
         fontSize="xs"

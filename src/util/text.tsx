@@ -142,3 +142,17 @@ export function capitalizeWords(text: string) {
     .map((word) => capitalize(word))
     .join(" ");
 }
+
+export function ordinal(n: number) {
+  if (10 <= n % 100 && n % 100 <= 20) {
+    return `${n}th`;
+  } else if (n % 10 === 1) {
+    return `${n}st`;
+  } else if (n % 10 === 2) {
+    return `${n}nd`;
+  } else if (n % 10 === 3) {
+    return `${n}rd`;
+  } else {
+    return `${n}th`;
+  }
+}

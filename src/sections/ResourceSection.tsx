@@ -18,6 +18,7 @@ import Thanksgarden from "./resources/2016/Thanksgarden";
 import AsdonMartin from "./resources/2017/AsdonMartin";
 import TunnelOfLove from "./resources/2017/TunnelOfLove";
 import Zatara from "./resources/2018/Zatara";
+import KramcoSausageOMatic from "./resources/2019/KramcoSausageOMatic";
 import Cartography from "./resources/2020/Cartography";
 import CommerceGhost from "./resources/2020/CommerceGhost";
 import Melodramedary from "./resources/2020/Melodramedary";
@@ -102,6 +103,9 @@ const ResourceSection = () => (
 
       /* 2018 */
       Zatara,
+
+      /* 2019 */
+      KramcoSausageOMatic,
 
       /* 2020 */
       PowerfulGlove,

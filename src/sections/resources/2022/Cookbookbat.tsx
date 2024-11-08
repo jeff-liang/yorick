@@ -5,6 +5,8 @@ import { $familiar, $item, clamp, get } from "libram";
 import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
+import { NagPriority } from "../../../contexts/NagContext";
+import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
 import { plural } from "../../../util/text";
 
@@ -14,13 +16,9 @@ const Cookbookbat = () => {
   const veg = $item`Vegetable of Jarlsberg`;
   const yeast = $item`Yeast of Boris`;
 
-  if (!haveUnrestricted(cookbookbat)) return null;
-
   const wheyAmount = availableAmount(whey);
   const vegAmount = availableAmount(veg);
   const yeastAmount = availableAmount(yeast);
-
-  if (!get("_canEat") && wheyAmount + vegAmount + yeastAmount < 1) return null;
 
   const borisBreadCraftable = Math.floor(yeastAmount / 2);
   const roastedVegCraftable = Math.floor(vegAmount / 2);
@@ -30,6 +28,26 @@ const Cookbookbat = () => {
       : 0;
 
   const freeCooksRemaining = clamp(5 - get("_cookbookbatCrafting"), 0, 5);
+
+  const questMonsterName = get("_cookbookbatQuestMonster", "");
+  const questLocationName = get("_cookbookbatQuestSuggestedLocation", "");
+
+  useNag(
+    () => ({
+      id: "cookbookbat-quest-nag",
+      priority: NagPriority.MID,
+      node: questMonsterName !== "" && (
+        <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
+          <Line>Fight a {questMonsterName} for Cookbookbat ingredients.</Line>
+          <Line>Could find one in {questLocationName}.</Line>
+        </Tile>
+      ),
+    }),
+    [cookbookbat, questLocationName, questMonsterName],
+  );
+
+  if (!haveUnrestricted(cookbookbat)) return null;
+  if (!get("_canEat") && wheyAmount + vegAmount + yeastAmount < 1) return null;
 
   return (
     <Tile

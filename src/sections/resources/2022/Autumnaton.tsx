@@ -74,47 +74,6 @@ const Autumnaton = () => {
     return null;
   }
 
-  const description: JSX.Element[] = [];
-
-  if (have(autumnatonItem)) {
-    description.push(
-      <Line key="autumnaton-next-use">
-        Next use will take{" "}
-        <Text as="span" fontWeight="bold" color="red.500">
-          {autobotsReturnTime}
-        </Text>{" "}
-        adventures.
-      </Line>,
-    );
-  } else if (turncountWhereAutobotReturns > totalTurnsPlayed()) {
-    description.push(
-      <Line key="autumnaton-will-return">
-        Will return in{" "}
-        <Text as="span" fontWeight="bold" color="red.500">
-          {turncountWhereAutobotReturns + 1 - totalTurnsPlayed()}
-        </Text>{" "}
-        adventures.
-      </Line>,
-    );
-    description.push(
-      <Line key="autumnaton-currently-exploring">
-        <Text as="b">
-          Currently exploring: {autumnatonQuestLocation?.identifierString}
-        </Text>
-      </Line>,
-    );
-  } else if (turncountWhereAutobotReturns <= totalTurnsPlayed()) {
-    description.push(
-      <Line key="autumnaton-next-mission">
-        Next mission takes{" "}
-        <Text as="span" fontWeight="bold" color="red.500">
-          {autobotsReturnTime}
-        </Text>{" "}
-        adventures.
-      </Line>,
-    );
-  }
-
   const upgradesToGet: string[] = [];
   if (!autumnatonUpgrades.includes("cowcatcher")) {
     upgradesToGet.push(
@@ -134,16 +93,6 @@ const Autumnaton = () => {
   }
   if (!autumnatonUpgrades.includes("rightleg1")) {
     upgradesToGet.push("Visit mid indoor for -11 cooldown (Haunted Library?)");
-  }
-
-  if (upgradesToGet.length > 0) {
-    description.push(
-      <UnorderedList key="autumnaton-upgrades">
-        {upgradesToGet.map((text) => (
-          <ListItem key={text}>{text}</ListItem>
-        ))}
-      </UnorderedList>,
-    );
   }
 
   const potentialTargets: [string, string][] = [];
@@ -189,33 +138,59 @@ const Autumnaton = () => {
     }
   }
 
-  if (potentialTargets.length > 0) {
-    description.push(
-      <AdviceTooltip
-        key="autumnaton-potential-targets"
-        text={
-          <VStack align="start">
-            <Heading size="sm">Potential Targets</Heading>
-            {potentialTargets.map(([item, location], index) => (
-              <Text key={`autumnaton-target-${index}`}>
-                <ItemButtons linkedContent={$item`${item}`} /> ({location})
-              </Text>
-            ))}
-          </VStack>
-        }
-        label="Potential Autumnaton Targets"
-      />,
-    );
-  }
-
   return (
     <Tile
       header="Autumn-aton"
       imageUrl="/images/itemimages/autumnaton.gif"
       linkedContent={autumnatonItem}
     >
-      <Line>Grabs items from a zone you've previously visited.</Line>,
-      {description}
+      <Line>Grabs items from a zone you've previously visited.</Line>
+      {have(autumnatonItem) ? (
+        <Line>
+          Next use will take{" "}
+          <Text as="span" fontWeight="bold" color="red.500">
+            {autobotsReturnTime}
+          </Text>{" "}
+          adventures.
+        </Line>
+      ) : (
+        <>
+          <Line>
+            Will return in{" "}
+            <Text as="b" color="red.500">
+              {turncountWhereAutobotReturns + 1 - totalTurnsPlayed()}
+            </Text>{" "}
+            adventures.
+          </Line>
+          <Line>
+            <Text as="b">
+              Currently exploring: {autumnatonQuestLocation?.identifierString}.
+            </Text>
+          </Line>
+        </>
+      )}
+      {upgradesToGet.length > 0 && (
+        <UnorderedList>
+          {upgradesToGet.map((text) => (
+            <ListItem key={text}>{text}</ListItem>
+          ))}
+        </UnorderedList>
+      )}
+      {potentialTargets.length > 0 && (
+        <AdviceTooltip
+          text={
+            <VStack align="start">
+              <Heading size="sm">Potential Targets</Heading>
+              {potentialTargets.map(([item, location], index) => (
+                <Text key={`autumnaton-target-${index}`}>
+                  <ItemButtons linkedContent={$item`${item}`} /> ({location})
+                </Text>
+              ))}
+            </VStack>
+          }
+          label="Potential Autumnaton Targets"
+        />
+      )}
     </Tile>
   );
 };

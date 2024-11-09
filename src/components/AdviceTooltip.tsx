@@ -28,6 +28,7 @@ const AdviceTooltip: FC<AdviceTooltipProps> = ({ text, label, ...props }) => {
         fontWeight="bold"
         color="gray.500"
         decoration="underline dotted lightsteelblue"
+        cursor="pointer"
       >
         {label}
       </Text>

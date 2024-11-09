@@ -83,7 +83,7 @@ const PatrioticEagle = () => {
   useNag(
     () => ({
       id: "patriotic-eagle-pledge-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.LOW,
       node: haveEagle &&
         canUseCitizen &&
         pledgeZoneEffect &&

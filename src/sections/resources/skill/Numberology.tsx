@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import {
   myAdventures,
   myAscensions,
@@ -15,6 +15,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { inRun } from "../../../util/quest";
+import { plural } from "../../../util/text";
 
 const MOON_SIGN_ID_LOOKUP: Record<string, number> = {
   "": 0,
@@ -33,9 +34,9 @@ const MOON_SIGN_ID_LOOKUP: Record<string, number> = {
 
 const calculateNumberologyInputs = (
   desiredDigits: number[],
-): { outputs: Record<number, number>; deltas: Record<number, number> } => {
-  const outputs: Record<number, number> = {};
-  const deltas: Record<number, number> = {};
+): { outputs: Map<number, number>; deltas: Map<number, number> } => {
+  const outputs = new Map<number, number>();
+  const deltas = new Map<number, number>();
 
   if (!(mySign() in MOON_SIGN_ID_LOOKUP)) {
     return { outputs, deltas };
@@ -46,7 +47,7 @@ const calculateNumberologyInputs = (
   const c = (myAscensions() + moonSignId) * b + myAdventures();
 
   desiredDigits.forEach((digit) => {
-    deltas[digit] = 99;
+    deltas.set(digit, 99);
   });
 
   for (let x = 0; x <= 99; x++) {
@@ -54,19 +55,19 @@ const calculateNumberologyInputs = (
     const lastTwoDigits = v % 100;
 
     if (desiredDigits.includes(lastTwoDigits)) {
-      outputs[lastTwoDigits] = x;
-      delete deltas[lastTwoDigits];
+      outputs.set(lastTwoDigits, x);
+      deltas.delete(lastTwoDigits);
     }
 
     desiredDigits.forEach((digit) => {
-      if (!(digit in outputs)) {
+      if (!outputs.has(digit)) {
         let delta = digit - lastTwoDigits;
         if (delta <= 0) {
-          deltas[digit] = Math.min(deltas[digit], -delta);
+          deltas.set(digit, Math.min(deltas.get(digit) ?? 99, -delta));
         } else {
           delta = digit - (lastTwoDigits + 100);
           if (delta <= 0) {
-            deltas[digit] = Math.min(deltas[digit], -delta);
+            deltas.set(digit, Math.min(deltas.get(digit) ?? 99, -delta));
           }
         }
       }
@@ -119,27 +120,26 @@ const Numberology = () => {
 
   return (
     <Tile
-      header="Calculate the Universe"
+      header={plural(usesRemaining, "universe calculation")}
+      id="calculate-the-universe-resource"
       imageUrl="/images/itemimages/abacus.gif"
     >
-      <Line>
-        <Text as="b">Enter these values to cast Calculate the Universe:</Text>
-      </Line>
-      {desiredDigits.map(({ digit, reason }) => (
-        <Line key={digit}>
-          {digit in outputs ? (
-            <>
-              Enter <Text as="b">{outputs[digit]}</Text> for {reason}.
-            </>
-          ) : digit in deltas ? (
-            <>
-              Wait {deltas[digit]} adventures to calculate for {reason}.
-            </>
-          ) : (
-            <>Cannot currently calculate for {reason}.</>
-          )}
-        </Line>
-      ))}
+      <Line>Enter these values to cast Calculate the Universe:</Line>
+      <UnorderedList>
+        {desiredDigits.map(({ digit, reason }) => (
+          <ListItem key={digit}>
+            {outputs.has(digit) ? (
+              <>
+                Enter <Text as="b">{outputs.get(digit)}</Text> for {reason}.
+              </>
+            ) : deltas.has(digit) ? (
+              `Wait ${plural(deltas.get(digit) ?? 0, "turn")} to calculate for ${reason}.`
+            ) : (
+              `Cannot currently calculate for ${reason}.`
+            )}
+          </ListItem>
+        ))}
+      </UnorderedList>
       {usesRemaining > 1 && (
         <Line>You have {usesRemaining} calculations remaining today.</Line>
       )}

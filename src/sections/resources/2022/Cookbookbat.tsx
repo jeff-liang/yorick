@@ -1,4 +1,4 @@
-import { Stack, Text, UnorderedList } from "@chakra-ui/react";
+import { ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
@@ -93,7 +93,10 @@ const Cookbookbat = () => {
         </Line>
       )}
       {fightsUntilQuest > 1 ? (
-        <Line>{plural(fightsUntilQuest, "fight")} until next quest.</Line>
+        <Line>
+          {plural(fightsUntilQuest, "fight")} until next
+          {questMonster && " (rerolled)"} quest.
+        </Line>
       ) : (
         <Line>New ingredient quest next turn.</Line>
       )}
@@ -104,22 +107,22 @@ const Cookbookbat = () => {
             {yeastAmount} yeast. Make:
           </Line>
           <UnorderedList>
-            <Line>
+            <ListItem>
               <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
               meat.
-            </Line>
-            <Line>
+            </ListItem>
+            <ListItem>
               <Text as="b">
                 {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
               </Text>{" "}
               +100% item.
-            </Line>
-            <Line>
+            </ListItem>
+            <ListItem>
               <Text as="b">
                 {focacciaCraftable}x Roasted Vegetable Focaccia:
               </Text>{" "}
               +10 fam XP.
-            </Line>
+            </ListItem>
           </UnorderedList>
         </Stack>
       </MainLink>

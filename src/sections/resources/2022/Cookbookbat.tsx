@@ -1,13 +1,23 @@
 import { Stack, Text, UnorderedList } from "@chakra-ui/react";
-import { availableAmount } from "kolmafia";
-import { $familiar, $item, clamp, get } from "libram";
+import {
+  availableAmount,
+  fullnessLimit,
+  Location,
+  myDaycount,
+  myFullness,
+  myPath,
+  toLocation,
+} from "kolmafia";
+import { $familiar, $item, $path, clamp, get } from "libram";
 
 import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
+import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
+import { parentPlaceLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
 const Cookbookbat = () => {
@@ -30,47 +40,97 @@ const Cookbookbat = () => {
   const freeCooksRemaining = clamp(5 - get("_cookbookbatCrafting"), 0, 5);
 
   const questMonsterName = get("_cookbookbatQuestMonster", "");
-  const questLocationName = get("_cookbookbatQuestSuggestedLocation", "");
+  const questLocationName =
+    get("_cookbookbatQuestLastLocation", "") ||
+    get("_cookbookbatQuestSuggestedLocation", "");
+  const questLocation = toLocation(questLocationName);
+
+  const path = myPath();
+  const daycount = myDaycount();
 
   useNag(
     () => ({
       id: "cookbookbat-quest-nag",
       priority: NagPriority.MID,
-      node: questMonsterName !== "" && (
-        <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
-          <Line>Fight a {questMonsterName} for Cookbookbat ingredients.</Line>
-          <Line>Could find one in {questLocationName}.</Line>
-        </Tile>
-      ),
+      // Only nag on quests in AG - and only for 1-day attempts.
+      node: questMonsterName !== "" &&
+        path === $path`Avant Guard` &&
+        daycount === 1 && (
+          <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
+            <Line>Fight a {questMonsterName} for Cookbookbat ingredients.</Line>
+            <Line
+              href={
+                questLocation !== Location.none
+                  ? parentPlaceLink(questLocation)
+                  : undefined
+              }
+            >
+              Could find one in {questLocationName}.
+            </Line>
+          </Tile>
+        ),
     }),
-    [cookbookbat, questLocationName, questMonsterName],
+    [
+      cookbookbat,
+      daycount,
+      path,
+      questLocation,
+      questLocationName,
+      questMonsterName,
+    ],
   );
 
   if (!haveUnrestricted(cookbookbat)) return null;
-  if (!get("_canEat") && wheyAmount + vegAmount + yeastAmount < 1) return null;
+  if (myFullness() >= fullnessLimit()) return null;
+
+  const ingredientsCharge = get("cookbookbatIngredientsCharge", 0);
+  const fightsUntilQuest = get("_cookbookbatCombatsUntilNewQuest", 0);
 
   return (
     <Tile
       header="Pizza party with the Cookbookbat!"
-      imageUrl="/images/itemimages/bbat_fam.gif"
+      linkedContent={cookbookbat}
       href="/craft.php?mode=cook"
     >
-      <Line href="/craft.php?mode=cook">
-        You currently have {wheyAmount} whey, {vegAmount} veg, and {yeastAmount}{" "}
-        yeast. Make:
+      <Line>
+        {plural(11 - ingredientsCharge, "fight")} until next ingredients drop.
       </Line>
-      <UnorderedList>
+      {questMonsterName !== "" && (
         <Line>
-          <b>{borisBreadCraftable}x Boris's Bread:</b> +100% meat.
+          Or fight a {questMonsterName} in {questLocationName} for ingredients.
         </Line>
-        <Line>
-          <b>{roastedVegCraftable}x Roasted Vegetable of Jarlsberg:</b> +100%
-          item.
-        </Line>
-        <Line>
-          <b>{focacciaCraftable}x Roasted Vegetable Focaccia:</b> +10 fam XP.
-        </Line>
-      </UnorderedList>
+      )}
+      {fightsUntilQuest > 1 ? (
+        <Line>{plural(fightsUntilQuest, "fight")} until next quest.</Line>
+      ) : (
+        <Line>New ingredient quest next turn.</Line>
+      )}
+      <MainLink href="/craft.php?mode=cook">
+        <Stack spacing={0.5}>
+          <Line>
+            You currently have {wheyAmount} whey, {vegAmount} veg, and{" "}
+            {yeastAmount} yeast. Make:
+          </Line>
+          <UnorderedList>
+            <Line>
+              <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
+              meat.
+            </Line>
+            <Line>
+              <Text as="b">
+                {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
+              </Text>{" "}
+              +100% item.
+            </Line>
+            <Line>
+              <Text as="b">
+                {focacciaCraftable}x Roasted Vegetable Focaccia:
+              </Text>{" "}
+              +10 fam XP.
+            </Line>
+          </UnorderedList>
+        </Stack>
+      </MainLink>
       <AdviceTooltip
         text={
           <Stack align="start">
@@ -84,7 +144,7 @@ const Cookbookbat = () => {
       />
       {freeCooksRemaining > 0 && (
         <Line>
-          <b>{plural(freeCooksRemaining, "free cook")}:</b> Unstable fulminate,
+          {plural(freeCooksRemaining, "free cook")}: Unstable fulminate,
           potions, and more.
         </Line>
       )}

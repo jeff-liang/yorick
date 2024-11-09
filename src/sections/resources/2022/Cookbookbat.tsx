@@ -2,11 +2,9 @@ import { Stack, Text, UnorderedList } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
-  Location,
   myDaycount,
   myFullness,
   myPath,
-  toLocation,
 } from "kolmafia";
 import { $familiar, $item, $path, clamp, get } from "libram";
 
@@ -39,11 +37,8 @@ const Cookbookbat = () => {
 
   const freeCooksRemaining = clamp(5 - get("_cookbookbatCrafting"), 0, 5);
 
-  const questMonsterName = get("_cookbookbatQuestMonster", "");
-  const questLocationName =
-    get("_cookbookbatQuestLastLocation", "") ||
-    get("_cookbookbatQuestSuggestedLocation", "");
-  const questLocation = toLocation(questLocationName);
+  const questMonster = get("_cookbookbatQuestMonster");
+  const questLocation = get("_cookbookbatQuestLastLocation");
 
   const path = myPath();
   const daycount = myDaycount();
@@ -53,38 +48,34 @@ const Cookbookbat = () => {
       id: "cookbookbat-quest-nag",
       priority: NagPriority.MID,
       // Only nag on quests in AG - and only for 1-day attempts.
-      node: questMonsterName !== "" &&
+      node: questMonster !== null &&
         path === $path`Avant Guard` &&
         daycount === 1 && (
           <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
-            <Line>Fight a {questMonsterName} for Cookbookbat ingredients.</Line>
+            <Line>
+              Fight a {questMonster.identifierString} for Cookbookbat
+              ingredients.
+            </Line>
             <Line
               href={
-                questLocation !== Location.none
+                questLocation !== null
                   ? parentPlaceLink(questLocation)
                   : undefined
               }
             >
-              Could find one in {questLocationName}.
+              Could find one in {questLocation?.identifierString}.
             </Line>
           </Tile>
         ),
     }),
-    [
-      cookbookbat,
-      daycount,
-      path,
-      questLocation,
-      questLocationName,
-      questMonsterName,
-    ],
+    [cookbookbat, daycount, path, questLocation, questMonster],
   );
 
   if (!haveUnrestricted(cookbookbat)) return null;
   if (myFullness() >= fullnessLimit()) return null;
 
-  const ingredientsCharge = get("cookbookbatIngredientsCharge", 0);
-  const fightsUntilQuest = get("_cookbookbatCombatsUntilNewQuest", 0);
+  const ingredientsCharge = get("cookbookbatIngredientsCharge");
+  const fightsUntilQuest = get("_cookbookbatCombatsUntilNewQuest");
 
   return (
     <Tile
@@ -95,9 +86,10 @@ const Cookbookbat = () => {
       <Line>
         {plural(11 - ingredientsCharge, "fight")} until next ingredients drop.
       </Line>
-      {questMonsterName !== "" && (
+      {questMonster !== null && (
         <Line>
-          Or fight a {questMonsterName} in {questLocationName} for ingredients.
+          Or fight a {questMonster.identifierString} in{" "}
+          {questLocation?.identifierString} for ingredients.
         </Line>
       )}
       {fightsUntilQuest > 1 ? (

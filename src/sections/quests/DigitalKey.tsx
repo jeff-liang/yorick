@@ -142,12 +142,12 @@ const DigitalKeyQuest: FC = () => {
           {expectedPoints[currentColor] === 400 ? (
             <>
               <Line color={currentColor}>
-                <b>MAXIMUM POINTS!</b>
+                <Text as="b">MAXIMUM POINTS!</Text>
               </Line>
               <Line>
                 Adventure in{" "}
-                <b style={{ color: currentColor }}>{zoneMap[currentColor]}</b>{" "}
-                for 400 points per turn!
+                <Text color={currentColor}>{zoneMap[currentColor]}</Text> for
+                400 points per turn!
               </Line>
             </>
           ) : (
@@ -185,8 +185,9 @@ const DigitalKeyQuest: FC = () => {
           {highestPointColor !== currentColor && (
             <Line color="gray">
               Alternate Route: At current stats, you'd earn{" "}
-              <b>{expectedPoints[highestPointColor]} points</b> per fight at{" "}
-              <b>{zoneMap[highestPointColor]}</b>. Not recommended!
+              <Text as="b">{expectedPoints[highestPointColor]} points</Text> per
+              fight at <Text as="b">{zoneMap[highestPointColor]}</Text>. Not
+              recommended!
             </Line>
           )}
           <Line>

@@ -14,7 +14,7 @@ export default [
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
   {
-    ignores: ["node_modules/", "build/"],
+    ignores: ["node_modules/", "build/", "types/"],
   },
   {
     languageOptions: {

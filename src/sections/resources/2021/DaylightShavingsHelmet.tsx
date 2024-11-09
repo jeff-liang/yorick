@@ -1,3 +1,4 @@
+import { Text } from "@chakra-ui/react";
 import { $effect, $item, DaylightShavings } from "libram";
 
 import Line from "../../../components/Line";
@@ -32,7 +33,7 @@ const DaylightShavingsHelmet = () => {
       {buffsTilMeat === 0 ? (
         <Line>
           <text style={{ color: "#CC0000" }}>
-            <b>WARNING!</b>
+            <Text as="b">WARNING!</Text>
           </text>{" "}
           Meat buff's up next! Only equip the helmet when you need it.
         </Line>

@@ -1,4 +1,4 @@
-import { List, ListIcon, ListItem } from "@chakra-ui/react";
+import { List, ListIcon, ListItem, Text } from "@chakra-ui/react";
 import { combatRateModifier, myHash, myLocation } from "kolmafia";
 import { $location, $skill, have, questStep } from "libram";
 import { FC } from "react";
@@ -50,7 +50,7 @@ const Level6: FC = () => {
     return (
       <ListItem key={zoneName} pl="1">
         <ListIcon as={Chevrons} usesLeft={ncCompleted} totalUses={4} />
-        <b>{zoneName}:</b>{" "}
+        <Text as="b">{zoneName}:</Text>{" "}
         {`${zoneQueue.length}/4 NCs (~${expected.toFixed(1)} turns remaining)`}
       </ListItem>
     );

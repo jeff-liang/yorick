@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import { $item, get, have, questStep } from "libram";
 
 import Line from "../../../components/Line";
@@ -68,27 +68,28 @@ const IndustrialFireExtinguisher = () => {
         <UnorderedList>
           {showBat && (
             <ListItem>
-              <b>Constricted Blast</b>: Unlock a Bat Hole chamber.
+              <Text as="b">Constricted Blast</Text>: Unlock a Bat Hole chamber.
             </ListItem>
           )}
           {showKnob && (
             <ListItem>
-              <b>Foam the Place</b>: Obtain the Knob Harem Outfit.
+              <Text as="b">Foam the Place</Text>: Obtain the Knob Harem Outfit.
             </ListItem>
           )}
           {showCyrpt && (
             <ListItem>
-              <b>Replace the Chill</b>: Reduce evil by 10 in a zone.
+              <Text as="b">Replace the Chill</Text>: Reduce evil by 10 in a
+              zone.
             </ListItem>
           )}
           {showBlech && (
             <ListItem>
-              <b>Cool it Down</b>: 73% Blech House progress.
+              <Text as="b">Cool it Down</Text>: 73% Blech House progress.
             </ListItem>
           )}
           {showDesert && (
             <ListItem>
-              <b>Take a Drink</b>: 15 turns of Ultrahydrated.
+              <Text as="b">Take a Drink</Text>: 15 turns of Ultrahydrated.
             </ListItem>
           )}
         </UnorderedList>

@@ -35,7 +35,7 @@ const LocationBar: FC<StackProps> = (props) => {
   const handleKeyDownGlobal = useCallback((event: KeyboardEvent) => {
     if (
       event.target?.constructor?.name !== "HTMLInputElement" &&
-      event.key === "`" &&
+      event.key === "\\" &&
       !event.metaKey &&
       !event.altKey &&
       !event.shiftKey &&

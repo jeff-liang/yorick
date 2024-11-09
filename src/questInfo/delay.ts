@@ -9,19 +9,8 @@ interface ZoneDelay {
   needed?: () => boolean;
 }
 
+// In rough order of priority (does it open other zones?)
 export const DELAY_ZONES: ZoneDelay[] = [
-  {
-    zone: $location`The Outskirts of Cobb's Knob`,
-    length: 10,
-  },
-  {
-    zone: $location`The Spooky Forest`,
-    length: 5,
-  },
-  {
-    zone: $location`The Boss Bat's Lair`,
-    length: 5,
-  },
   {
     zone: $location`The Haunted Gallery`,
     length: 5,
@@ -43,18 +32,9 @@ export const DELAY_ZONES: ZoneDelay[] = [
     length: 25,
   },
   {
-    zone: $location`The Castle in the Clouds in the Sky (Ground Floor)`,
-    length: 10,
-  },
-  {
     zone: $location`The Hidden Park`,
     length: 6,
     needed: () => !haveMachete() && lianasCanBeFree(),
-  },
-  {
-    zone: $location`The Copperhead Club`,
-    // Not including NCs themselves here.
-    length: 12,
   },
   {
     zone: $location`The Upper Chamber`,
@@ -63,6 +43,27 @@ export const DELAY_ZONES: ZoneDelay[] = [
   {
     zone: $location`The Middle Chamber`,
     length: 9,
+  },
+  {
+    zone: $location`The Outskirts of Cobb's Knob`,
+    length: 10,
+  },
+  {
+    zone: $location`The Spooky Forest`,
+    length: 5,
+  },
+  {
+    zone: $location`The Boss Bat's Lair`,
+    length: 5,
+  },
+  {
+    zone: $location`The Castle in the Clouds in the Sky (Ground Floor)`,
+    length: 10,
+  },
+  {
+    zone: $location`The Copperhead Club`,
+    // Not including NCs themselves here.
+    length: 12,
   },
 ];
 

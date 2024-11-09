@@ -13,7 +13,6 @@ import {
 import {
   $effect,
   $item,
-  $items,
   $location,
   $monster,
   $path,
@@ -29,6 +28,7 @@ import MainLink from "../../../components/MainLink";
 import QuestTile from "../../../components/QuestTile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
+import { haveMachete, lianasCanBeFree } from "../../../questInfo/hiddenCity";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { atStep, questFinished, Step } from "../../../util/quest";
 import { commaAnd, plural, pluralItem } from "../../../util/text";
@@ -59,11 +59,6 @@ const Unlock: FC<UnlockProps> = ({ shrine, location }) => {
     </Line>
   );
 };
-
-const machetes = $items`antique machete, muculent machete, machetito`;
-function haveMachete() {
-  return machetes.some((item) => have(item));
-}
 
 const Machete = () => {
   const hiddenPark = $location`The Hidden Park`;
@@ -439,8 +434,6 @@ const HiddenCity = () => {
   const ascensions = myAscensions();
   const lastTempleAdventures = get("lastTempleAdventures");
   const stoneFacedTurns = haveEffect($effect`Stone-Faced`);
-  const lianasCanBeFree =
-    myPath() !== $path`Avant Guard` && myPath() !== $path`BIG!`;
 
   useNag(
     () => ({
@@ -517,7 +510,7 @@ const HiddenCity = () => {
                   Use your book of matches to unlock the Hidden Tavern.
                 </Line>
               )}
-            {!haveMachete() && lianasCanBeFree ? (
+            {!haveMachete() && lianasCanBeFree() ? (
               <Machete />
             ) : (
               <>

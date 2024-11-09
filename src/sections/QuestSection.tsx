@@ -3,6 +3,7 @@ import { $path, get } from "libram";
 
 import TileSection from "../components/TileSection";
 
+import Delay from "./quests/Delay";
 import DigitalKey from "./quests/DigitalKey";
 import HeroKeys from "./quests/HeroKeys";
 import HiddenTemple from "./quests/HiddenTemple";
@@ -35,6 +36,7 @@ const QuestSection = () => {
         Manor,
         ...(showStandardQuests
           ? [
+              Delay,
               Level1,
               Level2,
               Level3,

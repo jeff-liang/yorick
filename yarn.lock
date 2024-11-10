@@ -3264,12 +3264,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kolmafia@npm:tome-kolmafia-mock@^5.28107.3":
-  version: 5.28107.3
-  resolution: "tome-kolmafia-mock@npm:5.28107.3"
+"kolmafia@npm:tome-kolmafia-mock@5.28118.0":
+  version: 5.28118.0
+  resolution: "tome-kolmafia-mock@npm:5.28118.0"
   peerDependencies:
-    tome-kolmafia-lib: ^5.28107.3
-  checksum: 10c0/758c047f4ce4320f3e097d4fdc2db616762f2978a5e48c95640ffd54e9d8c5a7339df12038ddab46b3dbf9113ec3612f9be2b14e185df8fcb6367f48adf9ac7e
+    tome-kolmafia-lib: ^5.28118.0
+  checksum: 10c0/7f411a62eae0455af740b4eacfcf63a1da66a43582ff7c706be68475855c451b9c30e2d5240b63464ab6c3f33b2529a5194a7014a065cc868d6b748b6f54157a
   languageName: node
   linkType: hard
 
@@ -4511,14 +4511,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia-lib@npm:^5.28107.3":
-  version: 5.28107.3
-  resolution: "tome-kolmafia-lib@npm:5.28107.3"
+"tome-kolmafia-lib@portal:/Users/phulin/Documents/Projects/kol/tome/packages/tome-kolmafia-lib::locator=yorick%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "tome-kolmafia-lib@portal:/Users/phulin/Documents/Projects/kol/tome/packages/tome-kolmafia-lib::locator=yorick%40workspace%3A."
   dependencies:
     dataloader: "npm:^2.2.2"
-  checksum: 10c0/99fc6dde3c2fea60f3e4ca11296bb57e88d62c9369aa8d89a0036ea4df4934b8d4bdda03dc82bf37aea4cf496211c0e8d1c784c2098597f2016e609bf806178e
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "tome-kolmafia-react@npm:^0.2.5":
   version: 0.2.5
@@ -4945,7 +4944,7 @@ __metadata:
     framer-motion: "npm:^11.3.29"
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
-    kolmafia: "npm:tome-kolmafia-mock@^5.28107.3"
+    kolmafia: "npm:tome-kolmafia-mock@5.28118.0"
     libram: "npm:^0.9.16"
     postcss: "npm:^8.4.41"
     prettier: "npm:^3.3.3"
@@ -4953,7 +4952,7 @@ __metadata:
     react-dom: "npm:^18.3.1"
     react-error-boundary: "npm:^4.0.13"
     react-router-dom: "npm:^6.26.1"
-    tome-kolmafia-lib: "npm:^5.28107.3"
+    tome-kolmafia-lib: "npm:^5.28118.0"
     tome-kolmafia-react: "npm:^0.2.5"
     ts-morph: "npm:^24.0.0"
     typescript: "npm:^5.6.3"

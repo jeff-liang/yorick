@@ -47,6 +47,9 @@ const Island: FC = () => {
           )}
         </>
       )}
+      {shoreScrip > 3 && !have($item`dinghy plans`) && (
+        <Line href="/shop.php?whichshop=shore">Buy dinghy plans.</Line>
+      )}
       {have($item`dinghy plans`) && (
         <Line>Use your dinghy plans to make a boat.</Line>
       )}

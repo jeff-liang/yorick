@@ -195,8 +195,8 @@ const Level7: FC = () => {
           "Pick 4th option in NC.",
         ])}
         {getZoneDisplay("Alcove", alcoveEvil, "+init, -combat", [
-          `${Math.min(100, 150 + initiativeModifier() / 100).toFixed(
-            0,
+          `${(Math.min(100, 150 + initiativeModifier()) / 10).toFixed(
+            1,
           )}% chance of modern zmobie (${Math.ceil(
             (alcoveEvil - 13) / 5,
           )} needed)`,

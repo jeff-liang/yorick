@@ -1,5 +1,5 @@
 import { availableAmount, combatRateModifier, haveEquipped } from "kolmafia";
-import { $item, $skill, AutumnAton, get, have } from "libram";
+import { $item, $location, $skill, AutumnAton, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -7,6 +7,7 @@ import QuestTile from "../../../components/QuestTile";
 import { commaOr, plural, truthy } from "../../../util/text";
 
 const Lighthouse: FC = () => {
+  const sonofaBeach = $location`Sonofa Beach`;
   const lighthouseFinished = get("lighthouseQuestState") === "finished";
   const gunpowderNeeded = Math.max(
     0,
@@ -52,13 +53,18 @@ const Lighthouse: FC = () => {
           </Line>
           <Line>
             ~{turnsToComplete.toFixed(1)} turns to complete quest at{" "}
-            {Math.floor(combatRate)}% combat. |~
-            {turnsPerLobster.toFixed(1)} turns per lobster.
+            {Math.floor(combatRate)}% combat. {turnsPerLobster.toFixed(1)} turns
+            per lobster.
           </Line>
-          {AutumnAton.have() && (
+          {AutumnAton.have() && sonofaBeach.turnsSpent > 0 ? (
             <Line>
               Send autumn-aton in {plural(AutumnAton.turnsLeft(), "turn")} for{" "}
               {plural(AutumnAton.zoneItems(), "barrel")} per send.
+            </Line>
+          ) : (
+            <Line>
+              Spend a turn (maybe wanderer) in Sonofa Beach, then send
+              autumn-aton.
             </Line>
           )}
           {(canUseReplaceEnemy || canUseMacrometeorite) && (

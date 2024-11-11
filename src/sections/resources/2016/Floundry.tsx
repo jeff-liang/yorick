@@ -1,5 +1,5 @@
 import { Text } from "@chakra-ui/react";
-import { canEquip } from "kolmafia";
+import { canEquip, isUnrestricted } from "kolmafia";
 import { $item, $skill, get, have } from "libram";
 
 import Line from "../../../components/Line";
@@ -11,7 +11,7 @@ const ClanFloundry = () => {
   const vipAvailable = haveUnrestricted($item`Clan VIP Lounge key`);
 
   // Early exits if conditions aren't met
-  if (!vipAvailable) return null;
+  if (!vipAvailable || !isUnrestricted($item`Clan Floundry`)) return null;
   if (!inRun()) return null;
 
   // Check if we already have any of the floundry items

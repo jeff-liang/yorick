@@ -16,7 +16,8 @@ const SeptEmberCenser = () => {
 
   const bembershoot = $item`bembershoot`;
   const mmmBrrMouthwash = $item`Mmm-brr! brand mouthwash`;
-  const septEmbers = get("availableSeptEmbers", 0);
+  const septEmbers =
+    get("availableSeptEmbers") + 7 * +!get("_septEmberBalanceChecked");
   const coldResistance = numericModifier("cold resistance");
   const mainstatGain = Math.floor(
     7 *
@@ -29,6 +30,8 @@ const SeptEmberCenser = () => {
   const structureUsed = get("_structuralEmberUsed");
   const miniEmberingHulk = $item`miniature Embering Hulk`;
   const hulkFought = get("_emberingHulkFought");
+
+  if (septEmbers <= 0) return null;
 
   return (
     <Tile

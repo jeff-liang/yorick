@@ -5,6 +5,7 @@ import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
+import { commaSeparate } from "../../../util/text";
 
 interface LocationData {
   location: Location;
@@ -97,13 +98,15 @@ const Junkyard: FC = () => {
                 ({ location, shorthand }) => (
                   <Line key={location.id}>
                     <Text as="strong">{shorthand}</Text>:{" "}
-                    {getMonsters(location).map((monster) => (
-                      <MonsterText
-                        key={monster.id}
-                        monster={gremlinShortName(monster)}
-                        isBanished={isBanished(monster)}
-                      />
-                    ))}
+                    {commaSeparate(
+                      getMonsters(location).map((monster) => (
+                        <MonsterText
+                          key={monster.id}
+                          monster={gremlinShortName(monster)}
+                          isBanished={isBanished(monster)}
+                        />
+                      )),
+                    )}
                   </Line>
                 ),
               )}

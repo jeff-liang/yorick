@@ -51,7 +51,7 @@ const Level12: FC = () => {
   const hippiesDefeated = get("hippiesDefeated");
   const fratboysDefeated = get("fratboysDefeated");
   const haveHippyFatigues = haveOutfit("War Hippy Fatigues");
-  const haveFratFatigues = haveOutfit("War Frat Fatigues");
+  const haveFratFatigues = haveOutfit("Frat Warrior Fatigues");
 
   const sideQuestNames = [
     "Lighthouse",

@@ -1,4 +1,4 @@
-import { availableAmount } from "kolmafia";
+import { availableAmount, isUnrestricted } from "kolmafia";
 import { $familiar, $item, get } from "libram";
 import { FC, ReactNode } from "react";
 
@@ -19,7 +19,8 @@ const FAX_SOURCES: FaxSource[] = [
   {
     name: "Photocopy",
     remaining: () =>
-      haveUnrestricted($item`Clan VIP Lounge key`)
+      haveUnrestricted($item`Clan VIP Lounge key`) &&
+      isUnrestricted($item`deluxe fax machine`)
         ? 1 - +get("_photocopyUsed")
         : 0,
     render: ({ remaining }) => (

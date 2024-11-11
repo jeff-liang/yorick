@@ -140,9 +140,6 @@ const Numberology = () => {
           </ListItem>
         ))}
       </UnorderedList>
-      {usesRemaining > 1 && (
-        <Line>You have {usesRemaining} calculations remaining today.</Line>
-      )}
     </Tile>
   );
 };

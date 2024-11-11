@@ -92,7 +92,7 @@ const DigitalKeyQuest: FC = () => {
         header="Get the continuum transfunctioner"
         id="digital-key-quest"
         imageUrl="/images/itemimages/pixelkey.gif"
-        href="place.php?whichplace=forestvillage&action=fv_mystic"
+        href="/place.php?whichplace=forestvillage&action=fv_mystic"
         minLevel={5}
       >
         <Line>Visit the crackpot mystic for your transfunctioner.</Line>
@@ -146,8 +146,10 @@ const DigitalKeyQuest: FC = () => {
               </Line>
               <Line>
                 Adventure in{" "}
-                <Text color={currentColor}>{zoneMap[currentColor]}</Text> for
-                400 points per turn!
+                <Text as="span" color={currentColor}>
+                  {zoneMap[currentColor]}
+                </Text>{" "}
+                for 400 points per turn!
               </Line>
             </>
           ) : (

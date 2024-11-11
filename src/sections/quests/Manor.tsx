@@ -233,8 +233,8 @@ const SecondFloor: FC = () => {
               <Line href={parentPlaceLink(bedroom)}>
                 Get Lady Spookyraven's finest gown from an elegant nightstand in
                 the Bedroom.
-                {gallery.turnsSpent < 6
-                  ? ` ${plural(6 - gallery.turnsSpent, "more turn")} of delay.`
+                {bedroom.turnsSpent < 6
+                  ? ` ${plural(6 - bedroom.turnsSpent, "more turn")} of delay.`
                   : ""}
               </Line>
               {bedroomItemsNeeded.length > 0 && (

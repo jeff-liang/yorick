@@ -113,7 +113,10 @@ const Level8: FC = () => {
             {coldRes >= 5
               ? "Fight "
               : `Get 5 cold resistance (+${5 - coldRes}) and fight `}
-            {yetiCount < 3 ? `${3 - yetiCount} yetis and Groar` : "Groar"}
+            {yetiCount < 3
+              ? `${plural(3 - yetiCount, "yeti")} and Groar`
+              : "Groar"}
+            .
           </Line>,
         ],
         [5, <Line>Return fur to the Trapper.</Line>],

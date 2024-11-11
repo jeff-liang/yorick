@@ -9,10 +9,8 @@ import { commaOr, plural, truthy } from "../../../util/text";
 const Lighthouse: FC = () => {
   const sonofaBeach = $location`Sonofa Beach`;
   const lighthouseFinished = get("lighthouseQuestState") === "finished";
-  const gunpowderNeeded = Math.max(
-    0,
-    5 - availableAmount($item`barrel of gunpowder`),
-  );
+  const gunpowderCount = availableAmount($item`barrel of gunpowder`);
+  const gunpowderNeeded = Math.max(0, 5 - gunpowderCount);
   const combatRate = combatRateModifier();
 
   const effectiveCombatRate =
@@ -51,22 +49,32 @@ const Lighthouse: FC = () => {
             Need {plural(gunpowderNeeded, "more barrel", "more barrels")} of
             gunpowder.
           </Line>
+          {AutumnAton.have() &&
+            AutumnAton.currentlyIn() === sonofaBeach &&
+            AutumnAton.zoneItems() + gunpowderCount >= 5 && (
+              <Line>
+                Autumn-aton will finish quest. Wait{" "}
+                {plural(AutumnAton.turnsLeft(), "turn")}.
+              </Line>
+            )}
           <Line>
             ~{turnsToComplete.toFixed(1)} turns to complete quest at{" "}
             {Math.floor(combatRate)}% combat. {turnsPerLobster.toFixed(1)} turns
             per lobster.
           </Line>
-          {AutumnAton.have() && sonofaBeach.turnsSpent > 0 ? (
-            <Line>
-              Send autumn-aton in {plural(AutumnAton.turnsLeft(), "turn")} for{" "}
-              {plural(AutumnAton.zoneItems(), "barrel")} per send.
-            </Line>
-          ) : (
-            <Line>
-              Spend a turn (maybe wanderer) in Sonofa Beach, then send
-              autumn-aton.
-            </Line>
-          )}
+          {AutumnAton.have() &&
+            AutumnAton.currentlyIn() !== sonofaBeach &&
+            (sonofaBeach.turnsSpent > 0 ? (
+              <Line>
+                Send autumn-aton in {plural(AutumnAton.turnsLeft(), "turn")} for{" "}
+                {plural(AutumnAton.zoneItems(), "barrel")} per send.
+              </Line>
+            ) : (
+              <Line>
+                Spend a turn (maybe wanderer) in Sonofa Beach, then send
+                autumn-aton.
+              </Line>
+            ))}
           {(canUseReplaceEnemy || canUseMacrometeorite) && (
             <>
               <Line>

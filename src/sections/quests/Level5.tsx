@@ -43,11 +43,15 @@ const Level5: FC = () => {
           [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
           [
             Step.STARTED,
-            <Line>
-              {haveKey
-                ? "Use Cobb's Knob map to go inside."
-                : "Adventure in the Outskirts to find the encryption key."}
-            </Line>,
+            !haveKey ? (
+              <Line>
+                Adventure in the Outskirts to find the encryption key.
+              </Line>
+            ) : (
+              <Line command="use Cobb's Knob map">
+                Use Cobb's Knob map to go inside.
+              </Line>
+            ),
           ],
           [
             1,

@@ -1,11 +1,12 @@
 import { ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
-import { myAscensions, myLevel } from "kolmafia";
-import { $item, get } from "libram";
+import { canAdventure, myAscensions, myLevel } from "kolmafia";
+import { $effect, $item, $location, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
+import { inventoryLink, parentPlaceLink } from "../../../util/links";
 
 interface MayamSymbol {
   ring: number;
@@ -124,9 +125,19 @@ const MayamCalendar: FC = () => {
   ];
 
   const templeResetAscension = get("lastTempleAdventures");
-  const mayamSymbolsUsed = get("_mayamSymbolsUsed");
+  const templeResetAvailable = templeResetAscension < myAscensions();
+  const mayamSymbolsUsed = get("_mayamSymbolsUsed").split(",");
 
-  if (!haveUnrestricted(mayamCalendar)) {
+  const remaining =
+    3 -
+    ["yam4", "clock", "explosion"].filter((symbol) =>
+      mayamSymbolsUsed.includes(symbol),
+    ).length;
+
+  if (
+    !haveUnrestricted(mayamCalendar) ||
+    (remaining === 0 && !templeResetAvailable)
+  ) {
     return null;
   }
 
@@ -183,8 +194,19 @@ const MayamCalendar: FC = () => {
           </ListItem>
         ))}
       </UnorderedList>
-      {templeResetAscension < myAscensions() && (
-        <Line fontWeight="bold">Temple reset available!</Line>
+      {templeResetAvailable && (
+        <Line
+          fontWeight="bold"
+          href={
+            remaining === 0 && canAdventure($location`The Hidden Temple`)
+              ? !have($effect`Stone-Faced`)
+                ? inventoryLink($item`stone wool`)
+                : parentPlaceLink($location`The Hidden Temple`)
+              : undefined
+          }
+        >
+          Temple reset available!
+        </Line>
       )}
     </Tile>
   );

@@ -51,7 +51,7 @@ function getPotentialPulls(meatRemaining: number) {
       $item`flapper fly`,
     ];
     return possible
-      .filter((item) => isUnrestricted(item))
+      .filter((item) => isUnrestricted(item) && !have(item))
       .map((item) => {
         const effect = effectModifier(item, "Effect");
         const meatDroppedPerTurnWithItem =

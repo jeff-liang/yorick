@@ -139,11 +139,19 @@ const Copperhead: FC = () => {
         [
           1,
           <>
-            <Line href={locations ? parentPlaceLink(locations[0]) : undefined}>
-              Adventure in{" "}
-              {locations?.map((l) => l.identifierString).join(" or ")} to find{" "}
-              {item}.
-            </Line>
+            {item && !have(Item.get(item)) ? (
+              <Line
+                href={locations ? parentPlaceLink(locations[0]) : undefined}
+              >
+                Adventure in{" "}
+                {locations?.map((l) => l.identifierString).join(" or ")} to find{" "}
+                {item}.
+              </Line>
+            ) : (
+              <Line href={parentPlaceLink(copperhead)}>
+                Return {item} to Shen.
+              </Line>
+            )}
             {copperheadTurns < 14 && (
               <Line href={parentPlaceLink(copperhead)}>
                 Or work on burning {14 - (3 - shenMeetings) - copperheadTurns}{" "}

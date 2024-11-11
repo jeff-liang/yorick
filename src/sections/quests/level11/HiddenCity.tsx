@@ -133,6 +133,8 @@ const Apartment = () => {
   const apartmentReady =
     apartmentTurns === nextElevator || get("noncombatForcerActive");
 
+  if (step === Step.FINISHED) return null;
+
   return (
     atStep(step, [
       [
@@ -481,7 +483,7 @@ const HiddenCity = () => {
           1,
           <>
             {stoneFacedTurns === 0 &&
-              (have($item`stone wool`) ? (
+              (!have($item`stone wool`) ? (
                 <Line>Find some stone wool or otherwise get Stone-Faced.</Line>
               ) : (
                 <Line command="use stone wool">

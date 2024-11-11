@@ -89,7 +89,7 @@ const AvantGuard: FC = () => {
         ) : monster ? (
           <Tile
             header="Bodyguard chat next fight."
-            imageUrl={monster.image}
+            imageUrl={`/images/adventureimages/${monster.image}`}
             imageAlt={monster.name}
           >
             <Line>

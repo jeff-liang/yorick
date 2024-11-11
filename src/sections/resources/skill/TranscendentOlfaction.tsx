@@ -21,7 +21,7 @@ const TranscendentOlfaction: FC = () => {
       imageUrl="/images/itemimages/snout.gif"
     >
       <Line>Make encountering a zone monster much more likely.</Line>
-      {tracked && <Line>Currently tracking {tracked.identifierString}</Line>}
+      {tracked && <Line>Currently tracking {tracked.identifierString}.</Line>}
     </Tile>
   );
 };

@@ -75,7 +75,7 @@ const OilPeak: FC = () => {
       )}
       {needJar && (
         <Line>
-          +item for {} more bubbling' crude. ~{crudePA} crude/adv.
+          +item for {} more bubbling' crude. ~{crudePA.toFixed(1)} crude/adv.
         </Line>
       )}
     </QuestTile>

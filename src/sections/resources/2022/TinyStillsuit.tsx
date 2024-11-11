@@ -6,6 +6,7 @@ import {
   myInebriety,
 } from "kolmafia";
 import { $item, get } from "libram";
+import { getHash } from "tome-kolmafia-lib";
 
 import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
@@ -46,6 +47,7 @@ const TinyStillsuit = () => {
         <Tile
           header={`${sweatAdvs} adv stillsuit sweat booze`}
           id="tiny-stillsuit-nag"
+          href={`/inventory.php?action=distill&pwd=${getHash()}`}
           imageUrl="/images/itemimages/stillsuit.gif"
         >
           {familiarSweat > 449 ? (
@@ -122,7 +124,7 @@ const TinyStillsuit = () => {
     <Tile
       header={`${familiarSweat}/${sweatCalcSweat} drams of stillsuit sweat`}
       linkedContent={tinyStillsuit}
-      href="/inventory.php?action=distill"
+      href={`/inventory.php?action=distill&pwd=${getHash()}`}
     >
       {familiarSweat > 358 ? (
         <>

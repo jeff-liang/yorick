@@ -49,8 +49,5 @@
     "generate": "vite-node scripts/generateLocations.ts && prettier --write src/generated",
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint --fix . && prettier --write ."
-  },
-  "resolutions": {
-    "tome-kolmafia-lib": "portal:/Users/phulin/Documents/Projects/kol/tome/packages/tome-kolmafia-lib"
   }
 }

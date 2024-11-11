@@ -4511,13 +4511,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia-lib@portal:/Users/phulin/Documents/Projects/kol/tome/packages/tome-kolmafia-lib::locator=yorick%40workspace%3A.":
-  version: 0.0.0-use.local
-  resolution: "tome-kolmafia-lib@portal:/Users/phulin/Documents/Projects/kol/tome/packages/tome-kolmafia-lib::locator=yorick%40workspace%3A."
+"tome-kolmafia-lib@npm:^5.28118.0":
+  version: 5.28118.0
+  resolution: "tome-kolmafia-lib@npm:5.28118.0"
   dependencies:
     dataloader: "npm:^2.2.2"
+  checksum: 10c0/7c20262fd1c401c961eda6df2b4d14d3d132357762294819d75f8a6d6068f979fa5649a21274317d3a1223f4ad63c4c1830caf8f9bd847ef30c35b8344063887
   languageName: node
-  linkType: soft
+  linkType: hard
 
 "tome-kolmafia-react@npm:^0.2.5":
   version: 0.2.5

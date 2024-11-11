@@ -1,5 +1,6 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import {
+  haveOutfit,
   myAdventures,
   myAscensions,
   myLevel,
@@ -9,12 +10,12 @@ import {
   mySpleenUse,
   numericModifier,
 } from "kolmafia";
-import { $path, $skill, get } from "libram";
+import { $effect, $item, $path, $skill, get, have } from "libram";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
-import { inRun } from "../../../util/quest";
+import { inRun, questFinished } from "../../../util/quest";
 import { plural } from "../../../util/text";
 
 const MOON_SIGN_ID_LOOKUP: Record<string, number> = {
@@ -95,6 +96,21 @@ const Numberology = () => {
 
   if (path !== $path`Slow and Steady`) {
     desiredDigits.push({ digit: 69, reason: "+3 adventures" });
+  }
+
+  if (!haveOutfit("Frat Warrior Fatigues") && !questFinished("questL12War")) {
+    desiredDigits.push({
+      digit: 151,
+      reason: "frat warrior outfit (fight 151st infantryman)",
+    });
+  }
+
+  if (
+    !have($item`Knob Goblin perfume`) &&
+    !have($effect`Knob Goblin Perfume`) &&
+    !questFinished("questL05Goblin")
+  ) {
+    desiredDigits.push({ digit: 9, reason: "knob goblin perfume" });
   }
 
   if (inRun()) {

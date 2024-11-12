@@ -207,7 +207,7 @@ const Office = () => {
   ];
   const neededFiles = have($item`McClusky file (complete)`)
     ? 0
-    : 5 - files.findIndex((file) => !have(file));
+    : files.filter((file) => !have(file)).length;
 
   const office = $location`The Hidden Office Building`;
   const nextHoliday = office.forceNoncombat + office.lastNoncombatTurnsSpent;
@@ -297,7 +297,7 @@ const BowlingAlley = () => {
       <Line href={CITY_LINK} fontWeight="bold">
         Hidden Bowling Alley
       </Line>
-      {haveCcsc && !ccscEquipped && (
+      {haveCcsc && canSkipRoll && !ccscEquipped && (
         <Line href={inventoryLink(candyCaneSwordCane)} fontWeight="bold">
           Equip the candy cane sword cane to skip a roll.
         </Line>

@@ -19,6 +19,7 @@ import { parentPlaceLink } from "../util/links";
 import { plural } from "../util/text";
 
 import AutocompleteInput from "./AutocompleteInput";
+import Line from "./Line";
 import MainLink from "./MainLink";
 import Monsters from "./Monsters";
 
@@ -105,7 +106,9 @@ const LocationBar: FC<StackProps> = (props) => {
         fontSize="xs"
         display={showDetails || autoHasFocus ? "flex" : "none"}
       >
-        <Monsters location={location} />
+        <Line>
+          <Monsters location={location} />
+        </Line>
         <Text>
           Combat Queue:{" "}
           {combatQueue.length === 0 ? "empty" : combatQueue.join(" → ")}

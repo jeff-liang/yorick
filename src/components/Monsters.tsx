@@ -62,7 +62,11 @@ const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
           return targets.includes(monster) ? (
             <Text as="b">{text}</Text>
           ) : banisher ? (
-            <Tooltip hasArrow label={`Banished: ${banisher.name}`}>
+            <Tooltip
+              display="inline"
+              hasArrow
+              label={`Banished: ${banisher.name}`}
+            >
               <Text as="span" color="gray.500">
                 {text}
               </Text>

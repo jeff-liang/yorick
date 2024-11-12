@@ -75,13 +75,13 @@ const Level10: FC = () => {
         [
           7,
           <>
-            {(!haveEquipped($item`amulet of extreme plot significance`) ||
-              !haveEquipped($item`titanium assault umbrella`) ||
-              !haveEquipped($item`unbreakable umbrella`)) && (
-              <Line fontWeight="bold" color="red.500">
-                Equip an umbrella or the amulet of extreme plot significance.
-              </Line>
-            )}
+            {!haveEquipped($item`amulet of extreme plot significance`) &&
+              !haveEquipped($item`titanium assault umbrella`) &&
+              !haveEquipped($item`unbreakable umbrella`) && (
+                <Line fontWeight="bold" color="red.500">
+                  Equip an umbrella or the amulet of extreme plot significance.
+                </Line>
+              )}
             <Line>Maximize -combat and adventure in the castle basement.</Line>
           </>,
         ],

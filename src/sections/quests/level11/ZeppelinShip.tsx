@@ -1,4 +1,5 @@
-import { $item, get, have } from "libram";
+import { myPath } from "kolmafia";
+import { $item, $path, get, have } from "libram";
 
 import Line from "../../../components/Line";
 
@@ -14,7 +15,9 @@ const ZeppelinShip = () => {
         <Line color="red">Use glark cable in combat.</Line>
       )}
       <Line>Search for Ron in the Zeppelin</Line>
-      <Line>{get("_glarkCableUses")}/5 glark cables used. (free kills)</Line>
+      {myPath() !== $path`Avant Guard` && (
+        <Line>{get("_glarkCableUses")}/5 glark cables used. (free kills)</Line>
+      )}
     </>
   );
 };

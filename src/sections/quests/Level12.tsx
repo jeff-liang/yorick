@@ -164,13 +164,13 @@ const Level12: FC = () => {
       {step >= 1 && (
         <>
           {get("sidequestArenaCompleted") === "none" && (
-            <Arena disabled={openQuests.includes("Arena")} />
+            <Arena disabled={!openQuests.includes("Arena")} />
           )}
           {get("sidequestJunkyardCompleted") === "none" && <Junkyard />}
           {get("sidequestLighthouseCompleted") === "none" && <Lighthouse />}
           {get("sidequestOrchardCompleted") === "none" && <Orchard />}
           {get("sidequestNunsCompleted") === "none" && (
-            <Nuns disabled={openQuests.includes("Nuns")} />
+            <Nuns disabled={!openQuests.includes("Nuns")} />
           )}
           {get("sidequestFarmCompleted") === "none" && <Farm />}
         </>

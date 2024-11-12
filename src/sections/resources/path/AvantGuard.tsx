@@ -1,6 +1,14 @@
 import { ListItem, UnorderedList } from "@chakra-ui/react";
-import { Monster, myPath } from "kolmafia";
-import { $item, $monster, $path, get, have, questStep } from "libram";
+import { Monster, myFamiliar, myPath } from "kolmafia";
+import {
+  $familiar,
+  $item,
+  $monster,
+  $path,
+  get,
+  have,
+  questStep,
+} from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -12,6 +20,8 @@ const AvantGuard: FC = () => {
   const pathCheck = myPath() === $path`Avant Guard`;
   const charged = get("bodyguardCharge") >= 50;
   const monster = get("bodyguardChatMonster");
+  const bodyguard = $familiar`Burly Bodyguard`;
+  const bodyguardOut = myFamiliar() === bodyguard;
 
   useNag(() => {
     const files = [
@@ -73,12 +83,14 @@ const AvantGuard: FC = () => {
         (charged ? (
           <Tile
             header="Bodyguard ready to chat!"
-            href="/main.php?talktobg=1"
-            imageUrl="/images/itemimages/bodyguard.gif"
+            id="bodyguard-chat-nag"
+            href={bodyguardOut ? "/main.php?talktobg=1" : undefined}
+            linkedContent={bodyguard}
             imageAlt="Burly Bodyguard"
           >
             <Line>
-              Your bodyguard is ready to talk to you. Recommended chats:
+              Your bodyguard is ready to talk to you.
+              {bodyguardOut && " Take them with you."} Recommended chats:
             </Line>
             <UnorderedList size="xs">
               {recommended.map((monster) => (
@@ -89,6 +101,7 @@ const AvantGuard: FC = () => {
         ) : monster ? (
           <Tile
             header="Bodyguard chat next fight."
+            id="bodyguard-chat-nag"
             imageUrl={`/images/adventureimages/${monster.image}`}
             imageAlt={monster.name}
           >
@@ -98,7 +111,7 @@ const AvantGuard: FC = () => {
           </Tile>
         ) : null),
     };
-  }, [charged, monster, pathCheck]);
+  }, [bodyguard, bodyguardOut, charged, monster, pathCheck]);
 
   return null;
 };

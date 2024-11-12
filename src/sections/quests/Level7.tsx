@@ -105,12 +105,8 @@ const Level7: FC = () => {
       id: "level-7-evil-eye-nag",
       priority: NagPriority.MID,
       node: evilEyeCount > 0 && nookEvil > 13 && (
-        <Tile
-          header={header}
-          imageUrl="/images/itemimages/zomboeye.gif"
-          linkedContent={$item`evil eye`}
-        >
-          <Line>
+        <Tile header={header} imageUrl="/images/itemimages/zomboeye.gif">
+          <Line command={`use ${evilEyeCount} evil eye`}>
             You have {plural(evilEyeCount, "evil eye")}. Use{" "}
             {evilEyeCount === 1 ? "it" : "them"} to reduce Nook evilness by{" "}
             {evilEyeCount * 3}.
@@ -195,7 +191,7 @@ const Level7: FC = () => {
           "Pick 4th option in NC.",
         ])}
         {getZoneDisplay("Alcove", alcoveEvil, "+init, -combat", [
-          `${(Math.min(100, 150 + initiativeModifier()) / 10).toFixed(
+          `${Math.min(100, (150 + initiativeModifier()) / 10).toFixed(
             1,
           )}% chance of modern zmobie (${Math.ceil(
             (alcoveEvil - 13) / 5,

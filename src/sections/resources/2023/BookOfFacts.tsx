@@ -25,7 +25,7 @@ const BookOfFacts = () => {
     : "";
   const eaglePhylumBanished =
     get("banishedPhyla") !== ""
-      ? Phylum.get(get("banishedPhyla").split(":")[1])
+      ? Phylum.get(get("banishedPhyla").split(":")[0])
       : null;
   const olfactionString =
     haveUnrestricted($skill`Transcendent Olfaction`) &&

@@ -67,7 +67,7 @@ const PatrioticEagle = () => {
   const rwbMonster = get("rwbMonster");
   const fightsLeft = Math.max(0, Math.min(get("rwbMonsterCount"), 2));
   const screechRecharge = get("screechCombats");
-  const eaglePhylumBanished = Phylum.get(get("banishedPhyla").split(":")[1]);
+  const eaglePhylumBanished = Phylum.get(get("banishedPhyla").split(":")[0]);
   const citizenOfAZone = $effect`Citizen of a Zone`;
   const haveCitizen = have(citizenOfAZone);
   const canUseCitizen =

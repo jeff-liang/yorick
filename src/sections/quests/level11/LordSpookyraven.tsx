@@ -117,6 +117,9 @@ const LordSpookyraven: FC = () => {
 
   if (step === Step.FINISHED) return null;
 
+  const boilerFights = Math.ceil(
+    50.1 / (10 + Math.floor(Math.max(currentMl, 0) / 2)),
+  );
   return (
     <QuestTile
       header={
@@ -173,11 +176,12 @@ const LordSpookyraven: FC = () => {
       ) : useFastRoute && haveUnstableFulminate ? (
         <>
           <Line href={CELLAR_LINK}>
-            Adventure in the haunted boiler room with +{mlNeeded} ML.
+            Adventure in the haunted boiler room
+            {mlNeeded > 0 && ` with +${mlNeeded} ML`}.
           </Line>
           <Line href={CELLAR_LINK}>
-            ~{Math.ceil(50.1 / (10 + Math.floor(Math.max(currentMl, 0) / 2)))}{" "}
-            total boiler fights to charge fulminate.
+            {boilerFights > 1 ? `~${boilerFights}` : boilerFights} total boiler
+            fights to charge fulminate.
           </Line>
         </>
       ) : useFastRoute && !recipeWasAutoreadWithGlasses ? (

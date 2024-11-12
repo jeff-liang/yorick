@@ -1,11 +1,13 @@
 import { Location } from "kolmafia";
-import { $location } from "libram";
+import { $item, $location } from "libram";
+
+import { haveUnrestricted } from "../util/available";
 
 import { haveMachete, lianasCanBeFree } from "./hiddenCity";
 
 interface ZoneDelay {
   zone: Location;
-  length: number;
+  length: number | (() => number);
   needed?: () => boolean;
 }
 
@@ -29,7 +31,7 @@ export const DELAY_ZONES: ZoneDelay[] = [
   },
   {
     zone: $location`The Penultimate Fantasy Airship`,
-    length: 25,
+    length: haveUnrestricted($item`bat wings`) ? 20 : 25,
   },
   {
     zone: $location`The Hidden Park`,
@@ -70,6 +72,9 @@ export const DELAY_ZONES: ZoneDelay[] = [
 export function remainingDelay() {
   return DELAY_ZONES.map(({ zone, length, needed }) => ({
     zone,
-    remaining: needed === undefined || needed() ? length - zone.turnsSpent : 0,
+    remaining:
+      needed === undefined || needed()
+        ? (typeof length === "function" ? length() : length) - zone.turnsSpent
+        : 0,
   })).filter(({ remaining }) => remaining > 0);
 }

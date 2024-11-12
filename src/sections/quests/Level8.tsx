@@ -1,5 +1,13 @@
-import { itemAmount, numericModifier, toItem } from "kolmafia";
-import { $item, $location, $monster, get, have, questStep } from "libram";
+import { itemAmount, myPath, numericModifier, toItem } from "kolmafia";
+import {
+  $item,
+  $location,
+  $monster,
+  $path,
+  get,
+  have,
+  questStep,
+} from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
@@ -25,7 +33,10 @@ const Level8: FC = () => {
 
   const coldRes = Math.floor(numericModifier("Cold Resistance"));
 
-  const yetiCount = $location`Mist-Shrouded Peak`.turnsSpent;
+  const yetiCount = Math.floor(
+    $location`Mist-Shrouded Peak`.turnsSpent /
+      (myPath() === $path`Avant Guard` ? 2 : 1),
+  );
 
   if (step === Step.FINISHED) return null;
 

@@ -100,7 +100,7 @@ const Numberology = () => {
 
   if (!haveOutfit("Frat Warrior Fatigues") && !questFinished("questL12War")) {
     desiredDigits.push({
-      digit: 151,
+      digit: 51,
       reason: "frat warrior outfit (fight 151st infantryman)",
     });
   }

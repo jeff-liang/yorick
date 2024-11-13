@@ -69,6 +69,7 @@ const Layout = () => {
         status: "error",
         duration: 10000,
         isClosable: true,
+        containerStyle: { maxW: "95vw" },
       });
     });
   }, [toast]);

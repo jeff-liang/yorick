@@ -12,19 +12,13 @@ import AdviceTooltip from "../../components/AdviceTooltip";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
-import { Step } from "../../util/quest";
+import { inRun, Step } from "../../util/quest";
 
 const Level13: FC = () => {
   const step = questStep("questL13Final");
-  const inAftercore = get("kingLiberated");
-  const inGreyGoo = myPath() === $path`Grey Goo`;
   const inActuallyEdTheUndying = myPath() === $path`Actually Ed the Undying`;
 
-  if (
-    inAftercore ||
-    inGreyGoo ||
-    (step === Step.UNSTARTED && inActuallyEdTheUndying)
-  ) {
+  if (!inRun() || (step === Step.UNSTARTED && inActuallyEdTheUndying)) {
     return null;
   }
 
@@ -53,6 +47,7 @@ const Level13: FC = () => {
       <Tile
         header="Find the Naughty Sorceress"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/ns_tower.gif"
       >
         <Line>Complete the races at the registration desk.</Line>
@@ -71,6 +66,7 @@ const Level13: FC = () => {
       <Tile
         header="Hedge Maze"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/hedgemaze.gif"
       >
         <Line>Navigate the Hedge Maze in the Naughty Sorceress' Tower.</Line>
@@ -86,11 +82,15 @@ const Level13: FC = () => {
       "Boris's key",
       "Jarlsberg's key",
       "Sneaky Pete's key",
+      "skeleton key",
+      "Richard's star key",
+      "digital key",
     ].filter((key) => !keysUsed.includes(key));
     return (
       <Tile
         header="Tower Door"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/nstower_door.gif"
       >
         <Line>Open the tower door.</Line>
@@ -106,6 +106,7 @@ const Level13: FC = () => {
       <Tile
         header="Wall of Skin"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/ns_wall1.gif"
       >
         <Line>Defeat the Wall of Skin.</Line>
@@ -125,6 +126,7 @@ const Level13: FC = () => {
       <Tile
         header="Wall of Meat"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/ns_wall2.gif"
       >
         <Line>Defeat the Wall of Meat.</Line>
@@ -138,23 +140,28 @@ const Level13: FC = () => {
     );
   }
 
-  const candyCaneSwordCane = $item`candy cane sword cane`;
-  const haveCcsc = haveUnrestricted(candyCaneSwordCane);
-  const haveCcscEquipped = haveEquipped(candyCaneSwordCane);
-
-  const haveSaucegeyser = have($skill`Saucegeyser`);
-  const mlModifier = Math.max(0.5, 1 - numericModifier("Monster Level") / 250);
-  const saucegeyserDamage =
-    mlModifier *
-    ((numericModifier("Spell Damage Percent") / 100) *
-      (60 + 0.4 * myBuffedstat($stat`Mysticality`)) +
-      numericModifier("Spell Damage"));
-
   if (!pastTowerLevel3) {
+    const candyCaneSwordCane = $item`candy cane sword cane`;
+    const haveCcsc = haveUnrestricted(candyCaneSwordCane);
+    const haveCcscEquipped = haveEquipped(candyCaneSwordCane);
+
+    const haveSaucegeyser = have($skill`Saucegeyser`);
+    const mlModifier = Math.max(
+      0.5,
+      1 - numericModifier("Monster Level") / 250,
+    );
+    const saucegeyserDamage =
+      3 *
+      mlModifier *
+      ((numericModifier("Spell Damage Percent") / 100) *
+        (60 + 0.4 * myBuffedstat($stat`Mysticality`)) +
+        numericModifier("Spell Damage"));
+
     return (
       <Tile
         header="Defeat the Wall of Bones"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/ns_wall3.gif"
       >
         {have($item`electric boning knife`) ? (
@@ -194,6 +201,7 @@ const Level13: FC = () => {
       <Tile
         header="Mirror"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/mirror.gif"
       >
         <Line>Face the looking glass.</Line>
@@ -214,6 +222,7 @@ const Level13: FC = () => {
       <Tile
         header="Your Shadow"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/shadow.gif"
       >
         <Line>Fight your shadow.</Line>
@@ -232,6 +241,7 @@ const Level13: FC = () => {
       <Tile
         header="Naughty Sorceress"
         id="level-13-quest"
+        href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/ns.gif"
       >
         <Line>Defeat the Naughty Sorceress.</Line>

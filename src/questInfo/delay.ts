@@ -31,7 +31,7 @@ export const DELAY_ZONES: ZoneDelay[] = [
   },
   {
     zone: $location`The Penultimate Fantasy Airship`,
-    length: haveUnrestricted($item`bat wings`) ? 20 : 25,
+    length: () => (haveUnrestricted($item`bat wings`) ? 20 : 25),
   },
   {
     zone: $location`The Hidden Park`,
@@ -64,8 +64,7 @@ export const DELAY_ZONES: ZoneDelay[] = [
   },
   {
     zone: $location`The Copperhead Club`,
-    // Not including NCs themselves here.
-    length: 12,
+    length: 14,
   },
 ];
 

@@ -1,94 +1,23 @@
-import { Item, Location, Monster, myDaycount, myPath } from "kolmafia";
-import {
-  $effect,
-  $item,
-  $location,
-  $monster,
-  $path,
-  get,
-  have,
-  questStep,
-} from "libram";
+import { Item, myDaycount, myPath } from "kolmafia";
+import { $effect, $item, $location, $path, have, questStep } from "libram";
 import { FC } from "react";
 
 import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
+import { currentSnake, SHEN_DAYS } from "../../../questInfo/copperhead";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { atStep, questFinished, Step } from "../../../util/quest";
 import { commaList } from "../../../util/text";
 
-type Snake = {
-  monster: Monster;
-  locations: Location[];
-  item: string;
-};
-
-const BATSNAKE: Snake = {
-  monster: $monster`Batsnake`,
-  locations: [$location`The Batrat and Ratbat Burrow`],
-  item: "The Stankara Stone",
-};
-
-const FROZEN_SOLID_SNAKE = {
-  monster: $monster`Frozen Solid Snake`,
-  locations: [$location`Lair of the Ninja Snowmen`],
-  item: "The First Pizza",
-};
-
-const BURNING_SNAKE_OF_FIRE = {
-  monster: $monster`Burning Snake of Fire`,
-  locations: [$location`The Castle in the Clouds in the Sky (Top Floor)`],
-  item: "Murphy's Rancid Black Flag",
-};
-
-const SNAKE_WITH_LIKE_TEN_HEADS = {
-  monster: $monster`The Snake With Like Ten Heads`,
-  locations: [$location`The Hole in the Sky`],
-  item: "The Eye of the Stars",
-};
-
-const FRATTLESNAKE = {
-  monster: $monster`The Frattlesnake`,
-  locations: [$location`The Smut Orc Logging Camp`],
-  item: "The Lacrosse Stick of Lacoronado",
-};
-
-const SNAKELETON = {
-  monster: $monster`Snakeleton`,
-  locations: [
-    $location`The Unquiet Garves`,
-    $location`The VERY Unquiet Garves`,
-  ],
-  item: "The Shield of Brook",
-};
-
-const shenDays: Snake[][] = [
-  [BATSNAKE, FROZEN_SOLID_SNAKE, BURNING_SNAKE_OF_FIRE],
-  [FRATTLESNAKE, SNAKELETON, SNAKE_WITH_LIKE_TEN_HEADS],
-  [FROZEN_SOLID_SNAKE, BATSNAKE, SNAKELETON],
-  [FRATTLESNAKE, BATSNAKE, SNAKELETON],
-  [BURNING_SNAKE_OF_FIRE, FRATTLESNAKE, SNAKE_WITH_LIKE_TEN_HEADS],
-  [BURNING_SNAKE_OF_FIRE, BATSNAKE, SNAKE_WITH_LIKE_TEN_HEADS],
-  [FRATTLESNAKE, SNAKELETON, SNAKE_WITH_LIKE_TEN_HEADS],
-  [SNAKELETON, BURNING_SNAKE_OF_FIRE, FRATTLESNAKE],
-  [SNAKELETON, FRATTLESNAKE, SNAKE_WITH_LIKE_TEN_HEADS],
-  [SNAKE_WITH_LIKE_TEN_HEADS, BATSNAKE, BURNING_SNAKE_OF_FIRE],
-  [FROZEN_SOLID_SNAKE, BATSNAKE, BURNING_SNAKE_OF_FIRE],
-];
-
 const Copperhead: FC = () => {
   const step = questStep("questL11Shen");
-  const initiationDay = get("shenInitiationDay");
-  const questItem = get("shenQuestItem");
 
-  const dayData = shenDays[(initiationDay - 1) % shenDays.length];
-  const currentSnake = dayData?.find((s) => s.item === questItem);
   if (step === Step.FINISHED) {
     return null;
   }
 
-  const { locations, item } = currentSnake ?? {};
+  const { locations, item } = currentSnake() ?? {};
 
   const copperhead = $location`The Copperhead Club`;
   const copperheadTurns = copperhead.turnsSpent;
@@ -127,7 +56,7 @@ const Copperhead: FC = () => {
             <Line>
               If you meet him today, you will have to go to{" "}
               {commaList(
-                (shenDays[(myDaycount() - 1) % shenDays.length] ?? []).map(
+                (SHEN_DAYS[(myDaycount() - 1) % SHEN_DAYS.length] ?? []).map(
                   (snake) => snake.locations[0].identifierString,
                 ),
                 "and",

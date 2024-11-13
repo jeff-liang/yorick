@@ -1,22 +1,27 @@
-import { Modifier, myPath } from "kolmafia";
-import { $item, $path, get, have, questStep } from "libram";
+import {
+  haveEquipped,
+  Modifier,
+  myBuffedstat,
+  myPath,
+  numericModifier,
+} from "kolmafia";
+import { $item, $path, $skill, $stat, get, have, questStep } from "libram";
 import { FC } from "react";
 
 import AdviceTooltip from "../../components/AdviceTooltip";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { haveUnrestricted } from "../../util/available";
 import { Step } from "../../util/quest";
 
 const Level13: FC = () => {
   const step = questStep("questL13Final");
   const inAftercore = get("kingLiberated");
-  const inBugbearInvasion = myPath() === $path`Bugbear Invasion`;
   const inGreyGoo = myPath() === $path`Grey Goo`;
   const inActuallyEdTheUndying = myPath() === $path`Actually Ed the Undying`;
 
   if (
     inAftercore ||
-    inBugbearInvasion ||
     inGreyGoo ||
     (step === Step.UNSTARTED && inActuallyEdTheUndying)
   ) {
@@ -133,21 +138,52 @@ const Level13: FC = () => {
     );
   }
 
+  const candyCaneSwordCane = $item`candy cane sword cane`;
+  const haveCcsc = haveUnrestricted(candyCaneSwordCane);
+  const haveCcscEquipped = haveEquipped(candyCaneSwordCane);
+
+  const haveSaucegeyser = have($skill`Saucegeyser`);
+  const mlModifier = Math.max(0.5, 1 - numericModifier("Monster Level") / 250);
+  const saucegeyserDamage =
+    mlModifier *
+    ((numericModifier("Spell Damage Percent") / 100) *
+      (60 + 0.4 * myBuffedstat($stat`Mysticality`)) +
+      numericModifier("Spell Damage"));
+
   if (!pastTowerLevel3) {
     return (
       <Tile
-        header="Wall of Bones"
+        header="Defeat the Wall of Bones"
         id="level-13-quest"
         imageUrl="/images/adventureimages/ns_wall3.gif"
       >
-        <Line>Defeat the Wall of Bones.</Line>
         {have($item`electric boning knife`) ? (
           <Line>Use the electric boning knife against it.</Line>
         ) : (
-          <Line>
-            Find the electric boning knife on the ground floor of the Castle in
-            the Clouds in the Sky (-combat), or towerkill.
-          </Line>
+          <>
+            {haveCcsc && !haveCcscEquipped && (
+              <Line
+                command="equip candy cane sword cane"
+                fontWeight="bold"
+                color="red.500"
+              >
+                Equip the candy cane sword.
+              </Line>
+            )}
+            {haveCcsc && (
+              <Line>Use Surprisingly Sweet Slash to reduce HP by 75%.</Line>
+            )}
+            {haveSaucegeyser && (
+              <Line>
+                Minimum Saucegeyser damage: {saucegeyserDamage.toFixed(0)}/
+                {haveCcsc ? 1667 : 5000}
+              </Line>
+            )}
+            <Line>
+              Find the electric boning knife on the ground floor of the Castle
+              in the Clouds in the Sky (-combat), or towerkill.
+            </Line>
+          </>
         )}
       </Tile>
     );

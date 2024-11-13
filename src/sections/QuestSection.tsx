@@ -12,6 +12,7 @@ import Level1 from "./quests/Level1";
 import Level10 from "./quests/Level10";
 import Level11 from "./quests/Level11";
 import Level12 from "./quests/Level12";
+import Level13 from "./quests/Level13";
 import Level2 from "./quests/Level2";
 import Level3 from "./quests/Level3";
 import Level4 from "./quests/Level4";
@@ -55,6 +56,7 @@ const QuestSection = () => {
               DigitalKey,
               StarKey,
               WandOfNagamar,
+              Level13,
             ]
           : []),
       ]}

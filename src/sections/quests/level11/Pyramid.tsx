@@ -124,7 +124,7 @@ const Pyramid: FC = () => {
       header="Descend the Pyramid"
       imageUrl="/images/itemimages/nemes.gif"
       minLevel={11}
-      disabled={!haveStaffOfEd}
+      disabled={!haveStaffOfEd && step < Step.STARTED}
     >
       {atStep(step, [
         [

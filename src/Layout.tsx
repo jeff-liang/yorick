@@ -5,9 +5,11 @@ import {
   Flex,
   Heading,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
 import { myDaycount, myTurncount } from "kolmafia";
 import { useCallback, useContext, useEffect, useState } from "react";
+import { setGlobalErrorHandler } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
 
 import BrandHeading from "./components/BrandHeading";
@@ -16,6 +18,7 @@ import LocationBar from "./components/LocationBar";
 import PrefsButton from "./components/PrefsButton";
 import RefreshButton from "./components/RefreshButton";
 import NagContext from "./contexts/NagContext";
+import { addDevelopmentListeners } from "./prefs/addListeners";
 import NagSection from "./sections/NagSection";
 import QuestSection from "./sections/QuestSection";
 import ResourceSection from "./sections/ResourceSection";
@@ -48,8 +51,27 @@ const Layout = () => {
           triggerHardRefresh();
         }
       });
+
+      addDevelopmentListeners();
     }
   }, [triggerHardRefresh]);
+
+  const toast = useToast();
+  useEffect(() => {
+    setGlobalErrorHandler((err) => {
+      console.error(err);
+      toast({
+        title: "Error updating.",
+        description:
+          err !== null && (typeof err === "object" || typeof err === "string")
+            ? err.toString()
+            : "Unknown error.",
+        status: "error",
+        duration: 10000,
+        isClosable: true,
+      });
+    });
+  }, [toast]);
 
   return (
     <Container

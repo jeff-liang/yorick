@@ -1,11 +1,8 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { RefreshContextProvider } from "tome-kolmafia-react";
 
 import NagContextProvider from "./contexts/NagContextProvider";
 import Layout from "./Layout";
-import { addDevelopmentListeners } from "./prefs/addListeners";
-import { inDevMode } from "./util/env";
 
 const bulleted = {
   container: {
@@ -44,20 +41,14 @@ const theme = extendTheme({
   },
 });
 
-const App = () => {
-  useEffect(() => {
-    if (inDevMode()) addDevelopmentListeners();
-  }, []);
-
-  return (
-    <ChakraProvider theme={theme}>
-      <RefreshContextProvider>
-        <NagContextProvider>
-          <Layout />
-        </NagContextProvider>
-      </RefreshContextProvider>
-    </ChakraProvider>
-  );
-};
+const App = () => (
+  <ChakraProvider theme={theme}>
+    <RefreshContextProvider>
+      <NagContextProvider>
+        <Layout />
+      </NagContextProvider>
+    </RefreshContextProvider>
+  </ChakraProvider>
+);
 
 export default App;

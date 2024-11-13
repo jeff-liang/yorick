@@ -28,7 +28,7 @@ const AsyncButton: FC<AsyncButtonProps> = forwardRef(
         command && !onClick
           ? async () => {
               const result = await remoteCliExecute(command);
-              if (result?.functions?.[0] === false) {
+              if (result === false) {
                 toast({
                   title: "Command failed.",
                   description: `Failed to execute "${command}".`,

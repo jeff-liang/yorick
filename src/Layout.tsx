@@ -100,7 +100,7 @@ const Layout = () => {
             Day {myDaycount()} / Turn {myTurncount()}
           </Heading>
           <Stack>
-            {Object.keys(nags).length > 0 && <NagSection />}
+            {Object.keys(nags).length > -1 && <NagSection />}
             <QuestSection />
             <Divider />
             <ResourceSection />

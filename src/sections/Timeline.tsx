@@ -16,6 +16,7 @@ import {
 import { FC, forwardRef } from "react";
 
 import { haveUnrestricted } from "../util/available";
+import { inDevMode } from "../util/env";
 import { plural } from "../util/text";
 
 const Pill: FC<BadgeProps> = forwardRef(({ children, ...props }, ref) => (
@@ -64,6 +65,13 @@ const Timeline: FC<StackProps> = (props) => {
       color: "yellow.600",
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Yellow.`,
     },
+    {
+      name: "ELRWB",
+      turns: haveEffect($effect`Everything Looks Red, White and Blue`),
+      color: "purple.600",
+      label: (turns) =>
+        `${plural(turns, "turn")} of Everything Looks Red, White and Blue.`,
+    },
   ];
 
   if (returnCombats > 0) {
@@ -100,7 +108,7 @@ const Timeline: FC<StackProps> = (props) => {
     });
   }
 
-  const elementsFiltered = elements; // .filter(([, turns]) => turns > 0);
+  const elementsFiltered = elements.filter(({ turns }) => turns > 0);
   elementsFiltered.sort(
     ({ turns: turnsA }, { turns: turnsB }) => turnsA - turnsB,
   );
@@ -108,7 +116,16 @@ const Timeline: FC<StackProps> = (props) => {
   if (elementsFiltered.length === 0) return null;
 
   return (
-    <Stack flexFlow="row wrap" {...props}>
+    <Stack
+      flexFlow="row wrap"
+      // account for refresh button.
+      w={
+        inDevMode()
+          ? "calc(100% - 30px - 3 * var(--chakra-space-1))"
+          : "calc(100% - 15px - 2 * var(--chakra-space-1))"
+      }
+      {...props}
+    >
       {elementsFiltered.map(({ name, turns, color, label }) => (
         <Tooltip hasArrow label={label(turns)}>
           <Pill key={name} bgColor={color}>

@@ -146,7 +146,8 @@ const Numberology = () => {
           <ListItem key={digit}>
             {outputs.has(digit) ? (
               <>
-                Enter <Text as="b">{outputs.get(digit)}</Text> for {reason}.
+                Enter <Text as="b">{outputs.get(digit)}</Text> for {reason} (
+                {digit}).
               </>
             ) : deltas.has(digit) ? (
               `Wait ${plural(deltas.get(digit) ?? 0, "turn")} to calculate for ${reason}.`

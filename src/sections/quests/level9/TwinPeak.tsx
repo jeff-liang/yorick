@@ -5,7 +5,6 @@ import {
   initiativeModifier,
   itemDropModifier,
   myFamiliar,
-  myHash,
   numericModifier,
 } from "kolmafia";
 import { $item, get, have, questStep } from "libram";
@@ -15,6 +14,7 @@ import Chevrons from "../../../components/Chevrons";
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import Requirement from "../../../components/Requirement";
+import { inventoryLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
 const TwinPeak: FC = () => {
@@ -22,7 +22,8 @@ const TwinPeak: FC = () => {
   const res = Math.floor(numericModifier("stench resistance"));
   const jars = availableAmount($item`jar of oil`);
   const init = initiativeModifier();
-  const haveTrimmers = have($item`rusty hedge trimmers`);
+  const hedgeTrimmers = $item`rusty hedge trimmers`;
+  const haveTrimmers = have(hedgeTrimmers);
 
   const progress = get("twinPeakProgress");
   const stenchDone = (progress & 1) > 0;
@@ -71,7 +72,7 @@ const TwinPeak: FC = () => {
     >
       {haveTrimmers &&
         (ncsReady > 0 ? (
-          <Line href={`/inv_use.php?pwd=${myHash()}&which=3&whichitem=5115`}>
+          <Line href={inventoryLink(hedgeTrimmers)}>
             Use hedge trimmers for next NC.
           </Line>
         ) : (

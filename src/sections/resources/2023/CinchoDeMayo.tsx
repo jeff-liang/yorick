@@ -1,11 +1,13 @@
 import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
-import { myAscensions, totalFreeRests } from "kolmafia";
+import { getDwelling, myAscensions, totalFreeRests } from "kolmafia";
 import {
   $item,
+  BurningLeaves,
   ChateauMantegna,
   CinchoDeMayo as LibramCincho,
   get,
   have,
+  haveInCampground,
   MayamCalendar,
   sumNumbers,
 } from "libram";
@@ -43,6 +45,13 @@ const CinchoDeMayo = () => {
     } else if (resetAvailable) {
       additionalCinchSources["Mayam chair after reset"] = 25;
     }
+  }
+  if (BurningLeaves.have() && !haveInCampground($item`forest canopy bed`)) {
+    additionalCinchSources[
+      getDwelling() === $item`big rock`
+        ? "forest canopy bed (need dwelling)"
+        : "forest canopy bed"
+    ] = 25;
   }
 
   const additionalCinch = sumNumbers(Object.values(additionalCinchSources));

@@ -65,21 +65,22 @@ const BatWings: FC = () => {
       {bridge >= 25 && !canAdventure($location`Oil Peak`) && (
         <Line>You can skip the rest of the bridge!</Line>
       )}
-      {availableZones.length > 0 && (
-        <>
-          <Line command={!batWingsEquipped ? "equip bat wings" : undefined}>
-            Visit the Bat Hole zones{" "}
-            {!batWingsEquipped && "with bat wings equipped "}to get:
-          </Line>
-          <UnorderedList>
-            {availableZones.map(({ location, reward }) => (
-              <ListItem key={location.id}>
-                {location.identifierString}: {reward.name}
-              </ListItem>
-            ))}
-          </UnorderedList>
-        </>
-      )}
+      {canAdventure($location`The Bat Hole Entrance`) &&
+        availableZones.length > 0 && (
+          <>
+            <Line command={!batWingsEquipped ? "equip bat wings" : undefined}>
+              Visit the Bat Hole zones{" "}
+              {!batWingsEquipped && "with bat wings equipped "}to get:
+            </Line>
+            <UnorderedList>
+              {availableZones.map(({ location, reward }) => (
+                <ListItem key={location.id}>
+                  {location.identifierString}: {reward.name}
+                </ListItem>
+              ))}
+            </UnorderedList>
+          </>
+        )}
     </Tile>
   );
 };

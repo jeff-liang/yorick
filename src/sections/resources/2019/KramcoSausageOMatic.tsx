@@ -26,9 +26,10 @@ const KramcoSausageOMatic = () => {
   const path = myPath();
 
   const probabilityOfSausageFight = getKramcoWandererChance();
+  const lastTurn = get("_lastSausageMonsterTurn");
   const turnsToNextGuaranteedFight = Math.round(
     (1 / probabilityOfSausageFight) *
-      (totalTurnsPlayed() - get("_lastSausageMonsterTurn")),
+      (1 + totalTurnsPlayed() - (lastTurn || totalTurnsPlayed())),
   );
   const kramcosEquipped = haveEquipped(kramcoSausageOMatic);
 

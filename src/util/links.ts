@@ -1,3 +1,4 @@
+import { decodeEntity } from "html-entities";
 import { canAdventure, Item, Location, Skill } from "kolmafia";
 import { $location, $locations } from "libram";
 import { getHashIfAvailable } from "tome-kolmafia-lib";
@@ -8,6 +9,7 @@ export function inventoryLink(filter: string | Item) {
   if (typeof filter !== "string") {
     filter = filter.identifierString;
     filter = filter.replace(/^\[[0-9]+\]/, "");
+    filter = decodeEntity(filter);
   }
   return `/inventory.php?ftext=${filter}`;
 }

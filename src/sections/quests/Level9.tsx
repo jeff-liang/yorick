@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import AbooPeak from "./level9/AbooPeak";
+import ABooPeak from "./level9/ABooPeak";
 import Angus from "./level9/Angus";
 import OilPeak from "./level9/OilPeak";
 import OrcChasm from "./level9/OrcChasm";
@@ -11,7 +11,7 @@ const Level9: FC = () => {
     <>
       <OrcChasm />
       <Angus />
-      <AbooPeak />
+      <ABooPeak />
       <TwinPeak />
       <OilPeak />
     </>

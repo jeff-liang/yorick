@@ -1,7 +1,9 @@
 import { Link, LinkProps } from "@chakra-ui/react";
 import { FC } from "react";
 
-type MainLinkProps = Omit<LinkProps, "href" | "target"> & { href?: string };
+export type MainLinkProps = Omit<LinkProps, "href" | "target"> & {
+  href?: string;
+};
 
 const MainLink: FC<MainLinkProps> = ({ href, children, ...props }) =>
   href ? (

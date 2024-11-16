@@ -1,8 +1,10 @@
 import { myPath } from "kolmafia";
-import { $path, get } from "libram";
+import { $path } from "libram";
 
 import TileSection from "../components/TileSection";
+import { inRun } from "../util/quest";
 
+import Leveling from "./misc/Leveling";
 import Delay from "./quests/Delay";
 import DigitalKey from "./quests/DigitalKey";
 import HeroKeys from "./quests/HeroKeys";
@@ -27,7 +29,7 @@ import WandOfNagamar from "./quests/WandOfNagamar";
 
 const QuestSection = () => {
   const showStandardQuests =
-    !get("kingLiberated") &&
+    inRun() &&
     myPath() !== $path`Community Service` &&
     myPath() !== $path`Grey Goo`;
   return (
@@ -37,6 +39,7 @@ const QuestSection = () => {
         Manor,
         ...(showStandardQuests
           ? [
+              Leveling,
               Delay,
               Level1,
               Level2,

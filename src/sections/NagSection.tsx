@@ -39,8 +39,9 @@ const NagSection = () => {
             <Stack flexFlow="row wrap" px={2}>
               {nagsList
                 .slice(NAG_DISPLAY_LIMIT)
-                .map(([, { imageUrl, node }]) => (
+                .map(([id, { imageUrl, node }]) => (
                   <Tooltip
+                    key={id}
                     color="black"
                     bgColor="white"
                     border="1px solid black"

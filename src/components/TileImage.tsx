@@ -1,7 +1,7 @@
-import { Box, Image, ImageProps } from "@chakra-ui/react";
+import { Flex, FlexProps, Image } from "@chakra-ui/react";
 import { forwardRef } from "react";
 
-interface TileImageProps extends ImageProps {
+interface TileImageProps extends FlexProps {
   imageUrl?: string;
   imageAlt?: string;
 }
@@ -9,11 +9,11 @@ interface TileImageProps extends ImageProps {
 const TileImage = forwardRef<HTMLDivElement, TileImageProps>(
   ({ imageUrl, imageAlt, boxSize, ...props }, ref) =>
     imageUrl ? (
-      <Box ref={ref}>
-        <Image src={imageUrl} alt={imageAlt} fit="contain" {...props} />
-      </Box>
+      <Flex ref={ref} direction="row" justify="center" {...props}>
+        <Image src={imageUrl} alt={imageAlt} w={boxSize} fit="contain" />
+      </Flex>
     ) : (
-      <Box w={boxSize} ref={ref} />
+      <Flex w={boxSize} ref={ref} {...props} />
     ),
 );
 

@@ -1,6 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
-  Flex,
+  Box,
   Heading,
   HStack,
   IconButton,
@@ -135,10 +135,9 @@ const Tile: FC<TileProps> = ({
       textColor={collapsed || disabled ? "gray.500" : undefined}
       {...props}
     >
-      <Flex
+      <Box
         w="30px"
         flexShrink={0}
-        align="center"
         css={{
           ".chakra-portal &": {
             display: "none",
@@ -160,10 +159,9 @@ const Tile: FC<TileProps> = ({
             mb="auto"
             mx={collapsed || disabled ? "auto" : undefined}
             boxSize={imageSize}
-            maxH={collapsed || disabled ? "20px" : undefined}
           />
         )}
-      </Flex>
+      </Box>
       <VStack align="stretch" spacing={0.5}>
         {!collapsed && !disabled && linkEntireTile ? (
           <MainLink href={href}>{tileContents}</MainLink>

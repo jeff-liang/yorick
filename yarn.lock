@@ -3283,14 +3283,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.9.16":
-  version: 0.9.16
-  resolution: "libram@npm:0.9.16"
+"libram@npm:^0.9.18":
+  version: 0.9.18
+  resolution: "libram@npm:0.9.18"
   dependencies:
     html-entities: "npm:^2.5.2"
   peerDependencies:
     kolmafia: ^5.28100.0
-  checksum: 10c0/a32423380a9677b7125d797f3613c1766ac43075e14714fea4afbd163edaf233a6232b3a96eacde3ec38d1724202763ee527cda11ad4f577ccf892d51b77dbf1
+  checksum: 10c0/3b2e6b43524cf0bae2b5bb998f36e750218526f2ffa15e8aa7df00daf55a4bf7b7456fb5d2c58ba02d20f60fd4b72416e38c810eade0079fe0c6d18450c71b43
   languageName: node
   linkType: hard
 
@@ -4946,7 +4946,7 @@ __metadata:
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
     kolmafia: "npm:tome-kolmafia-mock@5.28118.0"
-    libram: "npm:^0.9.16"
+    libram: "npm:^0.9.18"
     postcss: "npm:^8.4.41"
     prettier: "npm:^3.3.3"
     react: "npm:^18.3.1"

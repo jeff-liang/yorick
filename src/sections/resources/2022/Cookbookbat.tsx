@@ -2,13 +2,14 @@ import { ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
+  Item,
   myDaycount,
   myFullness,
   myPath,
+  todayToString,
 } from "kolmafia";
 import { $familiar, $item, $path, clamp, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -35,26 +36,38 @@ const Cookbookbat = () => {
       ? Math.min(borisBreadCraftable, roastedVegCraftable)
       : 0;
 
+  const allPizzasEaten =
+    +get("deepDishOfLegendEaten") +
+      +get("calzoneOfLegendEaten") +
+      +get("pizzaOfLegendEaten") ===
+    3;
+
   const freeCooksRemaining = clamp(5 - get("_cookbookbatCrafting"), 0, 5);
 
   const questMonster = get("_cookbookbatQuestMonster");
   const questLocation = get("_cookbookbatQuestLastLocation");
+  const questIngredientName = get("_cookbookbatQuestIngredient");
+  const questIngredient =
+    questIngredientName === "" ? null : Item.get(questIngredientName);
 
   const path = myPath();
   const daycount = myDaycount();
+  const year = parseInt(todayToString().substring(0, 4));
 
   useNag(
     () => ({
       id: "cookbookbat-quest-nag",
       priority: NagPriority.MID,
-      // Only nag on quests in AG - and only for 1-day attempts.
+      // Only nag on quests in hardcore AG/2024 std - and only for 1-day attempts.
       node: questMonster !== null &&
-        path === $path`Avant Guard` &&
+        !allPizzasEaten &&
+        year === 2024 &&
+        (path === $path`Avant Guard` || path === $path`Standard`) &&
         daycount === 1 && (
           <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
             <Line>
-              Fight a {questMonster.identifierString} for Cookbookbat
-              ingredients.
+              Fight a {questMonster.identifierString} for{" "}
+              {questIngredient && plural(3, questIngredient)}.
             </Line>
             <Line
               href={
@@ -68,7 +81,16 @@ const Cookbookbat = () => {
           </Tile>
         ),
     }),
-    [cookbookbat, daycount, path, questLocation, questMonster],
+    [
+      allPizzasEaten,
+      cookbookbat,
+      daycount,
+      path,
+      questIngredient,
+      questLocation,
+      questMonster,
+      year,
+    ],
   );
 
   if (!haveUnrestricted(cookbookbat)) return null;
@@ -89,7 +111,8 @@ const Cookbookbat = () => {
       {questMonster !== null && (
         <Line>
           Or fight a {questMonster.identifierString} in{" "}
-          {questLocation?.identifierString} for ingredients.
+          {questLocation?.identifierString} for{" "}
+          {questIngredient && plural(3, questIngredient)}.
         </Line>
       )}
       {fightsUntilQuest > 1 ? (
@@ -126,17 +149,6 @@ const Cookbookbat = () => {
           </UnorderedList>
         </Stack>
       </MainLink>
-      <AdviceTooltip
-        text={
-          <Stack align="start">
-            <Text as="b">Cookbookbat Recipes!</Text>
-            <Text>Boris's Bread = yeast + yeast</Text>
-            <Text>Roasted Vegetable of Jarlsberg = veg + veg</Text>
-            <Text>Roasted Vegetable Focaccia = bread + roastveg</Text>
-          </Stack>
-        }
-        label="Important Recipes"
-      />
       {freeCooksRemaining > 0 && (
         <Line>
           {plural(freeCooksRemaining, "free cook")}: Unstable fulminate,

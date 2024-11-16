@@ -10,6 +10,7 @@ import {
   Item,
   myBasestat,
   myFamiliar,
+  myLevel,
   myPrimestat,
   numericModifier,
   pullsRemaining,
@@ -86,7 +87,7 @@ function effect(effect: Effect, effectAvailable = () => true): ColdResSource {
 }
 
 const Leveling: React.FC = () => {
-  // if (myLevel() >= 12) return null;
+  if (myLevel() >= 12) return null;
 
   const multiplier =
     1 +

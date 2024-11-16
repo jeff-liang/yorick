@@ -1,3 +1,4 @@
+import { totalFreeRests } from "kolmafia";
 import { $effect, $item, $skill, get, have } from "libram";
 import { FC } from "react";
 
@@ -6,6 +7,7 @@ import Tile from "../../components/Tile";
 import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
+import { inventoryLink, skillLink } from "../../util/links";
 
 const BeatenUp: FC = () => {
   let method = "";
@@ -20,12 +22,12 @@ const BeatenUp: FC = () => {
     get("_hotTubSoaks") < 5
   ) {
     method = "Soak in VIP hot tub.";
-    url = "clan_viplounge.php";
+    url = "/clan_viplounge.php";
   } else if (have($skill`Shake It Off`)) {
     method = "Cast Shake It Off.";
-    url = "skills.php";
-  } else if (get("timesRested", 0) < get("freeRestsDailyLimit", 0)) {
-    method = `Free rest at ${get("restingDescription")}.`;
+    url = skillLink($skill`Shake It Off`);
+  } else if (get("timesRested") < totalFreeRests()) {
+    method = `Free rest.`;
     url = get("restingURL");
   } else {
     const healingItems = [
@@ -37,8 +39,8 @@ const BeatenUp: FC = () => {
     ];
     for (const item of healingItems) {
       if (have(item)) {
-        method = `Use ${item}.`;
-        url = "inventory.php?which=1";
+        method = `Use ${item.name}.`;
+        url = inventoryLink(item);
         break;
       }
     }

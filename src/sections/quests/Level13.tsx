@@ -48,7 +48,7 @@ const Level13: FC = () => {
         header="Find the Naughty Sorceress"
         id="level-13-quest"
         href="/place.php?whichplace=nstower"
-        imageUrl="/images/adventureimages/ns_tower.gif"
+        imageUrl="/images/adventureimages/regdesk.gif"
       >
         <Line>Complete the races at the registration desk.</Line>
         {statRaceType && (

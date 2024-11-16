@@ -15,17 +15,23 @@ async function generateLocations() {
     .map((line) => line.trim())
     .filter((line) => line.length !== 0 && !line.startsWith("#"));
 
-  const locationNames = lines
+  const locationData = lines
     .map((line) => line.split("\t"))
     .filter(([parent, , , name]) => parent && name)
-    .map(([parent, , , name]) => `${parent}: ${name}`)
+    .map(([parent, location, , name]) => [
+      parent,
+      name,
+      location.startsWith("adventure=")
+        ? new Number(location.replace("adventure=", ""))
+        : null,
+    ])
     .filter((line) => line)
     .sort();
 
   mkdirSync("src/generated", { recursive: true });
   writeFileSync(
-    "src/generated/locationNames.ts",
-    `export default ${JSON.stringify(locationNames)};\n`,
+    "src/generated/locationData.ts",
+    `export default ${JSON.stringify(locationData)} as [string, string, number | null][];\n`,
   );
 }
 

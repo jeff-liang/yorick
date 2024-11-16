@@ -13,9 +13,9 @@ import {
 import { remoteCliExecute } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
 
-import LOCATION_NAMES from "../generated/locationNames";
+import LOCATION_DATA from "../generated/locationData";
 import { getFrames } from "../util/frames";
-import { parentPlaceLink } from "../util/links";
+import { parentPlaceLink, parentPlaceNameLink } from "../util/links";
 import { plural } from "../util/text";
 
 import AutocompleteInput from "./AutocompleteInput";
@@ -24,6 +24,9 @@ import MainLink from "./MainLink";
 import Monsters from "./Monsters";
 
 const MAX_AUTOCOMPLETE = 10;
+const LOCATION_NAMES = LOCATION_DATA.filter(
+  ([parent]) => parent !== "Obsolete",
+).map(([parent, name]) => `${parent}: ${name}`);
 
 const LocationBar: FC<StackProps> = (props) => {
   const { triggerHardRefresh } = useContext(RefreshContext);
@@ -71,13 +74,20 @@ const LocationBar: FC<StackProps> = (props) => {
   }, [handleKeyDownGlobal, locationFieldRef]);
 
   const handleSubmit = useCallback(
-    (current: string | null) => {
+    async (current: string | null) => {
       if (current !== null) {
-        const location = current.split(": ")[1];
+        const [zone, location] = current.split(": ", 2);
         if (location !== undefined) {
           remoteCliExecute(`set nextAdventure = ${location}`);
           triggerHardRefresh();
           setAutoValue("");
+          const mainpane = window.parent.parent.mainpane;
+          if (mainpane) {
+            const link = parentPlaceNameLink(location, zone);
+            if (link) {
+              mainpane.location.href = link;
+            }
+          }
         }
       }
     },

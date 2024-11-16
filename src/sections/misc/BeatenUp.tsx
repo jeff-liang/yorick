@@ -1,5 +1,5 @@
 import { totalFreeRests } from "kolmafia";
-import { $effect, $item, $skill, get, have } from "libram";
+import { $effect, $item, $skill, CinchoDeMayo, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
@@ -26,16 +26,20 @@ const BeatenUp: FC = () => {
   } else if (have($skill`Shake It Off`)) {
     method = "Cast Shake It Off.";
     url = skillLink($skill`Shake It Off`);
-  } else if (get("timesRested") < totalFreeRests()) {
+  } else if (
+    get("timesRested") < totalFreeRests() &&
+    (!CinchoDeMayo.have() ||
+      CinchoDeMayo.currentCinch() + CinchoDeMayo.cinchRestoredBy() <= 100)
+  ) {
     method = `Free rest.`;
-    url = get("restingURL");
+    url = "/campground.php";
   } else {
     const healingItems = [
       $item`tiny house`,
       $item`Space Tours Tripple`,
       $item`personal massager`,
-      $item`forest tears`,
       $item`CSA all-purpose soap`,
+      $item`forest tears`,
     ];
     for (const item of healingItems) {
       if (have(item)) {
@@ -49,9 +53,11 @@ const BeatenUp: FC = () => {
   useNag(
     () => ({
       id: "beaten-up-nag",
-      priority: NagPriority.IMMEDIATE,
+      priority: NagPriority.MID,
       imageUrl: "/images/itemimages/beatenup.gif",
       node: have($effect`Beaten Up`) &&
+        !have($effect`Once-Cursed`) &&
+        !have($effect`Twice-Cursed`) &&
         !have($effect`Thrice-Cursed`) &&
         method && (
           <Tile

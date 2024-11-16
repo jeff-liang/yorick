@@ -123,7 +123,7 @@ const CandyCaneSwordCane = () => {
   useNag(
     () => ({
       id: "candy-cane-sword-cane-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.ERROR,
       imageUrl: "/images/itemimages/ccsword.gif",
       node: haveCcsc && inRun && pathCheck && displayNag && (
         <Tile header="Wear Your Candy" linkedContent={candyCaneSwordCane}>

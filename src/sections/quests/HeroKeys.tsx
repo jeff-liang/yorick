@@ -241,7 +241,7 @@ const HeroKeys: FC = () => {
 
     return {
       id: "daily-dungeon-location-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/loottoken.gif",
       node:
         Object.keys(nodes).length > 0 ? (

@@ -440,7 +440,7 @@ const HiddenCity = () => {
   useNag(
     () => ({
       id: "stone-faced-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/stonewool.gif",
       node: stoneFacedTurns > 0 &&
         (lastTempleAdventures < ascensions || step < Step.FINISHED) && (

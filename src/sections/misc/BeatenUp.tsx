@@ -49,7 +49,7 @@ const BeatenUp: FC = () => {
   useNag(
     () => ({
       id: "beaten-up-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/beatenup.gif",
       node: have($effect`Beaten Up`) &&
         !have($effect`Thrice-Cursed`) &&

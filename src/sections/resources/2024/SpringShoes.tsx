@@ -21,7 +21,7 @@ const SpringShoes = () => {
   useNag(
     () => ({
       id: "spring-shoes-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/springshoes.gif",
       node: haveShoes && pathCheck && !haveELG && (
         <Tile

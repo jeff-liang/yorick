@@ -20,7 +20,7 @@ const CursedMagnifyingGlass = () => {
   useNag(
     () => ({
       id: "cursed-magnifying-glass-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/cursedmag.gif",
       node: haveCmg && voidFreeFights < 5 && turnsToVoid === 0 && (
         <Tile

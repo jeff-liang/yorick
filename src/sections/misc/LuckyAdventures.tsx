@@ -190,7 +190,7 @@ const LuckyAdventures: FC = () => {
   useNag(
     () => ({
       id: "lucky-adventures-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/11leafclover.gif",
       node: isLucky && (
         <Tile

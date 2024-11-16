@@ -47,7 +47,7 @@ const AprilingBandHelmet = () => {
   useNag(
     () => ({
       id: "apriling-band-helmet-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/aprilinghat.gif",
       node: haveHelmet &&
         conductorTimer <= totalTurnsPlayed() &&

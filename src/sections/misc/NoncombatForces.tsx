@@ -130,7 +130,7 @@ const NoncombatForces: FC = () => {
   useNag(
     () => ({
       id: "nc-forces-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/clarabell.gif",
       node: active && (
         <Tile

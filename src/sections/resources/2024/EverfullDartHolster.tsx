@@ -26,7 +26,7 @@ const EverfullDartHolster = () => {
   useNag(
     () => ({
       id: "everfull-dart-holster-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/dartholster.gif",
       node: !haveELR && haveHolster && (
         <Tile

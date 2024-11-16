@@ -83,7 +83,7 @@ const PatrioticEagle = () => {
   useNag(
     () => ({
       id: "patriotic-eagle-pledge-nag",
-      priority: NagPriority.LOW,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/flag1.gif",
       node: haveEagle &&
         canUseCitizen &&

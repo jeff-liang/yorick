@@ -22,7 +22,7 @@ const RomanCandelabra = () => {
   useNag(
     () => ({
       id: "roman-candelabra-nag",
-      priority: NagPriority.MID,
+      priority: haveSpringShoes ? NagPriority.MID : NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/romcandel.gif",
       node: haveCandelabra && (!haveELP || (!haveELG && !haveSpringShoes)) && (
         <Tile linkedContent={romanCandelabra} id="roman-candelabra-nag">

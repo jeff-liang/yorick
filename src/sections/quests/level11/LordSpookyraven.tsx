@@ -94,7 +94,7 @@ const LordSpookyraven: FC = () => {
   useNag(
     () => ({
       id: "lord-spookyraven-quest-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/wine2.gif",
       node: step < Step.FINISHED &&
         inBoilerRoom &&

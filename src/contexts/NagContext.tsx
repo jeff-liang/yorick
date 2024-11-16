@@ -1,8 +1,13 @@
 import { createContext, ReactNode } from "react";
 
 export enum NagPriority {
-  HIGH = 100,
+  // User is probably making a mistake.
+  ERROR = 150,
+  // Something the user should really do immediately.
+  IMMEDIATE = 100,
+  // Default.
   MID = 50,
+  // Something user needs to pay attention to, but not right this second.
   LOW = 0,
 }
 

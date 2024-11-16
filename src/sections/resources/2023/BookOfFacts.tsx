@@ -37,7 +37,7 @@ const BookOfFacts = () => {
   useNag(
     () => ({
       id: "book-of-facts-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/factbook.gif",
       node:
         habitatMonster && habitatMonsterName !== "none" && fightsLeft > 0 ? (

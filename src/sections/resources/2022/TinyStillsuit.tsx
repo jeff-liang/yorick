@@ -42,7 +42,7 @@ const TinyStillsuit = () => {
   useNag(
     () => ({
       id: "tiny-stillsuit-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/stillsuit.gif",
       node: haveStillsuit && canGuzzleSweat && sweatAdvs >= 8 && (
         <Tile

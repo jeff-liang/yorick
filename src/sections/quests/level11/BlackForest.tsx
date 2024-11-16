@@ -54,7 +54,7 @@ const BlackForest: FC = () => {
     ];
     return {
       id: "black-forest-nag",
-      priority: NagPriority.HIGH,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/documents.gif",
       node:
         possibleNags.every(([show]) => !show) ||

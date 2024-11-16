@@ -57,7 +57,7 @@ const Cookbookbat = () => {
   useNag(
     () => ({
       id: "cookbookbat-quest-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/bbat_fam.gif",
       // Only nag on quests in hardcore AG/2024 std - and only for 1-day attempts.
       node: questMonster !== null &&

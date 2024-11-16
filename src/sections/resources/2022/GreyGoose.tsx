@@ -31,7 +31,7 @@ const GreyGoose: FC = () => {
   useNag(
     () => ({
       id: "grey-goose-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.ERROR,
       imageUrl: "/images/itemimages/greygoose.gif",
       node: gooseDrones > 0 && (
         <Tile header="GOOSO IS LIT" imageUrl="/images/itemimages/greygoose.gif">

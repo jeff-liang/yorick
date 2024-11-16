@@ -55,6 +55,7 @@ const BlackForest: FC = () => {
     return {
       id: "black-forest-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/documents.gif",
       node:
         possibleNags.every(([show]) => !show) ||
         myLocation() !== blackForest ||

@@ -191,6 +191,7 @@ const LuckyAdventures: FC = () => {
     () => ({
       id: "lucky-adventures-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/11leafclover.gif",
       node: isLucky && (
         <Tile
           header="You're lucky!"

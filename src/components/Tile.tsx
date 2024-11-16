@@ -98,22 +98,31 @@ const Tile: FC<TileProps> = ({
             heading
           )}
         </Heading>
-        {!collapsed && tooltip}
-        {!collapsed && linkedContent && !linkHide && (
-          <ContentButtons linkedContent={linkedContent} />
-        )}
-        {!collapsed && extraLinks}
-        {disabled || nonCollapsible || (
-          <IconButton
-            icon={collapsed ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            aria-label="Collapse"
-            h={4}
-            minW={4}
-            fontSize="20px"
-            variant="ghost"
-            onClick={() => setCollapsed((collapsed) => !collapsed)}
-          />
-        )}
+        <HStack
+          spacing={1}
+          css={{
+            ".chakra-portal &": {
+              display: "none",
+            },
+          }}
+        >
+          {!collapsed && tooltip}
+          {!collapsed && linkedContent && !linkHide && (
+            <ContentButtons linkedContent={linkedContent} />
+          )}
+          {!collapsed && extraLinks}
+          {disabled || nonCollapsible || (
+            <IconButton
+              icon={collapsed ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              aria-label="Collapse"
+              h={4}
+              minW={4}
+              fontSize="20px"
+              variant="ghost"
+              onClick={() => setCollapsed((collapsed) => !collapsed)}
+            />
+          )}
+        </HStack>
       </HStack>
       {!collapsed && !disabled && children}
     </>
@@ -126,7 +135,16 @@ const Tile: FC<TileProps> = ({
       textColor={collapsed || disabled ? "gray.500" : undefined}
       {...props}
     >
-      <Flex w="30px" flexShrink={0} align="center">
+      <Flex
+        w="30px"
+        flexShrink={0}
+        align="center"
+        css={{
+          ".chakra-portal &": {
+            display: "none",
+          },
+        }}
+      >
         {icon ?? (
           <TileImage
             imageUrl={

@@ -22,6 +22,7 @@ const SpringShoes = () => {
     () => ({
       id: "spring-shoes-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/springshoes.gif",
       node: haveShoes && pathCheck && !haveELG && (
         <Tile
           header="Run With Spring Shoes"

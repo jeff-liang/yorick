@@ -21,6 +21,7 @@ const CursedMagnifyingGlass = () => {
     () => ({
       id: "cursed-magnifying-glass-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/cursedmag.gif",
       node: haveCmg && voidFreeFights < 5 && turnsToVoid === 0 && (
         <Tile
           linkedContent={cursedMagnifyingGlass}

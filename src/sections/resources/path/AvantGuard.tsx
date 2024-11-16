@@ -78,6 +78,7 @@ const AvantGuard: FC = () => {
     return {
       id: "bodyguard-chat-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/bodyguard.gif",
       node:
         pathCheck &&
         (charged ? (

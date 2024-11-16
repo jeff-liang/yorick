@@ -34,6 +34,7 @@ const AsdonMartin = () => {
     () => ({
       id: "asdon-martin-bumper",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/asdonfob.gif",
       node: workshedAsdon && !banisherActive && (
         <Tile
           header="Cast Spring-Loaded Front Bumper"

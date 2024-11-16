@@ -6,12 +6,21 @@ export enum NagPriority {
   LOW = 0,
 }
 
-export type NagWithPriority = { priority: number; node: ReactNode };
+export type NagWithPriority = {
+  priority: number;
+  imageUrl: string;
+  node: ReactNode;
+};
 
 export interface NagContextValue {
   // Map from priority to list of nodes at that priority.
   nags: Record<string, NagWithPriority>;
-  withNag(id: string, priority: number, node: ReactNode): void;
+  withNag(
+    id: string,
+    priority: number,
+    imageUrl: string,
+    node: ReactNode,
+  ): void;
 }
 
 const NagContext = createContext<NagContextValue>({

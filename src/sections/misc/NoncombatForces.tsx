@@ -131,6 +131,7 @@ const NoncombatForces: FC = () => {
     () => ({
       id: "nc-forces-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/clarabell.gif",
       node: active && (
         <Tile
           header="Noncombat Forced"

@@ -174,6 +174,7 @@ const ModelTrainSet = () => {
     () => ({
       id: "model-train-set-nag",
       priority: NagPriority.MID,
+      imageUrl,
       node: shouldNag && (
         <Tile header="Reconfigure Model Train Set" imageUrl={imageUrl}>
           <Line href="/campground.php?action=workshed">

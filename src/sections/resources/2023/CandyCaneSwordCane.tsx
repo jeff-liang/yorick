@@ -124,6 +124,7 @@ const CandyCaneSwordCane = () => {
     () => ({
       id: "candy-cane-sword-cane-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/ccsword.gif",
       node: haveCcsc && inRun && pathCheck && displayNag && (
         <Tile header="Wear Your Candy" linkedContent={candyCaneSwordCane}>
           <Line>

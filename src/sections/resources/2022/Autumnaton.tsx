@@ -45,6 +45,7 @@ const Autumnaton = () => {
     () => ({
       id: "autumnaton-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/autumnaton.gif",
       node: haveAutumnatonItem && (
         <Tile
           header="Use your autumn-aton"

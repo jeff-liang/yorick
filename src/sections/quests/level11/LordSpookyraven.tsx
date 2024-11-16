@@ -95,6 +95,7 @@ const LordSpookyraven: FC = () => {
     () => ({
       id: "lord-spookyraven-quest-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/wine2.gif",
       node: step < Step.FINISHED &&
         inBoilerRoom &&
         haveUnstableFulminate &&

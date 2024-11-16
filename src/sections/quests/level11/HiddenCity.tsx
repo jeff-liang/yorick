@@ -441,6 +441,7 @@ const HiddenCity = () => {
     () => ({
       id: "stone-faced-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/stonewool.gif",
       node: stoneFacedTurns > 0 &&
         (lastTempleAdventures < ascensions || step < Step.FINISHED) && (
           <QuestTile

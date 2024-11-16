@@ -1,4 +1,4 @@
-import { ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react";
+import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
@@ -11,7 +11,7 @@ import {
 import { $familiar, $item, $path, clamp, get } from "libram";
 
 import Line from "../../../components/Line";
-import MainLink from "../../../components/MainLink";
+import LinkBlock from "../../../components/LinkBlock";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
@@ -58,6 +58,7 @@ const Cookbookbat = () => {
     () => ({
       id: "cookbookbat-quest-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/bbat_fam.gif",
       // Only nag on quests in hardcore AG/2024 std - and only for 1-day attempts.
       node: questMonster !== null &&
         !allPizzasEaten &&
@@ -123,32 +124,28 @@ const Cookbookbat = () => {
       ) : (
         <Line>New ingredient quest next turn.</Line>
       )}
-      <MainLink href="/craft.php?mode=cook">
-        <Stack spacing={0.5}>
-          <Line>
-            You currently have {wheyAmount} whey, {vegAmount} veg, and{" "}
-            {yeastAmount} yeast. Make:
-          </Line>
-          <UnorderedList>
-            <ListItem>
-              <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
-              meat.
-            </ListItem>
-            <ListItem>
-              <Text as="b">
-                {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
-              </Text>{" "}
-              +100% item.
-            </ListItem>
-            <ListItem>
-              <Text as="b">
-                {focacciaCraftable}x Roasted Vegetable Focaccia:
-              </Text>{" "}
-              +10 fam XP.
-            </ListItem>
-          </UnorderedList>
-        </Stack>
-      </MainLink>
+      <LinkBlock href="/craft.php?mode=cook">
+        <Line>
+          You currently have {wheyAmount} whey, {vegAmount} veg, and{" "}
+          {yeastAmount} yeast. Make:
+        </Line>
+        <UnorderedList>
+          <ListItem>
+            <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
+            meat.
+          </ListItem>
+          <ListItem>
+            <Text as="b">
+              {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
+            </Text>{" "}
+            +100% item.
+          </ListItem>
+          <ListItem>
+            <Text as="b">{focacciaCraftable}x Roasted Vegetable Focaccia:</Text>{" "}
+            +10 fam XP.
+          </ListItem>
+        </UnorderedList>
+      </LinkBlock>
       {freeCooksRemaining > 0 && (
         <Line>
           {plural(freeCooksRemaining, "free cook")}: Unstable fulminate,

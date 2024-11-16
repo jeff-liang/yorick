@@ -32,6 +32,7 @@ const GreyGoose: FC = () => {
     () => ({
       id: "grey-goose-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/greygoose.gif",
       node: gooseDrones > 0 && (
         <Tile header="GOOSO IS LIT" imageUrl="/images/itemimages/greygoose.gif">
           <Line>
@@ -54,6 +55,7 @@ const GreyGoose: FC = () => {
     () => ({
       id: "grey-goose-grey-you-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/greygoose.gif",
       node: myClass() === $class`Grey Goo` && gooseWeight > 5 && (
         <Tile
           header="Re-Process Matter"

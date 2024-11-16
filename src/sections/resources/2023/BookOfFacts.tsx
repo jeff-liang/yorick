@@ -38,6 +38,7 @@ const BookOfFacts = () => {
     () => ({
       id: "book-of-facts-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/factbook.gif",
       node:
         habitatMonster && habitatMonsterName !== "none" && fightsLeft > 0 ? (
           <Tile
@@ -82,6 +83,7 @@ const BookOfFacts = () => {
     () => ({
       id: "book-of-facts-circadian-rhythms-nag",
       priority: NagPriority.LOW,
+      imageUrl: "/images/itemimages/clock.gif",
       node:
         haveEffect(recallingCircadianRhythms) > 0 &&
         circadianAdv < 10 &&

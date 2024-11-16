@@ -44,6 +44,7 @@ const SourceTerminalTile = () => {
     () => ({
       id: "source-terminal-learn-skills",
       priority: NagPriority.LOW,
+      imageUrl: "/images/itemimages/sourceterminal.gif",
       node: haveTerminal && skillsNeeded > 0 && (
         <Tile
           header="Source Terminal Skills"

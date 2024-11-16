@@ -72,6 +72,7 @@ const ClosedCircuitPayPhone = () => {
     () => ({
       id: "closed-circuit-pay-phone-lodestone-nag",
       priority: NagPriority.LOW,
+      imageUrl: "/images/itemimages/rufusphone.gif",
       node: havePayPhone && questObjectiveFulfilled && (
         <Tile
           header="Rufus quest done"
@@ -89,6 +90,7 @@ const ClosedCircuitPayPhone = () => {
     () => ({
       id: "closed-circuit-pay-phone-shadow-rift-nc-nag",
       priority: NagPriority.LOW,
+      imageUrl: "/images/itemimages/shadowbucket.gif",
       node: havePayPhone &&
         rufusQuestState === "started" &&
         riftAdvsUntilNC === 0 && (

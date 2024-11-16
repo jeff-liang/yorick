@@ -48,11 +48,15 @@ const AprilingBandHelmet = () => {
     () => ({
       id: "apriling-band-helmet-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/aprilinghat.gif",
       node: haveHelmet &&
         conductorTimer <= totalTurnsPlayed() &&
         !havePatrolBeat &&
         NONCOMBAT_ZONES.includes(location) && (
-          <Tile header="Conduct the Apriling Band">
+          <Tile
+            header="Conduct the Apriling Band"
+            imageUrl="/images/itemimages/aprilinghat.gif"
+          >
             <Line href={inventoryActionLink("apriling")}>
               You can change your tune to -combat!
             </Line>

@@ -23,6 +23,7 @@ const CosmicBowlingBall = () => {
     () => ({
       id: "cosmic-bowling-ball-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/cosmicball2.gif",
       node: youHaveTheBall && (
         <Tile
           header="Cosmic Bowling Ball"

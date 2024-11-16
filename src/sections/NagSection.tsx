@@ -1,11 +1,14 @@
-import { Stack } from "@chakra-ui/react";
+import { Stack, Tooltip } from "@chakra-ui/react";
 import { useContext } from "react";
 
 import Section from "../components/Section";
 import TileErrorBoundary from "../components/TileErrorBoundary";
+import TileImage from "../components/TileImage";
 import NagContext from "../contexts/NagContext";
 
 import Timeline from "./Timeline";
+
+const NAG_DISPLAY_LIMIT = 5;
 
 const NagSection = () => {
   const { nags } = useContext(NagContext);
@@ -27,11 +30,29 @@ const NagSection = () => {
       <Timeline px={2} />
       {nagsList.length > 0 && (
         <Section name="Now">
-          {nagsList.map(([id, { node }]) => (
+          {nagsList.slice(0, NAG_DISPLAY_LIMIT).map(([id, { node }]) => (
             <TileErrorBoundary key={id} name={id}>
               {node}
             </TileErrorBoundary>
           ))}
+          {nagsList.length > NAG_DISPLAY_LIMIT && (
+            <Stack flexFlow="row wrap" px={2}>
+              {nagsList
+                .slice(NAG_DISPLAY_LIMIT)
+                .map(([, { imageUrl, node }]) => (
+                  <Tooltip
+                    color="black"
+                    bgColor="white"
+                    border="1px solid black"
+                    borderRadius="4px"
+                    p={2}
+                    label={node}
+                  >
+                    <TileImage imageUrl={imageUrl} />
+                  </Tooltip>
+                ))}
+            </Stack>
+          )}
         </Section>
       )}
     </Stack>

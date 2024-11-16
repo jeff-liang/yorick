@@ -43,6 +43,7 @@ const TinyStillsuit = () => {
     () => ({
       id: "tiny-stillsuit-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/stillsuit.gif",
       node: haveStillsuit && canGuzzleSweat && sweatAdvs >= 8 && (
         <Tile
           header={`${sweatAdvs} adv stillsuit sweat booze`}

@@ -26,6 +26,7 @@ const JurassicParka: FC = () => {
     () => ({
       id: "jurassic-parka-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/jparka3.gif",
       node: haveParka &&
         canEquipParka &&
         !inCs &&

@@ -45,6 +45,7 @@ const KramcoSausageOMatic = () => {
     () => ({
       id: "kramco-sausage-goblin-nag",
       priority: NagPriority.HIGH,
+      imageUrl: "/images/itemimages/saugrinder.gif",
       node: haveKramco &&
         path !== $path`Live. Ascend. Repeat.` &&
         probabilityOfSausageFight >= 1.0 && (

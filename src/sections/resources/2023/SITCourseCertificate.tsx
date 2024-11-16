@@ -62,6 +62,7 @@ const SITCertificate = () => {
     () => ({
       id: "sit-course-certificate-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/sitcert.gif",
       node: haveSit && currentlyInRun && !sitChanged && (
         <Tile header="S.I.T. Course Enrollment" linkedContent={sitCertificate}>
           {!hasAnySkill && (

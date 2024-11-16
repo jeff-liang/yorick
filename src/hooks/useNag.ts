@@ -15,6 +15,7 @@ function useNag(
   callback: () => {
     id: string;
     priority: number;
+    imageUrl: string;
     node: ReactNode;
   },
   dependencies: unknown[],
@@ -34,8 +35,8 @@ function useNag(
   ]);
 
   useEffect(() => {
-    const { id, priority, node } = memoizedCallback();
-    withNag(id, priority, node);
+    const { id, priority, imageUrl, node } = memoizedCallback();
+    withNag(id, priority, imageUrl, node);
   }, [memoizedCallback, withNag]);
 }
 

@@ -104,6 +104,7 @@ const Level7: FC = () => {
     () => ({
       id: "level-7-evil-eye-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/zomboeye.gif",
       node: evilEyeCount > 0 && nookEvil > 13 && (
         <Tile header={header} imageUrl="/images/itemimages/zomboeye.gif">
           <Line command={`use ${evilEyeCount} evil eye`}>
@@ -121,6 +122,7 @@ const Level7: FC = () => {
     () => ({
       id: "level-7-retrocape-nag",
       priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/retrocape1.gif",
       node: inCyrpt &&
         (nookEvil > 13 ||
           nicheEvil > 13 ||
@@ -128,11 +130,7 @@ const Level7: FC = () => {
           alcoveEvil > 13) &&
         haveRetroCape &&
         (!retroCapeEquipped || !swordEquipped) && (
-          <Tile
-            header={header}
-            imageUrl="/images/itemimages/zomboeye.gif"
-            linkedContent={$item`evil eye`}
-          >
+          <Tile header={header} imageUrl="/images/itemimages/retrocape1.gif">
             <Line>Equip your retro cape and a sword to Slay the Dead.</Line>
           </Tile>
         ),

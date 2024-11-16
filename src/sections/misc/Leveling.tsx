@@ -113,7 +113,7 @@ const Leveling: React.FC = () => {
         get("_bastilleGames"),
       render: () => (
         <ListItem>
-          <MainLink href="">
+          <MainLink href={inventoryLink($item`Bastille Battalion control rig`)}>
             1 Bastille use ({(multiplier * 250).toFixed(0)} mainstat).
           </MainLink>
         </ListItem>

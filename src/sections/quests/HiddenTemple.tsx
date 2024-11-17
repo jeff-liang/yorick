@@ -20,6 +20,7 @@ const HiddenTemple: FC = () => {
       header="Find the Hidden Temple"
       imageUrl="/images/itemimages/map.gif"
       href={haveItems ? inventoryLink($item`Spooky Temple map`) : "/woods.php"}
+      linkEntireTile
     >
       {!have($item`tree-holed coin`) && !have($item`Spooky Temple map`) && (
         <Line>

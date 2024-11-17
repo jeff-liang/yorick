@@ -196,6 +196,7 @@ const HauntedLibrary: FC = () => {
 };
 
 const SecondFloor: FC = () => {
+  const step = questStep("questM21Dance");
   const shoes = $item`Lady Spookyraven's dancing shoes`;
   const puff = $item`Lady Spookyraven's powder puff`;
   const gown = $item`Lady Spookyraven's finest gown`;
@@ -210,7 +211,11 @@ const SecondFloor: FC = () => {
 
   return (
     <>
-      {questStep("questM21Dance") < 3 && ( // step3 is right after giving all three items to Lady Spookyraven
+      {step < 1 ? (
+        <Line href="/place.php?whichplace=manor2&action=manor2_ladys">
+          Talk to Lady Spookyraven on the second floor.
+        </Line>
+      ) : step < 3 ? ( // step3 is right after giving all three items to Lady Spookyraven
         <>
           {!have(shoes) && (
             <Line href={parentPlaceLink(gallery)}>
@@ -251,11 +256,12 @@ const SecondFloor: FC = () => {
             </Line>
           )}
         </>
-      )}
-      {questStep("questM21Dance") === 3 && (
-        <Line href={parentPlaceLink(ballroom)}>
-          Dance with Lady Spookyraven in the Haunted Ballroom.
-        </Line>
+      ) : (
+        step === 3 && (
+          <Line href={parentPlaceLink(ballroom)}>
+            Dance with Lady Spookyraven in the Haunted Ballroom.
+          </Line>
+        )
       )}
     </>
   );

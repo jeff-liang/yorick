@@ -33,6 +33,7 @@ const Level2: FC = () => {
         [1, "/council.php"],
         [Step.FINISHED, undefined],
       ])}
+      linkEntireTile
       minLevel={2}
     >
       {atStep(step, [

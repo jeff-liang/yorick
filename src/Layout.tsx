@@ -3,11 +3,9 @@ import {
   Container,
   Divider,
   Flex,
-  Heading,
   Stack,
   useToast,
 } from "@chakra-ui/react";
-import { myDaycount, myTurncount } from "kolmafia";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { setGlobalErrorHandler } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
@@ -17,7 +15,6 @@ import ChatButton from "./components/ChatButton";
 import LocationBar from "./components/LocationBar";
 import PrefsButton from "./components/PrefsButton";
 import RefreshButton from "./components/RefreshButton";
-import NagContext from "./contexts/NagContext";
 import { addDevelopmentListeners } from "./prefs/addListeners";
 import NagSection from "./sections/NagSection";
 import QuestSection from "./sections/QuestSection";
@@ -27,7 +24,6 @@ import { setup3Frames, setup4Frames, visibleFrameCount } from "./util/frames";
 
 const Layout = () => {
   const { triggerHardRefresh } = useContext(RefreshContext);
-  const { nags } = useContext(NagContext);
 
   const [chatFrameOpen, setChatFrameOpen] = useState(visibleFrameCount() >= 4);
   const toggleChatFrame = useCallback(() => {
@@ -96,11 +92,8 @@ const Layout = () => {
         </Stack>
         <Box overflow="scroll">
           <BrandHeading />
-          <Heading as="h4" size="sm" textAlign="center">
-            Day {myDaycount()} / Turn {myTurncount()}
-          </Heading>
           <Stack>
-            {Object.keys(nags).length > -1 && <NagSection />}
+            <NagSection />
             <QuestSection />
             <Divider />
             <ResourceSection />

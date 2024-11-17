@@ -1,4 +1,5 @@
-import { Stack, Tooltip } from "@chakra-ui/react";
+import { Heading, Stack, Tooltip } from "@chakra-ui/react";
+import { myDaycount, myTurncount } from "kolmafia";
 import { useContext } from "react";
 
 import Section from "../components/Section";
@@ -28,8 +29,8 @@ const NagSection = () => {
       borderColor="gray.200"
     >
       <Timeline px={2} />
-      {nagsList.length > 0 && (
-        <Section name="Now">
+      {nagsList.length > 0 ? (
+        <Section name={`Day ${myDaycount()} / Turn ${myTurncount()}`}>
           {nagsList.slice(0, NAG_DISPLAY_LIMIT).map(([id, { node }]) => (
             <TileErrorBoundary key={id} name={id}>
               {node}
@@ -55,6 +56,10 @@ const NagSection = () => {
             </Stack>
           )}
         </Section>
+      ) : (
+        <Heading as="h4" size="sm">
+          Day {myDaycount()} / Turn {myTurncount()}
+        </Heading>
       )}
     </Stack>
   );

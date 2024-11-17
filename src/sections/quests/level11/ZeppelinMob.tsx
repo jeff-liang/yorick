@@ -4,7 +4,7 @@ import { $effect, $item, get, have } from "libram";
 import Line from "../../../components/Line";
 import { haveUnrestricted } from "../../../util/available";
 
-const Zeppelin = () => {
+const ZeppelinMob = () => {
   const candyCaneSwordCane = $item`candy cane sword cane`;
   const haveCcsc = haveUnrestricted(candyCaneSwordCane);
   const sleazeProtestorsCleared = Math.max(
@@ -31,9 +31,7 @@ const Zeppelin = () => {
       ) : (
         <>
           {haveCcsc && !haveEquipped(candyCaneSwordCane) && (
-            <Line color="red.500" fontWeight="bold">
-              Equip your candy cane sword cane!
-            </Line>
+            <Line>Equip your candy cane sword cane!</Line>
           )}
           <Line>{80 - get("zeppelinProtestors")} protestors left.</Line>
           <Line>
@@ -49,4 +47,4 @@ const Zeppelin = () => {
   );
 };
 
-export default Zeppelin;
+export default ZeppelinMob;

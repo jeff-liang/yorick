@@ -1,4 +1,4 @@
-import { availableAmount, Item, myAscensions } from "kolmafia";
+import { availableAmount, haveEquipped, Item, myAscensions } from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
 import { FC } from "react";
 
@@ -10,6 +10,7 @@ import { commaAnd, plural, pluralItem } from "../../util/text";
 const Island: FC = () => {
   const shoreScrip = availableAmount($item`Shore Inc. Ship Trip Scrip`);
   const haveCcsc = haveUnrestricted($item`candy cane sword cane`);
+  const haveCcscEquipped = haveEquipped($item`candy cane sword cane`);
   const requiredTrips = haveCcsc ? 2 : 3;
   const islandUnlocked = get("lastIslandUnlock") === myAscensions();
 
@@ -42,12 +43,12 @@ const Island: FC = () => {
             {plural(requiredTrips - shoreScrip, "more time")} to get enough
             scrip for the dinghy plans.
           </Line>
-          {haveCcsc && !get("candyCaneSwordShore") && (
+          {haveCcsc && !haveCcscEquipped && !get("candyCaneSwordShore") && (
             <Line>Equip your candy cane sword to get extra scrip.</Line>
           )}
         </>
       )}
-      {shoreScrip > 3 && !have($item`dinghy plans`) && (
+      {shoreScrip >= 3 && !have($item`dinghy plans`) && (
         <Line href="/shop.php?whichshop=shore">Buy dinghy plans.</Line>
       )}
       {have($item`dinghy plans`) && (

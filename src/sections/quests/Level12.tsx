@@ -15,6 +15,7 @@ import Lighthouse from "./level12/Lighthouse";
 import Nuns from "./level12/Nuns";
 import Orchard from "./level12/Orchard";
 
+const ISLAND_PREWAR_URL = "/island.php";
 const ISLAND_WAR_URL = "/bigisland.php";
 
 function pluralEnemyCount(
@@ -41,7 +42,6 @@ const Level12: FC = () => {
         }
         id="island-war-quest"
         imageUrl="/images/itemimages/fmedbeta.gif"
-        href={ISLAND_WAR_URL}
         disabled={true}
       />
     );
@@ -114,7 +114,11 @@ const Level12: FC = () => {
         header="End the Island War"
         id="island-war-quest"
         imageUrl="/images/itemimages/fmedbeta.gif"
-        href={ISLAND_WAR_URL}
+        href={atStep(step, [
+          [Step.UNSTARTED, "/council.php"],
+          [Step.STARTED, ISLAND_PREWAR_URL],
+          [1, ISLAND_WAR_URL],
+        ])}
         minLevel={12}
       >
         {atStep(step, [

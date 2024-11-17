@@ -34,9 +34,8 @@ const FREE_FIGHTS: Source[] = [
     name: "NEP",
     remaining: () =>
       +(
-        (isUnrestricted($item`Neverending Party invitation envelope`) &&
-          get("_neverendingPartyToday")) ||
-        get("neverendingPartyAlways")
+        isUnrestricted($item`Neverending Party invitation envelope`) &&
+        (get("_neverendingPartyToday") || get("neverendingPartyAlways"))
       ) && 10 - get("_neverendingPartyFreeTurns"),
     render: ({ remaining }) => (
       <Line href="/place.php?whichplace=town_wrong">

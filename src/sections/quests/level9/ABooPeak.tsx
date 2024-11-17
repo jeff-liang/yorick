@@ -23,14 +23,18 @@ const elementalDamage = (base: number, element: Element) => {
 
 const ABooPeak: FC = () => {
   const step = questStep("questL09Topping");
-  const haunt = get("booPeakProgress");
+  const haunt = get("booPeakProgress", 100);
   const lit = get("booPeakLit");
   const clues = availableAmount($item`A-Boo clue`);
   const itemDrop = itemDropModifier();
   const cluePerAdv = Math.min(1, ((100 + itemDrop) * 0.15) / 100);
 
   const turnsTo90 = Math.ceil((haunt - 90) / 2);
-  const p3CluesBefore90 = binomialAtLeast(3 - clues, turnsTo90, cluePerAdv);
+  const p3CluesBefore90 = binomialAtLeast(
+    3 - clues,
+    Math.max(0, turnsTo90),
+    cluePerAdv,
+  );
 
   const damage = [13, 25, 50, 125, 250];
   const spookyDamage = sum(damage, (dmg) =>

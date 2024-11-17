@@ -22,7 +22,7 @@ export function range(lo: number, hi: number): number[];
 export function range(m: number, n?: number): number[] {
   const lo = n === undefined ? 0 : m;
   const hi = n === undefined ? m : n;
-  return [...Array(hi).slice(0, lo).keys()];
+  return [...Array(Math.max(0, hi)).slice(0, lo).keys()];
 }
 
 export function factorial(n: number): number {

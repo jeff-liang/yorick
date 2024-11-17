@@ -10,6 +10,7 @@ import { FC } from "react";
 
 import AdviceTooltip from "../../components/AdviceTooltip";
 import Line from "../../components/Line";
+import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { inRun, Step } from "../../util/quest";
@@ -44,11 +45,12 @@ const Level13: FC = () => {
 
   if (!pastRaces) {
     return (
-      <Tile
+      <QuestTile
         header="Find the Naughty Sorceress"
         id="level-13-quest"
         href="/place.php?whichplace=nstower"
         imageUrl="/images/adventureimages/regdesk.gif"
+        minLevel={13}
       >
         <Line>Complete the races at the registration desk.</Line>
         {statRaceType && (
@@ -57,7 +59,7 @@ const Level13: FC = () => {
         {elementalDamageRaceType && (
           <Line>Elemental Damage Race: {elementalDamageRaceType}</Line>
         )}
-      </Tile>
+      </QuestTile>
     );
   }
 

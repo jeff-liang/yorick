@@ -7,8 +7,8 @@ export interface SectionProps extends StackProps {
 }
 
 const Section: FC<SectionProps> = ({ name, children, ...props }) => (
-  <Stack spacing={3} align="stretch" pb={1} {...props}>
-    <Heading as="h2" size="md" px={2}>
+  <Stack spacing={3} align="stretch" px={2} pb={1} {...props}>
+    <Heading as="h2" size="md">
       {name}
     </Heading>
     <Stack

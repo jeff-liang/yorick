@@ -36,7 +36,7 @@ const NagSection = () => {
             </TileErrorBoundary>
           ))}
           {nagsList.length > NAG_DISPLAY_LIMIT && (
-            <Stack flexFlow="row wrap" px={2}>
+            <Stack flexFlow="row wrap">
               {nagsList
                 .slice(NAG_DISPLAY_LIMIT)
                 .map(([id, { imageUrl, node }]) => (

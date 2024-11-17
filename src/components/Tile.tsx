@@ -131,7 +131,6 @@ const Tile: FC<TileProps> = ({
   return (
     <HStack
       align="stretch"
-      px={2}
       textColor={collapsed || disabled ? "gray.500" : undefined}
       {...props}
     >

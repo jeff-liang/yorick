@@ -3,18 +3,21 @@ import {
   BadgeProps,
   Stack,
   StackProps,
+  Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { haveEffect, totalTurnsPlayed } from "kolmafia";
+import { getWorkshed, haveEffect, totalTurnsPlayed } from "kolmafia";
 import {
   $effect,
   $item,
   AutumnAton,
   get,
   getKramcoWandererChance,
+  maxBy,
 } from "libram";
 import { FC, forwardRef } from "react";
 
+import MainLink from "../components/MainLink";
 import { haveUnrestricted } from "../util/available";
 import { inDevMode } from "../util/env";
 import { plural } from "../util/text";
@@ -30,6 +33,79 @@ const Pill: FC<BadgeProps> = forwardRef(({ children, ...props }, ref) => (
     {children}
   </Badge>
 ));
+
+const ENV_COLORS: Record<string, string> = {
+  X: "gray.600",
+  U: "red.600",
+  I: "blue.600",
+  O: "yellow.600",
+};
+
+const ENV_RESULTS: Record<string, string> = {
+  X: "Fleshazole™",
+  U: "Breathitin™",
+  I: "Extrovermectin™",
+  O: "Homebodyl™",
+};
+
+const CMCTimeline: FC = () => {
+  const consults = get("_coldMedicineConsults");
+  const nextConsult = get("_nextColdMedicineConsult");
+
+  const turnsToConsult = nextConsult - totalTurnsPlayed();
+
+  const cabinet = $item`cold medicine cabinet`;
+  const workshed = getWorkshed();
+
+  const environments = [...get("lastCombatEnvironments").toUpperCase()];
+  const counts: Record<string, number> = {};
+  for (const c of environments) {
+    counts[c] = (counts[c] ?? 0) + 1;
+  }
+  const maxEnvironment = maxBy(Object.keys(ENV_RESULTS), (c) => counts[c] ?? 0);
+  const result =
+    counts[maxEnvironment] >= 11 ? ENV_RESULTS[maxEnvironment] : ENV_RESULTS.X;
+
+  return (
+    workshed === cabinet &&
+    consults < 5 && (
+      <Stack spacing={1} align="flex-start">
+        <Stack flexFlow="row wrap" spacing={0.5} align="center">
+          {environments.map((c, index) => (
+            <Badge
+              key={index}
+              w="14px"
+              px={0}
+              textAlign="center"
+              fontSize="xs"
+              color="white"
+              bgColor={ENV_COLORS[c]}
+            >
+              {c}
+            </Badge>
+          ))}
+        </Stack>
+        <Stack flexFlow="row wrap" spacing={1} align="center">
+          <Text as="b">
+            {turnsToConsult > 0 ? (
+              plural(turnsToConsult, "turn")
+            ) : (
+              <MainLink href="/campground.php?action=workshed">NOW</MainLink>
+            )}
+            :
+          </Text>
+          <Badge
+            fontSize="xs"
+            color="white"
+            bgColor={ENV_COLORS[maxEnvironment]}
+          >
+            {result}
+          </Badge>
+        </Stack>
+      </Stack>
+    )
+  );
+};
 
 interface TimelineElement {
   name: string;
@@ -116,23 +192,25 @@ const Timeline: FC<StackProps> = (props) => {
   if (elementsFiltered.length === 0) return null;
 
   return (
-    <Stack
-      flexFlow="row wrap"
-      // account for refresh button.
-      w={
-        inDevMode()
-          ? "calc(100% - 30px - 3 * var(--chakra-space-1))"
-          : "calc(100% - 15px - 2 * var(--chakra-space-1))"
-      }
-      {...props}
-    >
-      {elementsFiltered.map(({ name, turns, color, label }) => (
-        <Tooltip hasArrow label={label(turns)}>
-          <Pill key={name} bgColor={color}>
-            {name} {turns}
-          </Pill>
-        </Tooltip>
-      ))}
+    <Stack {...props}>
+      <Stack
+        flexFlow="row wrap"
+        // account for refresh button.
+        w={
+          inDevMode()
+            ? "calc(100% - 30px - 3 * var(--chakra-space-1))"
+            : "calc(100% - 15px - 2 * var(--chakra-space-1))"
+        }
+      >
+        {elementsFiltered.map(({ name, turns, color, label }) => (
+          <Tooltip key={name} hasArrow label={label(turns)}>
+            <Pill bgColor={color}>
+              {name} {turns}
+            </Pill>
+          </Tooltip>
+        ))}
+      </Stack>
+      <CMCTimeline />
     </Stack>
   );
 };

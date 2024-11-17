@@ -1,6 +1,8 @@
 import { createContext, ReactNode } from "react";
 
 export enum NagPriority {
+  // CMC (not a tile) goes before anything
+  CMC = 200,
   // User is probably making a mistake.
   ERROR = 150,
   // Something the user should really do immediately.

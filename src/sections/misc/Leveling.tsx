@@ -6,6 +6,7 @@ import {
   effectModifier,
   Familiar,
   getWorkshed,
+  haveEquipped,
   isUnrestricted,
   Item,
   myBasestat,
@@ -28,9 +29,11 @@ import {
   getModifier,
   have,
   MayamCalendar,
+  questStep,
   totalFamiliarWeight,
 } from "libram";
 
+import AsyncLink from "../../components/AsyncLink";
 import Cold from "../../components/elemental/Cold";
 import Line from "../../components/Line";
 import LinkBlock from "../../components/LinkBlock";
@@ -38,6 +41,7 @@ import MainLink from "../../components/MainLink";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
+import { questStarted } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
 
@@ -118,6 +122,66 @@ const Leveling: React.FC = () => {
           </MainLink>
         </ListItem>
       ),
+    },
+    {
+      name: "Leaflet",
+      remaining: () => +!get("leafletCompleted"),
+      render: () => {
+        const text = (
+          <>
+            1 strange leaflet (Quests menu)
+            {myLevel() < 9
+              ? " (after level 9)"
+              : !have($item`strange leaflet`) && " (visit council)"}
+            .
+          </>
+        );
+        return (
+          <ListItem>
+            {myLevel() >= 9 && !have($item`strange leaflet`) ? (
+              <MainLink href="/council.php">{text}</MainLink>
+            ) : (
+              text
+            )}
+          </ListItem>
+        );
+      },
+    },
+    {
+      name: "Enchanted Bean",
+      remaining: () =>
+        +(
+          questStep("questL10Garbage") <= 1 &&
+          haveUnrestricted($item`spring shoes`)
+        ),
+      render: () => {
+        const haveBean = have($item`enchanted bean`);
+        const verb = haveBean ? "Plant" : "Find and plant";
+        const text = `${verb} an enchanted bean${myLevel() >= 10 ? "" : " (at level 10)"}.`;
+        return (
+          <ListItem>
+            {myLevel() >= 10 && haveBean ? (
+              haveEquipped($item`spring shoes`) ? (
+                <MainLink
+                  href={
+                    questStarted("questL10Garbage")
+                      ? inventoryLink($item`enchanted bean`)
+                      : "/council.php"
+                  }
+                >
+                  {text}
+                </MainLink>
+              ) : (
+                <AsyncLink command="equip acc3 spring shoes">
+                  Equip spring shoes, then plant enchanted bean.
+                </AsyncLink>
+              )
+            ) : (
+              text
+            )}
+          </ListItem>
+        );
+      },
     },
   ];
 
@@ -209,7 +273,8 @@ const Leveling: React.FC = () => {
   const statName = myPrimestat().identifierString;
   const substat = $stat`Sub${statName === "none" ? "Muscle" : statName}`;
   const currentSubstat = myBasestat(substat);
-  const endingSubstat = currentSubstat + mouthwashMainstat * potentialMouthwash;
+  const endingSubstat =
+    currentSubstat + multiplier * mouthwashMainstat * potentialMouthwash;
   const endingStat = Math.sqrt(endingSubstat);
   const endingLevel = Math.sqrt(endingStat - 4) + 1;
 

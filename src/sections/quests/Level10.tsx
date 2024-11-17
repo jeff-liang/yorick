@@ -5,6 +5,7 @@ import { FC } from "react";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { haveUnrestricted } from "../../util/available";
+import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, plural } from "../../util/text";
 
@@ -42,7 +43,12 @@ const Level10: FC = () => {
       imageUrl="/images/otherimages/sigils/recyctat.gif"
       href={atStep(step, [
         [Step.UNSTARTED, "/council.php"],
-        [Step.STARTED, "/place.php?whichplace=plains"],
+        [
+          Step.STARTED,
+          have($item`enchanted bean`)
+            ? inventoryLink($item`enchanted bean`)
+            : "/place.php?whichplace=plains",
+        ],
         [1, "/place.php?whichplace=beanstalk"],
         [7, "/place.php?whichplace=giantcastle"],
         [10, "/council.php"],

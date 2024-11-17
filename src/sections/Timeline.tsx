@@ -49,13 +49,14 @@ const ENV_RESULTS: Record<string, string> = {
 };
 
 const CMCTimeline: FC = () => {
-  const consults = get("_coldMedicineConsults");
-  const nextConsult = get("_nextColdMedicineConsult");
-
-  const turnsToConsult = nextConsult - totalTurnsPlayed();
-
   const cabinet = $item`cold medicine cabinet`;
   const workshed = getWorkshed();
+  const consults = get("_coldMedicineConsults");
+
+  if (workshed !== cabinet || consults >= 5) return null;
+
+  const nextConsult = get("_nextColdMedicineConsult");
+  const turnsToConsult = nextConsult - totalTurnsPlayed();
 
   const environments = [...get("lastCombatEnvironments").toUpperCase()];
   const counts: Record<string, number> = {};
@@ -67,43 +68,36 @@ const CMCTimeline: FC = () => {
     counts[maxEnvironment] >= 11 ? ENV_RESULTS[maxEnvironment] : ENV_RESULTS.X;
 
   return (
-    workshed === cabinet &&
-    consults < 5 && (
-      <Stack spacing={1} align="flex-start">
-        <Stack flexFlow="row wrap" spacing={0.5} align="center">
-          {environments.map((c, index) => (
-            <Badge
-              key={index}
-              w="14px"
-              px={0}
-              textAlign="center"
-              fontSize="xs"
-              color="white"
-              bgColor={ENV_COLORS[c]}
-            >
-              {c}
-            </Badge>
-          ))}
-        </Stack>
-        <Stack flexFlow="row wrap" spacing={1} align="center">
-          <Text as="b">
-            {turnsToConsult > 0 ? (
-              plural(turnsToConsult, "turn")
-            ) : (
-              <MainLink href="/campground.php?action=workshed">NOW</MainLink>
-            )}
-            :
-          </Text>
+    <Stack spacing={1} align="flex-start">
+      <Stack flexFlow="row wrap" spacing={0.5} align="center">
+        {environments.map((c, index) => (
           <Badge
+            key={index}
+            w="14px"
+            px={0}
+            textAlign="center"
             fontSize="xs"
             color="white"
-            bgColor={ENV_COLORS[maxEnvironment]}
+            bgColor={ENV_COLORS[c]}
           >
-            {result}
+            {c}
           </Badge>
-        </Stack>
+        ))}
       </Stack>
-    )
+      <Stack flexFlow="row wrap" spacing={1} align="center">
+        <Text as="b">
+          {turnsToConsult > 0 ? (
+            plural(turnsToConsult, "turn")
+          ) : (
+            <MainLink href="/campground.php?action=workshed">NOW</MainLink>
+          )}
+          :
+        </Text>
+        <Badge fontSize="xs" color="white" bgColor={ENV_COLORS[maxEnvironment]}>
+          {result}
+        </Badge>
+      </Stack>
+    </Stack>
   );
 };
 

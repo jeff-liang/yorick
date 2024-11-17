@@ -7,7 +7,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 
-const MrStore2002 = () => {
+const MrStore2002Catalog = () => {
   const spookyVHSTape = $item`Spooky VHS Tape`;
   const loathingIdolMicrophone = $item`Loathing Idol Microphone`;
   const flashLiquidizerUltraDousingAccessory = $item`Flash Liquidizer Ultra Dousing Accessory`;
@@ -16,7 +16,9 @@ const MrStore2002 = () => {
   const nextVHSTurn = get("spookyVHSTapeMonsterTurn") + 8;
   const nextVHSTimer = nextVHSTurn - totalTurnsPlayed();
   const imageName = get("spookyVHSTapeMonster");
-  const mr2002Credits = get("availableMrStore2002Credits");
+  const mr2002Credits =
+    get("availableMrStore2002Credits") +
+    3 * +!get("_2002MrStoreCreditsCollected");
   const availableVHSes = availableAmount(spookyVHSTape);
   const mcTwistUsed = get("_epicMcTwistUsed");
   const fludaDousesLeft = Math.max(3 - get("_douseFoeUses"), 0);
@@ -156,4 +158,4 @@ const MrStore2002 = () => {
   );
 };
 
-export default MrStore2002;
+export default MrStore2002Catalog;

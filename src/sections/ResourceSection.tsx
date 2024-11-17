@@ -43,7 +43,6 @@ import MayDayPackage from "./resources/2022/MaydaySupplyPackage";
 import ModelTrainSet from "./resources/2022/ModelTrainSet";
 import TinyStillsuit from "./resources/2022/TinyStillsuit";
 import UnbreakableUmbrella from "./resources/2022/UnbreakableUmbrella";
-import MrStore2002 from "./resources/2023/2002Catalog";
 import BurningLeaves from "./resources/2023/AGuidetoBurningLeaves";
 import AugustScepter from "./resources/2023/AugustScepter";
 import BookOfFacts from "./resources/2023/BookOfFacts";
@@ -52,6 +51,7 @@ import CinchoDeMayo from "./resources/2023/CinchoDeMayo";
 import ClosedCircuitPayPhone from "./resources/2023/ClosedCircuitPayPhone";
 import CursedMonkeysPaw from "./resources/2023/CursedMonkeyPaw";
 import JillOfAllTrades from "./resources/2023/JillOfAllTrades";
+import MrStore2002Catalog from "./resources/2023/MrStore2002Catalog";
 import PatrioticEagle from "./resources/2023/PatrioticEagle";
 import RockGarden from "./resources/2023/RockGarden";
 import SITCertificate from "./resources/2023/SITCourseCertificate";
@@ -144,7 +144,7 @@ const ResourceSection = () => (
       ClosedCircuitPayPhone,
       CursedMonkeysPaw,
       CinchoDeMayo,
-      MrStore2002,
+      MrStore2002Catalog,
       PatrioticEagle,
       AugustScepter,
       BookOfFacts,

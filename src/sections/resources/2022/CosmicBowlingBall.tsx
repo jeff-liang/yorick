@@ -24,17 +24,20 @@ const CosmicBowlingBall = () => {
       id: "cosmic-bowling-ball-nag",
       priority: NagPriority.MID,
       imageUrl: "/images/itemimages/cosmicball2.gif",
-      node: youHaveTheBall && (
+      node: (youHaveTheBall || returnCombats === 1) && (
         <Tile
           header="Cosmic Bowling Ball"
           id="cosmic-bowling-ball-nag"
           imageUrl="/images/itemimages/cosmicball2.gif"
         >
-          <Line>You have it! Throw a curveball for a free run/banish.</Line>
+          <Line>
+            {youHaveTheBall ? "You have it!" : "Bowling ball back next combat!"}{" "}
+            Throw a curveball for a free run/banish.
+          </Line>
         </Tile>
       ),
     }),
-    [youHaveTheBall],
+    [returnCombats, youHaveTheBall],
   );
 
   if (!youHaveTheBall && returnCombats < 0) return null;

@@ -13,6 +13,7 @@ import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
 import PuckMan from "./resources/2015/PuckMan";
 import Floundry from "./resources/2016/Floundry";
+import ProtonicAcceleratorPack from "./resources/2016/ProtonicAcceleratorPack";
 import SourceTerminal from "./resources/2016/SourceTerminal";
 import Thanksgarden from "./resources/2016/Thanksgarden";
 import AsdonMartin from "./resources/2017/AsdonMartin";
@@ -94,6 +95,7 @@ const ResourceSection = () => (
 
       /* 2016 */
       Floundry,
+      ProtonicAcceleratorPack,
       SourceTerminal,
       Thanksgarden,
 

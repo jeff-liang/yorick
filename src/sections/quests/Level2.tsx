@@ -39,7 +39,7 @@ const Level2: FC = () => {
         [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
         [
           Step.STARTED,
-          forest.turnsSpent <= 5 ? (
+          forest.turnsSpent < 5 ? (
             <Line>
               Burn {plural(5 - forest.turnsSpent, "turn")} of delay in the
               Spooky Forest.

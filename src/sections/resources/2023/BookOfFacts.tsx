@@ -1,6 +1,7 @@
 import { haveEffect, isBanished, Phylum } from "kolmafia";
 import { $effect, $familiar, $item, $skill, get, have } from "libram";
 
+import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -20,9 +21,6 @@ const BookOfFacts = () => {
   );
   const patrioticEagle = $familiar`Patriotic Eagle`;
   const eagleUsable = haveUnrestricted(patrioticEagle);
-  const eagleString = eagleUsable
-    ? " Remember, you can phylum-banish with your Patriotic Eagle to make it easier!"
-    : "";
   const eaglePhylumBanished =
     get("banishedPhyla") !== ""
       ? Phylum.get(get("banishedPhyla").split(":")[0])
@@ -48,7 +46,10 @@ const BookOfFacts = () => {
           >
             <Line>
               Appears as a wandering monster in any zone. Try a place with few
-              competing monsters{olfactionString}.{eagleString}
+              competing monsters{olfactionString}.
+              {eagleUsable && (
+                <AdviceTooltipIcon text="Remember, you can phylum-banish with your Patriotic Eagle to make it easier!" />
+              )}
             </Line>
             {eaglePhylumBanished === habitatMonsterPhylum && (
               <Line color="red.500">
@@ -68,7 +69,7 @@ const BookOfFacts = () => {
       habitatMonsterName,
       fightsLeft,
       olfactionString,
-      eagleString,
+      eagleUsable,
       eaglePhylumBanished,
       habitatMonsterPhylum,
       habitatMonsterBanished,

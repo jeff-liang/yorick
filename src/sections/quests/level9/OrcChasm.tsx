@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
 import { availableAmount, Item } from "kolmafia";
-import { $items, get, questStep } from "libram";
+import { $item, $items, get, have, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -17,7 +17,8 @@ const countItems = (items: Item[], multiplier = 1) => {
 const OrcChasm: FC = () => {
   const step = questStep("questL09Topping");
   const orcProgress = get("smutOrcNoncombatProgress");
-  const bridgeProgress = get("chasmBridgeProgress");
+  const bridgeProgress =
+    get("chasmBridgeProgress") + (+have($item`bat wings`) && 5);
 
   const numExtras = countItems($items`smut orc keepsake box, snow boards`, 5);
 

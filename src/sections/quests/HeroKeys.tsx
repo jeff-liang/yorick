@@ -34,50 +34,8 @@ import { commaOr, plural, pluralJustDesc } from "../../util/text";
 interface Source {
   name: ReactNode;
   count: number;
-  condition: () => boolean;
+  condition: boolean;
 }
-
-const looseTeethSources: Source[] = [
-  {
-    name: "casting Aug. 22",
-    count: 4,
-    condition: () => AugustScepter.canCast(22),
-  },
-  {
-    name: "toothy sklelton in the Nook",
-    // Approximation of how many teeth you can get from the nook
-    count: 1 + Math.ceil((get("cyrptNookEvilness") - 13) / 8),
-    condition: () => get("cyrptNookEvilness") > 13,
-  },
-  {
-    name: "Alcove boss",
-    count: 1,
-    condition: () => get("cyrptAlcoveEvilness") > 0,
-  },
-] as const;
-
-const skeletonBoneSources: Source[] = [
-  {
-    name: "spiny skleleton in the Nook",
-    // Approximation of how many bones you can get from the nook
-    count: 1 + Math.ceil((get("cyrptNookEvilness") - 13) / 5),
-    condition: () => get("cyrptNookEvilness") > 13,
-  },
-  {
-    name: "Nook boss",
-    count: 3,
-    condition: () => get("cyrptNookEvilness") > 0,
-  },
-  {
-    name: (
-      <Link target="_blank" href="https://bofa.loathers.net">
-        BOFA (approximate)
-      </Link>
-    ),
-    count: 1,
-    condition: () => have($skill`Just the Facts`),
-  },
-] as const;
 
 const HeroKeys: FC = () => {
   const fatLootTokens = availableAmount($item`fat loot token`);
@@ -128,14 +86,64 @@ const HeroKeys: FC = () => {
   const skeletonKeyCreatable = Math.min(looseTeethCount, skeletonBoneCount);
   const skeletonKeyAvailable = skeletonKeyCount + skeletonKeyCreatable;
 
+  const canCast22 = AugustScepter.canCast(22);
+  const haveJustTheFacts = have($skill`Just the Facts`);
+  const cyrptNookEvilness = get("cyrptNookEvilness");
+  const cyrptAlcoveEvilness = get("cyrptAlcoveEvilness");
+  const looseTeethSources: Source[] = useMemo(
+    () => [
+      {
+        name: "casting Aug. 22",
+        count: 4,
+        condition: canCast22,
+      },
+      {
+        name: "toothy sklelton in the Nook",
+        // Approximation of how many teeth you can get from the nook
+        count: 1 + Math.ceil((cyrptNookEvilness - 13) / 8),
+        condition: cyrptNookEvilness > 13,
+      },
+      {
+        name: "Alcove boss",
+        count: 1,
+        condition: cyrptAlcoveEvilness > 0,
+      },
+    ],
+    [canCast22, cyrptAlcoveEvilness, cyrptNookEvilness],
+  );
+
+  const skeletonBoneSources: Source[] = useMemo(
+    () => [
+      {
+        name: "spiny skleleton in the Nook",
+        // Approximation of how many bones you can get from the nook
+        count: 1 + Math.ceil((cyrptNookEvilness - 13) / 5),
+        condition: cyrptNookEvilness > 13,
+      },
+      {
+        name: "Nook boss",
+        count: 3,
+        condition: cyrptNookEvilness > 0,
+      },
+      {
+        name: (
+          <Link target="_blank" href="https://bofa.loathers.net">
+            BOFA (approximate)
+          </Link>
+        ),
+        count: 1,
+        condition: haveJustTheFacts,
+      },
+    ],
+    [cyrptNookEvilness, haveJustTheFacts],
+  );
+
   const potentialLooseTeeth =
     looseTeethCount +
-    sum(looseTeethSources, (source) => (source.condition() ? source.count : 0));
+    sum(looseTeethSources, (source) => (source.condition ? source.count : 0));
   const potentialSkeletonBones =
     skeletonBoneCount +
-    sum(skeletonBoneSources, (source) =>
-      source.condition() ? source.count : 0,
-    );
+    sum(skeletonBoneSources, (source) => (source.condition ? source.count : 0));
   const potentialSkeletonKeys =
     skeletonKeyCount + Math.min(potentialLooseTeeth, potentialSkeletonBones);
 
@@ -180,6 +188,8 @@ const HeroKeys: FC = () => {
       skeletonKeyAvailable,
       looseTeethCount,
       skeletonBoneCount,
+      looseTeethSources,
+      skeletonBoneSources,
     ],
   );
 

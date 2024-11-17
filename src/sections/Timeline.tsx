@@ -6,7 +6,12 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { getWorkshed, haveEffect, totalTurnsPlayed } from "kolmafia";
+import {
+  getWorkshed,
+  haveEffect,
+  haveEquipped,
+  totalTurnsPlayed,
+} from "kolmafia";
 import {
   $effect,
   $item,
@@ -172,9 +177,18 @@ const Timeline: FC<StackProps> = (props) => {
   if (AutumnAton.have()) {
     elements.push({
       name: "AA",
-      turns: AutumnAton.turnsLeft(),
+      turns: AutumnAton.turnsLeft() + 1,
       color: "orange.600",
       label: (turns) => `${plural(turns, "turn")} until autumn-aton returns.`,
+    });
+  }
+
+  if (haveEquipped($item`cursed magnifying glass`)) {
+    elements.push({
+      name: "CMG",
+      turns: 13 - get("cursedMagnifyingGlassCount"),
+      color: "gray.600",
+      label: (turns) => `${plural(turns, "combat")} until next void wanderer.`,
     });
   }
 

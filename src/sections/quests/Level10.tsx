@@ -65,9 +65,8 @@ const Level10: FC = () => {
           Step.STARTED,
           <Line>Plant an enchanted bean in the nearby plains.</Line>,
         ],
-        [1, <Line>Visit the airship.</Line>],
         [
-          2,
+          1,
           <>
             {delayRemaining > 0 && (
               <Line>You need to burn {delayRemaining} more total delay.</Line>

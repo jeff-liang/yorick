@@ -172,7 +172,7 @@ const Level7: FC = () => {
         {getZoneDisplay("Nook", nookEvil, "+item drop, banish", [
           `${Math.min(100, (1 + itemDropModifier() / 100) * 20).toFixed(
             0,
-          )}% chance of evil eyes`,
+          )}% chance of evil eyes.`,
         ])}
         {getZoneDisplay("Niche", nicheEvil, "sniff dirty old lihc, banish", [
           "banish all but dirty old lihc",

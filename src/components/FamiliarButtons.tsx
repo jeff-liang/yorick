@@ -20,7 +20,7 @@ const FamiliarButtons: FC<FamiliarButtonsProps> = ({
 
   return (
     <AsyncButton
-      href={`/familiar.ph?&action=newfam&newfam=${linkID}&pwd=${myHash()}`}
+      href={`/familiar.php?&action=newfam&newfam=${linkID}&pwd=${myHash()}`}
       {...props}
     >
       take

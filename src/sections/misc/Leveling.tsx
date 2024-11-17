@@ -41,7 +41,7 @@ import MainLink from "../../components/MainLink";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
-import { questStarted } from "../../util/quest";
+import { questStarted, Step } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
 
@@ -151,7 +151,7 @@ const Leveling: React.FC = () => {
       name: "Enchanted Bean",
       remaining: () =>
         +(
-          questStep("questL10Garbage") <= 1 &&
+          questStep("questL10Garbage") <= Step.STARTED &&
           haveUnrestricted($item`spring shoes`)
         ),
       render: () => {

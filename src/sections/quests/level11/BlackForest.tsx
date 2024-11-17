@@ -1,4 +1,5 @@
 import {
+  availableAmount,
   combatRateModifier,
   haveEquipped,
   myFamiliar,
@@ -118,11 +119,24 @@ const BlackForest: FC = () => {
         [
           Step.STARTED,
           <>
-            {!haveGaloshes && (
-              <Line>
-                Bring 3 blackberries to the cobbler for blackberry galoshes.
-              </Line>
+            {turnsUntilNC > 0 && combatRate < 5 && (
+              <Line color="red.500">Run +5% combat to avoid NC.</Line>
             )}
+            {!haveGaloshes &&
+              (have($item`blackberry`, 3) ? (
+                <Line>
+                  Bring 3 blackberries to the cobbler for blackberry galoshes.
+                </Line>
+              ) : (
+                <Line>
+                  Get{" "}
+                  {plural(
+                    3 - availableAmount($item`blackberry`),
+                    $item`blackberry`,
+                  )}{" "}
+                  from blackberry bush.
+                </Line>
+              ))}
             <Line>Black Forest exploration: ~{forestProgress * 20}%.</Line>
             <Line>
               Noncombat guaranteed{" "}

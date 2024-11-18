@@ -7,7 +7,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
-import { inventoryActionLink } from "../../../util/links";
+import { inventoryActionLink, inventoryLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
 const NONCOMBAT_ZONES = [
@@ -102,7 +102,7 @@ const AprilingBandHelmet = () => {
       )}
 
       {saxUsesLeft > 0 && have($item`Apriling band saxophone`) && (
-        <Line>
+        <Line href={inventoryLink($item`Apriling band saxophone`)}>
           Can play the Sax {plural(saxUsesLeft, "more time")}.{" "}
           <Text as="span" color="green">
             LUCKY!
@@ -110,7 +110,7 @@ const AprilingBandHelmet = () => {
         </Line>
       )}
       {quadTomUsesLeft > 0 && have($item`Apriling band quad tom`) && (
-        <Line>
+        <Line href={inventoryLink($item`Apriling band quad tom`)}>
           Can play the Quad Toms {plural(quadTomUsesLeft, "more time")}.{" "}
           <Text as="span" color="orange">
             Sandworm!
@@ -118,7 +118,7 @@ const AprilingBandHelmet = () => {
         </Line>
       )}
       {tubaUsesLeft > 0 && have($item`Apriling band tuba`) && (
-        <Line>
+        <Line href={inventoryLink($item`Apriling band tuba`)}>
           Can play the Tuba {plural(tubaUsesLeft, "more time")}.{" "}
           <Text as="span" color="gray">
             SNEAK!
@@ -126,7 +126,7 @@ const AprilingBandHelmet = () => {
         </Line>
       )}
       {piccoloUsesLeft > 0 && have($item`Apriling band piccolo`) && (
-        <Line>
+        <Line href={inventoryLink($item`Apriling band piccolo`)}>
           Can play the Piccolo {plural(piccoloUsesLeft, "more time")}.{" "}
           <Text as="span" color="purple">
             +40 fxp

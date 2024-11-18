@@ -5,6 +5,7 @@ import { FC } from "react";
 
 import AdviceTooltip from "../../../components/AdviceTooltip";
 import Line from "../../../components/Line";
+import LinkBlock from "../../../components/LinkBlock";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
@@ -182,8 +183,9 @@ const AGuideToBurningLeaves: FC = () => {
             href={
               haveResin
                 ? inventoryLink($item`distilled resin`)
-                : "/campground.php?preaction=burningleaves"
+                : "/campground.php?preaction=leaves"
             }
+            linkEntireTile
           >
             <Line>
               Use distilled resin{!haveResin && " (50 leaves)"} to collect more
@@ -201,81 +203,79 @@ const AGuideToBurningLeaves: FC = () => {
     <Tile
       header="Burning Leaves"
       imageUrl="/images/itemimages/al_book.gif"
-      href="/campground.php?preaction=burningleaves"
+      href="/campground.php?preaction=leaves"
     >
-      <Line fontWeight="bold" href="/campground.php?preaction=burningleaves">
-        Item Summons:
-      </Line>
-      <UnorderedList>
-        {LEAFY_SUMMONS.map((summon) => {
-          if (
-            ((canUseShorty || canUseCrab) && summon.leafCost === 37) ||
-            (myLevel() > 11 && [42, 43].includes(summon.leafCost)) ||
-            (hasTaoOfTheTerrapin && summon.leafCost === 66) ||
-            (have($item`${summon.summonedItem}`) &&
-              [42, 43, 44, 66, 74].includes(summon.leafCost)) ||
-            (hasForestCanopyBed && summon.leafCost === 74) ||
-            (inRun && [99, 222, 1111, 6666, 11111].includes(summon.leafCost)) ||
-            (!inRun && [42, 43, 44, 66].includes(summon.leafCost))
-          ) {
-            return null;
-          }
+      <LinkBlock href="/campground.php?preaction=leaves">
+        <Line fontWeight="bold">Item Summons:</Line>
+        <UnorderedList>
+          {LEAFY_SUMMONS.map((summon) => {
+            if (
+              ((canUseShorty || canUseCrab) && summon.leafCost === 37) ||
+              (myLevel() > 11 && [42, 43].includes(summon.leafCost)) ||
+              (hasTaoOfTheTerrapin && summon.leafCost === 66) ||
+              (have($item`${summon.summonedItem}`) &&
+                [42, 43, 44, 66, 74].includes(summon.leafCost)) ||
+              (hasForestCanopyBed && summon.leafCost === 74) ||
+              (inRun &&
+                [99, 222, 1111, 6666, 11111].includes(summon.leafCost)) ||
+              (!inRun && [42, 43, 44, 66].includes(summon.leafCost))
+            ) {
+              return null;
+            }
 
-          const hasEnoughLeaves = leafCount >= summon.leafCost;
-          return (
-            <ListItem
-              key={summon.summonedItem}
-              color={hasEnoughLeaves ? "black" : "gray.500"}
-            >
-              {summon.leafCost} leaves: {summon.summonedItem} -{" "}
-              {summon.description}
-              {summon.meltingStatus && (
-                <Text as="span" fontSize="xs" color="gray.500">
-                  {" "}
-                  (melting)
-                </Text>
-              )}
-            </ListItem>
-          );
-        })}
-      </UnorderedList>
+            const hasEnoughLeaves = leafCount >= summon.leafCost;
+            return (
+              <ListItem
+                key={summon.summonedItem}
+                color={hasEnoughLeaves ? "black" : "gray.500"}
+              >
+                {summon.leafCost} leaves: {summon.summonedItem} -{" "}
+                {summon.description}
+                {summon.meltingStatus && (
+                  <Text as="span" fontSize="xs" color="gray.500">
+                    {" "}
+                    (melting)
+                  </Text>
+                )}
+              </ListItem>
+            );
+          })}
+        </UnorderedList>
+      </LinkBlock>
 
       {fightsRemaining > 0 && (
         <>
-          <Line
-            fontWeight="bold"
-            href="/campground.php?preaction=burningleaves"
-          >
-            Fight Summons:
-          </Line>
-          <UnorderedList>
-            {LEAFY_FIGHTS.map((fight) => {
-              if (
-                inRun &&
-                have($item`flaming leaf crown`) &&
-                fight.summonedMonster === "Leaviathan"
-              ) {
-                return null;
-              }
+          <LinkBlock href="/campground.php?preaction=leaves">
+            <Line fontWeight="bold">Fight Summons:</Line>
+            <UnorderedList>
+              {LEAFY_FIGHTS.map((fight) => {
+                if (
+                  inRun &&
+                  have($item`flaming leaf crown`) &&
+                  fight.summonedMonster === "Leaviathan"
+                ) {
+                  return null;
+                }
 
-              const hasEnoughLeaves = leafCount >= fight.leafCost;
-              return (
-                <ListItem
-                  key={fight.summonedMonster}
-                  color={hasEnoughLeaves ? "black" : "gray.500"}
-                >
-                  {fight.leafCost} leaves: {fight.summonedMonster} -{" "}
-                  {fight.scaling}; ~{fight.leavesDropped} leaves dropped
-                  {fight.extraDrops && (
-                    <Text as="span" fontSize="xs" color="gray.500">
-                      {" "}
-                      (also, drops {fight.extraDrops})
-                    </Text>
-                  )}
-                </ListItem>
-              );
-            })}
-          </UnorderedList>
+                const hasEnoughLeaves = leafCount >= fight.leafCost;
+                return (
+                  <ListItem
+                    key={fight.summonedMonster}
+                    color={hasEnoughLeaves ? "black" : "gray.500"}
+                  >
+                    {fight.leafCost} leaves: {fight.summonedMonster} -{" "}
+                    {fight.scaling}; ~{fight.leavesDropped} leaves dropped
+                    {fight.extraDrops && (
+                      <Text as="span" fontSize="xs" color="gray.500">
+                        {" "}
+                        (also, drops {fight.extraDrops})
+                      </Text>
+                    )}
+                  </ListItem>
+                );
+              })}
+            </UnorderedList>
+          </LinkBlock>
           <Line>
             {leafCount >= 111 * fightsRemaining ? (
               <AdviceTooltip

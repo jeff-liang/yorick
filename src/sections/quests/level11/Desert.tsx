@@ -23,11 +23,16 @@ import {
   currentExplorationPerTurn,
   possibleExplorationPerTurn,
 } from "../../../questInfo/desert";
-import { BLACK_MARKET_URL, inventoryLink } from "../../../util/links";
+import {
+  BLACK_MARKET_URL,
+  inventoryLink,
+  parentPlaceLink,
+} from "../../../util/links";
 import { questFinished, Step } from "../../../util/quest";
 import { commaAnd, commaOr, plural } from "../../../util/text";
 
 const BEACH_URL = "/place.php?whichplace=desertbeach";
+const GNASIR_URL = "/place.php?whichplace=desertbeach&action=db_gnasir";
 
 const DesertQuest = () => {
   const step = questStep("questL11Desert");
@@ -87,15 +92,17 @@ const DesertQuest = () => {
 
       {needBlackPaint && desertExploration >= 10 && (
         <>
-          {have($item`can of black paint`) && (
-            <Line href={BEACH_URL}>
+          {have($item`can of black paint`) ? (
+            <Line href={GNASIR_URL}>
               Give can of black paint to Gnasir (15%).
             </Line>
-          )}
-          {npcPrice($item`can of black paint`) > 0 && (
-            <Line href={BLACK_MARKET_URL}>
-              Buy can of black paint from Black Market and give to Gnasir (15%).
-            </Line>
+          ) : (
+            npcPrice($item`can of black paint`) > 0 && (
+              <Line href={BLACK_MARKET_URL}>
+                Buy can of black paint from Black Market and give to Gnasir
+                (15%).
+              </Line>
+            )
           )}
         </>
       )}
@@ -103,10 +110,10 @@ const DesertQuest = () => {
       {needKillingJar && (
         <>
           {have($item`killing jar`) && desertExploration >= 10 && (
-            <Line>Give killing jar to Gnasir (15%).</Line>
+            <Line href={GNASIR_URL}>Give killing jar to Gnasir (15%).</Line>
           )}
           {!have($item`killing jar`) && (
-            <Line>
+            <Line href={parentPlaceLink($location`The Haunted Library`)}>
               Find killing jar (10% drop from banshee librarian) (15%).
             </Line>
           )}

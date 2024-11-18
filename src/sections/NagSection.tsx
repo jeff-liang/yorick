@@ -57,7 +57,7 @@ const NagSection = () => {
           )}
         </Section>
       ) : (
-        <Heading as="h4" size="sm">
+        <Heading as="h4" size="md" px={2}>
           Day {myDaycount()} / Turn {myTurncount()}
         </Heading>
       )}

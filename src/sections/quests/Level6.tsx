@@ -13,7 +13,7 @@ const Level6: FC = () => {
   const step = questStep("questL06Friar");
   const hash = myHash();
   const hasCartography = have($skill`Comprehensive Cartography`);
-  const combatModifier = combatRateModifier() ?? 0;
+  const combatModifier = combatRateModifier();
 
   const darkNeck = $location`The Dark Neck of the Woods`;
   const darkHeart = $location`The Dark Heart of the Woods`;
@@ -32,7 +32,7 @@ const Level6: FC = () => {
       zone.noncombatQueue
         ?.split(";")
         ?.map((s) => s.trim())
-        ?.filter((s) => s && s !== "Adjust your Parka") ?? [];
+        ?.filter((s) => s && s !== "Dart Perks") ?? [];
     const ncCompleted =
       zoneQueue.length + (zone === darkNeck && hasCartography ? 1 : 0);
 

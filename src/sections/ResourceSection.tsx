@@ -43,7 +43,7 @@ import MayDayPackage from "./resources/2022/MaydaySupplyPackage";
 import ModelTrainSet from "./resources/2022/ModelTrainSet";
 import TinyStillsuit from "./resources/2022/TinyStillsuit";
 import UnbreakableUmbrella from "./resources/2022/UnbreakableUmbrella";
-import BurningLeaves from "./resources/2023/AGuidetoBurningLeaves";
+import AGuideToBurningLeaves from "./resources/2023/AGuidetoBurningLeaves";
 import AugustScepter from "./resources/2023/AugustScepter";
 import BookOfFacts from "./resources/2023/BookOfFacts";
 import CandyCaneSwordCane from "./resources/2023/CandyCaneSwordCane";
@@ -149,7 +149,7 @@ const ResourceSection = () => (
       AugustScepter,
       BookOfFacts,
       JillOfAllTrades,
-      BurningLeaves,
+      AGuideToBurningLeaves,
       CandyCaneSwordCane,
 
       /* 2024 */

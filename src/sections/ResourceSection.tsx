@@ -61,6 +61,7 @@ import ChestMimic from "./resources/2024/ChestMimic";
 import EverfullDartHolster from "./resources/2024/EverfullDartHolster";
 import MayamCalendar from "./resources/2024/MayamCalendar";
 import MiniKiwi from "./resources/2024/MiniKiwi";
+import PeaceTurkey from "./resources/2024/PeaceTurkey";
 import PhotoBooth from "./resources/2024/PhotoBooth";
 import RomanCandelabra from "./resources/2024/RomanCandelabra";
 import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
@@ -164,6 +165,7 @@ const ResourceSection = () => (
       SeptEmberCenser,
       BatWings,
       PhotoBooth,
+      PeaceTurkey,
 
       /* Nags only */
       BeatenUp,

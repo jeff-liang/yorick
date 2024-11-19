@@ -80,8 +80,8 @@ const Tile: FC<TileProps> = ({
 
   const headerMain =
     header ??
-    (linkedContent?.name
-      ? capitalizeWords(decode(linkedContent.name))
+    (linkedContent?.identifierString
+      ? capitalizeWords(decode(linkedContent.identifierString))
       : undefined);
   const heading =
     headerMain && headerSuffix ? `${headerMain} ${headerSuffix}` : headerMain;

@@ -147,6 +147,7 @@ const ClosedCircuitPayPhone = () => {
       {shadowBricks > 0 && (
         <Tile
           header={`${plural(shadowBricks, "shadow brick")}${shadowBrickUsesLeft < shadowBricks ? ` (${shadowBrickUsesLeft} usable today)` : ""}`}
+          id="shadow-brick-tile"
           imageUrl="/images/itemimages/shadowbrick.gif"
         >
           <Line>Win a fight without taking a turn.</Line>
@@ -156,6 +157,7 @@ const ClosedCircuitPayPhone = () => {
       {shadowLodestones > 0 && (
         <Tile
           header={`${shadowLodestones} Rufus's shadow lodestones`}
+          id="shadow-lodestone-tile"
           imageUrl="/images/itemimages/shadowlodestone.gif"
         >
           <Line>

@@ -14,7 +14,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { isNormalCampgroundPath } from "../../../util/paths";
-import { plural } from "../../../util/text";
+import { commaAnd, plural } from "../../../util/text";
 
 const SourceTerminalTile = () => {
   const sourceTerminal = $item`Source terminal`;
@@ -30,6 +30,8 @@ const SourceTerminalTile = () => {
   const installedChips = SourceTerminal.getChips();
 
   const activeSkills = SourceTerminal.getSkills();
+  const extractActive = activeSkills.includes(SourceTerminal.Skills.Extract);
+  const turboActive = activeSkills.includes(SourceTerminal.Skills.Turbo);
 
   // Calculate skill limit - DRAM chip allows 2 skills instead of 1
   const skillLimit = installedChips.includes("DRAM") ? 2 : 1;
@@ -52,16 +54,12 @@ const SourceTerminalTile = () => {
         >
           <Line>
             Learn {skillsNeeded} skill{skillsNeeded > 1 ? "s" : ""}. Maybe{" "}
-            {!activeSkills.includes(SourceTerminal.Skills.Extract) && "Extract"}
-            {!activeSkills.includes(SourceTerminal.Skills.Extract) &&
-              !activeSkills.includes(SourceTerminal.Skills.Turbo) &&
-              " and "}
-            {!activeSkills.includes(SourceTerminal.Skills.Turbo) && "Turbo"}.
+            {commaAnd([!extractActive && "Extract", !turboActive && "Turbo"])}
           </Line>
         </Tile>
       ),
     }),
-    [haveTerminal, skillsNeeded, activeSkills],
+    [haveTerminal, skillsNeeded, extractActive, turboActive],
   );
 
   if (!haveTerminal) return null;

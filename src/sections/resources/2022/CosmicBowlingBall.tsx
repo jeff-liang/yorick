@@ -91,7 +91,7 @@ const CosmicBowlingBall = () => {
           Your Bowling Ball will return in{" "}
           <AdviceTooltip
             text="Free runs count for this!"
-            label={plural(returnCombats, "turn")}
+            content={plural(returnCombats, "turn")}
           />
           .
         </Line>

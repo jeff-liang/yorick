@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   haveEquipped,
   inebrietyLimit,
@@ -175,43 +175,41 @@ const TinyStillsuit = () => {
       )}
       <Line>
         <AdviceTooltip
-          display="inline-block"
           text={
-            <UnorderedList>
+            <List.Root>
               {Object.entries(advDramsTable).map(
                 ([advs, drams]) =>
                   drams > familiarSweat && (
-                    <ListItem key={advs}>
+                    <List.Item key={advs}>
                       {advs} advs: {drams} drams ({drams - familiarSweat} more
                       sweat)
-                    </ListItem>
+                    </List.Item>
                   ),
               )}
               {familiarSweat > 553 && (
-                <ListItem>
+                <List.Item>
                   {" "}
                   13 advs: ... y'know, you should probably just drink it, buddy.
-                </ListItem>
+                </List.Item>
               )}
-            </UnorderedList>
+            </List.Root>
           }
-          label="Sweat/Advs"
+          content="Sweat/Advs"
         />{" "}
         •{" "}
         <AdviceTooltip
-          display="inline-block"
           text={
-            <UnorderedList>
-              <ListItem>Cubeling / Stomping Boots: +item</ListItem>
-              <ListItem>
+            <List.Root>
+              <List.Item>Cubeling / Stomping Boots: +item</List.Item>
+              <List.Item>
                 Levitating Potato / Candy Carnie / Flan: +item and +food
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Star Starfish / Emilio / Globmule / Waifuton: +item and +sleaze
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           }
-          label="Suggested Familiars"
+          content="Suggested Familiars"
         />
       </Line>
     </Tile>

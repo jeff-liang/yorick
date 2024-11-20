@@ -1,8 +1,8 @@
-import { List, ListIcon, ListItem } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { getProperty } from "kolmafia";
 import { $skill, get } from "libram";
 
-import Chevrons from "../../../components/Chevrons";
+import ChevronsListIcon from "../../../components/ChevronsListIcon";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
@@ -37,14 +37,13 @@ const EmotionChip = () => {
       }`;
       const skillName = `Feel ${skillDescription.split(" ")[0]}`;
       return (
-        <ListItem
+        <List.Item
           key={skillDescription}
           pl="1"
           display="flex"
           color={casts === 0 ? "gray.500" : undefined}
         >
-          <ListIcon
-            as={Chevrons}
+          <ChevronsListIcon
             usesLeft={casts}
             totalUses={3}
             marginInlineEnd={1}
@@ -62,7 +61,7 @@ const EmotionChip = () => {
               {text}
             </MainLink>
           )}
-        </ListItem>
+        </List.Item>
       );
     },
   );
@@ -76,7 +75,7 @@ const EmotionChip = () => {
   //   - My lean is to not include hatred and leave it for the banish tile I'm making.
   return (
     <Tile header="Emotion Chip" imageUrl="/images/itemimages/emochip1.gif">
-      <List>{listItems}</List>
+      <List.Root>{listItems}</List.Root>
     </Tile>
   );
 };

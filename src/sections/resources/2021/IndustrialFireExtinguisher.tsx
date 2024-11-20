@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import { $item, get, have, questStep } from "libram";
 
 import Line from "../../../components/Line";
@@ -65,34 +65,34 @@ const IndustrialFireExtinguisher = () => {
         vortices).`}
       </Line>
       {foam >= 20 && (
-        <UnorderedList>
+        <List.Root>
           {showBat && (
-            <ListItem>
+            <List.Item>
               <Text as="b">Constricted Blast</Text>: Unlock a Bat Hole chamber.
-            </ListItem>
+            </List.Item>
           )}
           {showKnob && (
-            <ListItem>
+            <List.Item>
               <Text as="b">Foam the Place</Text>: Obtain the Knob Harem Outfit.
-            </ListItem>
+            </List.Item>
           )}
           {showCyrpt && (
-            <ListItem>
+            <List.Item>
               <Text as="b">Replace the Chill</Text>: Reduce evil by 10 in a
               zone.
-            </ListItem>
+            </List.Item>
           )}
           {showBlech && (
-            <ListItem>
+            <List.Item>
               <Text as="b">Cool it Down</Text>: 73% Blech House progress.
-            </ListItem>
+            </List.Item>
           )}
           {showDesert && (
-            <ListItem>
+            <List.Item>
               <Text as="b">Take a Drink</Text>: 15 turns of Ultrahydrated.
-            </ListItem>
+            </List.Item>
           )}
-        </UnorderedList>
+        </List.Root>
       )}
     </Tile>
   );

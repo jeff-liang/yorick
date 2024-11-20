@@ -1,4 +1,4 @@
-import { Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import { availableAmount, canAdventure, haveEffect } from "kolmafia";
 import { $effect, $item, $location, get } from "libram";
 
@@ -54,7 +54,7 @@ const ClosedCircuitPayPhone = () => {
 
   const getShadowBrickLocationTooltip = () => {
     return (
-      <UnorderedList>
+      <List.Root>
         {shadowBrickLocations.map((location, index) => (
           <Text
             key={index}
@@ -64,7 +64,7 @@ const ClosedCircuitPayPhone = () => {
             {location.zoneName} {location.extraItems}
           </Text>
         ))}
-      </UnorderedList>
+      </List.Root>
     );
   };
 
@@ -128,7 +128,7 @@ const ClosedCircuitPayPhone = () => {
         )}
         <AdviceTooltip
           text={getShadowBrickLocationTooltip()}
-          label="Shadow Brick locations"
+          content="Shadow Brick locations"
         />
       </Tile>
 

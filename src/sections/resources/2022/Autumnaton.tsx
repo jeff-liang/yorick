@@ -1,10 +1,4 @@
-import {
-  Heading,
-  ListItem,
-  Text,
-  UnorderedList,
-  VStack,
-} from "@chakra-ui/react";
+import { Heading, List, Text, VStack } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -171,11 +165,11 @@ const Autumnaton = () => {
         </>
       )}
       {upgradesToGet.length > 0 && (
-        <UnorderedList>
+        <List.Root>
           {upgradesToGet.map((text) => (
-            <ListItem key={text}>{text}</ListItem>
+            <List.Item key={text}>{text}</List.Item>
           ))}
-        </UnorderedList>
+        </List.Root>
       )}
       {potentialTargets.length > 0 && (
         <AdviceTooltip
@@ -189,7 +183,7 @@ const Autumnaton = () => {
               ))}
             </VStack>
           }
-          label="Potential Autumnaton Targets"
+          content="Potential Autumnaton Targets"
         />
       )}
     </Tile>

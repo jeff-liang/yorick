@@ -1,4 +1,4 @@
-import { ListItem, OrderedList, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { $item, get } from "libram";
 
 import AdviceTooltip from "../../../components/AdviceTooltip";
@@ -86,21 +86,21 @@ const JuneCleaver = () => {
     .filter((entry) => !cleaverQueue.includes(entry.choice))
     .map(({ option1, option2, option3, name, choice }) => {
       return (
-        <ListItem key={choice}>
+        <List.Item key={choice}>
           <AdviceTooltip
             text={
               <>
                 <Line fontWeight="bold">Choices:</Line>
-                <OrderedList>
-                  <ListItem key={`${choice}_1`}>{option1}</ListItem>
-                  <ListItem key={`${choice}_2`}>{option2}</ListItem>
-                  <ListItem key={`${choice}_3`}>{option3}</ListItem>
-                </OrderedList>
+                <List.Root>
+                  <List.Item key={`${choice}_1`}>{option1}</List.Item>
+                  <List.Item key={`${choice}_2`}>{option2}</List.Item>
+                  <List.Item key={`${choice}_3`}>{option3}</List.Item>
+                </List.Root>
               </>
             }
-            label={name}
+            content={name}
           />
-        </ListItem>
+        </List.Item>
       );
     });
 
@@ -121,7 +121,7 @@ const JuneCleaver = () => {
         </Line>
       )}
       <Line>Possible upcoming NCs:</Line>
-      <UnorderedList>{availableChoices}</UnorderedList>
+      <List.Root>{availableChoices}</List.Root>
     </Tile>
   );
 };

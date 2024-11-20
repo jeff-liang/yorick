@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import {
   $item,
   CombatLoversLocket as CombatLoversLocketLibram,
@@ -217,11 +217,11 @@ const CombatLoversLocket: FC = () => {
         </Line>
         <Line color="blue.500">{locketEnchantment}</Line>
         {options.length > 0 && (
-          <UnorderedList>
+          <List.Root>
             {options.map((option) => (
-              <ListItem key={option}>{option}</ListItem>
+              <List.Item key={option}>{option}</List.Item>
             ))}
-          </UnorderedList>
+          </List.Root>
         )}
       </Tile>
     )

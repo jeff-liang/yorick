@@ -135,7 +135,7 @@ const Level13: FC = () => {
         <Line>
           <AdviceTooltip
             text="You need 526% meat drop to guarantee a one-turn kill."
-            label={`Current meat drop: ${Modifier.get("Meat Drop")}`}
+            content={`Current meat drop: ${Modifier.get("Meat Drop")}`}
           />
         </Line>
       </Tile>
@@ -231,7 +231,7 @@ const Level13: FC = () => {
         <Line>
           <AdviceTooltip
             text="You need enough initiative to go first against Your Shadow."
-            label={`Current initiative: ${Modifier.get("Initiative")}`}
+            content={`Current initiative: ${Modifier.get("Initiative")}`}
           />
         </Line>
       </Tile>

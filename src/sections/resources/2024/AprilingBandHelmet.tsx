@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import { myLocation, totalTurnsPlayed } from "kolmafia";
 import { $effect, $item, $location, get, have } from "libram";
 
@@ -76,17 +76,17 @@ const AprilingBandHelmet = () => {
           <Line href={inventoryActionLink("apriling")}>
             You can change your tune!
           </Line>
-          <UnorderedList>
-            <ListItem color={havePatrolBeat ? "blue" : undefined}>
+          <List.Root>
+            <List.Item color={havePatrolBeat ? "blue" : undefined}>
               -10% Combat Frequency
-            </ListItem>
-            <ListItem color={haveBattleCadence ? "blue" : undefined}>
+            </List.Item>
+            <List.Item color={haveBattleCadence ? "blue" : undefined}>
               +10% Combat Frequency
-            </ListItem>
-            <ListItem color={haveCelebrationBop ? "blue" : undefined}>
+            </List.Item>
+            <List.Item color={haveCelebrationBop ? "blue" : undefined}>
               +25% booze, +50% food, +100% candy
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List.Root>
         </>
       ) : (
         <Line>

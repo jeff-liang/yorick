@@ -1,19 +1,12 @@
-import { InfoIcon, Text } from "@chakra-ui/icons";
-import {
-  ComponentWithAs,
-  HStack,
-  Icon,
-  IconProps,
-  Image,
-  VStack,
-} from "@chakra-ui/react";
+import { HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
+import { Info } from "lucide-react";
 import { FC } from "react";
 
 import AdviceTip from "./AdviceTip";
 
 interface AdviceTooltipIconProps {
   text: string;
-  icon?: ComponentWithAs<"svg", IconProps>;
+  icon?: typeof Info;
 }
 /**
  * A tooltip generated on an icon hoverover with a skull that states whatever text you want for the player.
@@ -22,7 +15,10 @@ interface AdviceTooltipIconProps {
  * @returns A FC Tooltip object where the displayed icon generates the tooltip on hoverover.
  */
 
-const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({ text, icon }) => {
+const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({
+  text,
+  icon: TooltipIcon = Info,
+}) => {
   const toolTip = (
     <HStack px={2}>
       <Image
@@ -31,7 +27,7 @@ const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({ text, icon }) => {
         boxSize="30px"
         fit="contain"
       />
-      <VStack align="stretch" spacing={0.3}>
+      <VStack align="stretch" gap={0.3}>
         <Text bg="gray.200" p={4} rounded="md" fontSize={12}>
           {text}
         </Text>
@@ -40,8 +36,10 @@ const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({ text, icon }) => {
   );
 
   return (
-    <AdviceTip label={toolTip}>
-      <Icon as={icon ? icon : InfoIcon} color="gray.500" h={3.5} w={3.5} />
+    <AdviceTip content={toolTip}>
+      <Icon color="gray.500" h={3.5} w={3.5}>
+        <TooltipIcon />
+      </Icon>
     </AdviceTip>
   );
 };

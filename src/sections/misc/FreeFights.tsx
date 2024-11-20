@@ -1,4 +1,3 @@
-import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import {
   availableAmount,
   canAdventure,
@@ -7,6 +6,7 @@ import {
   myPath,
 } from "kolmafia";
 import { $item, $location, $path, $skill, get } from "libram";
+import { CircleHelp } from "lucide-react";
 import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
@@ -138,7 +138,7 @@ const FreeFights: FC = () => {
             decrement your effects. Many of them are scaling fights; by stacking
             large +mainstat% modifiers, they will give increasing amounts of stats
             and allow you to level very quickly!`}
-          icon={QuestionOutlineIcon}
+          icon={CircleHelp}
         />
       }
     >

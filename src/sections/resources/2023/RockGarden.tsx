@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import { availableAmount, getCampground } from "kolmafia";
 import { $item, get, have } from "libram";
 
@@ -72,17 +72,17 @@ const RockGarden = () => {
         (availableMilestones > 0 && desertProgress < 100)) && (
         <>
           <Line>Inventory:</Line>
-          <UnorderedList>
+          <List.Root>
             {availableGravels > 0 && (
-              <ListItem>{gravelMessage(availableGravels)}</ListItem>
+              <List.Item>{gravelMessage(availableGravels)}</List.Item>
             )}
             {availableWhetStones && (
-              <ListItem>{whetStoneMessage(availableWhetStones)}</ListItem>
+              <List.Item>{whetStoneMessage(availableWhetStones)}</List.Item>
             )}
             {availableMilestones && desertProgress < 100 && (
-              <ListItem>{milestoneMessage(availableMilestones)}</ListItem>
+              <List.Item>{milestoneMessage(availableMilestones)}</List.Item>
             )}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
       {(gardenGravels > 0 ||
@@ -90,17 +90,17 @@ const RockGarden = () => {
         (gardenMilestones > 0 && desertProgress < 100)) && (
         <>
           <Line>Harvest from your garden:</Line>
-          <UnorderedList>
+          <List.Root>
             {gardenGravels > 0 && (
-              <ListItem>{gravelMessage(gardenGravels)}</ListItem>
+              <List.Item>{gravelMessage(gardenGravels)}</List.Item>
             )}
             {gardenWhetstones > 0 && (
-              <ListItem>{whetStoneMessage(gardenWhetstones)}</ListItem>
+              <List.Item>{whetStoneMessage(gardenWhetstones)}</List.Item>
             )}
             {gardenMilestones > 0 && desertProgress < 100 && (
-              <ListItem>{milestoneMessage(gardenMilestones)}</ListItem>
+              <List.Item>{milestoneMessage(gardenMilestones)}</List.Item>
             )}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
     </Tile>

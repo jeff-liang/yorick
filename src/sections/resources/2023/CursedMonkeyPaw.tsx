@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -311,10 +311,10 @@ function showWish({
   const color = currentlyAccessible ? "black" : "gray.500";
 
   return (
-    <ListItem color={color} key={target.identifierString}>
+    <List.Item color={color} key={target.identifierString}>
       {target.name}
       {additionalDescription && <>: {additionalDescription}</>}
-    </ListItem>
+    </List.Item>
   );
 }
 
@@ -361,20 +361,20 @@ const CursedMonkeysPaw = () => {
       {options.length > 0 && (
         <>
           <Line fontWeight="bold">Possible wishes:</Line>
-          <UnorderedList>{options}</UnorderedList>
+          <List.Root>{options}</List.Root>
         </>
       )}
       <Line fontWeight="bold">Monkey skills:</Line>
-      <UnorderedList>
+      <List.Root>
         {monkeySkills().map((skill) => (
-          <ListItem key={skill.fingerCount}>
+          <List.Item key={skill.fingerCount}>
             <Text as="b">
               {plural(skill.fingerCount, "finger", "fingers")}:
             </Text>{" "}
             {skill.description}
-          </ListItem>
+          </List.Item>
         ))}
-      </UnorderedList>
+      </List.Root>
       {monkeyWishesLeft === 5 && (
         <>
           <Line

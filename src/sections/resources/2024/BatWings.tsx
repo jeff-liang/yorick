@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { canAdventure, haveEquipped } from "kolmafia";
 import { $item, $location, get } from "libram";
 import { FC } from "react";
@@ -72,13 +72,13 @@ const BatWings: FC = () => {
               Visit the Bat Hole zones{" "}
               {!batWingsEquipped && "with bat wings equipped "}to get:
             </Line>
-            <UnorderedList>
+            <List.Root>
               {availableZones.map(({ location, reward }) => (
-                <ListItem key={location.id}>
+                <List.Item key={location.id}>
                   {location.identifierString}: {reward.name}
-                </ListItem>
+                </List.Item>
               ))}
-            </UnorderedList>
+            </List.Root>
           </>
         )}
     </Tile>

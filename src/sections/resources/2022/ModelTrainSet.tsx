@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import { availableAmount, myLevel, myPrimestat } from "kolmafia";
 import { $item, $stat, get, have } from "libram";
 
@@ -255,20 +255,20 @@ const ModelTrainSet = () => {
             <Text as="b" textAlign="center" pb={1}>
               Train station cycle
             </Text>
-            <UnorderedList>
+            <List.Root>
               {Array.from({ length: 8 }, (_, i) => {
                 const station =
                   stationDescriptions[stations[(trainPosition + i) % 8]];
                 return (
-                  <ListItem key={i}>
+                  <List.Item key={i}>
                     <Text as="b">{station.name}</Text>: {station.description}
-                  </ListItem>
+                  </List.Item>
                 );
               })}
-            </UnorderedList>
+            </List.Root>
           </>
         }
-        label="Full train cycle"
+        content="Full train cycle"
       />
     </Tile>
   );

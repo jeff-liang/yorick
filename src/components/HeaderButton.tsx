@@ -1,7 +1,7 @@
-import { Button, ButtonProps } from "@chakra-ui/react";
 import { forwardRef } from "react";
 
 import MainLink from "./MainLink";
+import { Button, ButtonProps } from "./ui/button";
 
 interface HeaderButtonProps extends ButtonProps {
   href?: string;

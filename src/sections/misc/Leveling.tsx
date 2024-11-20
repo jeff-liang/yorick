@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import {
   availableAmount,
   canInteract,
@@ -104,10 +104,10 @@ const Leveling: React.FC = () => {
       remaining: () =>
         Math.min(3, get("skillLevel144")) - get("_universeCalculated"),
       render: ({ remaining }) => (
-        <ListItem>
+        <List.Item>
           {plural(remaining, "numberology use")} ({(multiplier * 89).toFixed(0)}{" "}
           mainstat).
-        </ListItem>
+        </List.Item>
       ),
     },
     {
@@ -116,11 +116,11 @@ const Leveling: React.FC = () => {
         +haveUnrestricted($item`Bastille Battalion control rig`) -
         get("_bastilleGames"),
       render: () => (
-        <ListItem>
+        <List.Item>
           <MainLink href={inventoryLink($item`Bastille Battalion control rig`)}>
             1 Bastille use ({(multiplier * 250).toFixed(0)} mainstat).
           </MainLink>
-        </ListItem>
+        </List.Item>
       ),
     },
     {
@@ -137,13 +137,13 @@ const Leveling: React.FC = () => {
           </>
         );
         return (
-          <ListItem>
+          <List.Item>
             {myLevel() >= 9 && !have($item`strange leaflet`) ? (
               <MainLink href="/council.php">{text}</MainLink>
             ) : (
               text
             )}
-          </ListItem>
+          </List.Item>
         );
       },
     },
@@ -159,7 +159,7 @@ const Leveling: React.FC = () => {
         const verb = haveBean ? "Plant" : "Find and plant";
         const text = `${verb} an enchanted bean${myLevel() >= 10 ? "" : " (at level 10)"}.`;
         return (
-          <ListItem>
+          <List.Item>
             {myLevel() >= 10 && haveBean ? (
               haveEquipped($item`spring shoes`) ? (
                 <MainLink
@@ -179,7 +179,7 @@ const Leveling: React.FC = () => {
             ) : (
               text
             )}
-          </ListItem>
+          </List.Item>
         );
       },
     },
@@ -308,25 +308,25 @@ const Leveling: React.FC = () => {
             )}
           </LinkBlock>
           <Line>Can get more cold res from:</Line>
-          <UnorderedList>
+          <List.Root>
             {coldResSources
               .filter(({ available }) => available())
               .map(({ thing, value }) => (
-                <ListItem key={thing.identifierString}>
+                <List.Item key={thing.identifierString}>
                   {thing.identifierString}{" "}
                   <Cold>
                     (+
                     {value ? value() : getModifier("Cold Resistance", thing)})
                   </Cold>
-                </ListItem>
+                </List.Item>
               ))}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
       {total > 0 && (
         <>
           <Line>Additional stat sources:</Line>
-          <UnorderedList>{rendered}</UnorderedList>
+          <List.Root>{rendered}</List.Root>
         </>
       )}
     </Tile>

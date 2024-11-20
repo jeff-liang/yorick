@@ -1,4 +1,4 @@
-import { Text, Tooltip } from "@chakra-ui/react";
+import { Text } from "@chakra-ui/react";
 import {
   appearanceRates,
   getMonsters,
@@ -12,6 +12,8 @@ import { $monster, getBanishedMonsters, sum } from "libram";
 import { FC } from "react";
 
 import { separate } from "../util/text";
+
+import { Tooltip } from "./ui/tooltip";
 
 export interface MonstersLineProps {
   location: Location;
@@ -62,11 +64,7 @@ const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
           return targets.includes(monster) ? (
             <Text as="b">{text}</Text>
           ) : banisher ? (
-            <Tooltip
-              display="inline"
-              hasArrow
-              label={`Banished: ${banisher.name}`}
-            >
+            <Tooltip showArrow content={`Banished: ${banisher.name}`}>
               <Text as="span" color="gray.500">
                 {text}
               </Text>

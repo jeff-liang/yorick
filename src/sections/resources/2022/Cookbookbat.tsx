@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
@@ -129,22 +129,22 @@ const Cookbookbat = () => {
           You currently have {wheyAmount} whey, {vegAmount} veg, and{" "}
           {yeastAmount} yeast. Make:
         </Line>
-        <UnorderedList>
-          <ListItem>
+        <List.Root>
+          <List.Item>
             <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
             meat.
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Text as="b">
               {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
             </Text>{" "}
             +100% item.
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <Text as="b">{focacciaCraftable}x Roasted Vegetable Focaccia:</Text>{" "}
             +10 fam XP.
-          </ListItem>
-        </UnorderedList>
+          </List.Item>
+        </List.Root>
       </LinkBlock>
       {freeCooksRemaining > 0 && (
         <Line>

@@ -1,4 +1,4 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, defaultSystem } from "@chakra-ui/react";
 import { RefreshContextProvider } from "tome-kolmafia-react";
 
 import Layout from "./components/Layout";
@@ -8,7 +8,7 @@ import Layout from "./components/Layout";
 // egrep -Roh '(get|getProperty|questStep|questStarted|questFinished)\("([_a-zA-Z0-9]+)"\)' src | sed -E 's/.*"([_a-zA-Z0-9]+)".*/\1/' | tr -d '`' | sort -f | uniq | jq -R . | jq -s . > src/prefs/preferences.json
 
 const App = () => (
-  <ChakraProvider>
+  <ChakraProvider value={defaultSystem}>
     <RefreshContextProvider>
       <Layout />
     </RefreshContextProvider>

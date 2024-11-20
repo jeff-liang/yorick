@@ -1,6 +1,5 @@
-import { Link, LinkProps, Spinner, Tooltip, useToast } from "@chakra-ui/react";
+import { Link, LinkProps, Spinner } from "@chakra-ui/react";
 import {
-  FC,
   forwardRef,
   MouseEvent,
   useCallback,
@@ -11,16 +10,18 @@ import {
 import { remoteCliExecute } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
 
+import { toaster } from "./ui/toaster";
+import { Tooltip } from "./ui/tooltip";
+
 export interface AsyncLinkProps extends Omit<LinkProps, "href"> {
   href?: string;
   command?: string;
 }
 
-const AsyncLink: FC<AsyncLinkProps> = forwardRef(
+const AsyncLink = forwardRef<HTMLAnchorElement, AsyncLinkProps>(
   ({ href, command, onClick, children, ...props }, ref) => {
     const { triggerHardRefresh } = useContext(RefreshContext);
     const [isLoading, setIsLoading] = useState(false);
-    const toast = useToast();
 
     const onClickWithCommand = useMemo(
       () =>
@@ -28,17 +29,15 @@ const AsyncLink: FC<AsyncLinkProps> = forwardRef(
           ? async () => {
               const result = await remoteCliExecute(command);
               if (result === false) {
-                toast({
+                toaster.error({
                   title: "Command failed.",
                   description: `Failed to execute "${command}".`,
-                  status: "error",
                   duration: 5000,
-                  isClosable: true,
                 });
               }
             }
           : onClick,
-      [command, onClick, toast],
+      [command, onClick],
     );
 
     const handleClick = useCallback(
@@ -70,9 +69,7 @@ const AsyncLink: FC<AsyncLinkProps> = forwardRef(
         {children} <Spinner as="span" size="xs" />
       </Link>
     ) : command ? (
-      <Tooltip label={command} fontSize="xs">
-        {link}
-      </Tooltip>
+      <Tooltip content={command}>{link}</Tooltip>
     ) : (
       link
     );

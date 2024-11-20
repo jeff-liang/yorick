@@ -1,4 +1,4 @@
-import { Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Heading, List, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   canEquip,
@@ -93,10 +93,10 @@ const generatePhylumOptions = (
   );
   return (
     available.length > 0 && (
-      <ListItem key={phylum}>
+      <List.Item key={phylum}>
         <Text as="b">{phylum}:</Text>{" "}
         {available.map(([name]) => name).join(", ")}
-      </ListItem>
+      </List.Item>
     )
   );
 };
@@ -270,7 +270,7 @@ const PatrioticEagle = () => {
               </>
             )}
           </Heading>
-          <UnorderedList>{phylumOptions}</UnorderedList>
+          <List.Root>{phylumOptions}</List.Root>
         </>
       )}
       {showPledge && (

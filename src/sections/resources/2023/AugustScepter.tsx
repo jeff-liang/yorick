@@ -1,4 +1,4 @@
-import { Table, Tbody, Td, Text, Tr } from "@chakra-ui/react";
+import { Table, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   myLevel,
@@ -99,7 +99,7 @@ const AugustScepter: FC = () => {
         1,
         <>
           +2-5 turns{" "}
-          <Text as="span" size="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.500">
             (spend turns @ the Goatlet)
           </Text>
         </>,
@@ -192,7 +192,7 @@ const AugustScepter: FC = () => {
         28,
         <>
           +10 weight familiar equipment{" "}
-          <Text as="span" size="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.500">
             (melting)
           </Text>
         </>,
@@ -205,18 +205,18 @@ const AugustScepter: FC = () => {
     .map(([day, reason]) => {
       const skillName = `Aug. ${ordinal(day)}: ${ALL_SKILLS.get(day)?.[0]}`;
       return (
-        <Tr key={day}>
-          <Td px={1} py={0.5}>
+        <Table.Row key={day}>
+          <Table.Cell px={1} py={0.5}>
             {day}
-          </Td>
-          <Td px={1} py={0.5}>
+          </Table.Cell>
+          <Table.Cell px={1} py={0.5}>
             {skillName ? (
               <MainLink href={skillLink(skillName)}>{reason}</MainLink>
             ) : (
               reason
             )}
-          </Td>
-        </Tr>
+          </Table.Cell>
+        </Table.Row>
       );
     });
 
@@ -225,8 +225,8 @@ const AugustScepter: FC = () => {
       <Text fontWeight="bold" textAlign="center">
         Well, you asked for it!
       </Text>
-      <Table size="sm">
-        <Tbody>
+      <Table.Root size="sm">
+        <Table.Body>
           {[...ALL_SKILLS.entries()]
             .sort(([a], [b]) => a - b)
             .map(([skillNumber, [, skillDesc]]) => {
@@ -234,8 +234,8 @@ const AugustScepter: FC = () => {
                 ? "gray.500"
                 : "black";
               return (
-                <Tr key={skillNumber}>
-                  <Td
+                <Table.Row key={skillNumber}>
+                  <Table.Cell
                     textAlign="center"
                     fontSize="xs"
                     px={1}
@@ -243,15 +243,15 @@ const AugustScepter: FC = () => {
                     color={lineColor}
                   >
                     {skillNumber}
-                  </Td>
-                  <Td fontSize="xs" px={1} py={0} color={lineColor}>
+                  </Table.Cell>
+                  <Table.Cell fontSize="xs" px={1} py={0} color={lineColor}>
                     {skillDesc}
-                  </Td>
-                </Tr>
+                  </Table.Cell>
+                </Table.Row>
               );
             })}
-        </Tbody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </>
   );
 
@@ -266,12 +266,12 @@ const AugustScepter: FC = () => {
         get valuable benefits.
       </Line>
       {table.length > 0 && (
-        <Table size="sm" variant="unstyled">
-          <Tbody>{table}</Tbody>
-        </Table>
+        <Table.Root size="sm" unstyled>
+          <Table.Body>{table}</Table.Body>
+        </Table.Root>
       )}
       <AdviceTooltip
-        label="No, YORICK, show me ALL the skills."
+        content="No, YORICK, show me ALL the skills."
         text={tooltip}
       />
     </Tile>

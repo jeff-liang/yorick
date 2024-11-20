@@ -70,7 +70,7 @@ const Thanksgarden = () => {
             {commaSeparate([
               <AdviceTooltip
                 key="turkey"
-                label={`${plural(
+                content={`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   turkeyBlaster,
                 )} to burn delay`}
@@ -78,7 +78,7 @@ const Thanksgarden = () => {
               />,
               <AdviceTooltip
                 key="stuffing"
-                label={`${plural(
+                content={`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   stuffingFluffer,
                 )} for the war`}
@@ -87,7 +87,7 @@ const Thanksgarden = () => {
               "various foods",
               <AdviceTooltip
                 key="boat"
-                label="gravy boat for the crypt (somewhat marginal)"
+                content="gravy boat for the crypt (somewhat marginal)"
                 text="Requires 3 cashews."
               />,
             ])}

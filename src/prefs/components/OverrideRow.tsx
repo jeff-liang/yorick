@@ -1,4 +1,4 @@
-import { Td, Text, Tr } from "@chakra-ui/react";
+import { Table, Text } from "@chakra-ui/react";
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
 import { validityType, validValue } from "../util/valid";
@@ -37,13 +37,13 @@ const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
   const valid = validValue(validity, value);
 
   return (
-    <Tr>
-      <Td>
+    <Table.Row>
+      <Table.Cell>
         <Text textAlign="right" my="auto">
           {label ?? override}
         </Text>
-      </Td>
-      <Td>
+      </Table.Cell>
+      <Table.Cell>
         <ValidatedInput
           value={value}
           valid={valid}
@@ -53,8 +53,8 @@ const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
           minW="6rem"
           placeholder={current}
         />
-      </Td>
-    </Tr>
+      </Table.Cell>
+    </Table.Row>
   );
 };
 

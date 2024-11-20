@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Text, List } from "@chakra-ui/react";
 import {
   haveOutfit,
   myAdventures,
@@ -141,9 +141,9 @@ const Numberology = () => {
       imageUrl="/images/itemimages/abacus.gif"
     >
       <Line>Enter these values to cast Calculate the Universe:</Line>
-      <UnorderedList>
+      <List.Root>
         {desiredDigits.map(({ digit, reason }) => (
-          <ListItem key={digit}>
+          <List.Item key={digit}>
             {outputs.has(digit) ? (
               <>
                 Enter <Text as="b">{outputs.get(digit)}</Text> for {digit} ={" "}
@@ -154,9 +154,9 @@ const Numberology = () => {
             ) : (
               `Cannot currently calculate for ${reason}.`
             )}
-          </ListItem>
+          </List.Item>
         ))}
-      </UnorderedList>
+      </List.Root>
     </Tile>
   );
 };

@@ -19,7 +19,7 @@ const SkillButtons: FC<SkillButtonsProps> = ({
   return (
     <HeaderButton
       href={`/runskillz.php?action=Skillz&whichskill=${linkID}&targetplayer=0&pwd=${myHash()}&quantity=1`}
-      isDisabled={myMp() < mpCost(linkedContent)}
+      disabled={myMp() < mpCost(linkedContent)}
       {...props}
     >
       cast

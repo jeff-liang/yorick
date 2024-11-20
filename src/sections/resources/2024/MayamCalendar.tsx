@@ -1,4 +1,4 @@
-import { ListItem, OrderedList, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { canAdventure, myAscensions, myLevel } from "kolmafia";
 import { $effect, $item, $location, get, have } from "libram";
 import { FC } from "react";
@@ -148,10 +148,10 @@ const MayamCalendar: FC = () => {
   const ringDescriptions = [1, 2, 3, 4].map((ring) => {
     const ringSymbols = unusedSymbols.filter((symbol) => symbol.ring === ring);
     return (
-      <ListItem key={ring}>
+      <List.Item key={ring}>
         <Text as="b">{`${ring}${["st", "nd", "rd", "th"][ring - 1]} ring:`}</Text>{" "}
         {ringSymbols.map((symbol) => symbol.friendlyName).join(", ")}
-      </ListItem>
+      </List.Item>
     );
   });
 
@@ -183,17 +183,17 @@ const MayamCalendar: FC = () => {
       imageUrl="/images/itemimages/yamcal.gif"
       linkedContent={mayamCalendar}
     >
-      <OrderedList>{ringDescriptions}</OrderedList>
+      <List.Root as="ol">{ringDescriptions}</List.Root>
       {availableResonances.length > 0 && (
         <Line fontWeight="bold">Cool Mayam combos!</Line>
       )}
-      <UnorderedList>
+      <List.Root>
         {availableResonances.map((resonance, index) => (
-          <ListItem key={index}>
+          <List.Item key={index}>
             <Text as="b">{resonance.name}:</Text> {resonance.combo.join(" + ")}
-          </ListItem>
+          </List.Item>
         ))}
-      </UnorderedList>
+      </List.Root>
       {templeResetAvailable && (
         <Line
           fontWeight="bold"

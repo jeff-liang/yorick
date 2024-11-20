@@ -5,7 +5,7 @@ import MainLink, { MainLinkProps } from "./MainLink";
 
 const LinkBlock: FC<MainLinkProps> = ({ children, ...props }) => (
   <MainLink {...props}>
-    <Stack spacing={0.5}>{children}</Stack>
+    <Stack gap={0.5}>{children}</Stack>
   </MainLink>
 );
 

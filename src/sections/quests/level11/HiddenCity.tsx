@@ -226,7 +226,7 @@ const Office = () => {
       [
         Step.STARTED,
         <MainLink href={CITY_LINK}>
-          <Stack spacing={0.5}>
+          <Stack gap={0.5}>
             <Line fontWeight="bold">Hidden Office Building</Line>
             {needToUseClip ? (
               <Line

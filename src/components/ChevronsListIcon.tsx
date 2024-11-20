@@ -1,21 +1,22 @@
-import { IconProps, ListIcon } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { FC } from "react";
 
-import Chevrons from "./Chevrons";
+import Chevrons, { ChevronsProps } from "./Chevrons";
 
-interface ChevronsListIconProps extends IconProps {
+interface ChevronsListProps extends ChevronsProps {
   usesLeft: number;
   totalUses: number;
 }
 
-const ChevronsListIcon: FC<ChevronsListIconProps> = (props) => (
-  <ListIcon
-    as={Chevrons}
+const ChevronsList: FC<ChevronsListProps> = (props) => (
+  <List.Indicator
+    asChild
     display="inline-flex"
     verticalAlign="center"
     my="auto"
-    {...props}
-  />
+  >
+    <Chevrons {...props} />
+  </List.Indicator>
 );
 
-export default ChevronsListIcon;
+export default ChevronsList;

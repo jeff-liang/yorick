@@ -1,9 +1,9 @@
-import { List, ListIcon, ListItem, Text } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { combatRateModifier, myHash, myLocation } from "kolmafia";
 import { $location, $skill, have, questStep } from "libram";
 import { FC } from "react";
 
-import Chevrons from "../../components/Chevrons";
+import ChevronsListIcon from "../../components/ChevronsListIcon";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { turnsToSeeSingleNoncombatCapped } from "../../util/calc";
@@ -48,11 +48,11 @@ const Level6: FC = () => {
       expectedThisNc +
       Math.max(0, 3 - ncCompleted) * turnsToSeeSingleNoncombatCapped(95, 5);
     return (
-      <ListItem key={zoneName} pl="1">
-        <ListIcon as={Chevrons} usesLeft={ncCompleted} totalUses={4} />
+      <List.Item key={zoneName} pl="1">
+        <ChevronsListIcon usesLeft={ncCompleted} totalUses={4} />
         <Text as="b">{zoneName}:</Text>{" "}
         {`${zoneQueue.length}/4 NCs (~${expected.toFixed(1)} turns remaining)`}
-      </ListItem>
+      </List.Item>
     );
   });
 
@@ -81,7 +81,7 @@ const Level6: FC = () => {
                 Your -combat% is less than 25%, you want more!
               </Line>
             )}
-            <List>{listItems}</List>
+            <List.Root>{listItems}</List.Root>
           </>,
         ],
         [2, <Line>Conduct the ritual to finish the quest.</Line>],

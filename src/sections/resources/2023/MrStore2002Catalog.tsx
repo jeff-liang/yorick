@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, myHash, totalTurnsPlayed } from "kolmafia";
 import { $item, get, getTodaysHolidayWanderers, have } from "libram";
 
@@ -70,34 +70,34 @@ const MrStore2002Catalog = () => {
       {mr2002Credits > 0 && (
         <>
           <Line>Spend credits on prehistoric IotMs!</Line>
-          <UnorderedList>
+          <List.Root>
             {!have(flashLiquidizerUltraDousingAccessory) && (
-              <ListItem>
+              <List.Item>
                 Flash Liquidizer Ultra Dousing Accessory: +3 BLARTpockets
-              </ListItem>
+              </List.Item>
             )}
             {!have(proSkateboard) && (
-              <ListItem>Pro skateboard: +1 duplicate</ListItem>
+              <List.Item>Pro skateboard: +1 duplicate</List.Item>
             )}
             {!have($item`Letter from Carrie Bradshaw`) &&
               !have($item`red-soled high heels`) && (
-                <ListItem>
+                <List.Item>
                   Letter from Carrie Bradshaw: +50% booze drop accessory
-                </ListItem>
+                </List.Item>
               )}
             {availableAmount(loathingIdolMicrophone) < 69420 && (
-              <ListItem>
+              <List.Item>
                 Loathing Idol Microphone: +100% init, +50% items, +5% combat; 4
                 uses
-              </ListItem>
+              </List.Item>
             )}
             {availableAmount(spookyVHSTape) < 69420 && (
-              <ListItem>
+              <List.Item>
                 Spooky VHS Tape: wandering freekill YR of the monster you used
                 it on; try GROPs!
-              </ListItem>
+              </List.Item>
             )}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
       {availableVHSes > 0 && haveUnrestricted(spookyVHSTape) && (
@@ -106,11 +106,11 @@ const MrStore2002Catalog = () => {
             Have {availableVHSes} VHS tapes. Use to free-copy into delay &
             guarantee drops from:
           </Line>
-          <UnorderedList>
+          <List.Root>
             {vhsOptions.map((option, index) => (
-              <ListItem key={index}>{option}</ListItem>
+              <List.Item key={index}>{option}</List.Item>
             ))}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
       {have(loathingIdolMicrophone) && (
@@ -144,7 +144,7 @@ const MrStore2002Catalog = () => {
           ) : (
             <AdviceTooltip
               text={`${nextVHSTimer} adventures until your free fight YR VHS fight.`}
-              label={`Spooky VHS: ${imageName}`}
+              content={`Spooky VHS: ${imageName}`}
             />
           )}
         </Line>

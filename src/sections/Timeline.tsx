@@ -1,11 +1,4 @@
-import {
-  Badge,
-  BadgeProps,
-  Stack,
-  StackProps,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Badge, BadgeProps, Stack, StackProps, Text } from "@chakra-ui/react";
 import {
   getWorkshed,
   haveEffect,
@@ -23,21 +16,24 @@ import {
 import { FC, forwardRef } from "react";
 
 import MainLink from "../components/MainLink";
+import { Tooltip } from "../components/ui/tooltip";
 import { haveUnrestricted } from "../util/available";
 import { inDevMode } from "../util/env";
 import { plural } from "../util/text";
 
-const Pill: FC<BadgeProps> = forwardRef(({ children, ...props }, ref) => (
-  <Badge
-    borderRadius="2px"
-    color="white"
-    bgColor="gray.600"
-    ref={ref}
-    {...props}
-  >
-    {children}
-  </Badge>
-));
+const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ children, ...props }, ref) => (
+    <Badge
+      borderRadius="2px"
+      color="white"
+      bgColor="gray.600"
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </Badge>
+  ),
+);
 
 const ENV_COLORS: Record<string, string> = {
   X: "gray.600",
@@ -73,8 +69,8 @@ const CMCTimeline: FC = () => {
     counts[maxEnvironment] >= 11 ? ENV_RESULTS[maxEnvironment] : ENV_RESULTS.X;
 
   return (
-    <Stack spacing={1} align="flex-start">
-      <Stack flexFlow="row wrap" spacing={0.5} align="center">
+    <Stack gap={1} align="flex-start">
+      <Stack flexFlow="row wrap" gap={0.5} align="center">
         {environments.map((c, index) => (
           <Badge
             key={index}
@@ -89,7 +85,7 @@ const CMCTimeline: FC = () => {
           </Badge>
         ))}
       </Stack>
-      <Stack flexFlow="row wrap" spacing={1} align="center">
+      <Stack flexFlow="row wrap" gap={1} align="center">
         <Text as="b">
           {turnsToConsult > 0 ? (
             plural(turnsToConsult, "turn")
@@ -211,7 +207,7 @@ const Timeline: FC<StackProps> = (props) => {
         }
       >
         {elementsFiltered.map(({ name, turns, color, label }) => (
-          <Tooltip key={name} hasArrow label={label(turns)}>
+          <Tooltip key={name} content={label(turns)}>
             <Pill bgColor={color}>
               {name} {turns}
             </Pill>

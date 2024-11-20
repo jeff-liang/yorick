@@ -31,34 +31,75 @@ import { plural } from "../../../util/text";
 
 const PLEDGE_ZONES: readonly {
   effect: string;
-  locations: [string, string][];
+  locations: Record<string, string>;
 }[] = [
   {
     effect: "+30% item",
-    locations: [
-      ["Haunted Library", "The Haunted Library"],
-      ["Haunted Laundry Room", "The Haunted Laundry Room"],
-      ["Whitey's Grove", "Whitey's Grove"],
-    ],
+    locations: {
+      "The Haunted Library": "Haunted Library",
+      "The Haunted Laundry Room": "Haunted Laundry Room",
+      "Whitey's Grove": "Whitey's Grove",
+    },
   },
   {
     effect: "+50% meat",
-    locations: [
-      ["Ninja Snowmen Lair", "Lair of the Ninja Snowmen"],
-      ["Hidden Hospital", "The Hidden Hospital"],
-      ["Haunted Bathroom", "The Haunted Bathroom"],
-      ["the Oasis", "The Oasis"],
-    ],
+    locations: {
+      "Lair of the Ninja Snowmen": "Ninja Snowmen Lair",
+      "The Hidden Hospital": "Hidden Hospital",
+      "The Haunted Bathroom": "Haunted Bathroom",
+      "The Oasis": "the Oasis",
+    },
   },
   {
     effect: "+100% init",
-    locations: [
-      ["Haunted Kitchen", "The Haunted Kitchen"],
-      ["Oil Peak", "Oil Peak"],
-      ["Oliver's Tavern", "An Unusually Quiet Barroom Brawl"],
-    ],
+    locations: {
+      "The Haunted Kitchen": "Haunted Kitchen",
+      "Oil Peak": "Oil Peak",
+      "An Unusually Quiet Barroom Brawl": "Oliver's Tavern",
+    },
   },
 ];
+
+const PLEDGE_ZONES_ALL: Record<string, [string, string]> = {};
+for (const { effect, locations } of PLEDGE_ZONES) {
+  for (const [longName, shortName] of Object.entries(locations)) {
+    PLEDGE_ZONES_ALL[longName] = [effect, shortName];
+  }
+}
+
+const generatePledgeZones = (
+  locations: [string, string][],
+  effect: string,
+): ReactNode => {
+  const available = locations.filter(([loc]) =>
+    canAdventure($location`${loc}`),
+  );
+  return (
+    available.length > 0 && (
+      <Line key={effect}>
+        <Text as="b">{effect}:</Text>{" "}
+        {available.map(([name]) => name).join(", ")}
+      </Line>
+    )
+  );
+};
+
+const generatePhylumOptions = (
+  phylum: string,
+  options: [string, string, boolean][],
+): ReactNode => {
+  const available = options.filter(
+    ([, loc, useful]) => canAdventure($location`${loc}`) && useful,
+  );
+  return (
+    available.length > 0 && (
+      <ListItem key={phylum}>
+        <Text as="b">{phylum}:</Text>{" "}
+        {available.map(([name]) => name).join(", ")}
+      </ListItem>
+    )
+  );
+};
 
 const PatrioticEagle = () => {
   const patrioticEagle = $familiar`Patriotic Eagle`;
@@ -73,12 +114,8 @@ const PatrioticEagle = () => {
   const canUseCitizen =
     !haveCitizen && canEquip(patrioticEagle) && myPath() !== $path`Avant Guard`;
   const location = myLocation();
-  const pledgeZone = PLEDGE_ZONES.map(({ effect, locations }) => ({
-    effect,
-    location: locations.find(([, name]) => name === location.identifierString),
-  })).find(({ location }) => location !== undefined);
-  const pledgeZoneEffect = pledgeZone?.effect;
-  const pledgeZoneName = pledgeZone?.location?.[0];
+  const pledgeZone = PLEDGE_ZONES_ALL[location.identifierString] ?? [];
+  const [pledgeZoneEffect, pledgeZoneName] = pledgeZone;
 
   useNag(
     () => ({
@@ -112,7 +149,7 @@ const PatrioticEagle = () => {
     ],
   );
 
-  if (!haveUnrestricted(patrioticEagle)) return null;
+  if (!haveEagle) return null;
 
   const possibleAppearanceLocations = rwbMonster
     ? getMonsterLocations(rwbMonster).filter((location) =>
@@ -120,41 +157,9 @@ const PatrioticEagle = () => {
       )
     : [];
 
-  const generatePledgeZones = (
-    locations: [string, string][],
-    effect: string,
-  ): ReactNode =>
-    locations.some(([, loc]) => canAdventure($location`${loc}`)) && (
-      <Line key={effect}>
-        <Text as="b">{effect}:</Text>{" "}
-        {locations
-          .filter(([, loc]) => canAdventure($location`${loc}`))
-          .map(([name]) => name)
-          .join(", ")}
-      </Line>
-    );
-
   const pledgeZones = PLEDGE_ZONES.map(({ effect, locations }) =>
-    generatePledgeZones(locations, effect),
+    generatePledgeZones(Object.entries(locations), effect),
   );
-
-  const generatePhylumOptions = (
-    phylum: string,
-    options: [string, string, boolean][],
-  ): ReactNode =>
-    options.some(
-      ([, loc, useful]) => canAdventure($location`${loc}`) && useful,
-    ) && (
-      <ListItem key={phylum}>
-        <Text as="b">{phylum}:</Text>{" "}
-        {options
-          .filter(
-            ([, loc, useful]) => canAdventure($location`${loc}`) && useful,
-          )
-          .map(([name]) => name)
-          .join(", ")}
-      </ListItem>
-    );
 
   const phylumOptions = [
     generatePhylumOptions("Dude", [

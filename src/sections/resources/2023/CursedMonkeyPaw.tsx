@@ -34,31 +34,14 @@ interface MonkeyWish {
   currentlyAccessible: boolean;
 }
 
-const CursedMonkeysPaw = () => {
-  const cursedMonkeysPaw = $item`cursed monkey's paw`;
+interface MonkeySkill {
+  fingerCount: number;
+  theSkill: Skill;
+  description: string;
+}
 
-  const monkeyWishesLeft = CursedMonkeyPaw.wishes();
-
-  if (!haveUnrestricted(cursedMonkeysPaw) || monkeyWishesLeft === 0) {
-    return null;
-  }
-
-  const showWish = ({
-    target,
-    currentlyAccessible,
-    additionalDescription,
-  }: MonkeyWish) => {
-    const color = currentlyAccessible ? "black" : "gray.500";
-
-    return (
-      <ListItem color={color} key={target.identifierString}>
-        {target.name}
-        {additionalDescription && <>: {additionalDescription}</>}
-      </ListItem>
-    );
-  };
-
-  const inRunWishes: MonkeyWish[] = [
+function inRunWishes() {
+  return [
     {
       target: $item`sonar-in-a-biscuit`,
       shouldDisplay:
@@ -282,36 +265,20 @@ const CursedMonkeysPaw = () => {
       currentlyAccessible: canAdventure($location`The Valley of Rof L'm Fao`),
     },
   ];
+}
 
-  const aftercoreWishes: MonkeyWish[] = [
+function aftercoreWishes() {
+  return [
     {
       target: $item`bag of foreign bribes`,
       shouldDisplay: canAdventure($location`The Ice Hotel`),
       currentlyAccessible: true,
     },
   ];
+}
 
-  const showWishes = (wishes: MonkeyWish[]) => {
-    const currentWishes = wishes
-      .filter((wish) => wish.shouldDisplay && wish.currentlyAccessible)
-      .map(showWish);
-    const futureWishes = wishes
-      .filter((wish) => wish.shouldDisplay && !wish.currentlyAccessible)
-      .map(showWish);
-    return [...currentWishes, ...futureWishes];
-  };
-
-  const options = inRun()
-    ? showWishes(inRunWishes)
-    : showWishes(aftercoreWishes);
-
-  interface MonkeySkill {
-    fingerCount: number;
-    theSkill: Skill;
-    description: string;
-  }
-
-  const monkeySkills: MonkeySkill[] = [
+function monkeySkills(): MonkeySkill[] {
+  return [
     {
       fingerCount: 5,
       theSkill: $skill`Monkey Slap`,
@@ -334,6 +301,45 @@ const CursedMonkeysPaw = () => {
       description: "Olfaction-lite",
     },
   ];
+}
+
+function showWish({
+  target,
+  currentlyAccessible,
+  additionalDescription,
+}: MonkeyWish) {
+  const color = currentlyAccessible ? "black" : "gray.500";
+
+  return (
+    <ListItem color={color} key={target.identifierString}>
+      {target.name}
+      {additionalDescription && <>: {additionalDescription}</>}
+    </ListItem>
+  );
+}
+
+function showWishes(wishes: MonkeyWish[]) {
+  const currentWishes = wishes
+    .filter((wish) => wish.shouldDisplay && wish.currentlyAccessible)
+    .map(showWish);
+  const futureWishes = wishes
+    .filter((wish) => wish.shouldDisplay && !wish.currentlyAccessible)
+    .map(showWish);
+  return [...currentWishes, ...futureWishes];
+}
+
+const CursedMonkeysPaw = () => {
+  const cursedMonkeysPaw = $item`cursed monkey's paw`;
+
+  const monkeyWishesLeft = CursedMonkeyPaw.wishes();
+
+  if (!haveUnrestricted(cursedMonkeysPaw) || monkeyWishesLeft === 0) {
+    return null;
+  }
+
+  const options = inRun()
+    ? showWishes(inRunWishes())
+    : showWishes(aftercoreWishes());
 
   return (
     <Tile
@@ -360,7 +366,7 @@ const CursedMonkeysPaw = () => {
       )}
       <Line fontWeight="bold">Monkey skills:</Line>
       <UnorderedList>
-        {monkeySkills.map((skill) => (
+        {monkeySkills().map((skill) => (
           <ListItem key={skill.fingerCount}>
             <Text as="b">
               {plural(skill.fingerCount, "finger", "fingers")}:

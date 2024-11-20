@@ -24,11 +24,44 @@ import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { skillLink } from "../../../util/links";
-import { plural } from "../../../util/text";
+import { ordinal, plural } from "../../../util/text";
 
-const augustScepter = $item`august scepter`;
+const ALL_SKILLS = new Map<number, [string, string]>([
+  [1, ["Mountain Climbing Day!", "a +adv buff"]],
+  [2, ["Find an Eleven-Leaf Clover Day", "lucky!"]],
+  [3, ["Watermelon Day!", "a watermelon"]],
+  [4, ["Water Balloon Day!", "three water balloons"]],
+  [5, ["Oyster Day!", "some oyster eggs"]],
+  [6, ["Fresh Breath Day!", "a +com buff"]],
+  [7, ["Lighthouse Day!", "an item/meat buff"]],
+  [8, ["Cat Day!", "a catfight, meow"]],
+  [9, ["Hand Holding Day!", "a foe's hand held"]],
+  [10, ["World Lion Day!", "roars like a lion"]],
+  [11, ["Presidential Joke Day!", "myst stats"]],
+  [12, ["Elephant Day!", "mus stats"]],
+  [13, ["Left/Off Hander's Day!", "double offhands"]],
+  [14, ["Financial Awareness Day!", "bad meatgain"]],
+  [15, ["Relaxation Day!", "a full heal"]],
+  [16, ["Roller Coaster Day!", "-full & +food%"]],
+  [17, ["Thriftshop Day!", "a 1000 meat coupon"]],
+  [18, ["Serendipity Day!", "a bunch of items"]],
+  [19, ["Honey Bee Awareness Day!", "stalked by bees"]],
+  [20, ["Mosquito Day!", "HP regen"]],
+  [21, ["Spumoni Day!", "stats of all kinds"]],
+  [22, ["Tooth Fairy Day!", "a free tooth monster"]],
+  [23, ["Ride the Wind Day!", "mox stats"]],
+  [24, ["Waffle Day!", "three waffles"]],
+  [25, ["Banana Split Day!", "a banana split"]],
+  [26, ["Toilet Paper Day!", "some toilet paper"]],
+  [27, ["Just Because Day!", "three random effects"]],
+  [28, ["Race Your Mouse Day!", "a melting fam equip"]],
+  [29, ["More Herbs, Less Salt Day!", "a food stat enhancer"]],
+  [30, ["Beach Day!", "a +7 adv accessory"]],
+  [31, ["Cabernet Sauvignon Day!", "two bottles of +booze% wine"]],
+]);
 
 const AugustScepter: FC = () => {
+  const augustScepter = $item`august scepter`;
   const skillsAvailable = 5 - get("_augSkillsCast");
   if (!have(augustScepter) || skillsAvailable < 1) return null;
 
@@ -39,262 +72,149 @@ const AugustScepter: FC = () => {
     </Text>
   );
 
-  const augSkillsToValue: Record<string, string> = {
-    "Aug. 1st: Mountain Climbing Day!": "a +adv buff",
-    "Aug. 2nd: Find an Eleven-Leaf Clover Day": "lucky!",
-    "Aug. 3rd: Watermelon Day!": "a watermelon",
-    "Aug. 4th: Water Balloon Day!": "three water balloons",
-    "Aug. 5th: Oyster Day!": "some oyster eggs",
-    "Aug. 6th: Fresh Breath Day!": "a +com buff",
-    "Aug. 7th: Lighthouse Day!": "an item/meat buff",
-    "Aug. 8th: Cat Day!": "a catfight, meow",
-    "Aug. 9th: Hand Holding Day!": "a foe's hand held",
-    "Aug. 10th: World Lion Day!": "roars like a lion",
-    "Aug. 11th: Presidential Joke Day!": "myst stats",
-    "Aug. 12th: Elephant Day!": "mus stats",
-    "Aug. 13th: Left/Off Hander's Day!": "double offhands",
-    "Aug. 14th: Financial Awareness  Day!": "bad meatgain",
-    "Aug. 15th: Relaxation Day!": "a full heal",
-    "Aug. 16th: Roller Coaster Day!": "-full & +food%",
-    "Aug. 17th: Thriftshop Day!": "a 1000 meat coupon",
-    "Aug. 18th: Serendipity Day!": "a bunch of items",
-    "Aug. 19th: Honey Bee Awareness Day!": "stalked by bees",
-    "Aug. 20th: Mosquito Day!": "HP regen",
-    "Aug. 21st: Spumoni Day!": "stats of all kinds",
-    "Aug. 22nd: Tooth Fairy Day!": "a free tooth monster",
-    "Aug. 23rd: Ride the Wind Day!": "mox stats",
-    "Aug. 24th: Waffle Day!": "three waffles",
-    "Aug. 25th: Banana Split Day!": "a banana split",
-    "Aug. 26th: Toilet Paper Day!": "some toilet paper",
-    "Aug. 27th: Just Because Day!": "three random effects",
-    "Aug. 28th: Race Your Mouse Day!": "a melting fam equip",
-    "Aug. 29th: More Herbs, Less Salt  Day!": "a food stat enhancer",
-    "Aug. 30th: Beach Day!": "a +7 adv accessory",
-    "Aug. 31st: Cabernet Sauvignon  Day!": "two bottles of +booze% wine",
-  };
-
   const mainstatAugustSkill = byStat({
     Muscle: 12,
     Mysticality: 11,
     Moxie: 23,
   });
 
-  const grabNumber = (s: string) => {
-    const match = s.match(/\d+/);
-    return match ? parseInt(match[0]) : 0;
-  };
+  const usefulAugustSkills: [number, ReactNode][] = [];
 
-  const usefulAugustSkills: Record<number, ReactNode> = {};
+  if (get("questL13Final") !== "finished") {
+    const statsGained = Math.floor(
+      50 *
+        myLevel() *
+        (1.0 + numericModifier(`${myPrimestat()} Experience Percent`) / 100.0),
+    );
+    usefulAugustSkills.push([mainstatAugustSkill, `+${statsGained} mainstat`]);
+  }
 
-  Object.entries(augSkillsToValue).forEach(([augSkillName]) => {
-    const augSkillNumber = grabNumber(augSkillName);
-    const augSkillPref = `_aug${augSkillNumber}Cast`;
-
+  if (myPath() !== $path`Slow and Steady`) {
     if (
-      [3, 4, 5, 8, 14, 15, 19, 20, 21, 25, 26, 27, 29].includes(augSkillNumber)
+      availableAmount($item`goat cheese`) <= 2 &&
+      !haveUnrestricted($item`Mayam Calendar`) &&
+      questStep("questL08Trapper") < 2
     ) {
-      return;
-    }
-    if (get(augSkillPref)) return;
-
-    if (get("questL13Final") !== "finished") {
-      if (augSkillNumber === mainstatAugustSkill) {
-        const statsGained = Math.floor(
-          50 *
-            myLevel() *
-            (1.0 +
-              numericModifier(`${myPrimestat()} Experience Percent`) / 100.0),
-        );
-        usefulAugustSkills[augSkillNumber] = `+${statsGained} mainstat`;
-      }
-    }
-
-    if (myPath() !== $path`Slow and Steady`) {
-      if (
-        availableAmount($item`goat cheese`) <= 2 &&
-        !haveUnrestricted($item`Mayam Calendar`) &&
-        questStep("questL08Trapper") < 2
-      ) {
-        if (augSkillNumber === 1) {
-          usefulAugustSkills[1] = (
-            <>
-              +2-5 turns{" "}
-              <Text as="span" size="xs" color="gray.500">
-                (spend turns @ the Goatlet)
-              </Text>
-            </>
-          );
-        }
-      }
-
-      if (augSkillNumber === 30) {
-        usefulAugustSkills[30] = (
-          <>
-            +7 advs rollover accessory{" "}
-            <Text as="span" color="gray.500">
-              (melting)
-            </Text>
-          </>
-        );
-      }
-    }
-
-    const manorCheck =
-      questStep("questL11Manor") < 3 && get("manorDrawerCount") >= 21;
-    const blastingAddendum =
-      manorCheck && !have($item`blasting soda`) ? (
-        <Text as="span" color="gray.500">
-          {" "}
-          (blasting soda!)
-        </Text>
-      ) : null;
-
-    if (augSkillNumber === 16) {
-      usefulAugustSkills[16] = (
-        <>-1 fullness, +100% food drop{blastingAddendum}</>
-      );
-    }
-
-    if (manorCheck && !have($item`bottle of Chateau de Vinegar`)) {
-      if (augSkillNumber === 31) {
-        usefulAugustSkills[31] = (
-          <>
-            +100% booze drop wine{" "}
-            <Text as="span" color="gray.500">
-              (chateau de vinegar!)
-            </Text>
-          </>
-        );
-      }
-    }
-
-    if (augSkillNumber === 7) {
-      usefulAugustSkills[7] = <>+50% item, +100% meat{buffString}</>;
-    }
-    if (augSkillNumber === 2) {
-      usefulAugustSkills[2] = (
+      usefulAugustSkills.push([
+        1,
         <>
-          get{" "}
-          <Text as="span" color="green.500">
-            Lucky!
+          +2-5 turns{" "}
+          <Text as="span" size="xs" color="gray.500">
+            (spend turns @ the Goatlet)
           </Text>
-        </>
-      );
-    }
-    if (augSkillNumber === 24) {
-      usefulAugustSkills[24] = "3 waffles, for monster replacement";
-    }
-    if (augSkillNumber === 22) {
-      usefulAugustSkills[22] = "free fight for teeeeeeeeeeeth";
-    }
-    if (questStep("questL08Trapper") < 2) {
-      if (augSkillNumber === 6) {
-        usefulAugustSkills[6] = <>+10% combat{buffString}</>;
-      }
-    }
-    if (augSkillNumber === 9) {
-      usefulAugustSkills[9] = "hold hands for a minor sniff";
-    }
-    if (augSkillNumber === 10) {
-      usefulAugustSkills[10] = <>non-free reusable banishes{buffString}</>;
+        </>,
+      ]);
     }
 
-    const usefulOffhands = have($item`deck of lewd playing cards`);
-    const protestorsRemaining = Math.max(
-      0,
-      Math.min(80, 80 - get("zeppelinProtestors")),
-    );
-
-    if (usefulOffhands && protestorsRemaining > 10) {
-      if (augSkillNumber === 13) {
-        usefulAugustSkills[13] = (
-          <>
-            double offhand enchantments{" "}
-            <Text as="span" color="purple.500">
-              (sleaze for protestors)
-            </Text>
-          </>
-        );
-      }
-    }
-
-    if (
-      have($skill`Transcendent Olfaction`) &&
-      (have($familiar`Pair of Stomping Boots`) ||
-        (have($skill`The Ode to Booze`) &&
-          have($familiar`Frumious Bandersnatch`)))
-    ) {
-      if (!have($item`astral pet sweater`)) {
-        if (augSkillNumber === 28) {
-          usefulAugustSkills[28] = (
-            <>
-              +10 weight familiar equipment{" "}
-              <Text as="span" size="xs" color="gray.500">
-                (melting)
-              </Text>
-            </>
-          );
-        }
-      }
-    }
-  });
-
-  const table = Object.entries(usefulAugustSkills).map(([day, reason]) => {
-    const skillName = Object.keys(augSkillsToValue).find((name) =>
-      name.startsWith(`Aug. ${day}`),
-    );
-    return (
-      <Tr key={day}>
-        <Td px={1} py={0.5}>
-          {day}
-        </Td>
-        <Td px={1} py={0.5}>
-          {skillName ? (
-            <MainLink href={skillLink(skillName)}>{reason}</MainLink>
-          ) : (
-            reason
-          )}
-        </Td>
-      </Tr>
-    );
-  });
-
-  const summarizeAugust =
-    "Celebrate August tidings; cast skills corresponding to the given day to get valuable benefits.";
-
-  const description =
-    table.length > 0 ? (
+    usefulAugustSkills.push([
+      30,
       <>
-        <Text>{summarizeAugust}</Text>
-        <Table size="sm" variant="unstyled">
-          <Tbody>{table}</Tbody>
-        </Table>
-      </>
-    ) : (
-      <Text>{summarizeAugust}</Text>
-    );
+        +7 advs rollover accessory{" "}
+        <Text as="span" color="gray.500">
+          (melting)
+        </Text>
+      </>,
+    ]);
+  }
 
-  const title = `Cast ${plural(skillsAvailable, "August Scepter skill")}`;
-  const subtitle = "All buffs are 30 turns.";
+  const manorCheck =
+    questStep("questL11Manor") < 3 && get("manorDrawerCount") >= 21;
+  const blastingAddendum =
+    manorCheck && !have($item`blasting soda`) ? (
+      <Text as="span" color="gray.500">
+        {" "}
+        (blasting soda!)
+      </Text>
+    ) : null;
 
-  const allSkills = Object.entries(augSkillsToValue)
-    .sort((a, b) => grabNumber(a[0]) - grabNumber(b[0]))
-    .map(([augSkill, augSkillValue]) => {
-      const augSkillNumber = grabNumber(augSkill);
-      const lineColor = get(`_aug${augSkillNumber}Cast`) ? "gray.500" : "black";
+  usefulAugustSkills.push([
+    16,
+    <>-1 fullness, +100% food drop{blastingAddendum}</>,
+  ]);
+
+  if (manorCheck && !have($item`bottle of Chateau de Vinegar`)) {
+    usefulAugustSkills.push([
+      31,
+      <>
+        +100% booze drop wine{" "}
+        <Text as="span" color="gray.500">
+          (chateau de vinegar!)
+        </Text>
+      </>,
+    ]);
+  }
+
+  usefulAugustSkills.push([7, <>+50% item, +100% meat{buffString}</>]);
+  usefulAugustSkills.push([
+    2,
+    <>
+      get{" "}
+      <Text as="span" color="green.500">
+        Lucky!
+      </Text>
+    </>,
+  ]);
+  usefulAugustSkills.push([24, "3 waffles, for monster replacement"]);
+  usefulAugustSkills.push([22, "free fight for teeeeeeeeeeeth"]);
+
+  if (questStep("questL08Trapper") < 2) {
+    usefulAugustSkills.push([6, <>+10% combat{buffString}</>]);
+  }
+  usefulAugustSkills.push([9, "hold hands for a minor sniff"]);
+  usefulAugustSkills.push([10, <>non-free reusable banishes{buffString}</>]);
+
+  const usefulOffhands = have($item`deck of lewd playing cards`);
+  const protestorsRemaining = Math.max(
+    0,
+    Math.min(80, 80 - get("zeppelinProtestors")),
+  );
+
+  if (usefulOffhands && protestorsRemaining > 10) {
+    usefulAugustSkills.push([
+      13,
+      <>
+        double offhand enchantments{" "}
+        <Text as="span" color="purple.500">
+          (sleaze for protestors)
+        </Text>
+      </>,
+    ]);
+  }
+
+  if (
+    have($skill`Transcendent Olfaction`) &&
+    (have($familiar`Pair of Stomping Boots`) ||
+      (have($skill`The Ode to Booze`) &&
+        have($familiar`Frumious Bandersnatch`)))
+  ) {
+    if (!have($item`astral pet sweater`)) {
+      usefulAugustSkills.push([
+        28,
+        <>
+          +10 weight familiar equipment{" "}
+          <Text as="span" size="xs" color="gray.500">
+            (melting)
+          </Text>
+        </>,
+      ]);
+    }
+  }
+
+  const table = usefulAugustSkills
+    .sort(([a], [b]) => a - b)
+    .map(([day, reason]) => {
+      const skillName = `Aug. ${ordinal(day)}: ${ALL_SKILLS.get(day)?.[0]}`;
       return (
-        <Tr key={augSkillNumber}>
-          <Td
-            textAlign="center"
-            fontSize="x-small"
-            px={1}
-            py={0}
-            color={lineColor}
-          >
-            {augSkillNumber}
+        <Tr key={day}>
+          <Td px={1} py={0.5}>
+            {day}
           </Td>
-          <Td fontSize="x-small" px={1} py={0} color={lineColor}>
-            {augSkillValue}
+          <Td px={1} py={0.5}>
+            {skillName ? (
+              <MainLink href={skillLink(skillName)}>{reason}</MainLink>
+            ) : (
+              reason
+            )}
           </Td>
         </Tr>
       );
@@ -306,19 +226,50 @@ const AugustScepter: FC = () => {
         Well, you asked for it!
       </Text>
       <Table size="sm">
-        <Tbody>{allSkills}</Tbody>
+        <Tbody>
+          {[...ALL_SKILLS.entries()]
+            .sort(([a], [b]) => a - b)
+            .map(([skillNumber, [, skillDesc]]) => {
+              const lineColor = get(`_aug${skillNumber}Cast`)
+                ? "gray.500"
+                : "black";
+              return (
+                <Tr key={skillNumber}>
+                  <Td
+                    textAlign="center"
+                    fontSize="xs"
+                    px={1}
+                    py={0}
+                    color={lineColor}
+                  >
+                    {skillNumber}
+                  </Td>
+                  <Td fontSize="xs" px={1} py={0} color={lineColor}>
+                    {skillDesc}
+                  </Td>
+                </Tr>
+              );
+            })}
+        </Tbody>
       </Table>
     </>
   );
 
   return (
     <Tile
-      header={title}
+      header={`Cast ${plural(skillsAvailable, "August Scepter skill")}`}
       id="august-scepter-resource"
       imageUrl="/images/itemimages/scepter.gif"
     >
-      <Line>{subtitle}</Line>
-      {description}
+      <Line>
+        Celebrate August tidings; cast skills corresponding to the given day to
+        get valuable benefits.
+      </Line>
+      {table.length > 0 && (
+        <Table size="sm" variant="unstyled">
+          <Tbody>{table}</Tbody>
+        </Table>
+      )}
       <AdviceTooltip
         label="No, YORICK, show me ALL the skills."
         text={tooltip}

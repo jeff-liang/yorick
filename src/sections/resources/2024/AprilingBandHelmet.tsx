@@ -1,4 +1,4 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { myLocation, totalTurnsPlayed } from "kolmafia";
 import { $effect, $item, $location, get, have } from "libram";
 

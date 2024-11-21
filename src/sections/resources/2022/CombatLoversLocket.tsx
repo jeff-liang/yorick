@@ -1,4 +1,4 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   $item,
   CombatLoversLocket as CombatLoversLocketLibram,

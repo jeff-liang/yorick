@@ -1,4 +1,4 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { $item, get, have, questStep } from "libram";
 
 import Line from "../../../components/Line";

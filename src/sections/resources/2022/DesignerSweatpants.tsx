@@ -1,4 +1,4 @@
-import { LinkProps, Text, List } from "@chakra-ui/react";
+import { LinkProps, List, Text } from "@chakra-ui/react";
 import { haveEquipped, myInebriety } from "kolmafia";
 import { $item, $skill, get } from "libram";
 import { FC } from "react";

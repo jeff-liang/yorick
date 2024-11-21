@@ -1,7 +1,7 @@
-import { Button, ButtonProps } from "@chakra-ui/react";
 import { forwardRef } from "react";
 
 import MainLink from "./MainLink";
+import { Button, ButtonProps } from "./ui/button";
 
 interface HeaderButtonProps extends ButtonProps {
   href?: string;
@@ -12,7 +12,7 @@ const HeaderButton = forwardRef<HTMLButtonElement, HeaderButtonProps>(
     const button = (
       <Button
         ref={ref}
-        colorScheme="blackAlpha"
+        colorPalette="gray"
         size="xs"
         px={1}
         height={4}

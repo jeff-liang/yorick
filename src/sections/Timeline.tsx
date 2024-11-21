@@ -1,11 +1,4 @@
-import {
-  Badge,
-  BadgeProps,
-  Stack,
-  StackProps,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Badge, BadgeProps, Stack, StackProps, Text } from "@chakra-ui/react";
 import {
   getWorkshed,
   haveEffect,
@@ -23,27 +16,30 @@ import {
 import { FC, forwardRef } from "react";
 
 import MainLink from "../components/MainLink";
+import { Tooltip } from "../components/ui/tooltip";
 import { haveUnrestricted } from "../util/available";
 import { inDevMode } from "../util/env";
 import { plural } from "../util/text";
 
-const Pill: FC<BadgeProps> = forwardRef(({ children, ...props }, ref) => (
-  <Badge
-    borderRadius="2px"
-    color="white"
-    bgColor="gray.600"
-    ref={ref}
-    {...props}
-  >
-    {children}
-  </Badge>
-));
+const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ children, ...props }, ref) => (
+    <Badge
+      borderRadius="2px"
+      color="white"
+      bgColor="gray.solid"
+      ref={ref}
+      {...props}
+    >
+      {children}
+    </Badge>
+  ),
+);
 
 const ENV_COLORS: Record<string, string> = {
-  X: "gray.600",
-  U: "red.600",
-  I: "blue.600",
-  O: "yellow.600",
+  X: "gray.solid",
+  U: "red.solid",
+  I: "blue.solid",
+  O: "yellow.solid",
 };
 
 const ENV_RESULTS: Record<string, string> = {
@@ -73,8 +69,8 @@ const CMCTimeline: FC = () => {
     counts[maxEnvironment] >= 11 ? ENV_RESULTS[maxEnvironment] : ENV_RESULTS.X;
 
   return (
-    <Stack spacing={1} align="flex-start">
-      <Stack flexFlow="row wrap" spacing={0.5} align="center">
+    <Stack gap={1} align="flex-start">
+      <Stack flexFlow="row wrap" gap={0.5} align="center">
         {environments.map((c, index) => (
           <Badge
             key={index}
@@ -89,7 +85,7 @@ const CMCTimeline: FC = () => {
           </Badge>
         ))}
       </Stack>
-      <Stack flexFlow="row wrap" spacing={1} align="center">
+      <Stack flexFlow="row wrap" gap={1} align="center">
         <Text as="b">
           {turnsToConsult > 0 ? (
             plural(turnsToConsult, "turn")
@@ -119,31 +115,31 @@ const Timeline: FC<StackProps> = (props) => {
     {
       name: "ELG",
       turns: haveEffect($effect`Everything Looks Green`),
-      color: "green.600",
+      color: "green.solid",
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Green.`,
     },
     {
       name: "ELP",
       turns: haveEffect($effect`Everything Looks Purple`),
-      color: "purple.600",
+      color: "purple.solid",
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Purple.`,
     },
     {
       name: "ELR",
       turns: haveEffect($effect`Everything Looks Red`),
-      color: "red.600",
+      color: "red.solid",
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Red.`,
     },
     {
       name: "ELY",
       turns: haveEffect($effect`Everything Looks Yellow`),
-      color: "yellow.600",
+      color: "yellow.solid",
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Yellow.`,
     },
     {
       name: "ELRWB",
       turns: haveEffect($effect`Everything Looks Red, White and Blue`),
-      color: "purple.600",
+      color: "purple.solid",
       label: (turns) =>
         `${plural(turns, "turn")} of Everything Looks Red, White and Blue.`,
     },
@@ -153,7 +149,7 @@ const Timeline: FC<StackProps> = (props) => {
     elements.push({
       name: "CBB",
       turns: returnCombats,
-      color: "gray.600",
+      color: "gray.solid",
       label: (turns) =>
         `${plural(turns, "combat")} until Cosmic Bowling Ball returns.`,
     });
@@ -168,7 +164,7 @@ const Timeline: FC<StackProps> = (props) => {
     elements.push({
       name: "Kram",
       turns: turnsToNextGuaranteedFight,
-      color: "purple.600",
+      color: "purple.solid",
       label: (turns) =>
         `${plural(turns, "turn")} until guaranteed Kramco fight.`,
     });
@@ -178,7 +174,7 @@ const Timeline: FC<StackProps> = (props) => {
     elements.push({
       name: "AA",
       turns: AutumnAton.turnsLeft() + 1,
-      color: "orange.600",
+      color: "orange.solid",
       label: (turns) => `${plural(turns, "turn")} until autumn-aton returns.`,
     });
   }
@@ -187,7 +183,7 @@ const Timeline: FC<StackProps> = (props) => {
     elements.push({
       name: "CMG",
       turns: 13 - get("cursedMagnifyingGlassCount"),
-      color: "gray.600",
+      color: "gray.solid",
       label: (turns) => `${plural(turns, "combat")} until next void wanderer.`,
     });
   }
@@ -211,7 +207,7 @@ const Timeline: FC<StackProps> = (props) => {
         }
       >
         {elementsFiltered.map(({ name, turns, color, label }) => (
-          <Tooltip key={name} hasArrow label={label(turns)}>
+          <Tooltip key={name} content={label(turns)}>
             <Pill bgColor={color}>
               {name} {turns}
             </Pill>

@@ -145,7 +145,7 @@ const FreeKills: FC = () => {
                 key={
                   Array.isArray(source) ? source[0] : source.identifierString
                 }
-                color={have(thing) ? undefined : "gray.500"}
+                color={have(thing) ? undefined : "gray.solid"}
               >
                 {plural(
                   remaining(),

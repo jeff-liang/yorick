@@ -112,7 +112,7 @@ const Layout = () => {
   }
   return (
     <Container centerContent maxW={1000}>
-      <Stack spacing={4} w="full">
+      <Stack gap={4} w="full">
         <Heading textAlign="center">YORICK Development Overrides</Heading>
         <ValidatedInput
           value={filter}

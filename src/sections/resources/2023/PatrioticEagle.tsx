@@ -1,4 +1,4 @@
-import { Heading, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Heading, List, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   canEquip,
@@ -93,10 +93,10 @@ const generatePhylumOptions = (
   );
   return (
     available.length > 0 && (
-      <ListItem key={phylum}>
+      <List.Item key={phylum}>
         <Text as="b">{phylum}:</Text>{" "}
         {available.map(([name]) => name).join(", ")}
-      </ListItem>
+      </List.Item>
     )
   );
 };
@@ -239,7 +239,7 @@ const PatrioticEagle = () => {
             {possibleAppearanceLocations.join(", ")}.
           </Line>
           {rwbMonster?.phylum === eaglePhylumBanished && (
-            <Line color="red.500">
+            <Line color="red.solid">
               <Text as="b">WARNING!</Text> This monster will not appear, it's
               banished by your eagle screech!
             </Line>
@@ -256,13 +256,13 @@ const PatrioticEagle = () => {
                 Patriotic Eagle can screech and banish an entire phylum!{" "}
                 {screechRecharge === 0 && (
                   <>
-                    <Text as="span" color="red.500">
+                    <Text as="span" color="red.solid">
                       SCREEEE
                     </Text>
-                    <Text as="span" color="gray.500">
+                    <Text as="span" color="gray.solid">
                       EEEEE
                     </Text>
-                    <Text as="span" color="blue.500">
+                    <Text as="span" color="blue.solid">
                       EEEEE!
                     </Text>
                   </>
@@ -270,19 +270,19 @@ const PatrioticEagle = () => {
               </>
             )}
           </Heading>
-          <UnorderedList>{phylumOptions}</UnorderedList>
+          <List.Root>{phylumOptions}</List.Root>
         </>
       )}
       {showPledge && (
         <>
           <Line>
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               Pledge
             </Text>{" "}
-            <Text as="span" color="gray.500">
+            <Text as="span" color="gray.solid">
               allegiance
             </Text>{" "}
-            <Text as="span" color="blue.500">
+            <Text as="span" color="blue.solid">
               to a zone!
             </Text>
           </Line>

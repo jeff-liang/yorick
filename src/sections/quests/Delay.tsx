@@ -1,9 +1,9 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { canAdventure, Location } from "kolmafia";
 import { sum } from "libram";
 import { FC } from "react";
 
-import AdviceTooltip from "../../components/AdviceTooltip";
+import AdviceTooltipText from "../../components/AdviceTooltipText";
 import Line from "../../components/Line";
 import MainLink from "../../components/MainLink";
 import Tile from "../../components/Tile";
@@ -16,18 +16,18 @@ type Details = { zone: Location; remaining: number; available: boolean };
 const ZoneList: FC<{
   zones: Details[];
 }> = ({ zones }) => (
-  <UnorderedList>
+  <List.Root>
     {zones.map(({ zone, remaining, available }) => (
-      <ListItem
+      <List.Item
         key={zone.identifierString}
-        color={available ? undefined : "gray.500"}
+        color={available ? undefined : "gray.solid"}
       >
         <MainLink href={parentPlaceLink(zone)}>
           {plural(remaining, "turn")} in {zone.identifierString}.
         </MainLink>
-      </ListItem>
+      </List.Item>
     ))}
-  </UnorderedList>
+  </List.Root>
 );
 
 const Delay: FC = () => {
@@ -60,12 +60,9 @@ const Delay: FC = () => {
       <Line>Use free runs and free wanderers to avoid spending turns.</Line>
       <ZoneList zones={allRemaining} />
       {truncated.length > 0 && (
-        <Line>
-          <AdviceTooltip
-            text={<ZoneList zones={truncated} />}
-            label="Later zones."
-          />
-        </Line>
+        <AdviceTooltipText advice={<ZoneList zones={truncated} />}>
+          <Line>Later zones.</Line>
+        </AdviceTooltipText>
       )}
     </Tile>
   );

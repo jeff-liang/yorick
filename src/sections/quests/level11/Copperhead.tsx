@@ -85,7 +85,7 @@ const Copperhead: FC = () => {
               <Line href={parentPlaceLink(copperhead)}>
                 Or work on burning {14 - (3 - shenMeetings) - copperheadTurns}{" "}
                 turns of delay in the Copperhead Club.{" "}
-                <AdviceTooltipIcon text="This delay count does not include the meetings with Shen." />
+                <AdviceTooltipIcon advice="This delay count does not include the meetings with Shen." />
               </Line>
             )}
             {copperheadTurns === 14 && shenMeetings === 3 && (

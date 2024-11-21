@@ -39,7 +39,7 @@ const GreyGoose: FC = () => {
             <Text as="span" color="brown" fontWeight="bold">
               {gooseDrones}
             </Text>
-            <Text as="span" color="gray.500">
+            <Text as="span" color="gray.solid">
               {" "}
               GOOSO drones deployed.
             </Text>
@@ -61,7 +61,7 @@ const GreyGoose: FC = () => {
           header="Re-Process Matter"
           imageUrl="/images/itemimages/greygoose.gif"
         >
-          <Line color="gray.500">
+          <Line color="gray.solid">
             GOOSO is {gooseWeight} pounds ({gooseExperience} exp)
           </Line>
           <Line>
@@ -84,7 +84,9 @@ const GreyGoose: FC = () => {
         <Text as="b">{famExperienceGain}</Text> fam exp per fight. (Will become{" "}
         <Text
           as="b"
-          color={(gooseWeight + 1) ** 2 > newGooseExp ? "red.500" : "blue.500"}
+          color={
+            (gooseWeight + 1) ** 2 > newGooseExp ? "red.solid" : "blue.solid"
+          }
         >
           {newGooseExp}
         </Text>
@@ -107,7 +109,7 @@ const GreyGoose: FC = () => {
             after that.
           </Line>
           {famExperienceGain < famExpNeededForNextPound && (
-            <Line color="red.500">Insufficient famxp for next fight.</Line>
+            <Line color="red.solid">Insufficient famxp for next fight.</Line>
           )}
           <Line>
             Can emit <Text as="b">{gooseWeight - 5}</Text> drones to duplicate
@@ -174,19 +176,19 @@ const GreyGoose: FC = () => {
           {!get("_questPartyFair") && (
             <Line>
               {famExperienceGain >= 39 ? (
-                <Text as="span" color="green.500">
+                <Text as="span" color="green.solid">
                   Can GOOSO 3 drops per fight!
                 </Text>
               ) : famExperienceGain >= 24 ? (
-                <Text as="span" color="blue.500">
+                <Text as="span" color="blue.solid">
                   Can GOOSO 2 drops per fight!
                 </Text>
               ) : famExperienceGain >= 11 ? (
-                <Text as="span" color="purple.500">
+                <Text as="span" color="purple.solid">
                   Can GOOSO 1 drop per fight!
                 </Text>
               ) : (
-                <Text as="span" color="red.500">
+                <Text as="span" color="red.solid">
                   Cannot GOOSO any drops per fight!
                 </Text>
               )}

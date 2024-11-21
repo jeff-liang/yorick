@@ -1,10 +1,4 @@
-import {
-  Heading,
-  ListItem,
-  Text,
-  UnorderedList,
-  VStack,
-} from "@chakra-ui/react";
+import { Heading, List, Text, VStack } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -23,7 +17,7 @@ import {
   questStep,
 } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import ItemButtons from "../../../components/ItemButtons";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -54,7 +48,7 @@ const Autumnaton = () => {
         >
           <Line>
             Next use will take{" "}
-            <Text as="b" color="red.500">
+            <Text as="b" color="red.solid">
               {autobotsReturnTime}
             </Text>{" "}
             adventures.
@@ -149,7 +143,7 @@ const Autumnaton = () => {
       {have(autumnatonItem) ? (
         <Line>
           Next use will take{" "}
-          <Text as="span" fontWeight="bold" color="red.500">
+          <Text as="span" fontWeight="bold" color="red.solid">
             {autobotsReturnTime}
           </Text>{" "}
           adventures.
@@ -158,7 +152,7 @@ const Autumnaton = () => {
         <>
           <Line>
             Will return in{" "}
-            <Text as="b" color="red.500">
+            <Text as="b" color="red.solid">
               {turncountWhereAutobotReturns + 1 - totalTurnsPlayed()}
             </Text>{" "}
             adventures.
@@ -171,15 +165,15 @@ const Autumnaton = () => {
         </>
       )}
       {upgradesToGet.length > 0 && (
-        <UnorderedList>
+        <List.Root>
           {upgradesToGet.map((text) => (
-            <ListItem key={text}>{text}</ListItem>
+            <List.Item key={text}>{text}</List.Item>
           ))}
-        </UnorderedList>
+        </List.Root>
       )}
       {potentialTargets.length > 0 && (
-        <AdviceTooltip
-          text={
+        <AdviceTooltipText
+          advice={
             <VStack align="start">
               <Heading size="sm">Potential Targets</Heading>
               {potentialTargets.map(([item, location], index) => (
@@ -189,7 +183,7 @@ const Autumnaton = () => {
               ))}
             </VStack>
           }
-          label="Potential Autumnaton Targets"
+          children="Potential Autumnaton Targets"
         />
       )}
     </Tile>

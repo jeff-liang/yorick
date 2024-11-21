@@ -49,7 +49,7 @@ const SpaceJellyfishAdvice: FC<SpaceJellyfishAdviceProps> = ({
     return (
       <Line>
         {!isCurrentFamiliar(spaceJellyfish) ? (
-          <Text as="span" color="red.500">
+          <Text as="span" color="red.solid">
             Bring along your space jellyfish!
           </Text>
         ) : (
@@ -64,7 +64,7 @@ const SpaceJellyfishAdvice: FC<SpaceJellyfishAdviceProps> = ({
     );
   } else {
     if (isCurrentFamiliar(spaceJellyfish)) {
-      return <Line color="red.500">Switch to another familiar?</Line>;
+      return <Line color="red.solid">Switch to another familiar?</Line>;
     }
     return (
       <Line>{plural(turnsToNextNC, "more turn")} to jellyfish choice NC.</Line>

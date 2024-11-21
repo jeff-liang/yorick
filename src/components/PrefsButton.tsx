@@ -1,5 +1,5 @@
-import { EditIcon } from "@chakra-ui/icons";
 import { IconButton } from "@chakra-ui/react";
+import { EditIcon } from "lucide-react";
 import { FC } from "react";
 
 const PrefsButton: FC = () => {
@@ -11,14 +11,14 @@ const PrefsButton: FC = () => {
           mainpane.location.href = "http://localhost:3000/yorick/prefs";
         }
       }}
-      icon={<EditIcon />}
+      asChild
       aria-label="Open Overrides"
-      size="xs"
-      fontSize="15px"
+      size="2xs"
+      p={1}
       variant="outline"
       backgroundColor="white"
     >
-      overrides
+      <EditIcon />
     </IconButton>
   );
 };

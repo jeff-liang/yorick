@@ -1,10 +1,11 @@
-import { Heading, Stack, Tooltip } from "@chakra-ui/react";
+import { Box, Heading, Stack } from "@chakra-ui/react";
 import { myDaycount, myTurncount } from "kolmafia";
 import { useContext } from "react";
 
 import Section from "../components/Section";
 import TileErrorBoundary from "../components/TileErrorBoundary";
 import TileImage from "../components/TileImage";
+import { Tooltip } from "../components/ui/tooltip";
 import NagContext from "../contexts/NagContext";
 
 import Timeline from "./Timeline";
@@ -26,7 +27,7 @@ const NagSection = () => {
       pt="0.5rem"
       pb={2}
       borderBottom="1px solid"
-      borderColor="gray.200"
+      borderColor="gray.muted"
     >
       <Timeline px={2} />
       {nagsList.length > 0 ? (
@@ -40,24 +41,29 @@ const NagSection = () => {
             <Stack flexFlow="row wrap">
               {nagsList
                 .slice(NAG_DISPLAY_LIMIT)
-                .map(([id, { imageUrl, node }]) => (
-                  <Tooltip
-                    key={id}
-                    color="black"
-                    bgColor="white"
-                    border="1px solid black"
-                    borderRadius="4px"
-                    p={2}
-                    label={node}
-                  >
-                    <TileImage imageUrl={imageUrl} />
-                  </Tooltip>
-                ))}
+                .map(([id, { imageUrl, node }]) => {
+                  return (
+                    <Tooltip
+                      key={id}
+                      interactive
+                      contentProps={{
+                        color: "black",
+                        bgColor: "white",
+                        border: "1px solid black",
+                        rounded: "md",
+                        p: 2,
+                      }}
+                      content={<Box>{node}</Box>}
+                    >
+                      <TileImage imageUrl={imageUrl} />
+                    </Tooltip>
+                  );
+                })}
             </Stack>
           )}
         </Section>
       ) : (
-        <Heading as="h4" size="md" px={2}>
+        <Heading as="h2" px={2}>
           Day {myDaycount()} / Turn {myTurncount()}
         </Heading>
       )}

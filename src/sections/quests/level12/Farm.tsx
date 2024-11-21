@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { myLocation } from "kolmafia";
 import { $item, $location, get, have } from "libram";
 import { FC } from "react";
@@ -34,11 +34,11 @@ const Farm: FC = () => {
             </Line>
           )}
           <Line>Remember to:</Line>
-          <UnorderedList>
-            <ListItem>Make a fence out of the barbed wire</ListItem>
-            <ListItem>Knock over the lantern</ListItem>
-            <ListItem>Dump out the drum</ListItem>
-          </UnorderedList>
+          <List.Root>
+            <List.Item>Make a fence out of the barbed wire</List.Item>
+            <List.Item>Knock over the lantern</List.Item>
+            <List.Item>Dump out the drum</List.Item>
+          </List.Root>
         </>
       )}
       <Line>

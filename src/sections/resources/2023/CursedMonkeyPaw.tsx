@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -122,7 +122,7 @@ function inRunWishes() {
     {
       target: $effect`Dirty Pear`,
       additionalDescription: (
-        <Text as="span" color="purple.500">
+        <Text as="span" color="purple.solid">
           double sleaze damage
         </Text>
       ),
@@ -132,7 +132,7 @@ function inRunWishes() {
     {
       target: $effect`Painted-On Bikini`,
       additionalDescription: (
-        <Text as="span" color="purple.500">
+        <Text as="span" color="purple.solid">
           +100 sleaze damage
         </Text>
       ),
@@ -199,7 +199,7 @@ function inRunWishes() {
     {
       target: $effect`Staying Frosty`,
       additionalDescription: (
-        <Text as="span" color="blue.500">
+        <Text as="span" color="blue.solid">
           cold damage race
         </Text>
       ),
@@ -210,7 +210,7 @@ function inRunWishes() {
     {
       target: $effect`Dragged Through the Coals`,
       additionalDescription: (
-        <Text as="span" color="red.500">
+        <Text as="span" color="red.solid">
           hot damage race
         </Text>
       ),
@@ -221,7 +221,7 @@ function inRunWishes() {
     {
       target: $effect`Bored Stiff`,
       additionalDescription: (
-        <Text as="span" color="gray.500">
+        <Text as="span" color="gray.solid">
           spooky damage race
         </Text>
       ),
@@ -232,7 +232,7 @@ function inRunWishes() {
     {
       target: $effect`Sewer-Drenched`,
       additionalDescription: (
-        <Text as="span" color="green.500">
+        <Text as="span" color="green.solid">
           stench damage race
         </Text>
       ),
@@ -243,7 +243,7 @@ function inRunWishes() {
     {
       target: $effect`Fifty Ways to Bereave Your Lover`,
       additionalDescription: (
-        <Text as="span" color="purple.500">
+        <Text as="span" color="purple.solid">
           sleaze damage race
         </Text>
       ),
@@ -308,13 +308,13 @@ function showWish({
   currentlyAccessible,
   additionalDescription,
 }: MonkeyWish) {
-  const color = currentlyAccessible ? "black" : "gray.500";
+  const color = currentlyAccessible ? "black" : "gray.solid";
 
   return (
-    <ListItem color={color} key={target.identifierString}>
+    <List.Item color={color} key={target.identifierString}>
       {target.name}
       {additionalDescription && <>: {additionalDescription}</>}
-    </ListItem>
+    </List.Item>
   );
 }
 
@@ -361,20 +361,20 @@ const CursedMonkeysPaw = () => {
       {options.length > 0 && (
         <>
           <Line fontWeight="bold">Possible wishes:</Line>
-          <UnorderedList>{options}</UnorderedList>
+          <List.Root>{options}</List.Root>
         </>
       )}
       <Line fontWeight="bold">Monkey skills:</Line>
-      <UnorderedList>
+      <List.Root>
         {monkeySkills().map((skill) => (
-          <ListItem key={skill.fingerCount}>
+          <List.Item key={skill.fingerCount}>
             <Text as="b">
               {plural(skill.fingerCount, "finger", "fingers")}:
             </Text>{" "}
             {skill.description}
-          </ListItem>
+          </List.Item>
         ))}
-      </UnorderedList>
+      </List.Root>
       {monkeyWishesLeft === 5 && (
         <>
           <Line

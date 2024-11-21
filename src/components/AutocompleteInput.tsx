@@ -1,13 +1,4 @@
-import {
-  Input,
-  InputProps,
-  List,
-  ListItem,
-  Popover,
-  PopoverBody,
-  PopoverContent,
-  PopoverTrigger,
-} from "@chakra-ui/react";
+import { Input, InputProps, List } from "@chakra-ui/react";
 import {
   ChangeEvent,
   forwardRef,
@@ -16,6 +7,13 @@ import {
   useCallback,
   useState,
 } from "react";
+
+import {
+  PopoverBody,
+  PopoverContent,
+  PopoverRoot,
+  PopoverTrigger,
+} from "./ui/popover";
 
 function mod(n: number, k: number): number {
   const naive = n % k;
@@ -106,14 +104,15 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
     );
 
     return (
-      <Popover
-        isOpen={!hide && value.length >= 3 && matchingValues.length > 0}
+      <PopoverRoot
+        open={!hide && value.length >= 3 && matchingValues.length > 0}
         autoFocus={false}
-        placement="top"
+        positioning={{ placement: "top" }}
       >
         <PopoverTrigger>
           <Input
             size="xs"
+            height={7}
             value={value}
             onChange={handleChange}
             onKeyDown={handleAutocompleteKeyDown}
@@ -128,13 +127,13 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
         </PopoverTrigger>
         <PopoverContent maxW="90vw">
           <PopoverBody p={2} maxW="90vw">
-            <List listStyleType="none">
+            <List.Root listStyleType="none">
               {matchingValues.map((name, index) => {
                 const highlight =
                   autoIndex !== null &&
                   mod(autoIndex, matchingValues.length) === index;
                 return (
-                  <ListItem
+                  <List.Item
                     key={name}
                     data-current={name}
                     p={0.5}
@@ -146,13 +145,13 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
                     borderRadius="3px"
                   >
                     {name}
-                  </ListItem>
+                  </List.Item>
                 );
               })}
-            </List>
+            </List.Root>
           </PopoverBody>
         </PopoverContent>
-      </Popover>
+      </PopoverRoot>
     );
   },
 );

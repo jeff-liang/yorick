@@ -83,7 +83,7 @@ const Level10: FC = () => {
             {!haveEquipped($item`amulet of extreme plot significance`) &&
               !haveEquipped($item`titanium assault umbrella`) &&
               !haveEquipped($item`unbreakable umbrella`) && (
-                <Line fontWeight="bold" color="red.500">
+                <Line fontWeight="bold" color="red.solid">
                   Equip an umbrella or the amulet of extreme plot significance.
                 </Line>
               )}
@@ -105,7 +105,7 @@ const Level10: FC = () => {
           9,
           <>
             {!haveEquipped($item`Mohawk wig`) && (
-              <Line fontWeight="bold" color="red.500">
+              <Line fontWeight="bold" color="red.solid">
                 Equip a Mohawk wig.
               </Line>
             )}

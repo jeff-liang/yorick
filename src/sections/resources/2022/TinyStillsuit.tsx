@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { Box, List, Text } from "@chakra-ui/react";
 import {
   haveEquipped,
   inebrietyLimit,
@@ -8,7 +8,7 @@ import {
 import { $item, get } from "libram";
 import { getHashIfAvailable } from "tome-kolmafia-lib";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -54,7 +54,7 @@ const TinyStillsuit = () => {
           {familiarSweat > 449 ? (
             <>
               <Line>
-                <Text as="b" color="red.500">
+                <Text as="b" color="red.solid">
                   {sweatAdvs}
                 </Text>{" "}
                 advs when guzzling now (costs 1 liver).
@@ -72,17 +72,17 @@ const TinyStillsuit = () => {
             </Line>
           )}
           {haveStillsuitEquipped && (
-            <Line color="purple.500">
+            <Line color="purple.solid">
               Currently collecting sweat from current familiar!
             </Line>
           )}
           {!haveStillsuitEquipped && haveStillsuitInInventory && (
-            <Line color="red.500">
+            <Line color="red.solid">
               Not collecting sweat from any familiar right now.
             </Line>
           )}
           {!haveStillsuitEquipped && !haveStillsuitInInventory && (
-            <Line color="fuchsia.500">
+            <Line color="fuchsia.solid">
               Currently collecting sweat on a different familiar!
             </Line>
           )}
@@ -149,7 +149,7 @@ const TinyStillsuit = () => {
         </>
       ) : (
         <>
-          <Line color="red.500">Not enough sweat to guzzle.</Line>
+          <Line color="red.solid">Not enough sweat to guzzle.</Line>
           <Line>
             <Text as="b">{sweatCalcSweat - familiarSweat}</Text> more sweat
             until +1 more adventure. (
@@ -159,61 +159,59 @@ const TinyStillsuit = () => {
         </>
       )}
       {haveStillsuitEquipped && (
-        <Line color="purple.500">
+        <Line color="purple.solid">
           Currently collecting sweat from current familiar!
         </Line>
       )}
       {haveStillsuitInInventory && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Not collecting sweat from any familiar right now.
         </Line>
       )}
       {!haveStillsuitEquipped && !haveStillsuitInInventory && (
-        <Line color="fuchsia.500">
+        <Line color="fuchsia.solid">
           Currently collecting sweat on a different familiar!
         </Line>
       )}
-      <Line>
-        <AdviceTooltip
-          display="inline-block"
-          text={
-            <UnorderedList>
+      <Box>
+        <AdviceTooltipText
+          advice={
+            <List.Root>
               {Object.entries(advDramsTable).map(
                 ([advs, drams]) =>
                   drams > familiarSweat && (
-                    <ListItem key={advs}>
+                    <List.Item key={advs}>
                       {advs} advs: {drams} drams ({drams - familiarSweat} more
                       sweat)
-                    </ListItem>
+                    </List.Item>
                   ),
               )}
               {familiarSweat > 553 && (
-                <ListItem>
+                <List.Item>
                   {" "}
                   13 advs: ... y'know, you should probably just drink it, buddy.
-                </ListItem>
+                </List.Item>
               )}
-            </UnorderedList>
+            </List.Root>
           }
-          label="Sweat/Advs"
+          children="Sweat/Advs"
         />{" "}
         •{" "}
-        <AdviceTooltip
-          display="inline-block"
-          text={
-            <UnorderedList>
-              <ListItem>Cubeling / Stomping Boots: +item</ListItem>
-              <ListItem>
+        <AdviceTooltipText
+          advice={
+            <List.Root>
+              <List.Item>Cubeling / Stomping Boots: +item</List.Item>
+              <List.Item>
                 Levitating Potato / Candy Carnie / Flan: +item and +food
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 Star Starfish / Emilio / Globmule / Waifuton: +item and +sleaze
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           }
-          label="Suggested Familiars"
+          children="Suggested Familiars"
         />
-      </Line>
+      </Box>
     </Tile>
   );
 };

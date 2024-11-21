@@ -106,7 +106,7 @@ const LordSpookyraven: FC = () => {
           >
             <Line
               href={inventoryLink($item`unstable fulminate`)}
-              color="red.500"
+              color="red.solid"
             >
               Equip unstable fulminate.
             </Line>

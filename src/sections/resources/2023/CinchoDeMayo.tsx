@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { getDwelling, myAscensions, totalFreeRests } from "kolmafia";
 import {
   $item,
@@ -79,7 +79,7 @@ const CinchoDeMayo = () => {
       </Line>
       {totalCinch > 60 && (
         <Line>
-          <Text as="b" color="purple.500">
+          <Text as="b" color="purple.solid">
             Fiesta Exit (60%):
           </Text>{" "}
           Force a NC on your next adventure. You have{" "}
@@ -87,26 +87,26 @@ const CinchoDeMayo = () => {
           {totalCinch % 60}% cinch left over.
         </Line>
       )}
-      <UnorderedList>
+      <List.Root>
         {totalCinch > 25 && (
-          <ListItem>
+          <List.Item>
             <Text as="b">Party Soundtrack (25%):</Text> 30 advs of +5 fam
             weight.
-          </ListItem>
+          </List.Item>
         )}
         {totalCinch > 5 && (
           <>
-            <ListItem>
+            <List.Item>
               <Text as="b">Confetti Extravaganza (5%):</Text> 2x stats,
               in-combat
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <Text as="b">Projectile Piñata (5%):</Text> complex candy,
               in-combat
-            </ListItem>
+            </List.Item>
           </>
         )}
-      </UnorderedList>
+      </List.Root>
       <Line>
         You have {totalCinch}% more cinch available, accounting for your{" "}
         {plural(freeRestsRemaining, "remaining free rest")}.

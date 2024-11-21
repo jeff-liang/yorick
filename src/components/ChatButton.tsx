@@ -1,5 +1,5 @@
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import { ButtonProps, IconButton } from "@chakra-ui/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 
 export interface ChatButtonProps extends ButtonProps {
@@ -8,14 +8,16 @@ export interface ChatButtonProps extends ButtonProps {
 
 const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
   <IconButton
-    icon={direction === "left" ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+    asChild
     aria-label="Refresh"
-    size="xs"
-    fontSize="20px"
+    size="2xs"
+    p={1}
     variant="outline"
     backgroundColor="white"
     {...props}
-  />
+  >
+    {direction === "left" ? <ChevronLeft /> : <ChevronRight />}
+  </IconButton>
 );
 
 export default ChatButton;

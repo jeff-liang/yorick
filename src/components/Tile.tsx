@@ -1,4 +1,3 @@
-import { ChevronDownIcon, ChevronUpIcon } from "@chakra-ui/icons";
 import {
   Box,
   Heading,
@@ -9,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { Familiar, Item, Skill } from "kolmafia";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { FC, ReactNode, useState } from "react";
 
 import useLocalStorage from "../hooks/useLocalStorage";
@@ -89,9 +89,9 @@ const Tile: FC<TileProps> = ({
   const imageSize = collapsed || disabled ? "20px" : "30px";
 
   const tileContents = (
-    <>
-      <HStack spacing={1} align="center">
-        <Heading as="h3" size="sm">
+    <VStack align="start" gap={0.5}>
+      <HStack gap={1} align="center">
+        <Heading as="h3" size="md" lineHeight="tall">
           {!collapsed && !disabled && !linkEntireTile && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (
@@ -99,7 +99,7 @@ const Tile: FC<TileProps> = ({
           )}
         </Heading>
         <HStack
-          spacing={1}
+          gap={1}
           css={{
             ".chakra-portal &": {
               display: "none",
@@ -113,25 +113,29 @@ const Tile: FC<TileProps> = ({
           {!collapsed && extraLinks}
           {disabled || nonCollapsible || (
             <IconButton
-              icon={collapsed ? <ChevronUpIcon /> : <ChevronDownIcon />}
+              asChild
               aria-label="Collapse"
               h={4}
-              minW={4}
+              w={4}
+              minW={2}
               fontSize="20px"
               variant="ghost"
+              color="inherit"
               onClick={() => setCollapsed((collapsed) => !collapsed)}
-            />
+            >
+              {collapsed ? <ChevronUp /> : <ChevronDown />}
+            </IconButton>
           )}
         </HStack>
       </HStack>
       {!collapsed && !disabled && children}
-    </>
+    </VStack>
   );
 
   return (
     <HStack
       align="stretch"
-      textColor={collapsed || disabled ? "gray.500" : undefined}
+      color={collapsed || disabled ? "fg.subtle" : undefined}
       {...props}
     >
       <Box
@@ -161,13 +165,11 @@ const Tile: FC<TileProps> = ({
           />
         )}
       </Box>
-      <VStack align="stretch" spacing={0.5}>
-        {!collapsed && !disabled && linkEntireTile ? (
-          <MainLink href={href}>{tileContents}</MainLink>
-        ) : (
-          tileContents
-        )}
-      </VStack>
+      {!collapsed && !disabled && linkEntireTile ? (
+        <MainLink href={href}>{tileContents}</MainLink>
+      ) : (
+        tileContents
+      )}
     </HStack>
   );
 };

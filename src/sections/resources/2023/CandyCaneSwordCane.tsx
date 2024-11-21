@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   haveEquipped,
@@ -8,7 +8,7 @@ import {
 } from "kolmafia";
 import { $item, $location, $locations, get, have, questStep } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -31,7 +31,7 @@ const CandyCaneSwordCane = () => {
     {
       available: !get("_candyCaneSwordLyle"),
       node: (
-        <ListItem key="lyle">
+        <List.Item key="lyle">
           <MainLink
             href={
               ccscEquipped
@@ -41,7 +41,7 @@ const CandyCaneSwordCane = () => {
           >
             Bonus: Lyle's Monorail Buff (+40% init).
           </MainLink>
-        </ListItem>
+        </List.Item>
       ),
       location: null,
     },
@@ -49,18 +49,18 @@ const CandyCaneSwordCane = () => {
       available:
         !get("candyCaneSwordBlackForest") && questStep("questL11Black") < 2,
       node: (
-        <ListItem key="black">
+        <List.Item key="black">
           Bonus: The Black Forest (+8 exploration).
-        </ListItem>
+        </List.Item>
       ),
       location: $location`The Black Forest`,
     },
     {
       available: !get("candyCaneSwordDailyDungeon") && !get("dailyDungeonDone"),
       node: (
-        <ListItem key="daily">
+        <List.Item key="daily">
           Bonus: Daily Dungeon (+1 fat loot token).
-        </ListItem>
+        </List.Item>
       ),
       location: $location`The Daily Dungeon`,
     },
@@ -69,7 +69,9 @@ const CandyCaneSwordCane = () => {
         !get("candyCaneSwordApartmentBuilding") &&
         get("hiddenApartmentProgress") < 8,
       node: (
-        <ListItem key="apartment">Bonus: Hidden Apartment (+1 Curse).</ListItem>
+        <List.Item key="apartment">
+          Bonus: Hidden Apartment (+1 Curse).
+        </List.Item>
       ),
       location: $location`The Hidden Apartment Building`,
     },
@@ -78,9 +80,9 @@ const CandyCaneSwordCane = () => {
         !get("candyCaneSwordBowlingAlley") &&
         get("hiddenBowlingAlleyProgress") < 7,
       node: (
-        <ListItem key="bowl">
+        <List.Item key="bowl">
           Bonus: Hidden Bowling Alley (+1 free bowl).
-        </ListItem>
+        </List.Item>
       ),
       location: $location`The Hidden Bowling Alley`,
     },
@@ -88,9 +90,9 @@ const CandyCaneSwordCane = () => {
       available:
         !get("candyCaneSwordShore") && get("lastIslandUnlock") < myAscensions(),
       node: (
-        <ListItem key="shore">
+        <List.Item key="shore">
           Alternate: Shore (2 scrips for the price of 1).
-        </ListItem>
+        </List.Item>
       ),
       location: $location`The Shore, Inc. Travel Agency`,
     },
@@ -100,22 +102,22 @@ const CandyCaneSwordCane = () => {
           canAdventure(l),
         ) && questStep("questL12War") < 1,
       node: (
-        <ListItem key="hippy">
+        <List.Item key="hippy">
           Alternate: Hippy Camp (Redirect to the War Start NC).
-        </ListItem>
+        </List.Item>
       ),
       location: $location`Wartime Hippy Camp`,
     },
     {
       available: get("zeppelinProtestors") < 80,
       node: (
-        <ListItem key="zeppelin">
+        <List.Item key="zeppelin">
           Alternate: Zeppelin Protesters{" "}
-          <Text as="span" color="purple.500">
+          <Text as="span" color="purple.solid">
             (double Sleaze damage!)
           </Text>
           .
-        </ListItem>
+        </List.Item>
       ),
       location: $location`A Mob of Zeppelin Protesters`,
     },
@@ -139,28 +141,28 @@ const CandyCaneSwordCane = () => {
       node: haveCcsc && inRun && pathCheck && displayNag && (
         <Tile header="Wear Your Candy" linkedContent={candyCaneSwordCane}>
           <Line>
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               You're
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               in a
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               candy
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               cane
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               sword
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               cane
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               noncom
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               zone!
             </Text>
           </Line>
@@ -188,14 +190,12 @@ const CandyCaneSwordCane = () => {
         linkedContent={candyCaneSwordCane}
       >
         <Line>Ensure your CCSC is equipped for useful NCs:</Line>
-        <UnorderedList>
-          {availableOptions.map(({ node }) => node)}
-        </UnorderedList>
+        <List.Root>{availableOptions.map(({ node }) => node)}</List.Root>
         {!ccscEquipped && (
           <Line>
-            <AdviceTooltip
-              text="This is important!"
-              label="Equip the Candy Cane Sword Cane!"
+            <AdviceTooltipText
+              advice="This is important!"
+              children="Equip the Candy Cane Sword Cane!"
             />
           </Line>
         )}

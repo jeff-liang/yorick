@@ -43,7 +43,7 @@ const Zeppelin = () => {
       imageUrl="/images/itemimages/scharm.gif"
       href="/place.php?whichplace=zeppelin"
       tooltip={
-        tooltip && <AdviceTooltipIcon text={tooltip}></AdviceTooltipIcon>
+        tooltip && <AdviceTooltipIcon advice={tooltip}></AdviceTooltipIcon>
       }
       disabled={!questFinished("questL11Black")}
     >

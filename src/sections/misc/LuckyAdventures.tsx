@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { availableAmount, toItem } from "kolmafia";
 import {
   $effect,
@@ -197,7 +197,7 @@ const LuckyAdventures: FC = () => {
           header="You're lucky!"
           imageUrl="/images/itemimages/11leafclover.gif"
         >
-          <Line color="green.500">Next adventure will be a lucky one.</Line>
+          <Line color="green.solid">Next adventure will be a lucky one.</Line>
         </Tile>
       ),
     }),
@@ -210,7 +210,7 @@ const LuckyAdventures: FC = () => {
 
   const renderedUses = luckyAdventureUses.map(([name, use]) => {
     const rendered = use();
-    return rendered ? <ListItem key={name}>{rendered}</ListItem> : false;
+    return rendered ? <List.Item key={name}>{rendered}</List.Item> : false;
   });
 
   return (
@@ -223,7 +223,7 @@ const LuckyAdventures: FC = () => {
       {renderedUses.some((use) => use) ? (
         <>
           <Line>Ideas for uses:</Line>
-          <UnorderedList>{renderedUses}</UnorderedList>
+          <List.Root>{renderedUses}</List.Root>
         </>
       ) : (
         <Line>No ideas for how to use these. Get creative!</Line>

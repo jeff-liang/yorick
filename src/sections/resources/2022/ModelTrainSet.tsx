@@ -1,8 +1,8 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, myLevel, myPrimestat } from "kolmafia";
 import { $item, $stat, get, have } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -220,23 +220,23 @@ const ModelTrainSet = () => {
   return (
     <Tile header="Model Train Set" imageUrl={imageUrl}>
       {oreConfiguredWhenNotNeeded() && (
-        <Line color="red.500">Have ore configured when it's not needed!</Line>
+        <Line color="red.solid">Have ore configured when it's not needed!</Line>
       )}
       {loggingMillConfiguredWhenNotNeeded() && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Have lumber mill configured when it's not needed!
         </Line>
       )}
       {statsConfiguredWhenNotNeeded() && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Have stats configured when they're not needed!
         </Line>
       )}
       {stationConfigured("empty") && (
-        <Line color="red.500">Have an empty station configured!</Line>
+        <Line color="red.solid">Have an empty station configured!</Line>
       )}
       {reconfigurableIn === 0 ? (
-        <Line color="blue.500" href="/campground.php?action=workshed">
+        <Line color="blue.solid" href="/campground.php?action=workshed">
           Train set reconfigurable!
         </Line>
       ) : (
@@ -249,26 +249,26 @@ const ModelTrainSet = () => {
         Next station: <Text as="b">{nextStation.name}</Text> -{" "}
         {nextStation.description}
       </Line>
-      <AdviceTooltip
-        text={
+      <AdviceTooltipText
+        advice={
           <>
             <Text as="b" textAlign="center" pb={1}>
               Train station cycle
             </Text>
-            <UnorderedList>
+            <List.Root>
               {Array.from({ length: 8 }, (_, i) => {
                 const station =
                   stationDescriptions[stations[(trainPosition + i) % 8]];
                 return (
-                  <ListItem key={i}>
+                  <List.Item key={i}>
                     <Text as="b">{station.name}</Text>: {station.description}
-                  </ListItem>
+                  </List.Item>
                 );
               })}
-            </UnorderedList>
+            </List.Root>
           </>
         }
-        label="Full train cycle"
+        children="Full train cycle"
       />
     </Tile>
   );

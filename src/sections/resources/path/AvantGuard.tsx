@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { Monster, myFamiliar, myPath } from "kolmafia";
 import {
   $familiar,
@@ -93,11 +93,11 @@ const AvantGuard: FC = () => {
               Your bodyguard is ready to talk to you.
               {bodyguardOut && " Take them with you."} Recommended chats:
             </Line>
-            <UnorderedList size="xs">
+            <List.Root fontSize="xs">
               {recommended.map((monster) => (
-                <ListItem key={monster.id}>{monster.name}</ListItem>
+                <List.Item key={monster.id}>{monster.name}</List.Item>
               ))}
-            </UnorderedList>
+            </List.Root>
           </Tile>
         ) : monster ? (
           <Tile

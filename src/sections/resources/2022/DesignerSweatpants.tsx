@@ -1,4 +1,4 @@
-import { LinkProps, ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { LinkProps, List, Text } from "@chakra-ui/react";
 import { haveEquipped, myInebriety } from "kolmafia";
 import { $item, $skill, get } from "libram";
 import { FC } from "react";
@@ -32,33 +32,33 @@ const DesignerSweatpants = () => {
       id="designer-sweatpants-tile"
       linkedContent={designerSweatpants}
     >
-      <UnorderedList>
-        <ListItem>
+      <List.Root>
+        <List.Item>
           <LinkOrEquip href={skillLink($skill`Sweat Sip`)}>
             <Text as="b">Sweat Sip (5% sweat):</Text> Regain 50 MP
           </LinkOrEquip>
-        </ListItem>
-        <ListItem>
+        </List.Item>
+        <List.Item>
           <LinkOrEquip href={skillLink($skill`Drench Yourself in Sweat`)}>
             <Text as="b">Drench Yourself in Sweat (15% sweat):</Text> +100%
             Initiative
           </LinkOrEquip>
-        </ListItem>
+        </List.Item>
         {boozeSweatsLeft > 0 && (
-          <ListItem>
+          <List.Item>
             <LinkOrEquip href={skillLink($skill`Sweat Out Some Booze`)}>
               <Text as="b">Sweat Out Some Booze (25% sweat):</Text>
             </LinkOrEquip>
             <LinkOrEquip
               href={skillLink($skill`Sweat Out Some Booze`)}
-              color="orange.500"
+              color="orange.solid"
             >
               {` -1 Drunkenness. ${plural(boozeSweatsLeft, "use")} left for today.`}
               {myInebriety() === 0 && " Drink some booze first."}
             </LinkOrEquip>
-          </ListItem>
+          </List.Item>
         )}
-      </UnorderedList>
+      </List.Root>
     </Tile>
   );
 };

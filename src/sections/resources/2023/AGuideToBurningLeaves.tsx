@@ -1,9 +1,9 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, getCampground, myLevel } from "kolmafia";
 import { $effect, $familiar, $item, $skill, get, have } from "libram";
 import { FC } from "react";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import LinkBlock from "../../../components/LinkBlock";
 import Tile from "../../../components/Tile";
@@ -207,7 +207,7 @@ const AGuideToBurningLeaves: FC = () => {
     >
       <LinkBlock href="/campground.php?preaction=leaves">
         <Line fontWeight="bold">Item Summons:</Line>
-        <UnorderedList>
+        <List.Root>
           {LEAFY_SUMMONS.map((summon) => {
             if (
               ((canUseShorty || canUseCrab) && summon.leafCost === 37) ||
@@ -225,29 +225,29 @@ const AGuideToBurningLeaves: FC = () => {
 
             const hasEnoughLeaves = leafCount >= summon.leafCost;
             return (
-              <ListItem
+              <List.Item
                 key={summon.summonedItem}
-                color={hasEnoughLeaves ? "black" : "gray.500"}
+                color={hasEnoughLeaves ? "black" : "gray.solid"}
               >
                 {summon.leafCost} leaves: {summon.summonedItem} -{" "}
                 {summon.description}
                 {summon.meltingStatus && (
-                  <Text as="span" fontSize="xs" color="gray.500">
+                  <Text as="span" fontSize="xs" color="gray.solid">
                     {" "}
                     (melting)
                   </Text>
                 )}
-              </ListItem>
+              </List.Item>
             );
           })}
-        </UnorderedList>
+        </List.Root>
       </LinkBlock>
 
       {fightsRemaining > 0 && (
         <>
           <LinkBlock href="/campground.php?preaction=leaves">
             <Line fontWeight="bold">Fight Summons:</Line>
-            <UnorderedList>
+            <List.Root>
               {LEAFY_FIGHTS.map((fight) => {
                 if (
                   inRun &&
@@ -259,43 +259,43 @@ const AGuideToBurningLeaves: FC = () => {
 
                 const hasEnoughLeaves = leafCount >= fight.leafCost;
                 return (
-                  <ListItem
+                  <List.Item
                     key={fight.summonedMonster}
-                    color={hasEnoughLeaves ? "black" : "gray.500"}
+                    color={hasEnoughLeaves ? "black" : "gray.solid"}
                   >
                     {fight.leafCost} leaves: {fight.summonedMonster} -{" "}
                     {fight.scaling}; ~{fight.leavesDropped} leaves dropped
                     {fight.extraDrops && (
-                      <Text as="span" fontSize="xs" color="gray.500">
+                      <Text as="span" fontSize="xs" color="gray.solid">
                         {" "}
                         (also, drops {fight.extraDrops})
                       </Text>
                     )}
-                  </ListItem>
+                  </List.Item>
                 );
               })}
-            </UnorderedList>
+            </List.Root>
           </LinkBlock>
           <Line>
             {leafCount >= 111 * fightsRemaining ? (
-              <AdviceTooltip
-                text={`You can summon ${fightsRemaining} monstera for scaling fights.`}
-                label={`You have enough leaves for ${fightsRemaining} monstera.`}
+              <AdviceTooltipText
+                advice={`You can summon ${fightsRemaining} monstera for scaling fights.`}
+                children={`You have enough leaves for ${fightsRemaining} monstera.`}
               />
             ) : leafCount >= 11 * fightsRemaining ? (
-              <AdviceTooltip
-                text={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
-                label={`You have enough leaves for ${fightsRemaining} leaflets.`}
+              <AdviceTooltipText
+                advice={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
+                children={`You have enough leaves for ${fightsRemaining} leaflets.`}
               />
             ) : leafCount >= 11 ? (
-              <AdviceTooltip
-                text="Save leaves for more fights!"
-                label={`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
+              <AdviceTooltipText
+                advice="Save leaves for more fights!"
+                children={`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
               />
             ) : (
-              <AdviceTooltip
-                text="Save leaves for fights!"
-                label="You cannot currently summon a free fight."
+              <AdviceTooltipText
+                advice="Save leaves for fights!"
+                children="You cannot currently summon a free fight."
               />
             )}
           </Line>

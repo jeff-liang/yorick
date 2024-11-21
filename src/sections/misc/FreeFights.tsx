@@ -1,4 +1,3 @@
-import { QuestionOutlineIcon } from "@chakra-ui/icons";
 import {
   availableAmount,
   canAdventure,
@@ -7,6 +6,7 @@ import {
   myPath,
 } from "kolmafia";
 import { $item, $location, $path, $skill, get } from "libram";
+import { CircleHelp } from "lucide-react";
 import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
@@ -134,11 +134,11 @@ const FreeFights: FC = () => {
       imageUrl="/images/adventureimages/eldtentacle.gif"
       tooltip={
         <AdviceTooltipIcon
-          text={`These are inherently free fights. They do not cost a turn, nor do they
+          advice={`These are inherently free fights. They do not cost a turn, nor do they
             decrement your effects. Many of them are scaling fights; by stacking
             large +mainstat% modifiers, they will give increasing amounts of stats
             and allow you to level very quickly!`}
-          icon={QuestionOutlineIcon}
+          icon={CircleHelp}
         />
       }
     >

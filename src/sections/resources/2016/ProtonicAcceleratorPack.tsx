@@ -42,9 +42,9 @@ const ProtonicAcceleratorPack = () => {
       node: haveProtonPack && nextGhostTurn <= totalTurnsPlayed() && (
         <Tile header="It's ghost bustin' time!" linkedContent={protonPack}>
           {protonPackEquipped ? (
-            <Line color="red.500">Equip the protopack first.</Line>
+            <Line color="red.solid">Equip the protopack first.</Line>
           ) : (
-            <Line color="blue.500">Who you gonna call? You!</Line>
+            <Line color="blue.solid">Who you gonna call? You!</Line>
           )}
         </Tile>
       ),
@@ -69,7 +69,7 @@ const ProtonicAcceleratorPack = () => {
             {protonPackEquipped ? (
               <Line>Cast "shoot ghost" three times, then "trap ghost".</Line>
             ) : (
-              <Line command="equip protonic accelerator pack" color="red.500">
+              <Line command="equip protonic accelerator pack" color="red.solid">
                 Equip the protonic accelerator pack first.
               </Line>
             )}

@@ -30,14 +30,14 @@ const SpringShoes = () => {
           linkedContent={springShoes}
         >
           <Line>
-            <Text as="span" color="green.500" fontWeight="bold">
+            <Text as="span" color="green.solid">
               Free-run away from your problems with the{" "}
               <Text as="b">Spring Away</Text> skill!
             </Text>
           </Line>
           {!haveShoesEquipped && (
             <Line>
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 Equip the spring shoes first.
               </Text>
             </Line>
@@ -54,7 +54,7 @@ const SpringShoes = () => {
     <Tile linkedContent={springShoes}>
       <Line>Spring Kick: All day banish, doesn't end combat.</Line>
       {!haveShoesEquipped && (
-        <Line color="red">Equip the spring shoes first.</Line>
+        <Line color="red.solid">Equip the spring shoes first.</Line>
       )}
     </Tile>
   );

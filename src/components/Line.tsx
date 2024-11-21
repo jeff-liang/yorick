@@ -29,7 +29,7 @@ const Line: FC<Props> = ({
     command = `equip ${equipItem.identifierString}`;
   }
   return (
-    <Text mt={0} {...props}>
+    <Text {...props}>
       {command ? (
         <AsyncLink command={command}>{children}</AsyncLink>
       ) : href ? (

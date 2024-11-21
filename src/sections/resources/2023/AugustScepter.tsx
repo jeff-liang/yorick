@@ -1,4 +1,4 @@
-import { Table, Tbody, Td, Text, Tr } from "@chakra-ui/react";
+import { Table, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   myLevel,
@@ -18,7 +18,7 @@ import {
 } from "libram";
 import { FC, ReactNode } from "react";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -66,7 +66,7 @@ const AugustScepter: FC = () => {
   if (!have(augustScepter) || skillsAvailable < 1) return null;
 
   const buffString = (
-    <Text as="span" color="gray.500">
+    <Text as="span" color="gray.solid">
       {" "}
       (buff)
     </Text>
@@ -99,7 +99,7 @@ const AugustScepter: FC = () => {
         1,
         <>
           +2-5 turns{" "}
-          <Text as="span" size="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.solid">
             (spend turns @ the Goatlet)
           </Text>
         </>,
@@ -108,12 +108,12 @@ const AugustScepter: FC = () => {
 
     usefulAugustSkills.push([
       30,
-      <>
+      <Text>
         +7 advs rollover accessory{" "}
-        <Text as="span" color="gray.500">
+        <Text as="span" fontSize="xs" color="gray.solid">
           (melting)
         </Text>
-      </>,
+      </Text>,
     ]);
   }
 
@@ -121,7 +121,7 @@ const AugustScepter: FC = () => {
     questStep("questL11Manor") < 3 && get("manorDrawerCount") >= 21;
   const blastingAddendum =
     manorCheck && !have($item`blasting soda`) ? (
-      <Text as="span" color="gray.500">
+      <Text as="span" color="gray.solid">
         {" "}
         (blasting soda!)
       </Text>
@@ -137,19 +137,19 @@ const AugustScepter: FC = () => {
       31,
       <>
         +100% booze drop wine{" "}
-        <Text as="span" color="gray.500">
+        <Text as="span" color="gray.solid">
           (chateau de vinegar!)
         </Text>
       </>,
     ]);
   }
 
-  usefulAugustSkills.push([7, <>+50% item, +100% meat{buffString}</>]);
+  usefulAugustSkills.push([7, <Text>+50% item, +100% meat{buffString}</Text>]);
   usefulAugustSkills.push([
     2,
     <>
       get{" "}
-      <Text as="span" color="green.500">
+      <Text as="span" color="green.solid">
         Lucky!
       </Text>
     </>,
@@ -158,10 +158,13 @@ const AugustScepter: FC = () => {
   usefulAugustSkills.push([22, "free fight for teeeeeeeeeeeth"]);
 
   if (questStep("questL08Trapper") < 2) {
-    usefulAugustSkills.push([6, <>+10% combat{buffString}</>]);
+    usefulAugustSkills.push([6, <Text>+10% combat{buffString}</Text>]);
   }
   usefulAugustSkills.push([9, "hold hands for a minor sniff"]);
-  usefulAugustSkills.push([10, <>non-free reusable banishes{buffString}</>]);
+  usefulAugustSkills.push([
+    10,
+    <Text>non-free reusable banishes{buffString}</Text>,
+  ]);
 
   const usefulOffhands = have($item`deck of lewd playing cards`);
   const protestorsRemaining = Math.max(
@@ -172,12 +175,12 @@ const AugustScepter: FC = () => {
   if (usefulOffhands && protestorsRemaining > 10) {
     usefulAugustSkills.push([
       13,
-      <>
+      <Text>
         double offhand enchantments{" "}
-        <Text as="span" color="purple.500">
+        <Text as="span" color="purple.solid">
           (sleaze for protestors)
         </Text>
-      </>,
+      </Text>,
     ]);
   }
 
@@ -190,12 +193,12 @@ const AugustScepter: FC = () => {
     if (!have($item`astral pet sweater`)) {
       usefulAugustSkills.push([
         28,
-        <>
+        <Text>
           +10 weight familiar equipment{" "}
-          <Text as="span" size="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.solid">
             (melting)
           </Text>
-        </>,
+        </Text>,
       ]);
     }
   }
@@ -205,18 +208,18 @@ const AugustScepter: FC = () => {
     .map(([day, reason]) => {
       const skillName = `Aug. ${ordinal(day)}: ${ALL_SKILLS.get(day)?.[0]}`;
       return (
-        <Tr key={day}>
-          <Td px={1} py={0.5}>
+        <Table.Row key={day}>
+          <Table.Cell px={1} py={0.5}>
             {day}
-          </Td>
-          <Td px={1} py={0.5}>
+          </Table.Cell>
+          <Table.Cell px={1} py={0.5}>
             {skillName ? (
               <MainLink href={skillLink(skillName)}>{reason}</MainLink>
             ) : (
               reason
             )}
-          </Td>
-        </Tr>
+          </Table.Cell>
+        </Table.Row>
       );
     });
 
@@ -225,17 +228,17 @@ const AugustScepter: FC = () => {
       <Text fontWeight="bold" textAlign="center">
         Well, you asked for it!
       </Text>
-      <Table size="sm">
-        <Tbody>
+      <Table.Root size="sm">
+        <Table.Body>
           {[...ALL_SKILLS.entries()]
             .sort(([a], [b]) => a - b)
             .map(([skillNumber, [, skillDesc]]) => {
               const lineColor = get(`_aug${skillNumber}Cast`)
-                ? "gray.500"
+                ? "gray.solid"
                 : "black";
               return (
-                <Tr key={skillNumber}>
-                  <Td
+                <Table.Row key={skillNumber}>
+                  <Table.Cell
                     textAlign="center"
                     fontSize="xs"
                     px={1}
@@ -243,15 +246,15 @@ const AugustScepter: FC = () => {
                     color={lineColor}
                   >
                     {skillNumber}
-                  </Td>
-                  <Td fontSize="xs" px={1} py={0} color={lineColor}>
+                  </Table.Cell>
+                  <Table.Cell fontSize="xs" px={1} py={0} color={lineColor}>
                     {skillDesc}
-                  </Td>
-                </Tr>
+                  </Table.Cell>
+                </Table.Row>
               );
             })}
-        </Tbody>
-      </Table>
+        </Table.Body>
+      </Table.Root>
     </>
   );
 
@@ -266,13 +269,13 @@ const AugustScepter: FC = () => {
         get valuable benefits.
       </Line>
       {table.length > 0 && (
-        <Table size="sm" variant="unstyled">
-          <Tbody>{table}</Tbody>
-        </Table>
+        <Table.Root size="sm" unstyled>
+          <Table.Body>{table}</Table.Body>
+        </Table.Root>
       )}
-      <AdviceTooltip
-        label="No, YORICK, show me ALL the skills."
-        text={tooltip}
+      <AdviceTooltipText
+        children="No, YORICK, show me ALL the skills."
+        advice={tooltip}
       />
     </Tile>
   );

@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, myPrimestat, numericModifier } from "kolmafia";
 import { $item, get, have } from "libram";
 
@@ -43,33 +43,33 @@ const SeptEmberCenser = () => {
         <>
           <Line>
             Have{" "}
-            <Text as="span" color="red.500" fontWeight="bold">
+            <Text as="span" color="red.solid" fontWeight="bold">
               {septEmbers}
             </Text>{" "}
             Sept-Embers to make stuff with!
           </Line>
-          <UnorderedList>
-            <ListItem>
+          <List.Root>
+            <List.Item>
               1 embers: +5 cold res accessory (you have {bembershootCount}).
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               2 embers: mouthwash for{" "}
-              <Text as="span" color="blue.500">
+              <Text as="span" color="blue.solid">
                 {mainstatGain}
               </Text>{" "}
               mainstat (you have{" "}
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 {mouthwashCount}
               </Text>
               ).
-            </ListItem>
+            </List.Item>
             {!have(structuralEmber) && (
-              <ListItem>4 embers: +5/5 bridge parts (1/day).</ListItem>
+              <List.Item>4 embers: +5/5 bridge parts (1/day).</List.Item>
             )}
             {!hulkFought && !have(miniEmberingHulk) && (
-              <ListItem>6 embers: embering hulk (1/day).</ListItem>
+              <List.Item>6 embers: embering hulk (1/day).</List.Item>
             )}
-          </UnorderedList>
+          </List.Root>
         </>
       )}
       {!structureUsed && have(structuralEmber) && (

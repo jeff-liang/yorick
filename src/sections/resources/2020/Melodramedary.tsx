@@ -1,4 +1,4 @@
-import { Badge, Flex, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Badge, Flex, List } from "@chakra-ui/react";
 import { haveEquipped, myAscensions, myFamiliar, myLevel } from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
 import { FC } from "react";
@@ -14,13 +14,13 @@ interface SpitTargetProps {
   target: SpitTarget;
 }
 
-// Generates a ListItem for a given spit target
+// Generates a List.Item for a given spit target
 const SpitTargetItem: FC<SpitTargetProps> = ({ userLevel, target }) => {
   if (!target.accessible(userLevel)) return <></>;
   return (
-    <ListItem
+    <List.Item
       key={target.monster}
-    >{`${target.monster} via ${target.zone}`}</ListItem>
+    >{`${target.monster} via ${target.zone}`}</List.Item>
   );
 };
 
@@ -220,7 +220,7 @@ const Melodramedary = () => {
         </Line>
       )}
       {spitProgress === 100 && recommendations.length > 0 && (
-        <UnorderedList>
+        <List.Root>
           {recommendations.slice(0, 2).map((recc) => (
             <SpitTargetItem
               key={recc.monster}
@@ -228,7 +228,7 @@ const Melodramedary = () => {
               target={recc}
             />
           ))}
-        </UnorderedList>
+        </List.Root>
       )}
       {spitProgress === 100 && nostalgiaUses < 3 && (
         <Line>

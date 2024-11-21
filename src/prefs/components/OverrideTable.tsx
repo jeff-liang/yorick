@@ -1,4 +1,4 @@
-import { Heading, Table, Tbody } from "@chakra-ui/react";
+import { Heading, Table } from "@chakra-ui/react";
 import { FC } from "react";
 
 import OverrideRow from "./OverrideRow";
@@ -22,8 +22,8 @@ const OverrideTable: FC<OverrideTableProps> = ({
     <Heading as="h2" size="md" textAlign="center">
       {heading}
     </Heading>
-    <Table size="sm">
-      <Tbody>
+    <Table.Root size="sm">
+      <Table.Body>
         {data
           .filter((item) => !filterRegex || filterRegex.test(getOverride(item)))
           .map((item) => (
@@ -34,8 +34,8 @@ const OverrideTable: FC<OverrideTableProps> = ({
               current={getCurrent(item)}
             />
           ))}
-      </Tbody>
-    </Table>
+      </Table.Body>
+    </Table.Root>
   </>
 );
 

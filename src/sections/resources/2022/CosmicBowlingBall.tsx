@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { $item, $location, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -54,14 +54,14 @@ const CosmicBowlingBall = () => {
     >
       {currentZone === $location`The Hidden Bowling Alley` && (
         <Line>
-          <Text as="span" color="teal.500" fontWeight={"bold"}>
+          <Text as="span" color="teal.solid" fontWeight={"bold"}>
             You're in the bowling alley; remember to bowl for pygmies!
           </Text>{" "}
         </Line>
       )}
       {youHaveTheBall && (
         <Line>
-          <Text as="span" color="red.500" fontWeight={"bold"}>
+          <Text as="span" color="red.solid" fontWeight={"bold"}>
             You've got your bowling ball; throw it!
           </Text>{" "}
         </Line>
@@ -79,7 +79,7 @@ const CosmicBowlingBall = () => {
             <Text as="b">Bowl Straight Up:</Text> Gain +25% items / +50% meat
           </Line>
           <Line>
-            <Text as="span" color="gray.400">
+            <Text as="span" color="gray.emphasized">
               <Text as="b">Bowl Backwards:</Text> Pickpocket from the rest of
               your current CSV.
             </Text>
@@ -89,9 +89,9 @@ const CosmicBowlingBall = () => {
       {returnCombats > 0 && (
         <Line>
           Your Bowling Ball will return in{" "}
-          <AdviceTooltip
-            text="Free runs count for this!"
-            label={plural(returnCombats, "turn")}
+          <AdviceTooltipText
+            advice="Free runs count for this!"
+            children={plural(returnCombats, "turn")}
           />
           .
         </Line>

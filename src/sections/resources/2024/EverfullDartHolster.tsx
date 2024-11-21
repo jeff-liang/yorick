@@ -35,19 +35,19 @@ const EverfullDartHolster = () => {
           linkedContent={everfullDartHolster}
         >
           <Line>
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               Shoot a bullseye! ({dartCooldown} turns ELR)
             </Text>
           </Line>
           {!holsterEquipped ? (
             <Line>
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 Equip the dart holster first.
               </Text>
             </Line>
           ) : (
             <Line>
-              <Text as="span" color="blue.500">
+              <Text as="span" color="blue.solid">
                 Dart holster equipped.
               </Text>
             </Line>
@@ -64,21 +64,21 @@ const EverfullDartHolster = () => {
     <Tile linkedContent={everfullDartHolster}>
       <Line>Current dart skill: {dartSkill}.</Line>
       <Line>
-        <Text as="span" color="blue.500">
+        <Text as="span" color="blue.solid">
           {dartsNeededForNextPerk}
         </Text>{" "}
         darts needed for next Perk.
       </Line>
       {!holsterEquipped && (
         <Line>
-          <Text as="span" color="red.500">
+          <Text as="span" color="red.solid">
             Equip the dart holster first.
           </Text>
         </Line>
       )}
       {holsterEquipped && (
         <Line>
-          <Text as="span" color="blue.500">
+          <Text as="span" color="blue.solid">
             Dart holster equipped.
           </Text>
         </Line>

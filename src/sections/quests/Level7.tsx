@@ -1,10 +1,4 @@
-import {
-  Divider,
-  ListItem,
-  Stack,
-  Text,
-  UnorderedList,
-} from "@chakra-ui/react";
+import { List, Separator, Stack, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   equippedItem,
@@ -65,14 +59,14 @@ const getZoneDisplay = (
       </Line>
       {evil > 13 && (
         <Stack direction="row">
-          <Divider orientation="vertical" />
-          <UnorderedList>
+          <Separator orientation="vertical" />
+          <List.Root>
             {zoneStrategy.map((strat, index) => (
-              <ListItem key={typeof strat === "string" ? strat : index}>
+              <List.Item key={typeof strat === "string" ? strat : index}>
                 {strat}
-              </ListItem>
+              </List.Item>
             ))}
-          </UnorderedList>
+          </List.Root>
         </Stack>
       )}
     </MainLink>

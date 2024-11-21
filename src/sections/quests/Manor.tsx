@@ -1,4 +1,4 @@
-import { ListItem, Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   combatRateModifier,
   equippedAmount,
@@ -125,37 +125,37 @@ const HauntedBilliardsRoom: FC = () => {
         {estimatedPoolSkill} pool skill.
       </Line>
       {estimatedPoolSkill < 18 && (
-        <UnorderedList>
+        <List.Root>
           {myInebriety() < 10 && inebrietyLimit() >= 10 && (
-            <ListItem>Drink to 10 inebrierty for +pool skill.</ListItem>
+            <List.Item>Drink to 10 inebrierty for +pool skill.</List.Item>
           )}
           {have($item`Staff of Ed, almost`) && (
-            <ListItem>Untinker the Staff of Ed, almost.</ListItem>
+            <List.Item>Untinker the Staff of Ed, almost.</List.Item>
           )}
           {have($item`[7964]Staff of Fats`) &&
             !haveEquipped($item`[7964]Staff of Fats`) && (
-              <ListItem>Equip the Staff of Fats for +pool skill.</ListItem>
+              <List.Item>Equip the Staff of Fats for +pool skill.</List.Item>
             )}
-          {!have($item`pool cue`) && <ListItem>Find pool cue.</ListItem>}
+          {!have($item`pool cue`) && <List.Item>Find pool cue.</List.Item>}
           {have($item`pool cue`) &&
             !equippedAmount($item`pool cue`) &&
             myPath() !== $path`Gelatinous Noob` && (
-              <ListItem>
+              <List.Item>
                 <MainLink href={inventoryLink($item`pool cue`)}>
                   Equip pool cue for +pool skill.
                 </MainLink>
-              </ListItem>
+              </List.Item>
             )}
           {!haveEffect($effect`Chalky Hand`) &&
             have($item`handful of hand chalk`) && (
-              <ListItem>
+              <List.Item>
                 <MainLink href={inventoryLink($item`handful of hand chalk`)}>
                   Use handful of hand chalk for +pool skill and faster pool
                   skill training.
                 </MainLink>
-              </ListItem>
+              </List.Item>
             )}
-        </UnorderedList>
+        </List.Root>
       )}
     </>
   );

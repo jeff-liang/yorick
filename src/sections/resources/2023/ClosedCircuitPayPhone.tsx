@@ -1,8 +1,8 @@
-import { Text, UnorderedList } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, canAdventure, haveEffect } from "kolmafia";
 import { $effect, $item, $location, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -54,17 +54,17 @@ const ClosedCircuitPayPhone = () => {
 
   const getShadowBrickLocationTooltip = () => {
     return (
-      <UnorderedList>
+      <List.Root>
         {shadowBrickLocations.map((location, index) => (
           <Text
             key={index}
-            color={location.canAccess ? "black" : "gray.500"}
+            color={location.canAccess ? "fg.muted" : "fg.subtle"}
             fontWeight="bold"
           >
             {location.zoneName} {location.extraItems}
           </Text>
         ))}
-      </UnorderedList>
+      </List.Root>
     );
   };
 
@@ -112,23 +112,23 @@ const ClosedCircuitPayPhone = () => {
       <Tile linkedContent={closedCircuitPayPhone}>
         {shadowLodestones > 0 && (
           <Line>
-            <Text as="span" color="purple.500">
+            <Text as="span" color="purple.solid">
               Have {plural(shadowLodestones, "shadow lodestone")}.
             </Text>
           </Line>
         )}
         <Line>{riftAdvsUntilNC} encounters until NC/boss.</Line>
         {!calledRufusToday && (
-          <Line color="blue.500">Haven't called Rufus yet today.</Line>
+          <Line color="blue.solid">Haven't called Rufus yet today.</Line>
         )}
         {calledRufusToday && (
           <Line>
             Optionally call Rufus again for another (turn-taking) quest.
           </Line>
         )}
-        <AdviceTooltip
-          text={getShadowBrickLocationTooltip()}
-          label="Shadow Brick locations"
+        <AdviceTooltipText
+          advice={getShadowBrickLocationTooltip()}
+          children="Shadow Brick locations"
         />
       </Tile>
 
@@ -138,7 +138,7 @@ const ClosedCircuitPayPhone = () => {
           id="shadow-rift-active-free-fights"
           imageUrl="/images/adventureimages/voidguy.gif"
         >
-          <Line color="purple.500">Shadow Rift fights are free!</Line>
+          <Line color="purple.solid">Shadow Rift fights are free!</Line>
           <Line>{riftAdvsUntilNC} encounters until NC/boss.</Line>
           <Line>(don't use other free kills in there)</Line>
         </Tile>

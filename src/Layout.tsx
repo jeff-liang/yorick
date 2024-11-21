@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Divider,
-  Flex,
-  Stack,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Container, Flex, Separator, Stack } from "@chakra-ui/react";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { setGlobalErrorHandler } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
@@ -15,6 +8,7 @@ import ChatButton from "./components/ChatButton";
 import LocationBar from "./components/LocationBar";
 import PrefsButton from "./components/PrefsButton";
 import RefreshButton from "./components/RefreshButton";
+import { toaster, Toaster } from "./components/ui/toaster";
 import { addDevelopmentListeners } from "./prefs/addListeners";
 import NagSection from "./sections/NagSection";
 import QuestSection from "./sections/QuestSection";
@@ -52,26 +46,23 @@ const Layout = () => {
     }
   }, [triggerHardRefresh]);
 
-  const toast = useToast();
   useEffect(() => {
     setGlobalErrorHandler((err) => {
       console.error(err);
-      toast({
+      toaster.error({
         title: "Error updating.",
         description:
           err !== null && (typeof err === "object" || typeof err === "string")
             ? err.toString()
             : "Unknown error.",
-        status: "error",
         duration: 10000,
-        isClosable: true,
-        containerStyle: { maxW: "95vw" },
       });
     });
-  }, [toast]);
+  }, []);
 
   return (
     <Container
+      maxW="4xl"
       paddingX={0}
       fontSize="sm"
       h="100vh"
@@ -81,7 +72,7 @@ const Layout = () => {
       <Flex position="relative" minH={0}>
         <Stack
           direction="row"
-          spacing={1}
+          gap={1}
           position="absolute"
           top={1}
           right={1}
@@ -95,7 +86,7 @@ const Layout = () => {
           <Stack>
             <NagSection />
             <QuestSection />
-            <Divider />
+            <Separator />
             <ResourceSection />
           </Stack>
         </Box>
@@ -109,6 +100,7 @@ const Layout = () => {
         />
       </Flex>
       <LocationBar />
+      <Toaster />
     </Container>
   );
 };

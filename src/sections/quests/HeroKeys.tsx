@@ -1,4 +1,4 @@
-import { Link, ListItem, UnorderedList } from "@chakra-ui/react";
+import { Link, List } from "@chakra-ui/react";
 import {
   availableAmount,
   canEquip,
@@ -169,18 +169,18 @@ const HeroKeys: FC = () => {
           . You have {skeletonKeyAvailable} keys ({looseTeethCount} teeth,{" "}
           {skeletonBoneCount} bones).
         </Line>
-        <UnorderedList>
+        <List.Root>
           {looseTeethSources.map((source, index) => (
-            <ListItem key={index}>
+            <List.Item key={index}>
               {source.count} teeth from {source.name}.
-            </ListItem>
+            </List.Item>
           ))}
           {skeletonBoneSources.map((source, index) => (
-            <ListItem key={index}>
+            <List.Item key={index}>
               {source.count} bones from {source.name}.
-            </ListItem>
+            </List.Item>
           ))}
-        </UnorderedList>
+        </List.Root>
       </>
     ),
     [

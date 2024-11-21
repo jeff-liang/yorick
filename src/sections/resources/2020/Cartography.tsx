@@ -1,4 +1,4 @@
-import { ListItem, UnorderedList } from "@chakra-ui/react";
+import { List } from "@chakra-ui/react";
 import { Location, myLevel } from "kolmafia";
 import { $item, $skill, get, have } from "libram";
 import { FC } from "react";
@@ -58,10 +58,10 @@ interface MapTargetProps {
 }
 
 /**
- * Returns a <ListItem> enumerating a MapTarget. Includes GROP handling.
+ * Returns a <List.Item> enumerating a MapTarget. Includes GROP handling.
  * @param myLevel() User's current level (as number)
  * @param target A "MapTarget" entry.
- * @returns <ListItem> covering monster, zone, & accessibility.
+ * @returns <List.Item> covering monster, zone, & accessibility.
  */
 const MapTargetItem: FC<MapTargetProps> = ({ target }) => {
   if (!target.accessible()) return <></>;
@@ -72,21 +72,21 @@ const MapTargetItem: FC<MapTargetProps> = ({ target }) => {
     //   - Grops are available in X turns, in which case it just lets you know they'll be ready in X turns.
 
     return (
-      <ListItem key={target.monster}>
+      <List.Item key={target.monster}>
         {`Green Ops Soldier ${
           target.turnsTilGROPs > 0
             ? `(possible in ${plural(target.turnsTilGROPs, "war turn")})`
             : `@ ${target.zone}`
         }`}
-      </ListItem>
+      </List.Item>
     );
   } else {
     return (
-      <ListItem key={target.monster}>
+      <List.Item key={target.monster}>
         <MainLink
           href={parentPlaceLink(Location.get(target.zone))}
         >{`${target.monster} @ ${target.zone}`}</MainLink>
-      </ListItem>
+      </List.Item>
     );
   }
 };
@@ -165,11 +165,11 @@ const Cartography = () => {
       imageUrl="/images/itemimages/cccbook.gif"
     >
       <Line>{_mapUses} maps remaining. Some map suggestions:</Line>
-      <UnorderedList>
+      <List.Root>
         {recommendations.slice(0, 3).map((recc) => (
           <MapTargetItem key={recc.monster} target={recc} />
         ))}
-      </UnorderedList>
+      </List.Root>
     </Tile>
   );
 };

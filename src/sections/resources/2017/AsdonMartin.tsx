@@ -44,7 +44,7 @@ const AsdonMartin = () => {
             {currentFuel >= 50 ? (
               `Banish${freeRunsUsable ? "/free run" : ""}, costs 50 fuel.`
             ) : (
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 Need 50 fuel first.
               </Text>
             )}
@@ -75,7 +75,7 @@ const AsdonMartin = () => {
 
       {!missileLauncherUsed && !inFamiliarsPath && !inGLoverPath && (
         <Line>
-          <Text as="span" color={currentFuel >= 100 ? undefined : "red.500"}>
+          <Text as="span" color={currentFuel >= 100 ? undefined : "red.solid"}>
             Missile Launcher available. Costs 100 fuel, instakill +
             YR-equivalent.
           </Text>

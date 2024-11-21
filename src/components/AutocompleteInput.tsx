@@ -73,7 +73,6 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
           event.stopPropagation();
           onSubmit(event.currentTarget.getAttribute("data-current"));
         } else if (event.key === "Escape") {
-          setAutoIndex(-1);
           event.currentTarget.blur();
         }
       },

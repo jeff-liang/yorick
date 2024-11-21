@@ -10,8 +10,8 @@ const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
   <IconButton
     asChild
     aria-label="Refresh"
-    size="xs"
-    fontSize="20px"
+    size="2xs"
+    p={1}
     variant="outline"
     backgroundColor="white"
     {...props}

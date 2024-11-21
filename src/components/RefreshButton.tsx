@@ -6,8 +6,8 @@ const RefreshButton: FC<ButtonProps> = (props) => (
   <IconButton
     asChild
     aria-label="Refresh"
-    size="xs"
-    p={1.5}
+    size="2xs"
+    p={1}
     variant="outline"
     backgroundColor="white"
     {...props}

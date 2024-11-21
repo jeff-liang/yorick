@@ -13,8 +13,8 @@ const PrefsButton: FC = () => {
       }}
       asChild
       aria-label="Open Overrides"
-      size="xs"
-      fontSize="15px"
+      size="2xs"
+      p={1}
       variant="outline"
       backgroundColor="white"
     >

@@ -3,7 +3,7 @@ import { availableAmount, getCampground, myLevel } from "kolmafia";
 import { $effect, $familiar, $item, $skill, get, have } from "libram";
 import { FC } from "react";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import LinkBlock from "../../../components/LinkBlock";
 import Tile from "../../../components/Tile";
@@ -278,24 +278,24 @@ const AGuideToBurningLeaves: FC = () => {
           </LinkBlock>
           <Line>
             {leafCount >= 111 * fightsRemaining ? (
-              <AdviceTooltip
-                text={`You can summon ${fightsRemaining} monstera for scaling fights.`}
-                content={`You have enough leaves for ${fightsRemaining} monstera.`}
+              <AdviceTooltipText
+                advice={`You can summon ${fightsRemaining} monstera for scaling fights.`}
+                children={`You have enough leaves for ${fightsRemaining} monstera.`}
               />
             ) : leafCount >= 11 * fightsRemaining ? (
-              <AdviceTooltip
-                text={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
-                content={`You have enough leaves for ${fightsRemaining} leaflets.`}
+              <AdviceTooltipText
+                advice={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
+                children={`You have enough leaves for ${fightsRemaining} leaflets.`}
               />
             ) : leafCount >= 11 ? (
-              <AdviceTooltip
-                text="Save leaves for more fights!"
-                content={`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
+              <AdviceTooltipText
+                advice="Save leaves for more fights!"
+                children={`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
               />
             ) : (
-              <AdviceTooltip
-                text="Save leaves for fights!"
-                content="You cannot currently summon a free fight."
+              <AdviceTooltipText
+                advice="Save leaves for fights!"
+                children="You cannot currently summon a free fight."
               />
             )}
           </Line>

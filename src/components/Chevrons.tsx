@@ -1,6 +1,6 @@
 import { Icon, Text, TextProps } from "@chakra-ui/react";
 import { ChevronRight } from "lucide-react";
-import { FC } from "react";
+import { FC, forwardRef } from "react";
 
 export interface ChevronsProps extends TextProps {
   usesLeft: number;
@@ -13,9 +13,18 @@ export interface ChevronsProps extends TextProps {
  * @param usesLeft How many casts/uses you have left of the resource
  * @param totalUses Total number of uses the users has
  */
-const Chevrons: FC<ChevronsProps> = ({ usesLeft, totalUses, ...props }) => {
+const Chevrons: FC<ChevronsProps> = forwardRef<
+  HTMLParagraphElement,
+  ChevronsProps
+>(({ usesLeft, totalUses, ...props }, ref) => {
   return (
-    <Text as="span" verticalAlign="middle" whiteSpace="nowrap" {...props}>
+    <Text
+      as="span"
+      verticalAlign="middle"
+      whiteSpace="nowrap"
+      ref={ref}
+      {...props}
+    >
       {new Array(totalUses).fill(null).map((_, index) => (
         <Icon // I tried a few types of icons. This was the best, for now.
           key={index}
@@ -28,6 +37,6 @@ const Chevrons: FC<ChevronsProps> = ({ usesLeft, totalUses, ...props }) => {
       ))}
     </Text>
   );
-};
+});
 
 export default Chevrons;

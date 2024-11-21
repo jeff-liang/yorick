@@ -18,7 +18,7 @@ import {
 } from "libram";
 import { FC, ReactNode } from "react";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -270,9 +270,9 @@ const AugustScepter: FC = () => {
           <Table.Body>{table}</Table.Body>
         </Table.Root>
       )}
-      <AdviceTooltip
-        content="No, YORICK, show me ALL the skills."
-        text={tooltip}
+      <AdviceTooltipText
+        children="No, YORICK, show me ALL the skills."
+        advice={tooltip}
       />
     </Tile>
   );

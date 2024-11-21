@@ -8,7 +8,7 @@ import {
 import { $item, get } from "libram";
 import { getHashIfAvailable } from "tome-kolmafia-lib";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -174,8 +174,8 @@ const TinyStillsuit = () => {
         </Line>
       )}
       <Line>
-        <AdviceTooltip
-          text={
+        <AdviceTooltipText
+          advice={
             <List.Root>
               {Object.entries(advDramsTable).map(
                 ([advs, drams]) =>
@@ -194,11 +194,11 @@ const TinyStillsuit = () => {
               )}
             </List.Root>
           }
-          content="Sweat/Advs"
+          children="Sweat/Advs"
         />{" "}
         •{" "}
-        <AdviceTooltip
-          text={
+        <AdviceTooltipText
+          advice={
             <List.Root>
               <List.Item>Cubeling / Stomping Boots: +item</List.Item>
               <List.Item>
@@ -209,7 +209,7 @@ const TinyStillsuit = () => {
               </List.Item>
             </List.Root>
           }
-          content="Suggested Familiars"
+          children="Suggested Familiars"
         />
       </Line>
     </Tile>

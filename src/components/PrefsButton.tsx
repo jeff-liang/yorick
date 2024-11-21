@@ -1,5 +1,5 @@
-import { EditIcon } from "lucide-react";
 import { IconButton } from "@chakra-ui/react";
+import { EditIcon } from "lucide-react";
 import { FC } from "react";
 
 const PrefsButton: FC = () => {

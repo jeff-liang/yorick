@@ -3,7 +3,7 @@ import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 const config = defineConfig({
   globalCss: {
     html: {
-      lineHeight: 1.15,
+      lineHeight: "moderate",
     },
   },
   theme: {

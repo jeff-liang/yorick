@@ -6,7 +6,7 @@ import {
 } from "kolmafia";
 import { $familiar, $item, $path, get, have } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
@@ -45,9 +45,9 @@ const MiniKiwi = () => {
     >
       <Line>
         At {Math.floor(kiwiWeight)} weight, you have a{" "}
-        <AdviceTooltip
-          text="Chance of getting a mini-kiwi each fight"
-          content={`${kiwiChance.toFixed(1)}%`}
+        <AdviceTooltipText
+          advice="Chance of getting a mini-kiwi each fight"
+          children={`${kiwiChance.toFixed(1)}%`}
         />{" "}
         chance of a mini-kiwi each fight.
       </Line>

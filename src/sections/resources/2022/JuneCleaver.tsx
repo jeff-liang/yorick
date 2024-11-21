@@ -1,7 +1,7 @@
 import { List } from "@chakra-ui/react";
 import { $item, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
@@ -87,8 +87,8 @@ const JuneCleaver = () => {
     .map(({ option1, option2, option3, name, choice }) => {
       return (
         <List.Item key={choice}>
-          <AdviceTooltip
-            text={
+          <AdviceTooltipText
+            advice={
               <>
                 <Line fontWeight="bold">Choices:</Line>
                 <List.Root>
@@ -98,7 +98,7 @@ const JuneCleaver = () => {
                 </List.Root>
               </>
             }
-            content={name}
+            children={name}
           />
         </List.Item>
       );

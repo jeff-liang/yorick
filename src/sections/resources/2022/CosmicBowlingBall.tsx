@@ -1,7 +1,7 @@
 import { Text } from "@chakra-ui/react";
 import { $item, $location, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -89,9 +89,9 @@ const CosmicBowlingBall = () => {
       {returnCombats > 0 && (
         <Line>
           Your Bowling Ball will return in{" "}
-          <AdviceTooltip
-            text="Free runs count for this!"
-            content={plural(returnCombats, "turn")}
+          <AdviceTooltipText
+            advice="Free runs count for this!"
+            children={plural(returnCombats, "turn")}
           />
           .
         </Line>

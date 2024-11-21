@@ -1,4 +1,4 @@
-import { ButtonProps } from "@chakra-ui/react";
+import { ButtonProps, Text } from "@chakra-ui/react";
 import {
   forwardRef,
   MouseEvent,
@@ -62,7 +62,17 @@ const AsyncButton = forwardRef<HTMLButtonElement, AsyncButtonProps>(
         ref={ref}
         {...props}
       >
-        {command ? <Tooltip content={command}>{children}</Tooltip> : children}
+        {command ? (
+          <Tooltip content={command}>
+            {typeof children === "string" ? (
+              <Text as="span">{children}</Text>
+            ) : (
+              children
+            )}
+          </Tooltip>
+        ) : (
+          children
+        )}
       </HeaderButton>
     );
   },

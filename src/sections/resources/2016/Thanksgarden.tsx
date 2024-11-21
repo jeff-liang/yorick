@@ -7,7 +7,7 @@ import {
 } from "kolmafia";
 import { $item, $location, get, have } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { inventoryLink } from "../../../util/links";
@@ -68,27 +68,27 @@ const Thanksgarden = () => {
           Could make into{" "}
           <Box as="span">
             {commaSeparate([
-              <AdviceTooltip
+              <AdviceTooltipText
                 key="turkey"
-                content={`${plural(
+                children={`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   turkeyBlaster,
                 )} to burn delay`}
-                text="Requires 3 cashews each."
+                advice="Requires 3 cashews each."
               />,
-              <AdviceTooltip
+              <AdviceTooltipText
                 key="stuffing"
-                content={`${plural(
+                children={`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   stuffingFluffer,
                 )} for the war`}
-                text="Requires 3 cashews each."
+                advice="Requires 3 cashews each."
               />,
               "various foods",
-              <AdviceTooltip
+              <AdviceTooltipText
                 key="boat"
-                content="gravy boat for the crypt (somewhat marginal)"
-                text="Requires 3 cashews."
+                children="gravy boat for the crypt (somewhat marginal)"
+                advice="Requires 3 cashews."
               />,
             ])}
             .

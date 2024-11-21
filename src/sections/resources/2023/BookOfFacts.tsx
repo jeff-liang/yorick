@@ -48,7 +48,7 @@ const BookOfFacts = () => {
               Appears as a wandering monster in any zone. Try a place with few
               competing monsters{olfactionString}.
               {eagleUsable && (
-                <AdviceTooltipIcon text="Remember, you can phylum-banish with your Patriotic Eagle to make it easier!" />
+                <AdviceTooltipIcon advice="Remember, you can phylum-banish with your Patriotic Eagle to make it easier!" />
               )}
             </Line>
             {eaglePhylumBanished === habitatMonsterPhylum && (

@@ -1,8 +1,8 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, myLevel, myPrimestat } from "kolmafia";
 import { $item, $stat, get, have } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -249,8 +249,8 @@ const ModelTrainSet = () => {
         Next station: <Text as="b">{nextStation.name}</Text> -{" "}
         {nextStation.description}
       </Line>
-      <AdviceTooltip
-        text={
+      <AdviceTooltipText
+        advice={
           <>
             <Text as="b" textAlign="center" pb={1}>
               Train station cycle
@@ -268,7 +268,7 @@ const ModelTrainSet = () => {
             </List.Root>
           </>
         }
-        content="Full train cycle"
+        children="Full train cycle"
       />
     </Tile>
   );

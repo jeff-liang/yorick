@@ -1,4 +1,4 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   haveEquipped,
@@ -8,7 +8,7 @@ import {
 } from "kolmafia";
 import { $item, $location, $locations, get, have, questStep } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -193,9 +193,9 @@ const CandyCaneSwordCane = () => {
         <List.Root>{availableOptions.map(({ node }) => node)}</List.Root>
         {!ccscEquipped && (
           <Line>
-            <AdviceTooltip
-              text="This is important!"
-              content="Equip the Candy Cane Sword Cane!"
+            <AdviceTooltipText
+              advice="This is important!"
+              children="Equip the Candy Cane Sword Cane!"
             />
           </Line>
         )}

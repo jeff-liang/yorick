@@ -1,5 +1,6 @@
 import {
   haveEquipped,
+  initiativeModifier,
   Modifier,
   myBuffedstat,
   myPath,
@@ -8,7 +9,7 @@ import {
 import { $item, $path, $skill, $stat, get, have, questStep } from "libram";
 import { FC } from "react";
 
-import AdviceTooltip from "../../components/AdviceTooltip";
+import AdviceTooltipText from "../../components/AdviceTooltipText";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
@@ -133,9 +134,9 @@ const Level13: FC = () => {
       >
         <Line>Defeat the Wall of Meat.</Line>
         <Line>
-          <AdviceTooltip
-            text="You need 526% meat drop to guarantee a one-turn kill."
-            content={`Current meat drop: ${Modifier.get("Meat Drop")}`}
+          <AdviceTooltipText
+            advice="You need 526% meat drop to guarantee a one-turn kill."
+            children={`Current meat drop: ${Modifier.get("Meat Drop")}`}
           />
         </Line>
       </Tile>
@@ -229,10 +230,9 @@ const Level13: FC = () => {
       >
         <Line>Fight your shadow.</Line>
         <Line>
-          <AdviceTooltip
-            text="You need enough initiative to go first against Your Shadow."
-            content={`Current initiative: ${Modifier.get("Initiative")}`}
-          />
+          <AdviceTooltipText advice="You need enough initiative to go first against Your Shadow.">
+            Current initiative: {initiativeModifier().toFixed(0)}.
+          </AdviceTooltipText>
         </Line>
       </Tile>
     );

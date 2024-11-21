@@ -1,8 +1,8 @@
-import { Text, List } from "@chakra-ui/react";
+import { List, Text } from "@chakra-ui/react";
 import { availableAmount, canAdventure, haveEffect } from "kolmafia";
 import { $effect, $item, $location, get } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -126,9 +126,9 @@ const ClosedCircuitPayPhone = () => {
             Optionally call Rufus again for another (turn-taking) quest.
           </Line>
         )}
-        <AdviceTooltip
-          text={getShadowBrickLocationTooltip()}
-          content="Shadow Brick locations"
+        <AdviceTooltipText
+          advice={getShadowBrickLocationTooltip()}
+          children="Shadow Brick locations"
         />
       </Tile>
 

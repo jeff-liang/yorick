@@ -1,5 +1,5 @@
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ButtonProps, IconButton } from "@chakra-ui/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 
 export interface ChatButtonProps extends ButtonProps {

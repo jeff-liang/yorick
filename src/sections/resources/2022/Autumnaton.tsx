@@ -17,7 +17,7 @@ import {
   questStep,
 } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import ItemButtons from "../../../components/ItemButtons";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -172,8 +172,8 @@ const Autumnaton = () => {
         </List.Root>
       )}
       {potentialTargets.length > 0 && (
-        <AdviceTooltip
-          text={
+        <AdviceTooltipText
+          advice={
             <VStack align="start">
               <Heading size="sm">Potential Targets</Heading>
               {potentialTargets.map(([item, location], index) => (
@@ -183,7 +183,7 @@ const Autumnaton = () => {
               ))}
             </VStack>
           }
-          content="Potential Autumnaton Targets"
+          children="Potential Autumnaton Targets"
         />
       )}
     </Tile>

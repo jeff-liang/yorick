@@ -2,10 +2,10 @@ import { HStack, Icon, Image, Text, VStack } from "@chakra-ui/react";
 import { Info } from "lucide-react";
 import { FC } from "react";
 
-import AdviceTip from "./AdviceTip";
+import AdviceTooltip from "./AdviceTooltip";
 
 interface AdviceTooltipIconProps {
-  text: string;
+  advice: string;
   icon?: typeof Info;
 }
 /**
@@ -16,7 +16,7 @@ interface AdviceTooltipIconProps {
  */
 
 const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({
-  text,
+  advice,
   icon: TooltipIcon = Info,
 }) => {
   const toolTip = (
@@ -29,18 +29,18 @@ const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({
       />
       <VStack align="stretch" gap={0.3}>
         <Text bg="gray.200" p={4} rounded="md" fontSize={12}>
-          {text}
+          {advice}
         </Text>
       </VStack>
     </HStack>
   );
 
   return (
-    <AdviceTip content={toolTip}>
+    <AdviceTooltip content={toolTip}>
       <Icon color="gray.500" h={3.5} w={3.5}>
         <TooltipIcon />
       </Icon>
-    </AdviceTip>
+    </AdviceTooltip>
   );
 };
 

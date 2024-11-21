@@ -134,7 +134,7 @@ const FreeFights: FC = () => {
       imageUrl="/images/adventureimages/eldtentacle.gif"
       tooltip={
         <AdviceTooltipIcon
-          text={`These are inherently free fights. They do not cost a turn, nor do they
+          advice={`These are inherently free fights. They do not cost a turn, nor do they
             decrement your effects. Many of them are scaling fights; by stacking
             large +mainstat% modifiers, they will give increasing amounts of stats
             and allow you to level very quickly!`}

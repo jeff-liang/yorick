@@ -2,7 +2,7 @@ import { List, Text } from "@chakra-ui/react";
 import { availableAmount, myHash, totalTurnsPlayed } from "kolmafia";
 import { $item, get, getTodaysHolidayWanderers, have } from "libram";
 
-import AdviceTooltip from "../../../components/AdviceTooltip";
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
@@ -142,9 +142,9 @@ const MrStore2002Catalog = () => {
               Spooky VHS: {imageName.name} in 1 more adv
             </Text>
           ) : (
-            <AdviceTooltip
-              text={`${nextVHSTimer} adventures until your free fight YR VHS fight.`}
-              content={`Spooky VHS: ${imageName}`}
+            <AdviceTooltipText
+              advice={`${nextVHSTimer} adventures until your free fight YR VHS fight.`}
+              children={`Spooky VHS: ${imageName}`}
             />
           )}
         </Line>

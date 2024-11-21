@@ -58,7 +58,7 @@ const ClosedCircuitPayPhone = () => {
         {shadowBrickLocations.map((location, index) => (
           <Text
             key={index}
-            color={location.canAccess ? "black" : "gray.solid"}
+            color={location.canAccess ? "fg.muted" : "fg.subtle"}
             fontWeight="bold"
           >
             {location.zoneName} {location.extraItems}

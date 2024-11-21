@@ -108,12 +108,12 @@ const AugustScepter: FC = () => {
 
     usefulAugustSkills.push([
       30,
-      <>
+      <Text>
         +7 advs rollover accessory{" "}
-        <Text as="span" color="gray.solid">
+        <Text as="span" fontSize="xs" color="gray.solid">
           (melting)
         </Text>
-      </>,
+      </Text>,
     ]);
   }
 
@@ -144,7 +144,7 @@ const AugustScepter: FC = () => {
     ]);
   }
 
-  usefulAugustSkills.push([7, <>+50% item, +100% meat{buffString}</>]);
+  usefulAugustSkills.push([7, <Text>+50% item, +100% meat{buffString}</Text>]);
   usefulAugustSkills.push([
     2,
     <>
@@ -158,10 +158,13 @@ const AugustScepter: FC = () => {
   usefulAugustSkills.push([22, "free fight for teeeeeeeeeeeth"]);
 
   if (questStep("questL08Trapper") < 2) {
-    usefulAugustSkills.push([6, <>+10% combat{buffString}</>]);
+    usefulAugustSkills.push([6, <Text>+10% combat{buffString}</Text>]);
   }
   usefulAugustSkills.push([9, "hold hands for a minor sniff"]);
-  usefulAugustSkills.push([10, <>non-free reusable banishes{buffString}</>]);
+  usefulAugustSkills.push([
+    10,
+    <Text>non-free reusable banishes{buffString}</Text>,
+  ]);
 
   const usefulOffhands = have($item`deck of lewd playing cards`);
   const protestorsRemaining = Math.max(
@@ -172,12 +175,12 @@ const AugustScepter: FC = () => {
   if (usefulOffhands && protestorsRemaining > 10) {
     usefulAugustSkills.push([
       13,
-      <>
+      <Text>
         double offhand enchantments{" "}
         <Text as="span" color="purple.solid">
           (sleaze for protestors)
         </Text>
-      </>,
+      </Text>,
     ]);
   }
 
@@ -190,12 +193,12 @@ const AugustScepter: FC = () => {
     if (!have($item`astral pet sweater`)) {
       usefulAugustSkills.push([
         28,
-        <>
+        <Text>
           +10 weight familiar equipment{" "}
           <Text as="span" fontSize="xs" color="gray.solid">
             (melting)
           </Text>
-        </>,
+        </Text>,
       ]);
     }
   }

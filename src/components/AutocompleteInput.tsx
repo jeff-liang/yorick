@@ -1,12 +1,4 @@
-import {
-  Input,
-  InputProps,
-  List,
-  PopoverBody,
-  PopoverContent,
-  PopoverRoot,
-  PopoverTrigger,
-} from "@chakra-ui/react";
+import { Input, InputProps, List } from "@chakra-ui/react";
 import {
   ChangeEvent,
   forwardRef,
@@ -15,6 +7,13 @@ import {
   useCallback,
   useState,
 } from "react";
+
+import {
+  PopoverBody,
+  PopoverContent,
+  PopoverRoot,
+  PopoverTrigger,
+} from "./ui/popover";
 
 function mod(n: number, k: number): number {
   const naive = n % k;
@@ -74,6 +73,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
           event.stopPropagation();
           onSubmit(event.currentTarget.getAttribute("data-current"));
         } else if (event.key === "Escape") {
+          setAutoIndex(-1);
           event.currentTarget.blur();
         }
       },
@@ -113,6 +113,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, AutocompleteInputProps>(
         <PopoverTrigger>
           <Input
             size="xs"
+            height={7}
             value={value}
             onChange={handleChange}
             onKeyDown={handleAutocompleteKeyDown}

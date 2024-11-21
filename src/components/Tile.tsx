@@ -89,9 +89,9 @@ const Tile: FC<TileProps> = ({
   const imageSize = collapsed || disabled ? "20px" : "30px";
 
   const tileContents = (
-    <VStack align="stretch" gap={0.5}>
+    <VStack align="start" gap={0.5}>
       <HStack gap={1} align="center">
-        <Heading as="h3" size="md">
+        <Heading as="h3" size="md" lineHeight="tall">
           {!collapsed && !disabled && !linkEntireTile && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (
@@ -116,9 +116,11 @@ const Tile: FC<TileProps> = ({
               asChild
               aria-label="Collapse"
               h={4}
-              minW={4}
+              w={4}
+              minW={2}
               fontSize="20px"
               variant="ghost"
+              color="inherit"
               onClick={() => setCollapsed((collapsed) => !collapsed)}
             >
               {collapsed ? <ChevronUp /> : <ChevronDown />}
@@ -133,7 +135,7 @@ const Tile: FC<TileProps> = ({
   return (
     <HStack
       align="stretch"
-      color={collapsed || disabled ? "gray.solid" : undefined}
+      color={collapsed || disabled ? "fg.subtle" : undefined}
       {...props}
     >
       <Box

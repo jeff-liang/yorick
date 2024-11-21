@@ -5,10 +5,11 @@ import { Tooltip, TooltipProps } from "./ui/tooltip";
 const AdviceTooltip: FC<TooltipProps> = ({ content, ...props }) => (
   <Tooltip
     showArrow
+    openDelay={0}
     contentProps={{
-      css: { "--tooltip-bg": "gray.contrast" },
-      color: "gray.fg",
-      border: "1px solid gray.muted",
+      css: { "--tooltip-bg": "bg" },
+      bgColor: "bg",
+      border: "1px solid border",
       shadow: "xs",
       rounded: "md",
       mx: 5,

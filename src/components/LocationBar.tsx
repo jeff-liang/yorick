@@ -105,14 +105,14 @@ const LocationBar: FC<StackProps> = (props) => {
       onMouseOver={() => setShowDetails(true)}
       onMouseOut={() => setShowDetails(false)}
       backgroundColor="white"
-      borderTop="1px solid"
-      borderColor="gray.muted"
     >
       <Stack
         w="100%"
         py={2}
         px={3}
         zIndex={300}
+        borderTop="1px solid"
+        borderColor="gray.muted"
         fontSize="xs"
         display={showDetails || autoHasFocus ? "flex" : "none"}
       >

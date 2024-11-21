@@ -23,19 +23,19 @@ const ValidatedInput = ({
         <Field invalid={!valid && nonEmpty}>
           <Input
             value={value}
-            borderColor={valid && nonEmpty ? "green.500" : undefined}
+            borderColor={valid && nonEmpty ? "green.solid" : undefined}
             _focus={
               valid && nonEmpty
-                ? { borderColor: "green.500" }
+                ? { borderColor: "green.solid" }
                 : !valid && nonEmpty
-                  ? { borderColor: "red.500" }
+                  ? { borderColor: "red.solid" }
                   : undefined
             }
             _hover={
               valid && nonEmpty
-                ? { borderColor: "green.600" }
+                ? { borderColor: "green.solid" }
                 : !valid && nonEmpty
-                  ? { borderColor: "red.600" }
+                  ? { borderColor: "red.solid" }
                   : undefined
             }
             {...props}
@@ -43,12 +43,12 @@ const ValidatedInput = ({
         </Field>
         {valid && nonEmpty && (
           <InputAddon pointerEvents="none" {...iconProps}>
-            <Check color="green.500" />
+            <Check color="green.solid" />
           </InputAddon>
         )}
         {!valid && nonEmpty && (
           <InputAddon pointerEvents="none" {...iconProps}>
-            <CircleAlert color="red.500" />
+            <CircleAlert color="red.solid" />
           </InputAddon>
         )}
       </Group>

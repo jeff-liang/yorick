@@ -41,7 +41,7 @@ const TunnelOfLove = () => {
                   as="b"
                   color={
                     primestat === $stat`Muscle` && inRun() && myLevel() < 13
-                      ? "green.500"
+                      ? "green.solid"
                       : undefined
                   }
                 >
@@ -57,7 +57,7 @@ const TunnelOfLove = () => {
                       primestat === $stat`Mysticality` &&
                       inRun() &&
                       myLevel() < 13
-                        ? "green.500"
+                        ? "green.solid"
                         : undefined
                     }
                   >
@@ -73,7 +73,7 @@ const TunnelOfLove = () => {
                     (primestat === $stat`Moxie` && inRun() && myLevel() < 13) ||
                     !inRun() ||
                     myLevel() >= 13
-                      ? "green.500"
+                      ? "green.solid"
                       : undefined
                   }
                 >

@@ -175,7 +175,7 @@ const Level13: FC = () => {
               <Line
                 command="equip candy cane sword cane"
                 fontWeight="bold"
-                color="red.500"
+                color="red.solid"
               >
                 Equip the candy cane sword.
               </Line>

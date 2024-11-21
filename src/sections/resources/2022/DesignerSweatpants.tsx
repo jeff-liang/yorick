@@ -51,7 +51,7 @@ const DesignerSweatpants = () => {
             </LinkOrEquip>
             <LinkOrEquip
               href={skillLink($skill`Sweat Out Some Booze`)}
-              color="orange.500"
+              color="orange.solid"
             >
               {` -1 Drunkenness. ${plural(boozeSweatsLeft, "use")} left for today.`}
               {myInebriety() === 0 && " Drink some booze first."}

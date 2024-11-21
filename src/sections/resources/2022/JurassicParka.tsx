@@ -42,15 +42,15 @@ const JurassicParka: FC = () => {
             }
           >
             {!parkaEquipped && (
-              <Line color="red.500">Equip your Jurassic Parka!</Line>
+              <Line color="red.solid">Equip your Jurassic Parka!</Line>
             )}
-            {parkaEquipped && <Line color="orange.500">Parka equipped.</Line>}
+            {parkaEquipped && <Line color="orange.solid">Parka equipped.</Line>}
             {parkaMode !== "dilophosaur" ? (
-              <Line color="red.500" command="parka dilophosaur">
+              <Line color="red.solid" command="parka dilophosaur">
                 Change your parka to dilophosaur mode!
               </Line>
             ) : (
-              <Line color="orange.500">Dilophosaur mode enabled.</Line>
+              <Line color="orange.solid">Dilophosaur mode enabled.</Line>
             )}
             <Line>Parka yellow ray is ready; spit some acid!</Line>
           </Tile>
@@ -95,7 +95,7 @@ const JurassicParka: FC = () => {
       id="jurassic-parka-tile"
       linkedContent={jurassicParka}
     >
-      <Line color="blue.500">{parkaEnchantment}</Line>
+      <Line color="blue.solid">{parkaEnchantment}</Line>
       {spikolodonSpikesLeft > 0 && (
         <Line command="parka spikolodon">
           <Text as="b">{spikolodonSpikesLeft}</Text> spikolodon spikes

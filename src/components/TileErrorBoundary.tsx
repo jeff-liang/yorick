@@ -15,13 +15,13 @@ const TileErrorBoundary: FC<TileErrorBoundaryProps> = ({ name, children }) => {
       fallbackRender={({ error }) => (
         <Tile
           header={
-            <Text as="span" color="red.700">
+            <Text as="span" color="red.fg">
               Error in tile {name}.
             </Text>
           }
           id={`${name}-error`}
           nonCollapsible
-          bgColor="red.100"
+          bgColor="red.subtle"
           borderY="1px solid red"
           py={1}
         >

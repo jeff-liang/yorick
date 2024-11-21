@@ -12,7 +12,7 @@ const HeaderButton = forwardRef<HTMLButtonElement, HeaderButtonProps>(
     const button = (
       <Button
         ref={ref}
-        colorScheme="blackAlpha"
+        colorPalette="gray"
         size="xs"
         px={1}
         height={4}

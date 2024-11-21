@@ -47,7 +47,7 @@ const HiddenTemple: FC = () => {
           {myMeat() < 100 ? (
             <>
               {" "}
-              <Text as="b" color="red.500">
+              <Text as="b" color="red.solid">
                 You need 100 meat!
               </Text>
             </>

@@ -48,7 +48,7 @@ const Autumnaton = () => {
         >
           <Line>
             Next use will take{" "}
-            <Text as="b" color="red.500">
+            <Text as="b" color="red.solid">
               {autobotsReturnTime}
             </Text>{" "}
             adventures.
@@ -143,7 +143,7 @@ const Autumnaton = () => {
       {have(autumnatonItem) ? (
         <Line>
           Next use will take{" "}
-          <Text as="span" fontWeight="bold" color="red.500">
+          <Text as="span" fontWeight="bold" color="red.solid">
             {autobotsReturnTime}
           </Text>{" "}
           adventures.
@@ -152,7 +152,7 @@ const Autumnaton = () => {
         <>
           <Line>
             Will return in{" "}
-            <Text as="b" color="red.500">
+            <Text as="b" color="red.solid">
               {turncountWhereAutobotReturns + 1 - totalTurnsPlayed()}
             </Text>{" "}
             adventures.

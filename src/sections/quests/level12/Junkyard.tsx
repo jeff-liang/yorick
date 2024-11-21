@@ -42,7 +42,7 @@ interface MonsterTextProps {
 }
 
 const MonsterText: FC<MonsterTextProps> = ({ monster, isBanished }) => (
-  <Text as="span" color={isBanished ? "gray.500" : "inherit"}>
+  <Text as="span" color={isBanished ? "gray.solid" : "inherit"}>
     {monster}
   </Text>
 );

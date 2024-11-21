@@ -79,7 +79,7 @@ const CinchoDeMayo = () => {
       </Line>
       {totalCinch > 60 && (
         <Line>
-          <Text as="b" color="purple.500">
+          <Text as="b" color="purple.solid">
             Fiesta Exit (60%):
           </Text>{" "}
           Force a NC on your next adventure. You have{" "}

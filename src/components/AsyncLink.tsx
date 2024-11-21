@@ -64,12 +64,14 @@ const AsyncLink = forwardRef<HTMLAnchorElement, AsyncLinkProps>(
         {...props}
         textDecoration="none !important"
         pointerEvents="none"
-        color="gray.500"
+        color="gray.solid"
       >
         {children} <Spinner as="span" size="xs" />
       </Link>
     ) : command ? (
-      <Tooltip content={command}>{link}</Tooltip>
+      <Tooltip showArrow content={command}>
+        {link}
+      </Tooltip>
     ) : (
       link
     );

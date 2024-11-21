@@ -43,7 +43,7 @@ const SeptEmberCenser = () => {
         <>
           <Line>
             Have{" "}
-            <Text as="span" color="red.500" fontWeight="bold">
+            <Text as="span" color="red.solid" fontWeight="bold">
               {septEmbers}
             </Text>{" "}
             Sept-Embers to make stuff with!
@@ -54,11 +54,11 @@ const SeptEmberCenser = () => {
             </List.Item>
             <List.Item>
               2 embers: mouthwash for{" "}
-              <Text as="span" color="blue.500">
+              <Text as="span" color="blue.solid">
                 {mainstatGain}
               </Text>{" "}
               mainstat (you have{" "}
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 {mouthwashCount}
               </Text>
               ).

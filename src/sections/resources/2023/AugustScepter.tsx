@@ -66,7 +66,7 @@ const AugustScepter: FC = () => {
   if (!have(augustScepter) || skillsAvailable < 1) return null;
 
   const buffString = (
-    <Text as="span" color="gray.500">
+    <Text as="span" color="gray.solid">
       {" "}
       (buff)
     </Text>
@@ -99,7 +99,7 @@ const AugustScepter: FC = () => {
         1,
         <>
           +2-5 turns{" "}
-          <Text as="span" fontSize="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.solid">
             (spend turns @ the Goatlet)
           </Text>
         </>,
@@ -110,7 +110,7 @@ const AugustScepter: FC = () => {
       30,
       <>
         +7 advs rollover accessory{" "}
-        <Text as="span" color="gray.500">
+        <Text as="span" color="gray.solid">
           (melting)
         </Text>
       </>,
@@ -121,7 +121,7 @@ const AugustScepter: FC = () => {
     questStep("questL11Manor") < 3 && get("manorDrawerCount") >= 21;
   const blastingAddendum =
     manorCheck && !have($item`blasting soda`) ? (
-      <Text as="span" color="gray.500">
+      <Text as="span" color="gray.solid">
         {" "}
         (blasting soda!)
       </Text>
@@ -137,7 +137,7 @@ const AugustScepter: FC = () => {
       31,
       <>
         +100% booze drop wine{" "}
-        <Text as="span" color="gray.500">
+        <Text as="span" color="gray.solid">
           (chateau de vinegar!)
         </Text>
       </>,
@@ -149,7 +149,7 @@ const AugustScepter: FC = () => {
     2,
     <>
       get{" "}
-      <Text as="span" color="green.500">
+      <Text as="span" color="green.solid">
         Lucky!
       </Text>
     </>,
@@ -174,7 +174,7 @@ const AugustScepter: FC = () => {
       13,
       <>
         double offhand enchantments{" "}
-        <Text as="span" color="purple.500">
+        <Text as="span" color="purple.solid">
           (sleaze for protestors)
         </Text>
       </>,
@@ -192,7 +192,7 @@ const AugustScepter: FC = () => {
         28,
         <>
           +10 weight familiar equipment{" "}
-          <Text as="span" fontSize="xs" color="gray.500">
+          <Text as="span" fontSize="xs" color="gray.solid">
             (melting)
           </Text>
         </>,
@@ -231,7 +231,7 @@ const AugustScepter: FC = () => {
             .sort(([a], [b]) => a - b)
             .map(([skillNumber, [, skillDesc]]) => {
               const lineColor = get(`_aug${skillNumber}Cast`)
-                ? "gray.500"
+                ? "gray.solid"
                 : "black";
               return (
                 <Table.Row key={skillNumber}>

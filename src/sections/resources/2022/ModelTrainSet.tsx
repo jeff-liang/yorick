@@ -220,23 +220,23 @@ const ModelTrainSet = () => {
   return (
     <Tile header="Model Train Set" imageUrl={imageUrl}>
       {oreConfiguredWhenNotNeeded() && (
-        <Line color="red.500">Have ore configured when it's not needed!</Line>
+        <Line color="red.solid">Have ore configured when it's not needed!</Line>
       )}
       {loggingMillConfiguredWhenNotNeeded() && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Have lumber mill configured when it's not needed!
         </Line>
       )}
       {statsConfiguredWhenNotNeeded() && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Have stats configured when they're not needed!
         </Line>
       )}
       {stationConfigured("empty") && (
-        <Line color="red.500">Have an empty station configured!</Line>
+        <Line color="red.solid">Have an empty station configured!</Line>
       )}
       {reconfigurableIn === 0 ? (
-        <Line color="blue.500" href="/campground.php?action=workshed">
+        <Line color="blue.solid" href="/campground.php?action=workshed">
           Train set reconfigurable!
         </Line>
       ) : (

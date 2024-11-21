@@ -27,7 +27,7 @@ const NagSection = () => {
       pt="0.5rem"
       pb={2}
       borderBottom="1px solid"
-      borderColor="gray.200"
+      borderColor="gray.muted"
     >
       <Timeline px={2} />
       {nagsList.length > 0 ? (

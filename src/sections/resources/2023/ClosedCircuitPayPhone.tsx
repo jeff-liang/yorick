@@ -58,7 +58,7 @@ const ClosedCircuitPayPhone = () => {
         {shadowBrickLocations.map((location, index) => (
           <Text
             key={index}
-            color={location.canAccess ? "black" : "gray.500"}
+            color={location.canAccess ? "black" : "gray.solid"}
             fontWeight="bold"
           >
             {location.zoneName} {location.extraItems}
@@ -112,14 +112,14 @@ const ClosedCircuitPayPhone = () => {
       <Tile linkedContent={closedCircuitPayPhone}>
         {shadowLodestones > 0 && (
           <Line>
-            <Text as="span" color="purple.500">
+            <Text as="span" color="purple.solid">
               Have {plural(shadowLodestones, "shadow lodestone")}.
             </Text>
           </Line>
         )}
         <Line>{riftAdvsUntilNC} encounters until NC/boss.</Line>
         {!calledRufusToday && (
-          <Line color="blue.500">Haven't called Rufus yet today.</Line>
+          <Line color="blue.solid">Haven't called Rufus yet today.</Line>
         )}
         {calledRufusToday && (
           <Line>
@@ -138,7 +138,7 @@ const ClosedCircuitPayPhone = () => {
           id="shadow-rift-active-free-fights"
           imageUrl="/images/adventureimages/voidguy.gif"
         >
-          <Line color="purple.500">Shadow Rift fights are free!</Line>
+          <Line color="purple.solid">Shadow Rift fights are free!</Line>
           <Line>{riftAdvsUntilNC} encounters until NC/boss.</Line>
           <Line>(don't use other free kills in there)</Line>
         </Tile>

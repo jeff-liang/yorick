@@ -227,12 +227,12 @@ const AGuideToBurningLeaves: FC = () => {
             return (
               <List.Item
                 key={summon.summonedItem}
-                color={hasEnoughLeaves ? "black" : "gray.500"}
+                color={hasEnoughLeaves ? "black" : "gray.solid"}
               >
                 {summon.leafCost} leaves: {summon.summonedItem} -{" "}
                 {summon.description}
                 {summon.meltingStatus && (
-                  <Text as="span" fontSize="xs" color="gray.500">
+                  <Text as="span" fontSize="xs" color="gray.solid">
                     {" "}
                     (melting)
                   </Text>
@@ -261,12 +261,12 @@ const AGuideToBurningLeaves: FC = () => {
                 return (
                   <List.Item
                     key={fight.summonedMonster}
-                    color={hasEnoughLeaves ? "black" : "gray.500"}
+                    color={hasEnoughLeaves ? "black" : "gray.solid"}
                   >
                     {fight.leafCost} leaves: {fight.summonedMonster} -{" "}
                     {fight.scaling}; ~{fight.leavesDropped} leaves dropped
                     {fight.extraDrops && (
-                      <Text as="span" fontSize="xs" color="gray.500">
+                      <Text as="span" fontSize="xs" color="gray.solid">
                         {" "}
                         (also, drops {fight.extraDrops})
                       </Text>

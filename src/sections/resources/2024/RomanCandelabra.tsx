@@ -28,11 +28,11 @@ const RomanCandelabra = () => {
         <Tile linkedContent={romanCandelabra} id="roman-candelabra-nag">
           {!haveELG && !haveSpringShoes && (
             <>
-              <Line color="green.500">Green candle runaway!</Line>
+              <Line color="green.solid">Green candle runaway!</Line>
               {candelabraEquipped ? (
-                <Line color="green.500">Candelabra equipped.</Line>
+                <Line color="green.solid">Candelabra equipped.</Line>
               ) : (
-                <Line color="red.500">Equip the Roman Candelabra first.</Line>
+                <Line color="red.solid">Equip the Roman Candelabra first.</Line>
               )}
             </>
           )}
@@ -40,11 +40,11 @@ const RomanCandelabra = () => {
             <>
               <Line>Roman Candelabra monster chain ready.</Line>
               {candelabraEquipped ? (
-                <Line color="purple.500">
+                <Line color="purple.solid">
                   Candelabra equipped, blow your purple candle!
                 </Line>
               ) : (
-                <Line color="red.500">
+                <Line color="red.solid">
                   Equip the Roman Candelabra, for your purple ray.
                 </Line>
               )}

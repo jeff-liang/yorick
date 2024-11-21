@@ -9,11 +9,11 @@ export interface ElementNameProps {
 
 const ElementName: FC<ElementNameProps> = ({ element, children }) => {
   const elementColors: Record<string, string> = {
-    cold: "blue.500",
-    hot: "red.500",
-    spooky: "gray.500",
-    stench: "green.500",
-    sleaze: "purple.500",
+    cold: "blue.solid",
+    hot: "red.solid",
+    spooky: "gray.solid",
+    stench: "green.solid",
+    sleaze: "purple.solid",
   };
 
   return (

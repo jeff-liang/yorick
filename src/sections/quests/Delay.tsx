@@ -20,7 +20,7 @@ const ZoneList: FC<{
     {zones.map(({ zone, remaining, available }) => (
       <List.Item
         key={zone.identifierString}
-        color={available ? undefined : "gray.500"}
+        color={available ? undefined : "gray.solid"}
       >
         <MainLink href={parentPlaceLink(zone)}>
           {plural(remaining, "turn")} in {zone.identifierString}.
@@ -60,12 +60,9 @@ const Delay: FC = () => {
       <Line>Use free runs and free wanderers to avoid spending turns.</Line>
       <ZoneList zones={allRemaining} />
       {truncated.length > 0 && (
-        <Line>
-          <AdviceTooltipText
-            advice={<ZoneList zones={truncated} />}
-            children="Later zones."
-          />
-        </Line>
+        <AdviceTooltipText advice={<ZoneList zones={truncated} />}>
+          <Line>Later zones.</Line>
+        </AdviceTooltipText>
       )}
     </Tile>
   );

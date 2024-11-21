@@ -197,7 +197,7 @@ const LuckyAdventures: FC = () => {
           header="You're lucky!"
           imageUrl="/images/itemimages/11leafclover.gif"
         >
-          <Line color="green.500">Next adventure will be a lucky one.</Line>
+          <Line color="green.solid">Next adventure will be a lucky one.</Line>
         </Tile>
       ),
     }),

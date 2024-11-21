@@ -134,11 +134,11 @@ const MrStore2002Catalog = () => {
       {imageName && (
         <Line>
           {nextVHSTurn <= totalTurnsPlayed() ? (
-            <Text as="span" color="red.500" fontWeight="bold">
+            <Text as="span" color="red.solid" fontWeight="bold">
               Spooky VHS: {imageName.name} now
             </Text>
           ) : nextVHSTurn - 1 === totalTurnsPlayed() ? (
-            <Text as="span" color="blue.500">
+            <Text as="span" color="blue.solid">
               Spooky VHS: {imageName.name} in 1 more adv
             </Text>
           ) : (
@@ -150,7 +150,7 @@ const MrStore2002Catalog = () => {
         </Line>
       )}
       {warnings.map((warning, index) => (
-        <Line key={index} color="red.500">
+        <Line key={index} color="red.solid">
           ➾ {warning}
         </Line>
       ))}

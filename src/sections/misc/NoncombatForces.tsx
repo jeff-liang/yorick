@@ -95,7 +95,7 @@ const FORCE_SOURCES: Source[] = [
       ]);
       return (
         <Line
-          color={need.length > 0 ? "gray.500" : undefined}
+          color={need.length > 0 ? "gray.solid" : undefined}
           command={need.join("; ")}
         >
           {plural(remaining, "Jurassic Parka force")}.

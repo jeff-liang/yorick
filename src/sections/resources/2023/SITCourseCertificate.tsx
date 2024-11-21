@@ -66,7 +66,9 @@ const SITCertificate = () => {
       node: haveSit && currentlyInRun && !sitChanged && (
         <Tile header="S.I.T. Course Enrollment" linkedContent={sitCertificate}>
           {!hasAnySkill && (
-            <Line color="red.500">{randomPhrase} Take your S.I.T. course!</Line>
+            <Line color="red.solid">
+              {randomPhrase} Take your S.I.T. course!
+            </Line>
           )}
           {hasAnySkill && (
             <>

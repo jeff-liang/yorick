@@ -6,10 +6,9 @@ const AdviceTooltip: FC<TooltipProps> = ({ content, ...props }) => (
   <Tooltip
     showArrow
     contentProps={{
-      bgColor: "white",
-      color: "gray.600",
-      border: "1px",
-      borderColor: "gray.400",
+      css: { "--tooltip-bg": "gray.contrast" },
+      color: "gray.fg",
+      border: "1px solid gray.muted",
       shadow: "xs",
       rounded: "md",
       mx: 5,

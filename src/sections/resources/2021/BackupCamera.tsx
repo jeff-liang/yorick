@@ -42,14 +42,14 @@ const BackupCamera = () => {
       <Line>Currently set to {modeToEnchantment.get(cameraMode)}.</Line>
       {userLevel < 13 && cameraMode !== "ml" && (
         <Line command="backupcamera ml">
-          <Text as="span" color="gray.500">
+          <Text as="span" color="gray.solid">
             You aren't Level 13 yet; switch to ML?
           </Text>
         </Line>
       )}
       {!reverserStatus && (
         <Line command="backupcamera reverser on">
-          <Text as="span" color="red.500">
+          <Text as="span" color="red.solid">
             WARNING!
           </Text>{" "}
           Reverser is off. Turn it on, or combats are backwards!

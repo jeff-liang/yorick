@@ -20,7 +20,7 @@ const AdviceTooltipText: FC<AdviceTooltipProps> = ({
   ...props
 }) => {
   const toolTip = (
-    <Box bg="gray.100" p={2} rounded="md" fontSize="xs">
+    <Box bg="gray.subtle" p={2} rounded="md" fontSize="xs">
       {typeof advice === "string" ? <Text>{advice}</Text> : advice}
     </Box>
   );
@@ -30,7 +30,7 @@ const AdviceTooltipText: FC<AdviceTooltipProps> = ({
       <Text
         as="span"
         fontWeight="bold"
-        color="gray.500"
+        color="gray.solid"
         textDecoration="underline dotted lightsteelblue"
         cursor="pointer"
       >

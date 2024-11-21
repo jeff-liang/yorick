@@ -30,14 +30,14 @@ const SpringShoes = () => {
           linkedContent={springShoes}
         >
           <Line>
-            <Text as="span" color="green.500" fontWeight="bold">
+            <Text as="span" color="green.solid" fontWeight="bold">
               Free-run away from your problems with the{" "}
               <Text as="b">Spring Away</Text> skill!
             </Text>
           </Line>
           {!haveShoesEquipped && (
             <Line>
-              <Text as="span" color="red.500">
+              <Text as="span" color="red.solid">
                 Equip the spring shoes first.
               </Text>
             </Line>

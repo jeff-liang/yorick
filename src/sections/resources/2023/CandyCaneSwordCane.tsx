@@ -113,7 +113,7 @@ const CandyCaneSwordCane = () => {
       node: (
         <List.Item key="zeppelin">
           Alternate: Zeppelin Protesters{" "}
-          <Text as="span" color="purple.500">
+          <Text as="span" color="purple.solid">
             (double Sleaze damage!)
           </Text>
           .
@@ -141,28 +141,28 @@ const CandyCaneSwordCane = () => {
       node: haveCcsc && inRun && pathCheck && displayNag && (
         <Tile header="Wear Your Candy" linkedContent={candyCaneSwordCane}>
           <Line>
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               You're
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               in a
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               candy
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               cane
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               sword
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               cane
             </Text>{" "}
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               noncom
             </Text>{" "}
-            <Text as="span" color="green.500">
+            <Text as="span" color="green.solid">
               zone!
             </Text>
           </Line>

@@ -47,7 +47,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
             +3 Hot res
           </Text>
           {" and "}
-          <Text as="span" color="green.800">
+          <Text as="span" color="green.fg">
             +25 Stench Spell
           </Text>
         </>
@@ -58,7 +58,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
       return (
         <>
           {"+50% Meat Drops and "}
-          <Text as="span" color="gray.500">
+          <Text as="span" color="gray.solid">
             +25 Spooky Spell
           </Text>
         </>
@@ -66,7 +66,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
     case "goblin":
       return (
         <>
-          <Text as="span" color="green.800">
+          <Text as="span" color="green.fg">
             +25 Stench
           </Text>
           {" and +50% Mysticality"}
@@ -75,7 +75,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
     case "hippy":
       return (
         <>
-          <Text as="span" color="green.800">
+          <Text as="span" color="green.fg">
             +3 Stench res
           </Text>
           {" and +10 DR"}
@@ -93,7 +93,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
     case "horror":
       return (
         <>
-          <Text as="span" color="gray.500">
+          <Text as="span" color="gray.solid">
             +3 Spooky res
           </Text>
           {" and +50 HP"}
@@ -105,7 +105,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
       return (
         <>
           {"+25% Item Drops and "}
-          <Text as="span" color="purple.500">
+          <Text as="span" color="purple.solid">
             +25 Sleaze Spell
           </Text>
         </>
@@ -113,7 +113,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
     case "orc":
       return (
         <>
-          <Text as="span" color="purple.500">
+          <Text as="span" color="purple.solid">
             +3 Sleaze res
           </Text>
           {" and +25 MP"}
@@ -132,7 +132,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
       return (
         <>
           {"+50% Booze Drops and "}
-          <Text as="span" color="purple.500">
+          <Text as="span" color="purple.solid">
             +25 Sleaze
           </Text>
         </>
@@ -151,7 +151,7 @@ function getLocketEnchantment(phylum: string): ReactNode {
     case "undead":
       return (
         <>
-          <Text as="span" color="gray.500">
+          <Text as="span" color="gray.solid">
             +25 Spooky
           </Text>
           {" and +50% Muscle"}
@@ -215,7 +215,7 @@ const CombatLoversLocket: FC = () => {
           <Text as="b">Current enchantment: </Text>
           {locketPhylum}.
         </Line>
-        <Line color="blue.500">{locketEnchantment}</Line>
+        <Line color="blue.solid">{locketEnchantment}</Line>
         {options.length > 0 && (
           <List.Root>
             {options.map((option) => (

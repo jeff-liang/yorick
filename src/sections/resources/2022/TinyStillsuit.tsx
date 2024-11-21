@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { Box, List, Text } from "@chakra-ui/react";
 import {
   haveEquipped,
   inebrietyLimit,
@@ -54,7 +54,7 @@ const TinyStillsuit = () => {
           {familiarSweat > 449 ? (
             <>
               <Line>
-                <Text as="b" color="red.500">
+                <Text as="b" color="red.solid">
                   {sweatAdvs}
                 </Text>{" "}
                 advs when guzzling now (costs 1 liver).
@@ -72,17 +72,17 @@ const TinyStillsuit = () => {
             </Line>
           )}
           {haveStillsuitEquipped && (
-            <Line color="purple.500">
+            <Line color="purple.solid">
               Currently collecting sweat from current familiar!
             </Line>
           )}
           {!haveStillsuitEquipped && haveStillsuitInInventory && (
-            <Line color="red.500">
+            <Line color="red.solid">
               Not collecting sweat from any familiar right now.
             </Line>
           )}
           {!haveStillsuitEquipped && !haveStillsuitInInventory && (
-            <Line color="fuchsia.500">
+            <Line color="fuchsia.solid">
               Currently collecting sweat on a different familiar!
             </Line>
           )}
@@ -149,7 +149,7 @@ const TinyStillsuit = () => {
         </>
       ) : (
         <>
-          <Line color="red.500">Not enough sweat to guzzle.</Line>
+          <Line color="red.solid">Not enough sweat to guzzle.</Line>
           <Line>
             <Text as="b">{sweatCalcSweat - familiarSweat}</Text> more sweat
             until +1 more adventure. (
@@ -159,21 +159,21 @@ const TinyStillsuit = () => {
         </>
       )}
       {haveStillsuitEquipped && (
-        <Line color="purple.500">
+        <Line color="purple.solid">
           Currently collecting sweat from current familiar!
         </Line>
       )}
       {haveStillsuitInInventory && (
-        <Line color="red.500">
+        <Line color="red.solid">
           Not collecting sweat from any familiar right now.
         </Line>
       )}
       {!haveStillsuitEquipped && !haveStillsuitInInventory && (
-        <Line color="fuchsia.500">
+        <Line color="fuchsia.solid">
           Currently collecting sweat on a different familiar!
         </Line>
       )}
-      <Line>
+      <Box>
         <AdviceTooltipText
           advice={
             <List.Root>
@@ -211,7 +211,7 @@ const TinyStillsuit = () => {
           }
           children="Suggested Familiars"
         />
-      </Line>
+      </Box>
     </Tile>
   );
 };

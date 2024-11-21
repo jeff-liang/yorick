@@ -176,7 +176,7 @@ const Apartment = () => {
                 </Line>
               )
             ) : (
-              <Line href={CITY_LINK} color="red.500">
+              <Line href={CITY_LINK} color="red.solid">
                 Apartment NC next turn! Try to get Thrice-Cursed first.
               </Line>
             )
@@ -232,7 +232,7 @@ const Office = () => {
               <Line
                 href={inventoryLink($item`boring binder clip`)}
                 fontWeight="bold"
-                color="red.500"
+                color="red.solid"
               >
                 Use the boring binder clip to complete the McClusky file.
               </Line>
@@ -249,7 +249,7 @@ const Office = () => {
               </Line>
             ) : null}
             {officeReady ? (
-              <Line color="red.500">
+              <Line color="red.solid">
                 Office NC {get("noncombatForcerActive") ? "(forced) " : ""}next
                 turn!
               </Line>
@@ -318,7 +318,7 @@ const BowlingAlley = () => {
       {tavernUnlocked() ? (
         !get("banishedMonsters").includes("drunk pygmy") ? (
           !have(bowlOfScorpions) ? (
-            <Line href={TAVERN_LINK} fontWeight="bold" color="red.500">
+            <Line href={TAVERN_LINK} fontWeight="bold" color="red.solid">
               Buy Bowl of Scorpions from the Hidden Tavern to free run.
             </Line>
           ) : (
@@ -328,7 +328,7 @@ const BowlingAlley = () => {
           )
         ) : null
       ) : (
-        <Line color="gray.500">
+        <Line color="gray.solid">
           Unlock the Hidden Tavern for free runs from drunk pygmies.
         </Line>
       )}
@@ -375,7 +375,7 @@ const Hospital = () => {
         <Line
           command={`equip ${unequippedOutfitPieces[0].name}`}
           fontWeight="bold"
-          color="red.500"
+          color="red.solid"
         >
           Equip your {commaAnd(unequippedOutfitPieces)} first.
         </Line>
@@ -399,7 +399,7 @@ const Hospital = () => {
       )}
       <Line>{numberOfEquippedPieces * 10}% chance to fight spirit.</Line>
       {hospital.turnsSpent >= 8 && (
-        <Line color="gray.500">
+        <Line color="gray.solid">
           Alternatively, burn {31 - hospital.turnsSpent} more turns.
         </Line>
       )}

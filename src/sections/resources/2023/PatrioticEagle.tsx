@@ -239,7 +239,7 @@ const PatrioticEagle = () => {
             {possibleAppearanceLocations.join(", ")}.
           </Line>
           {rwbMonster?.phylum === eaglePhylumBanished && (
-            <Line color="red.500">
+            <Line color="red.solid">
               <Text as="b">WARNING!</Text> This monster will not appear, it's
               banished by your eagle screech!
             </Line>
@@ -256,13 +256,13 @@ const PatrioticEagle = () => {
                 Patriotic Eagle can screech and banish an entire phylum!{" "}
                 {screechRecharge === 0 && (
                   <>
-                    <Text as="span" color="red.500">
+                    <Text as="span" color="red.solid">
                       SCREEEE
                     </Text>
-                    <Text as="span" color="gray.500">
+                    <Text as="span" color="gray.solid">
                       EEEEE
                     </Text>
-                    <Text as="span" color="blue.500">
+                    <Text as="span" color="blue.solid">
                       EEEEE!
                     </Text>
                   </>
@@ -276,13 +276,13 @@ const PatrioticEagle = () => {
       {showPledge && (
         <>
           <Line>
-            <Text as="span" color="red.500">
+            <Text as="span" color="red.solid">
               Pledge
             </Text>{" "}
-            <Text as="span" color="gray.500">
+            <Text as="span" color="gray.solid">
               allegiance
             </Text>{" "}
-            <Text as="span" color="blue.500">
+            <Text as="span" color="blue.solid">
               to a zone!
             </Text>
           </Line>

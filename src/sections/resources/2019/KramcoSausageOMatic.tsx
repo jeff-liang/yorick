@@ -55,7 +55,7 @@ const KramcoSausageOMatic = () => {
             linkedContent={kramcoSausageOMatic}
           >
             {!kramcosEquipped && (
-              <Line color="red.500">
+              <Line color="red.solid">
                 Equip the Kramco Sausage-o-Matic™ first.
               </Line>
             )}
@@ -90,7 +90,7 @@ const KramcoSausageOMatic = () => {
     >
       {!kramcosEquipped && (
         <Line>
-          <Text as="span" color="red.500">
+          <Text as="span" color="red.solid">
             Equip the Kramco Sausage-o-Matic™ first.
           </Text>
         </Line>
@@ -122,7 +122,7 @@ const KramcoSausageOMatic = () => {
           </Line>
           {sausagesMade > 22 ? (
             <Line>
-              <Text color="purple.500">
+              <Text color="purple.solid">
                 {sausagesMade} sausages made today.
               </Text>
             </Line>

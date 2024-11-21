@@ -28,7 +28,7 @@ const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({
         fit="contain"
       />
       <VStack align="stretch" gap={0.3}>
-        <Text bg="gray.200" p={4} rounded="md" fontSize={12}>
+        <Text bg="gray.muted" p={4} rounded="md" fontSize={12}>
           {advice}
         </Text>
       </VStack>
@@ -37,7 +37,7 @@ const AdviceTooltipIcon: FC<AdviceTooltipIconProps> = ({
 
   return (
     <AdviceTooltip content={toolTip}>
-      <Icon color="gray.500" h={3.5} w={3.5}>
+      <Icon color="gray.solid" h={3.5} w={3.5}>
         <TooltipIcon />
       </Icon>
     </AdviceTooltip>

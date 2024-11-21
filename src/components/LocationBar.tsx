@@ -106,7 +106,7 @@ const LocationBar: FC<StackProps> = (props) => {
       onMouseOut={() => setShowDetails(false)}
       backgroundColor="white"
       borderTop="1px solid"
-      borderColor="gray.200"
+      borderColor="gray.muted"
     >
       <Stack
         w="100%"
@@ -148,7 +148,7 @@ const LocationBar: FC<StackProps> = (props) => {
         direction="row"
         justify="space-between"
         borderTop="1px solid"
-        borderColor="gray.200"
+        borderColor="gray.muted"
         fontSize="xs"
         {...props}
       >

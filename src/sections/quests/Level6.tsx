@@ -77,7 +77,7 @@ const Level6: FC = () => {
           Step.STARTED && 1,
           <>
             {inZone && combatModifier > -25 && (
-              <Line fontWeight="bold" color="red.500">
+              <Line fontWeight="bold" color="red.solid">
                 Your -combat% is less than 25%, you want more!
               </Line>
             )}

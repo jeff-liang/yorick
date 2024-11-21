@@ -28,7 +28,7 @@ const Chevrons: FC<ChevronsProps> = forwardRef<
       {new Array(totalUses).fill(null).map((_, index) => (
         <Icon // I tried a few types of icons. This was the best, for now.
           key={index}
-          color={index < usesLeft ? "black" : "gray.400"}
+          color={index < usesLeft ? "black" : "fg.subtle"}
           fontWeight={300}
           ml={-2}
         >

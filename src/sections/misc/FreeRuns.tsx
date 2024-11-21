@@ -85,7 +85,7 @@ const FreeRuns: FC = () => {
           ({ source, thing, caption, captionPlural, remaining }) =>
             !have(source) || remaining() <= 0 ? null : (
               <Line key={source.identifierString}>
-                <Text as="span" color={have(thing) ? undefined : "gray.500"}>
+                <Text as="span" color={have(thing) ? undefined : "gray.solid"}>
                   {plural(
                     remaining(),
                     caption?.() ?? thing.name,

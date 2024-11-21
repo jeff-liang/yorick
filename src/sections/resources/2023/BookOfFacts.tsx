@@ -52,12 +52,12 @@ const BookOfFacts = () => {
               )}
             </Line>
             {eaglePhylumBanished === habitatMonsterPhylum && (
-              <Line color="red.500">
+              <Line color="red.solid">
                 WARNING: {habitatMonsterName}'s phylum is banished!
               </Line>
             )}
             {habitatMonsterBanished && (
-              <Line color="red.500">
+              <Line color="red.solid">
                 WARNING: {habitatMonsterName} is banished!
               </Line>
             )}

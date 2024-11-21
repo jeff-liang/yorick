@@ -133,7 +133,7 @@ const Tile: FC<TileProps> = ({
   return (
     <HStack
       align="stretch"
-      color={collapsed || disabled ? "gray.500" : undefined}
+      color={collapsed || disabled ? "gray.solid" : undefined}
       {...props}
     >
       <Box

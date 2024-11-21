@@ -41,7 +41,7 @@ const EmotionChip = () => {
           key={skillDescription}
           pl="1"
           display="flex"
-          color={casts === 0 ? "gray.500" : undefined}
+          color={casts === 0 ? "gray.solid" : undefined}
         >
           <ChevronsListIcon
             usesLeft={casts}

@@ -68,28 +68,25 @@ const Thanksgarden = () => {
           Could make into{" "}
           <Box as="span">
             {commaSeparate([
-              <AdviceTooltipText
-                key="turkey"
-                children={`${plural(
+              <AdviceTooltipText key="turkey" advice="Requires 3 cashews each.">
+                {`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   turkeyBlaster,
                 )} to burn delay`}
-                advice="Requires 3 cashews each."
-              />,
+              </AdviceTooltipText>,
               <AdviceTooltipText
                 key="stuffing"
-                children={`${plural(
+                advice="Requires 3 cashews each."
+              >
+                {`${plural(
                   Math.floor(availableAmount(cashew) / 3),
                   stuffingFluffer,
                 )} for the war`}
-                advice="Requires 3 cashews each."
-              />,
+              </AdviceTooltipText>,
               "various foods",
-              <AdviceTooltipText
-                key="boat"
-                children="gravy boat for the crypt (somewhat marginal)"
-                advice="Requires 3 cashews."
-              />,
+              <AdviceTooltipText key="boat" advice="Requires 3 cashews.">
+                gravy boat for the crypt (somewhat marginal)
+              </AdviceTooltipText>,
             ])}
             .
           </Box>

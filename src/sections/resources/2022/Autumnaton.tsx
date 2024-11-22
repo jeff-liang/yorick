@@ -180,8 +180,9 @@ const Autumnaton = () => {
               ))}
             </VStack>
           }
-          children="Potential Autumnaton Targets"
-        />
+        >
+          Potential Autumnaton Targets
+        </AdviceTooltipText>
       )}
     </Tile>
   );

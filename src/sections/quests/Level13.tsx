@@ -134,10 +134,9 @@ const Level13: FC = () => {
       >
         <Line>Defeat the Wall of Meat.</Line>
         <Line>
-          <AdviceTooltipText
-            advice="You need 526% meat drop to guarantee a one-turn kill."
-            children={`Current meat drop: ${Modifier.get("Meat Drop")}`}
-          />
+          <AdviceTooltipText advice="You need 526% meat drop to guarantee a one-turn kill.">
+            {`Current meat drop: ${Modifier.get("Meat Drop")}`}
+          </AdviceTooltipText>
         </Line>
       </Tile>
     );

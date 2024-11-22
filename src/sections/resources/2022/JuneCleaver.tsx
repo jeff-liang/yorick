@@ -98,8 +98,9 @@ const JuneCleaver = () => {
                 </List.Root>
               </>
             }
-            children={name}
-          />
+          >
+            {name}
+          </AdviceTooltipText>
         </List.Item>
       );
     });

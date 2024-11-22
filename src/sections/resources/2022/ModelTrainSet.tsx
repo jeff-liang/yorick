@@ -268,8 +268,9 @@ const ModelTrainSet = () => {
             </List.Root>
           </>
         }
-        children="Full train cycle"
-      />
+      >
+        Full train cycle
+      </AdviceTooltipText>
     </Tile>
   );
 };

@@ -193,10 +193,9 @@ const CandyCaneSwordCane = () => {
         <List.Root>{availableOptions.map(({ node }) => node)}</List.Root>
         {!ccscEquipped && (
           <Line>
-            <AdviceTooltipText
-              advice="This is important!"
-              children="Equip the Candy Cane Sword Cane!"
-            />
+            <AdviceTooltipText advice="This is important!">
+              Equip the Candy Cane Sword Cane!
+            </AdviceTooltipText>
           </Line>
         )}
       </Tile>

@@ -191,8 +191,9 @@ const TinyStillsuit = () => {
               )}
             </List.Root>
           }
-          children="Sweat/Advs"
-        />{" "}
+        >
+          Sweat/Advs
+        </AdviceTooltipText>{" "}
         •{" "}
         <AdviceTooltipText
           advice={
@@ -206,8 +207,9 @@ const TinyStillsuit = () => {
               </List.Item>
             </List.Root>
           }
-          children="Suggested Familiars"
-        />
+        >
+          Suggested Familiars
+        </AdviceTooltipText>
       </Box>
     </Tile>
   );

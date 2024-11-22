@@ -144,8 +144,9 @@ const MrStore2002Catalog = () => {
           ) : (
             <AdviceTooltipText
               advice={`${nextVHSTimer} adventures until your free fight YR VHS fight.`}
-              children={`Spooky VHS: ${imageName}`}
-            />
+            >
+              {`Spooky VHS: ${imageName}`}
+            </AdviceTooltipText>
           )}
         </Line>
       )}

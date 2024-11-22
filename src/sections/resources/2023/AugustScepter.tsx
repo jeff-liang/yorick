@@ -273,10 +273,9 @@ const AugustScepter: FC = () => {
           <Table.Body>{table}</Table.Body>
         </Table.Root>
       )}
-      <AdviceTooltipText
-        children="No, YORICK, show me ALL the skills."
-        advice={tooltip}
-      />
+      <AdviceTooltipText advice={tooltip}>
+        No, YORICK, show me ALL the skills.
+      </AdviceTooltipText>
     </Tile>
   );
 };

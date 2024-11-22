@@ -45,10 +45,9 @@ const MiniKiwi = () => {
     >
       <Line>
         At {Math.floor(kiwiWeight)} weight, you have a{" "}
-        <AdviceTooltipText
-          advice="Chance of getting a mini-kiwi each fight"
-          children={`${kiwiChance.toFixed(1)}%`}
-        />{" "}
+        <AdviceTooltipText advice="Chance of getting a mini-kiwi each fight">
+          {`${kiwiChance.toFixed(1)}%`}
+        </AdviceTooltipText>{" "}
         chance of a mini-kiwi each fight.
       </Line>
       {!kiwiSpiritsBought && (

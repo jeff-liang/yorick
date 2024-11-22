@@ -280,23 +280,23 @@ const AGuideToBurningLeaves: FC = () => {
             {leafCount >= 111 * fightsRemaining ? (
               <AdviceTooltipText
                 advice={`You can summon ${fightsRemaining} monstera for scaling fights.`}
-                children={`You have enough leaves for ${fightsRemaining} monstera.`}
-              />
+              >
+                {`You have enough leaves for ${fightsRemaining} monstera.`}
+              </AdviceTooltipText>
             ) : leafCount >= 11 * fightsRemaining ? (
               <AdviceTooltipText
                 advice={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
-                children={`You have enough leaves for ${fightsRemaining} leaflets.`}
-              />
+              >
+                {`You have enough leaves for ${fightsRemaining} leaflets.`}
+              </AdviceTooltipText>
             ) : leafCount >= 11 ? (
-              <AdviceTooltipText
-                advice="Save leaves for more fights!"
-                children={`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
-              />
+              <AdviceTooltipText advice="Save leaves for more fights!">
+                {`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
+              </AdviceTooltipText>
             ) : (
-              <AdviceTooltipText
-                advice="Save leaves for fights!"
-                children="You cannot currently summon a free fight."
-              />
+              <AdviceTooltipText advice="Save leaves for fights!">
+                You cannot currently summon a free fight.
+              </AdviceTooltipText>
             )}
           </Line>
         </>

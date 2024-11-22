@@ -89,10 +89,9 @@ const CosmicBowlingBall = () => {
       {returnCombats > 0 && (
         <Line>
           Your Bowling Ball will return in{" "}
-          <AdviceTooltipText
-            advice="Free runs count for this!"
-            children={plural(returnCombats, "turn")}
-          />
+          <AdviceTooltipText advice="Free runs count for this!">
+            {plural(returnCombats, "turn")}
+          </AdviceTooltipText>
           .
         </Line>
       )}

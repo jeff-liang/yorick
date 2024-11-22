@@ -126,10 +126,9 @@ const ClosedCircuitPayPhone = () => {
             Optionally call Rufus again for another (turn-taking) quest.
           </Line>
         )}
-        <AdviceTooltipText
-          advice={getShadowBrickLocationTooltip()}
-          children="Shadow Brick locations"
-        />
+        <AdviceTooltipText advice={getShadowBrickLocationTooltip()}>
+          Shadow Brick locations
+        </AdviceTooltipText>
       </Tile>
 
       {shadowAffinityTurns > 0 && (

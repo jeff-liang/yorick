@@ -10,10 +10,11 @@ const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
   <IconButton
     asChild
     aria-label="Refresh"
+    _hover={{ bgColor: "bg.emphasized" }}
+    bgColor="bg"
     size="2xs"
     p={1}
     variant="outline"
-    backgroundColor="white"
     {...props}
   >
     {direction === "left" ? <ChevronLeft /> : <ChevronRight />}

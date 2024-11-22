@@ -16,7 +16,6 @@ const PrefsButton: FC = () => {
       size="2xs"
       p={1}
       variant="outline"
-      backgroundColor="white"
     >
       <EditIcon />
     </IconButton>

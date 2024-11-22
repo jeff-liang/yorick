@@ -91,7 +91,7 @@ const JurassicParka: FC = () => {
 
   return (
     <Tile
-      header={`Jurassic Parka (${parkaMode})`}
+      header={`Jurassic Parka${parkaMode ? ` (${parkaMode})` : ""}`}
       id="jurassic-parka-tile"
       linkedContent={jurassicParka}
     >

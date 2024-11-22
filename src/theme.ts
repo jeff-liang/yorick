@@ -25,12 +25,24 @@ const buttonRecipe = defineRecipe({
   ],
 });
 
-const config = defineConfig({
-  globalCss: {
-    html: {
-      lineHeight: "moderate",
-    },
+const textRecipe = defineRecipe({
+  base: {
+    lineHeight: "moderate",
   },
+});
+
+const headingRecipe = defineRecipe({
+  base: {
+    lineHeight: "moderate",
+  },
+});
+
+const config = defineConfig({
+  // globalCss: {
+  //   html: {
+  //     lineHeight: "moderate",
+  //   },
+  // },
   theme: {
     tokens: {
       lineHeights: {
@@ -45,6 +57,8 @@ const config = defineConfig({
     },
     recipes: {
       button: buttonRecipe,
+      heading: headingRecipe,
+      text: textRecipe,
     },
   },
 });

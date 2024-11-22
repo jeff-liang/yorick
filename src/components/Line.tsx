@@ -31,7 +31,9 @@ const Line: FC<Props> = ({
   return (
     <Text {...props}>
       {command ? (
-        <AsyncLink command={command}>{children}</AsyncLink>
+        <AsyncLink command={command}>
+          <Text as="span">{children}</Text>
+        </AsyncLink>
       ) : href ? (
         async ? (
           <AsyncLink href={href}>{children}</AsyncLink>

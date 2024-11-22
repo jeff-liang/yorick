@@ -9,7 +9,6 @@ const RefreshButton: FC<ButtonProps> = (props) => (
     size="2xs"
     p={1}
     variant="outline"
-    backgroundColor="white"
     {...props}
   >
     <RepeatIcon />

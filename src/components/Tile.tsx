@@ -91,7 +91,7 @@ const Tile: FC<TileProps> = ({
   const tileContents = (
     <VStack align="start" gap={0.5}>
       <HStack gap={1} align="center">
-        <Heading as="h3" size="md" lineHeight="tall">
+        <Heading as="h3" size="md">
           {!collapsed && !disabled && !linkEntireTile && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (

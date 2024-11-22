@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import { myClass, myLevel, myPrimestat, numericModifier } from "kolmafia";
 import { $class, $familiar, get } from "libram";
 import { FC } from "react";
@@ -79,9 +79,9 @@ const GreyGoose: FC = () => {
   return (
     <Tile linkedContent={greyGoose}>
       <Line>
-        Currently have <Text as="b">{gooseWeight}</Text> weight (
-        <Text as="b">{gooseExperience}</Text> experience), currently gain{" "}
-        <Text as="b">{famExperienceGain}</Text> fam exp per fight. (Will become{" "}
+        Currently have <Strong>{gooseWeight}</Strong> weight (
+        <Strong>{gooseExperience}</Strong> experience), currently gain{" "}
+        <Strong>{famExperienceGain}</Strong> fam exp per fight. (Will become{" "}
         <Text
           as="b"
           color={
@@ -94,31 +94,31 @@ const GreyGoose: FC = () => {
       </Line>
       {gooseWeight < 6 ? (
         <Line>
-          <Text as="b">
+          <Strong>
             {Math.ceil(famExpNeededForNextPound / famExperienceGain)}
-          </Text>{" "}
+          </Strong>{" "}
           combats until next pound, or{" "}
-          <Text as="b">{Math.ceil(horribleFamExpCalculation)}</Text> combats for
-          6 weight.
+          <Strong>{Math.ceil(horribleFamExpCalculation)}</Strong> combats for 6
+          weight.
         </Line>
       ) : (
         <>
           <Line>
-            <Text as="b">{famExpNeededForNextPound}</Text> famxp needed for next
-            pound, or <Text as="b">{famExpNeededForTwoPounds}</Text> for the one
+            <Strong>{famExpNeededForNextPound}</Strong> famxp needed for next
+            pound, or <Strong>{famExpNeededForTwoPounds}</Strong> for the one
             after that.
           </Line>
           {famExperienceGain < famExpNeededForNextPound && (
             <Line color="red.solid">Insufficient famxp for next fight.</Line>
           )}
           <Line>
-            Can emit <Text as="b">{gooseWeight - 5}</Text> drones to duplicate
+            Can emit <Strong>{gooseWeight - 5}</Strong> drones to duplicate
             items.
           </Line>
           {get("_meatifyMatterUsed") === false && (
             <Line>
-              Can meatify matter for{" "}
-              <Text as="b">{(gooseWeight - 5) ** 4}</Text> meat.
+              Can meatify matter for <Strong>{(gooseWeight - 5) ** 4}</Strong>{" "}
+              meat.
             </Line>
           )}
           {myClass() === $class`Grey Goo` &&
@@ -126,18 +126,17 @@ const GreyGoose: FC = () => {
           myLevel() < 11 ? (
             <>
               <Line>
-                Can generate <Text as="b">{(gooseWeight - 5) ** 2}</Text>{" "}
-                mainstat.
+                Can generate <Strong>{(gooseWeight - 5) ** 2}</Strong> mainstat.
               </Line>
               <Line>
-                <Text as="b">
+                <Strong>
                   GREY YOU:{" "}
                   {Math.ceil(famExpNeededForNextPound / famExperienceGain)}
-                </Text>{" "}
+                </Strong>{" "}
                 combats until next pound, or{" "}
-                <Text as="b">
+                <Strong>
                   {Math.ceil(horribleFamExpCalculationForGreyYou)}
-                </Text>{" "}
+                </Strong>{" "}
                 combats for 14 weight.
               </Line>
             </>
@@ -147,7 +146,7 @@ const GreyGoose: FC = () => {
               <>
                 <Line>
                   Can generate{" "}
-                  <Text as="b">
+                  <Strong>
                     {Math.round(
                       (gooseWeight - 5) ** 3 *
                         (1.0 +
@@ -156,18 +155,18 @@ const GreyGoose: FC = () => {
                           ) /
                             100.0),
                     )}
-                  </Text>{" "}
-                  substats. (<Text as="b">{(gooseWeight - 5) ** 3}</Text> base).
+                  </Strong>{" "}
+                  substats. (<Strong>{(gooseWeight - 5) ** 3}</Strong> base).
                 </Line>
                 <Line>
-                  <Text as="b">
+                  <Strong>
                     STAT GOOSO:{" "}
                     {Math.ceil(famExpNeededForNextPound / famExperienceGain)}
-                  </Text>{" "}
+                  </Strong>{" "}
                   combats until next pound, or{" "}
-                  <Text as="b">
+                  <Strong>
                     {Math.ceil(horribleFamExpCalculationForStandard)}
-                  </Text>{" "}
+                  </Strong>{" "}
                   combats for 20 weight.
                 </Line>
               </>

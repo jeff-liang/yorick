@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { canEquip, haveEquipped, myPath } from "kolmafia";
 import { $effect, $item, $path, $skill, clamp, get, have } from "libram";
 import { FC } from "react";
@@ -98,8 +98,7 @@ const JurassicParka: FC = () => {
       <Line color="blue.solid">{parkaEnchantment}</Line>
       {spikolodonSpikesLeft > 0 && (
         <Line command="parka spikolodon">
-          <Text as="b">{spikolodonSpikesLeft}</Text> spikolodon spikes
-          available.
+          <Strong>{spikolodonSpikesLeft}</Strong> spikolodon spikes available.
         </Line>
       )}
     </Tile>

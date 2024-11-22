@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import {
   appearanceRates,
   getMonsters,
@@ -62,7 +62,7 @@ const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
           const text = `${monster.name} (${queue.includes(monster) ? "Q " : ""}${(100 * frequency).toFixed(0)}%)`;
           const banisher = banishedMonsters.find(([, m]) => m === monster)?.[0];
           return targets.includes(monster) ? (
-            <Text as="b">{text}</Text>
+            <Strong>{text}</Strong>
           ) : banisher ? (
             <Tooltip showArrow content={`Banished: ${banisher.name}`}>
               <Text as="span" color="gray.solid">

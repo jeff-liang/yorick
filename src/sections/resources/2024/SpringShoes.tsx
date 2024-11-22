@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import { haveEquipped, myPath } from "kolmafia";
 import { $effect, $item, $path, have } from "libram";
 
@@ -32,7 +32,7 @@ const SpringShoes = () => {
           <Line>
             <Text as="span" color="green.solid">
               Free-run away from your problems with the{" "}
-              <Text as="b">Spring Away</Text> skill!
+              <Strong>Spring Away</Strong> skill!
             </Text>
           </Line>
           {!haveShoesEquipped && (

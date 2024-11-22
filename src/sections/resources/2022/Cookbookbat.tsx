@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
@@ -131,17 +131,16 @@ const Cookbookbat = () => {
         </Line>
         <List.Root>
           <List.Item>
-            <Text as="b">{borisBreadCraftable}x Boris's Bread:</Text> +100%
-            meat.
+            <Strong>{borisBreadCraftable}x Boris's Bread:</Strong> +100% meat.
           </List.Item>
           <List.Item>
-            <Text as="b">
+            <Strong>
               {roastedVegCraftable}x Roasted Vegetable of Jarlsberg:
-            </Text>{" "}
+            </Strong>{" "}
             +100% item.
           </List.Item>
           <List.Item>
-            <Text as="b">{focacciaCraftable}x Roasted Vegetable Focaccia:</Text>{" "}
+            <Strong>{focacciaCraftable}x Roasted Vegetable Focaccia:</Strong>{" "}
             +10 fam XP.
           </List.Item>
         </List.Root>

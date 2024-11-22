@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -368,9 +368,7 @@ const CursedMonkeysPaw = () => {
       <List.Root>
         {monkeySkills().map((skill) => (
           <List.Item key={skill.fingerCount}>
-            <Text as="b">
-              {plural(skill.fingerCount, "finger", "fingers")}:
-            </Text>{" "}
+            <Strong>{plural(skill.fingerCount, "finger", "fingers")}:</Strong>{" "}
             {skill.description}
           </List.Item>
         ))}

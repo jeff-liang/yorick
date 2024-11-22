@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { numericModifier } from "kolmafia";
 import { $familiar, $item, clamp, get, have } from "libram";
 
@@ -26,16 +26,15 @@ const ChestMimic = () => {
   return (
     <Tile linkedContent={chestMimic}>
       <Line>
-        Currently have <Text as="b">{chestExperience}</Text> experience,
-        currently gain <Text as="b">{famExperienceGain}</Text> fam exp per
-        fight.
+        Currently have <Strong>{chestExperience}</Strong> experience, currently
+        gain <Strong>{famExperienceGain}</Strong> fam exp per fight.
       </Line>
       <Line>
-        Need <Text as="b">{famExpNeededForNextEgg}</Text> more famxp for next
-        egg ({fightsForNextEgg}).
+        Need <Strong>{famExpNeededForNextEgg}</Strong> more famxp for next egg (
+        {fightsForNextEgg}).
       </Line>
       <Line>
-        Can lay <Text as="b">{mimicEggsLeft}</Text> more eggs today.
+        Can lay <Strong>{mimicEggsLeft}</Strong> more eggs today.
       </Line>
       {have(mimicEgg) && (
         <Line>

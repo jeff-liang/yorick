@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { $item, $skill, get, have } from "libram";
 import { ReactNode, useMemo } from "react";
 
@@ -40,19 +40,19 @@ const SITCertificate = () => {
     if (havePsychogeologist) {
       return (
         <>
-          You have ML; consider <Text as="b">Insectology</Text>, for meat?
+          You have ML; consider <Strong>Insectology</Strong>, for meat?
         </>
       );
     } else if (haveInsectologist) {
       return (
         <>
-          You have Meat; consider <Text as="b">Psychogeology</Text>, for ML?
+          You have Meat; consider <Strong>Psychogeology</Strong>, for ML?
         </>
       );
     } else if (haveCryptobotanist) {
       return (
         <>
-          You have Init; consider <Text as="b">Insectology</Text>, for meat?
+          You have Init; consider <Strong>Insectology</Strong>, for meat?
         </>
       );
     } else return <></>;

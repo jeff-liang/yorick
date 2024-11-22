@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Em } from "@chakra-ui/react";
 import { availableAmount, Item } from "kolmafia";
 import { $item, $items, get, have, questStep } from "libram";
 import { FC } from "react";
@@ -64,7 +64,7 @@ const OrcChasm: FC = () => {
           inProgress ? (
             <>
               <Line>
-                Build a bridge. <Text as="i">(+item, -ML)</Text>
+                Build a bridge. <Em>(+item, -ML)</Em>
               </Line>
               <Line>
                 Overkill orcs with cold damage: {orcProgress}/15 to NC.

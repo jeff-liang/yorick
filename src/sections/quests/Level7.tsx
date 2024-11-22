@@ -1,4 +1,4 @@
-import { List, Separator, Stack, Text } from "@chakra-ui/react";
+import { Em, List, Separator, Stack, Strong } from "@chakra-ui/react";
 import {
   availableAmount,
   equippedItem,
@@ -48,10 +48,10 @@ const getZoneDisplay = (
   return (
     <MainLink href="/crypt.php">
       <Line>
-        <Text as="b">{zone}:</Text>{" "}
+        <Strong>{zone}:</Strong>{" "}
         {evil > 13 ? (
           <>
-            {evil - 13}/37 evil to boss. <Text as="i">{quickInfo}</Text>
+            {evil - 13}/37 evil to boss. <Em>{quickInfo}</Em>
           </>
         ) : (
           "Fight the boss."

@@ -1,4 +1,4 @@
-import { Heading, List, Text, VStack } from "@chakra-ui/react";
+import { Heading, List, Strong, Text, VStack } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -48,10 +48,7 @@ const Autumnaton = () => {
         >
           <Line>
             Next use will take{" "}
-            <Text as="b" color="red.solid">
-              {autobotsReturnTime}
-            </Text>{" "}
-            adventures.
+            <Strong color="red.solid">{autobotsReturnTime}</Strong> adventures.
           </Line>
         </Tile>
       ),
@@ -152,15 +149,15 @@ const Autumnaton = () => {
         <>
           <Line>
             Will return in{" "}
-            <Text as="b" color="red.solid">
+            <Strong color="red.solid">
               {turncountWhereAutobotReturns + 1 - totalTurnsPlayed()}
-            </Text>{" "}
+            </Strong>{" "}
             adventures.
           </Line>
           <Line>
-            <Text as="b">
+            <Strong>
               Currently exploring: {autumnatonQuestLocation?.identifierString}.
-            </Text>
+            </Strong>
           </Line>
         </>
       )}

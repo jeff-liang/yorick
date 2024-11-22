@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import { canAdventure, myAscensions, myLevel } from "kolmafia";
 import { $effect, $item, $location, get, have } from "libram";
 import { FC } from "react";
@@ -149,7 +149,7 @@ const MayamCalendar: FC = () => {
     const ringSymbols = unusedSymbols.filter((symbol) => symbol.ring === ring);
     return (
       <List.Item key={ring}>
-        <Text as="b">{`${ring}${["st", "nd", "rd", "th"][ring - 1]} ring:`}</Text>{" "}
+        <Strong>{`${ring}${["st", "nd", "rd", "th"][ring - 1]} ring:`}</Strong>{" "}
         {ringSymbols.map((symbol) => symbol.friendlyName).join(", ")}
       </List.Item>
     );
@@ -190,7 +190,7 @@ const MayamCalendar: FC = () => {
       <List.Root>
         {availableResonances.map((resonance, index) => (
           <List.Item key={index}>
-            <Text as="b">{resonance.name}:</Text> {resonance.combo.join(" + ")}
+            <Strong>{resonance.name}:</Strong> {resonance.combo.join(" + ")}
           </List.Item>
         ))}
       </List.Root>

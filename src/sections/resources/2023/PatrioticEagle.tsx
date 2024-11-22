@@ -1,4 +1,4 @@
-import { Heading, List, Text } from "@chakra-ui/react";
+import { Heading, List, Strong, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   canEquip,
@@ -77,8 +77,7 @@ const generatePledgeZones = (
   return (
     available.length > 0 && (
       <Line key={effect}>
-        <Text as="b">{effect}:</Text>{" "}
-        {available.map(([name]) => name).join(", ")}
+        <Strong>{effect}:</Strong> {available.map(([name]) => name).join(", ")}
       </Line>
     )
   );
@@ -94,8 +93,7 @@ const generatePhylumOptions = (
   return (
     available.length > 0 && (
       <List.Item key={phylum}>
-        <Text as="b">{phylum}:</Text>{" "}
-        {available.map(([name]) => name).join(", ")}
+        <Strong>{phylum}:</Strong> {available.map(([name]) => name).join(", ")}
       </List.Item>
     )
   );
@@ -133,7 +131,7 @@ const PatrioticEagle = () => {
           >
             {!withEagle && <Line>Take your Patriotic Eagle with you.</Line>}
             <Line>
-              Pledge allegiance to <Text as="b">{pledgeZoneName}</Text> for{" "}
+              Pledge allegiance to <Strong>{pledgeZoneName}</Strong> for{" "}
               {pledgeZoneEffect}.
             </Line>
           </Tile>
@@ -240,7 +238,7 @@ const PatrioticEagle = () => {
           </Line>
           {rwbMonster?.phylum === eaglePhylumBanished && (
             <Line color="red.solid">
-              <Text as="b">WARNING!</Text> This monster will not appear, it's
+              <Strong>WARNING!</Strong> This monster will not appear, it's
               banished by your eagle screech!
             </Line>
           )}

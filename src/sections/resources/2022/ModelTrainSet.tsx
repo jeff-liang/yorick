@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import { availableAmount, myLevel, myPrimestat } from "kolmafia";
 import { $item, $stat, get, have } from "libram";
 
@@ -242,26 +242,26 @@ const ModelTrainSet = () => {
       ) : (
         <Line>
           Train set reconfigurable in{" "}
-          <Text as="b">{plural(reconfigurableIn, "combat")}</Text>.
+          <Strong>{plural(reconfigurableIn, "combat")}</Strong>.
         </Line>
       )}
       <Line>
-        Next station: <Text as="b">{nextStation.name}</Text> -{" "}
+        Next station: <Strong>{nextStation.name}</Strong> -{" "}
         {nextStation.description}
       </Line>
       <AdviceTooltipText
         advice={
           <>
-            <Text as="b" textAlign="center" pb={1}>
+            <Strong textAlign="center" pb={1}>
               Train station cycle
-            </Text>
+            </Strong>
             <List.Root>
               {Array.from({ length: 8 }, (_, i) => {
                 const station =
                   stationDescriptions[stations[(trainPosition + i) % 8]];
                 return (
                   <List.Item key={i}>
-                    <Text as="b">{station.name}</Text>: {station.description}
+                    <Strong>{station.name}</Strong>: {station.description}
                   </List.Item>
                 );
               })}

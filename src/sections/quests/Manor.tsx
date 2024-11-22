@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong, Text } from "@chakra-ui/react";
 import {
   combatRateModifier,
   equippedAmount,
@@ -174,9 +174,9 @@ const HauntedLibrary: FC = () => {
       </Line>
       <Line>
         Defeat{" "}
-        <Text as="b">
+        <Strong>
           {plural(5 - get("writingDesksDefeated", 0), "more writing desk")}
-        </Text>{" "}
+        </Strong>{" "}
         to acquire a necklace.
       </Line>
       <Line>

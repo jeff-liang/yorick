@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   haveEquipped,
@@ -108,17 +108,17 @@ const KramcoSausageOMatic = () => {
 
       {possibleSausages > 0 && sausagesEaten < 23 && (
         <>
-          <Text as="b">
+          <Strong>
             {plural(
               Math.min(sausagesAvailable, 23 - sausagesEaten),
               "magical sausage",
             )}{" "}
             edible.
-          </Text>
+          </Strong>
           <Line>+1 adventure and +999 MP each.</Line>
           <Line>
-            <Text as="b">{sausageCasings}</Text> casings available,{" "}
-            <Text as="b">{sausagesEaten}/23</Text> eaten today.
+            <Strong>{sausageCasings}</Strong> casings available,{" "}
+            <Strong>{sausagesEaten}/23</Strong> eaten today.
           </Line>
           {sausagesMade > 22 ? (
             <Line>

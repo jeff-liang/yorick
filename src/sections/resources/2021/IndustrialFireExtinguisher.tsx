@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import { $item, get, have, questStep } from "libram";
 
 import Line from "../../../components/Line";
@@ -68,28 +68,27 @@ const IndustrialFireExtinguisher = () => {
         <List.Root>
           {showBat && (
             <List.Item>
-              <Text as="b">Constricted Blast</Text>: Unlock a Bat Hole chamber.
+              <Strong>Constricted Blast</Strong>: Unlock a Bat Hole chamber.
             </List.Item>
           )}
           {showKnob && (
             <List.Item>
-              <Text as="b">Foam the Place</Text>: Obtain the Knob Harem Outfit.
+              <Strong>Foam the Place</Strong>: Obtain the Knob Harem Outfit.
             </List.Item>
           )}
           {showCyrpt && (
             <List.Item>
-              <Text as="b">Replace the Chill</Text>: Reduce evil by 10 in a
-              zone.
+              <Strong>Replace the Chill</Strong>: Reduce evil by 10 in a zone.
             </List.Item>
           )}
           {showBlech && (
             <List.Item>
-              <Text as="b">Cool it Down</Text>: 73% Blech House progress.
+              <Strong>Cool it Down</Strong>: 73% Blech House progress.
             </List.Item>
           )}
           {showDesert && (
             <List.Item>
-              <Text as="b">Take a Drink</Text>: 15 turns of Ultrahydrated.
+              <Strong>Take a Drink</Strong>: 15 turns of Ultrahydrated.
             </List.Item>
           )}
         </List.Root>

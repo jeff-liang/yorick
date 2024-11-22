@@ -1,4 +1,4 @@
-import { Badge, BadgeProps, Stack, StackProps, Text } from "@chakra-ui/react";
+import { Badge, BadgeProps, Stack, StackProps, Strong } from "@chakra-ui/react";
 import {
   getWorkshed,
   haveEffect,
@@ -86,14 +86,14 @@ const CMCTimeline: FC = () => {
         ))}
       </Stack>
       <Stack flexFlow="row wrap" gap={1} align="center">
-        <Text as="b">
+        <Strong>
           {turnsToConsult > 0 ? (
             plural(turnsToConsult, "turn")
           ) : (
             <MainLink href="/campground.php?action=workshed">NOW</MainLink>
           )}
           :
-        </Text>
+        </Strong>
         <Badge fontSize="xs" color="white" bgColor={ENV_COLORS[maxEnvironment]}>
           {result}
         </Badge>

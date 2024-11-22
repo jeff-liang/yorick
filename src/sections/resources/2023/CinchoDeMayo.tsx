@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import { getDwelling, myAscensions, totalFreeRests } from "kolmafia";
 import {
   $item,
@@ -75,34 +75,28 @@ const CinchoDeMayo = () => {
     >
       <Line>
         Use your Cincho de Mayo to cast skills in exchange for cinch; when
-        you're out of cinch, take a <Text as="b">free rest!?</Text>
+        you're out of cinch, take a <Strong>free rest!?</Strong>
       </Line>
       {totalCinch > 60 && (
         <Line>
-          <Text as="b" color="purple.solid">
-            Fiesta Exit (60%):
-          </Text>{" "}
-          Force a NC on your next adventure. You have{" "}
-          <Text as="b">{possibleFiestaExits}</Text> more possible, with{" "}
-          {totalCinch % 60}% cinch left over.
+          <Strong color="purple.solid">Fiesta Exit (60%):</Strong> Force a NC on
+          your next adventure. You have <Strong>{possibleFiestaExits}</Strong>{" "}
+          more possible, with {totalCinch % 60}% cinch left over.
         </Line>
       )}
       <List.Root>
         {totalCinch > 25 && (
           <List.Item>
-            <Text as="b">Party Soundtrack (25%):</Text> 30 advs of +5 fam
-            weight.
+            <Strong>Party Soundtrack (25%):</Strong> 30 advs of +5 fam weight.
           </List.Item>
         )}
         {totalCinch > 5 && (
           <>
             <List.Item>
-              <Text as="b">Confetti Extravaganza (5%):</Text> 2x stats,
-              in-combat
+              <Strong>Confetti Extravaganza (5%):</Strong> 2x stats, in-combat
             </List.Item>
             <List.Item>
-              <Text as="b">Projectile Piñata (5%):</Text> complex candy,
-              in-combat
+              <Strong>Projectile Piñata (5%):</Strong> complex candy, in-combat
             </List.Item>
           </>
         )}

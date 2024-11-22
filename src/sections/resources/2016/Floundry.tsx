@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { canEquip, isUnrestricted } from "kolmafia";
 import { $item, $skill, get, have } from "libram";
 
@@ -39,33 +39,33 @@ const ClanFloundry = () => {
       {canEquipWeapons && (
         <>
           <Line>
-            <Text as="b">Bass Clarinet (Ranged Weapon):</Text> -10% combat,
-            +100% moxie, -3 MP skill cost, +50 ranged damage.
+            <Strong>Bass Clarinet (Ranged Weapon):</Strong> -10% combat, +100%
+            moxie, -3 MP skill cost, +50 ranged damage.
           </Line>
           <Line>
-            <Text as="b">Fish Hatchet (Weapon):</Text> -10% combat, +100%
-            muscle, +5 familiar weight, +50 weapon damage
+            <Strong>Fish Hatchet (Weapon):</Strong> -10% combat, +100% muscle,
+            +5 familiar weight, +50 weapon damage
             {!bridgeComplete && ", +5 bridge progress"}.
           </Line>
         </>
       )}
       <Line>
-        <Text as="b">Codpiece (Acc):</Text> -10% combat, +100% myst, +100 max
-        MP, +50 spell damage{!get("oilPeakLit") && ", 8 bubblin' crudes"}.
+        <Strong>Codpiece (Acc):</Strong> -10% combat, +100% myst, +100 max MP,
+        +50 spell damage{!get("oilPeakLit") && ", 8 bubblin' crudes"}.
       </Line>
       <Line>
-        <Text as="b">Carpe (Back):</Text> +combat, +50% meat, +50% myst, regen
-        ~8 MP.
+        <Strong>Carpe (Back):</Strong> +combat, +50% meat, +50% myst, regen ~8
+        MP.
       </Line>
       {torsoAware && (
         <Line>
-          <Text as="b">Tunac (Shirt):</Text> +combat, +25 ML, +25% item, +50%
+          <Strong>Tunac (Shirt):</Strong> +combat, +25 ML, +25% item, +50%
           muscle.
         </Line>
       )}
       <Line>
-        <Text as="b">Troutsers (Pants):</Text> +50% moxie, +50% pickpocket, +5
-        all res, +11 prismatic damage.
+        <Strong>Troutsers (Pants):</Strong> +50% moxie, +50% pickpocket, +5 all
+        res, +11 prismatic damage.
       </Line>
     </Tile>
   );

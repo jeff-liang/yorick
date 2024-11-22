@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { hiddenTempleUnlocked, myMeat } from "kolmafia";
 import { $item, have } from "libram";
 import { FC } from "react";
@@ -47,9 +47,7 @@ const HiddenTemple: FC = () => {
           {myMeat() < 100 ? (
             <>
               {" "}
-              <Text as="b" color="red.solid">
-                You need 100 meat!
-              </Text>
+              <Strong color="red.solid">You need 100 meat!</Strong>
             </>
           ) : null}
         </Line>

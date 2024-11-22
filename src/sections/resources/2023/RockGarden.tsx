@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import { availableAmount, getCampground } from "kolmafia";
 import { $item, get, have } from "libram";
 
@@ -11,7 +11,7 @@ import { inRun } from "../../../util/quest";
 const gravelMessage = (gravels: number) => {
   return (
     <>
-      <Text as="b">{gravels}</Text>x groveling gravel (free kill*)
+      <Strong>{gravels}</Strong>x groveling gravel (free kill*)
     </>
   );
 };
@@ -19,7 +19,7 @@ const gravelMessage = (gravels: number) => {
 const whetStoneMessage = (whetStones: number) => {
   return (
     <>
-      <Text as="b">{whetStones}</Text>x whet stone (+1 adv on food)
+      <Strong>{whetStones}</Strong>x whet stone (+1 adv on food)
     </>
   );
 };
@@ -28,7 +28,7 @@ const milestoneMessage = (milestones: number) => {
   const desertProgress = get("desertExploration");
   return (
     <>
-      <Text as="b">{milestones}</Text>x milestone (+5% desert progress),{" "}
+      <Strong>{milestones}</Strong>x milestone (+5% desert progress),{" "}
       {100 - desertProgress}% remaining
     </>
   );

@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { myTurncount } from "kolmafia";
 import { get } from "libram";
@@ -21,13 +21,13 @@ const ActiveBanishes: FC = () => {
     <Tile header="Active Banishes" imageUrl="/images/itemimages/ballbat.gif">
       {phylumLength !== null && phylumLength > 0 && (
         <Line>
-          <Text as="b">Phylum {phylumName}</Text>: Patriotic Eagle (
+          <Strong>Phylum {phylumName}</Strong>: Patriotic Eagle (
           {plural(phylumLength, "turn")}).
         </Line>
       )}
       {banishes.map((banish, index) => (
         <Line key={index}>
-          <Text as="b">{decode(banish.banishedMonster.name)}:</Text>{" "}
+          <Strong>{decode(banish.banishedMonster.name)}:</Strong>{" "}
           {banish.banishSource} (
           {banish.banishTurnLength === -1
             ? "Until Rollover"

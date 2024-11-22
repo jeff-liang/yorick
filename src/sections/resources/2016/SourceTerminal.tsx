@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { availableAmount, myPath } from "kolmafia";
 import {
   $item,
@@ -86,13 +86,13 @@ const SourceTerminalTile = () => {
         >
           <Line>Set an enquiry for rollover buffs.</Line>
           <Line>
-            <Text as="b">familiar.enq:</Text> +5 familiar weight.
+            <Strong>familiar.enq:</Strong> +5 familiar weight.
           </Line>
           <Line>
-            <Text as="b">monsters.enq:</Text> +25 ML.
+            <Strong>monsters.enq:</Strong> +25 ML.
           </Line>
           <Line>
-            <Text as="b">stats.enq:</Text> +100% stats.
+            <Strong>stats.enq:</Strong> +100% stats.
           </Line>
         </Tile>
       )}

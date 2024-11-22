@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Em } from "@chakra-ui/react";
 import {
   availableAmount,
   equippedAmount,
@@ -56,7 +56,7 @@ const OilPeak: FC = () => {
       disabled={step < 2}
     >
       <Line>
-        <Text as="i">
+        <Em>
           {commaSeparate([
             "100ML",
             needJar && "+item",
@@ -64,7 +64,7 @@ const OilPeak: FC = () => {
               have($item`Duskwalker syringe`) &&
               "use Duskwalker syringe in combat",
           ])}
-        </Text>
+        </Em>
       </Line>
       {((needJar && ml < 100) || pressure > 0) && (
         <Line>

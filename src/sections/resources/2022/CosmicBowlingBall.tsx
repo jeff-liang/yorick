@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import { $item, $location, get } from "libram";
 
 import AdviceTooltipText from "../../../components/AdviceTooltipText";
@@ -69,19 +69,19 @@ const CosmicBowlingBall = () => {
       {youHaveTheBall && (
         <>
           <Line>
-            <Text as="b">Bowl a Curveball:</Text> Banish the monster, for free!
+            <Strong>Bowl a Curveball:</Strong> Banish the monster, for free!
           </Line>
           <Line>
-            <Text as="b">Bowl Sideways:</Text> Gain ~ 1.5x stats within{" "}
+            <Strong>Bowl Sideways:</Strong> Gain ~ 1.5x stats within{" "}
             {currentZone?.identifierString}
           </Line>
           <Line>
-            <Text as="b">Bowl Straight Up:</Text> Gain +25% items / +50% meat
+            <Strong>Bowl Straight Up:</Strong> Gain +25% items / +50% meat
           </Line>
           <Line>
             <Text as="span" color="gray.emphasized">
-              <Text as="b">Bowl Backwards:</Text> Pickpocket from the rest of
-              your current CSV.
+              <Strong>Bowl Backwards:</Strong> Pickpocket from the rest of your
+              current CSV.
             </Text>
           </Line>
         </>

@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { isUnrestricted, myPath, myPrimestat } from "kolmafia";
 import { $item, $path, $stat, get } from "libram";
 
@@ -32,15 +32,15 @@ const ClanFortune = () => {
       {!usedBuff && (
         <>
           <Line>
-            <Text as="b">Susie:</Text> +5 familiar weight, +familiar experience.
+            <Strong>Susie:</Strong> +5 familiar weight, +familiar experience.
           </Line>
           {!isGLover && (
             <>
               <Line>
-                <Text as="b">Hagnk:</Text> +50% item/booze/food.
+                <Strong>Hagnk:</Strong> +50% item/booze/food.
               </Line>
               <Line>
-                <Text as="b">Meatsmith:</Text> +100% meat, +50% gear drop.
+                <Strong>Meatsmith:</Strong> +100% meat, +50% gear drop.
               </Line>
             </>
           )}
@@ -49,20 +49,20 @@ const ClanFortune = () => {
               {(myPrimestat() === $stat`Muscle` ||
                 path === $path`Community Service`) && (
                 <Line>
-                  <Text as="b">Gunther:</Text> +5 muscle stats/fight, +100%
-                  muscle, +50% HP.
+                  <Strong>Gunther:</Strong> +5 muscle stats/fight, +100% muscle,
+                  +50% HP.
                 </Line>
               )}
               {(myPrimestat() === $stat`Mysticality` ||
                 path === $path`Community Service`) && (
                 <Line>
-                  <Text as="b">Gorgonzola:</Text> +5 myst stats/fight, +100%
-                  myst, +50% MP.
+                  <Strong>Gorgonzola:</Strong> +5 myst stats/fight, +100% myst,
+                  +50% MP.
                 </Line>
               )}
               {!isGLover && (
                 <Line>
-                  <Text as="b">Shifty:</Text> +5 moxie stats/fight, +100% moxie,
+                  <Strong>Shifty:</Strong> +5 moxie stats/fight, +100% moxie,
                   +50% init.
                 </Line>
               )}

@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong, Text } from "@chakra-ui/react";
 import { haveEquipped, myPath, numericModifier } from "kolmafia";
 import { $item, $path, get, have, maxBy, NumericModifier } from "libram";
 import { FC } from "react";
@@ -126,23 +126,21 @@ const DigitalKeyQuest: FC = () => {
             Woah, 10000 points??? That's this life's high score!
           </Line>
           <Line href={treasureLink}>
-            Visit the <Text as="b">Treasure House</Text> to claim your
-            hard-earned Digital Key.
+            Visit the <Strong>Treasure House</Strong> to claim your hard-earned
+            Digital Key.
           </Line>
         </>
       ) : (
         <>
           <Line>
-            <Text as="b">BONUS ZONE</Text>:{" "}
-            <Text as="b" color={currentColor}>
-              {zoneMap[currentColor]}
-            </Text>
+            <Strong>BONUS ZONE</Strong>:{" "}
+            <Strong color={currentColor}>{zoneMap[currentColor]}</Strong>
             {` (${plural(bonusTurnsRemaining, "more fight", "more fights")})`}
           </Line>
           {expectedPoints[currentColor] === 400 ? (
             <>
               <Line color={currentColor}>
-                <Text as="b">MAXIMUM POINTS!</Text>
+                <Strong>MAXIMUM POINTS!</Strong>
               </Line>
               <Line>
                 Adventure in{" "}
@@ -179,16 +177,16 @@ const DigitalKeyQuest: FC = () => {
           <Line>
             In {plural(bonusTurnsRemaining, "more fight", "more fights")}, bonus
             zone will be{" "}
-            <Text as="b" color={nextColor[currentColor]}>
+            <Strong color={nextColor[currentColor]}>
               {zoneMap[nextColor[currentColor]]}
-            </Text>
+            </Strong>
             .
           </Line>
           {highestPointColor !== currentColor && (
             <Line color="gray">
               Alternate Route: At current stats, you'd earn{" "}
-              <Text as="b">{expectedPoints[highestPointColor]} points</Text> per
-              fight at <Text as="b">{zoneMap[highestPointColor]}</Text>. Not
+              <Strong>{expectedPoints[highestPointColor]} points</Strong> per
+              fight at <Strong>{zoneMap[highestPointColor]}</Strong>. Not
               recommended!
             </Line>
           )}

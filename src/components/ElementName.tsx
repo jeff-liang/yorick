@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { ElementType } from "kolmafia";
 import { FC, ReactNode } from "react";
 
@@ -16,11 +16,7 @@ const ElementName: FC<ElementNameProps> = ({ element, children }) => {
     sleaze: "purple.solid",
   };
 
-  return (
-    <Text as="b" color={elementColors[element]}>
-      {children ?? element}
-    </Text>
-  );
+  return <Strong color={elementColors[element]}>{children ?? element}</Strong>;
 };
 
 export default ElementName;

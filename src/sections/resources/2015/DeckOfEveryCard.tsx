@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -19,6 +19,7 @@ import {
   questStep,
 } from "libram";
 
+import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink } from "../../../util/links";
@@ -208,9 +209,9 @@ const DeckOfEveryCard = () => {
       imageUrl="/images/itemimages/deckdeck.gif"
     >
       {unusedSummons.map((summon) => (
-        <Text key={summon.cards.join(" / ")}>
-          <Text as="b">{summon.cards.join(" / ")}</Text>: {summon.reason}
-        </Text>
+        <Line key={summon.cards.join(" / ")}>
+          <Strong>{summon.cards.join(" / ")}</Strong>: {summon.reason}
+        </Line>
       ))}
     </Tile>
   );

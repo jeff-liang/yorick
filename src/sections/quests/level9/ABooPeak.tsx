@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Em } from "@chakra-ui/react";
 import {
   availableAmount,
   Element,
@@ -62,7 +62,7 @@ const ABooPeak: FC = () => {
             {clues * 30 < haunt && (
               <>
                 {" "}
-                <Text as="i">+item</Text>
+                <Em>+item</Em>
               </>
             )}
           </Line>

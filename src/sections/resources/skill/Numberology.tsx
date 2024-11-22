@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong } from "@chakra-ui/react";
 import {
   haveOutfit,
   myAdventures,
@@ -146,7 +146,7 @@ const Numberology = () => {
           <List.Item key={digit}>
             {outputs.has(digit) ? (
               <>
-                Enter <Text as="b">{outputs.get(digit)}</Text> for {digit} ={" "}
+                Enter <Strong>{outputs.get(digit)}</Strong> for {digit} ={" "}
                 {reason}.
               </>
             ) : deltas.has(digit) ? (

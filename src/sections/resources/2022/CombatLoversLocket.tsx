@@ -1,4 +1,4 @@
-import { List, Text } from "@chakra-ui/react";
+import { List, Strong, Text } from "@chakra-ui/react";
 import {
   $item,
   CombatLoversLocket as CombatLoversLocketLibram,
@@ -212,7 +212,7 @@ const CombatLoversLocket: FC = () => {
           </MainLink>
         </Line>
         <Line>
-          <Text as="b">Current enchantment: </Text>
+          <Strong>Current enchantment: </Strong>
           {locketPhylum}.
         </Line>
         <Line color="blue.solid">{locketEnchantment}</Line>

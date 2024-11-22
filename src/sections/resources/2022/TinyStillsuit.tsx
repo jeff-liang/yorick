@@ -1,4 +1,4 @@
-import { Box, List, Text } from "@chakra-ui/react";
+import { Box, List, Strong } from "@chakra-ui/react";
 import {
   haveEquipped,
   inebrietyLimit,
@@ -54,18 +54,16 @@ const TinyStillsuit = () => {
           {familiarSweat > 449 ? (
             <>
               <Line>
-                <Text as="b" color="red.solid">
-                  {sweatAdvs}
-                </Text>{" "}
-                advs when guzzling now (costs 1 liver).
+                <Strong color="red.solid">{sweatAdvs}</Strong> advs when
+                guzzling now (costs 1 liver).
               </Line>
               <Line>You should probably guzzle your sweat now.</Line>
             </>
           ) : (
             <Line>
-              <Text as="b">
+              <Strong>
                 {familiarSweat}/{sweatCalcSweat}
-              </Text>{" "}
+              </Strong>{" "}
               drams of stillsuit sweat for next adventure (
               {Math.ceil((sweatCalcSweat - familiarSweat) / 3)} combats on
               current familiar).
@@ -130,19 +128,18 @@ const TinyStillsuit = () => {
       {familiarSweat > 358 ? (
         <>
           <Line>
-            <Text as="b">11</Text> advs when guzzling now (costs 1 liver).
+            <Strong>11</Strong> advs when guzzling now (costs 1 liver).
           </Line>
           <Line>You should probably guzzle your sweat now.</Line>
         </>
       ) : familiarSweat > 10 ? (
         <>
           <Line>
-            <Text as="b">{sweatAdvs}</Text> advs when guzzling now (costs 1
-            liver).
+            <Strong>{sweatAdvs}</Strong> advs when guzzling now (costs 1 liver).
           </Line>
           <Line>
-            <Text as="b">{sweatCalcSweat - familiarSweat}</Text> more sweat
-            until +1 more adventure. (
+            <Strong>{sweatCalcSweat - familiarSweat}</Strong> more sweat until
+            +1 more adventure. (
             {Math.ceil((sweatCalcSweat - familiarSweat) / 3)} combats on current
             familiar)
           </Line>
@@ -151,8 +148,8 @@ const TinyStillsuit = () => {
         <>
           <Line color="red.solid">Not enough sweat to guzzle.</Line>
           <Line>
-            <Text as="b">{sweatCalcSweat - familiarSweat}</Text> more sweat
-            until +1 more adventure. (
+            <Strong>{sweatCalcSweat - familiarSweat}</Strong> more sweat until
+            +1 more adventure. (
             {Math.ceil((sweatCalcSweat - familiarSweat) / 3)} combats on current
             familiar)
           </Line>

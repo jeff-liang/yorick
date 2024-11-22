@@ -1,4 +1,4 @@
-import { Text } from "@chakra-ui/react";
+import { Strong } from "@chakra-ui/react";
 import { round } from "kolmafia";
 import { $familiar, $item, $skill, clamp, get, have } from "libram";
 
@@ -37,7 +37,7 @@ const JillOfAllTrades = () => {
         (have($skill`Just the Facts`) || haveBookOfFacts) && (
           <Line>
             Halloween monsters make excellent targets for{" "}
-            <Text as="b">Recall Habitat</Text> from BoFA.
+            <Strong>Recall Habitat</Strong> from BoFA.
           </Line>
         )}
       {!ledCandleDropped && !haveLEDCandle && (

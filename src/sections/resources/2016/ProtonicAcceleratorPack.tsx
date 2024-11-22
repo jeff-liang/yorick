@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Strong } from "@chakra-ui/react";
 import { canAdventure, haveEquipped, myPath, totalTurnsPlayed } from "kolmafia";
 import { $item, $location, $path, get, have } from "libram";
 
@@ -99,18 +99,23 @@ const ProtonicAcceleratorPack = () => {
     [ghostLocation, haveProtonPack, protonPack, protonPackEquipped],
   );
 
-  if (!haveProtonPack) return null;
+  if (
+    !haveProtonPack ||
+    (!(nextGhostTurn > totalTurnsPlayed()) &&
+      !(!streamsCrossed && inRun() && myPath() !== $path`G-Lover`))
+  ) {
+    return null;
+  }
 
   return (
     <Tile linkedContent={protonPack}>
-      {nextGhostTurn > totalTurnsPlayed() ? (
+      {nextGhostTurn > totalTurnsPlayed() && (
         <Line>{nextGhostTimer} adventures until your next protonic ghost.</Line>
-      ) : null}
+      )}
       {!streamsCrossed && inRun() && myPath() !== $path`G-Lover` && (
         <>
           <Line>
-            <Text as="b">Stream crossing available:</Text> +20% stats for 10
-            turns.
+            <Strong>Stream crossing available:</Strong> +20% stats for 10 turns.
           </Line>
           {!protonPackEquipped && (
             <Line>Equip the protonic accelerator pack first.</Line>

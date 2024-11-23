@@ -167,7 +167,11 @@ const HauntedLibrary: FC = () => {
   const gnasirProgress = get("gnasirProgress");
   const needKillingJar = !(gnasirProgress & 4);
 
-  return (
+  return have($item`Lady Spookyraven's necklace`) ? (
+    <Line href="/place.php?whichplace=manor1&action=manor1_ladys">
+      Give Lady Spookyraven her necklace.
+    </Line>
+  ) : (
     <>
       <Line href={parentPlaceLink(library)}>
         Adventure in the Library to unlock the second floor.

@@ -1,5 +1,7 @@
-import { Heading, Table } from "@chakra-ui/react";
+import { Table } from "@chakra-ui/react";
 import { FC } from "react";
+
+import H3 from "../../components/H3";
 
 import OverrideRow from "./OverrideRow";
 
@@ -19,9 +21,7 @@ const OverrideTable: FC<OverrideTableProps> = ({
   getCurrent,
 }) => (
   <>
-    <Heading as="h2" size="md" textAlign="center">
-      {heading}
-    </Heading>
+    <H3 textAlign="center">{heading}</H3>
     <Table.Root size="sm">
       <Table.Body>
         {data

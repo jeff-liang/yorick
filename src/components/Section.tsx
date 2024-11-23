@@ -1,5 +1,7 @@
-import { Heading, Stack, StackProps } from "@chakra-ui/react";
+import { Stack, StackProps } from "@chakra-ui/react";
 import { FC, ReactNode } from "react";
+
+import H2 from "./H2";
 
 export interface SectionProps extends StackProps {
   name: string;
@@ -8,7 +10,7 @@ export interface SectionProps extends StackProps {
 
 const Section: FC<SectionProps> = ({ name, children, ...props }) => (
   <Stack gap={2} align="stretch" px={2} pb={1} {...props}>
-    <Heading as="h2">{name}</Heading>
+    <H2>{name}</H2>
     <Stack
       gap={2}
       _empty={{

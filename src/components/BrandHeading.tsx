@@ -1,8 +1,10 @@
-import { Heading, Image } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 import { FC } from "react";
 
+import H1 from "./H1";
+
 const BrandHeading: FC = () => (
-  <Heading as="h1" size="3xl" textAlign="center">
+  <H1 textAlign="center">
     Y
     <Image
       src="Skull192.png"
@@ -16,7 +18,7 @@ const BrandHeading: FC = () => (
       mixBlendMode="multiply"
     />
     RICK
-  </Heading>
+  </H1>
 );
 
 export default BrandHeading;

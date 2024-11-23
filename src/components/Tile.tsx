@@ -1,11 +1,4 @@
-import {
-  Box,
-  Heading,
-  HStack,
-  IconButton,
-  StackProps,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, HStack, IconButton, StackProps, VStack } from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { Familiar, Item, Skill } from "kolmafia";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -16,6 +9,7 @@ import { inDevMode } from "../util/env";
 import { capitalizeWords } from "../util/text";
 
 import ContentButtons from "./ContentButtons";
+import H4 from "./H4";
 import MainLink from "./MainLink";
 import TileImage from "./TileImage";
 
@@ -91,13 +85,13 @@ const Tile: FC<TileProps> = ({
   const tileContents = (
     <VStack align="start" gap={0.5}>
       <HStack gap={1} align="center">
-        <Heading as="h3" size="md">
+        <H4>
           {!collapsed && !disabled && !linkEntireTile && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (
             heading
           )}
-        </Heading>
+        </H4>
         <HStack
           gap={1}
           css={{

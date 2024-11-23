@@ -21,6 +21,7 @@ import {
 } from "libram";
 import { ReactNode } from "react";
 
+import H5 from "../../../components/H5";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -229,9 +230,7 @@ const PatrioticEagle = () => {
     <Tile linkedContent={patrioticEagle}>
       {showRwb && (
         <>
-          <Heading as="h4" size="xs">
-            Fight {plural(fightsLeft, `more ${rwbMonster}`)}
-          </Heading>
+          <H5>Fight {plural(fightsLeft, `more ${rwbMonster}`)}</H5>
           <Line>
             Copied by your eagle's blast. Will appear when you adventure in{" "}
             {possibleAppearanceLocations.join(", ")}.

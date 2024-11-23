@@ -1,7 +1,8 @@
-import { Box, Heading, Stack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { myDaycount, myTurncount } from "kolmafia";
 import { useContext } from "react";
 
+import H2 from "../components/H2";
 import Section from "../components/Section";
 import TileErrorBoundary from "../components/TileErrorBoundary";
 import TileImage from "../components/TileImage";
@@ -63,9 +64,9 @@ const NagSection = () => {
           )}
         </Section>
       ) : (
-        <Heading as="h2" px={2}>
+        <H2 px={2}>
           Day {myDaycount()} / Turn {myTurncount()}
-        </Heading>
+        </H2>
       )}
     </Stack>
   );

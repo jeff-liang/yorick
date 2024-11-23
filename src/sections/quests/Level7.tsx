@@ -21,7 +21,7 @@ import {
 import { FC, ReactNode } from "react";
 
 import Line from "../../components/Line";
-import MainLink from "../../components/MainLink";
+import LinkBlock from "../../components/LinkBlock";
 import Monsters from "../../components/Monsters";
 import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
@@ -46,7 +46,7 @@ const getZoneDisplay = (
   if (evil === 0) return null;
 
   return (
-    <MainLink href="/crypt.php">
+    <LinkBlock href="/crypt.php">
       <Line>
         <Strong>{zone}:</Strong>{" "}
         {evil > 13 ? (
@@ -69,7 +69,7 @@ const getZoneDisplay = (
           </List.Root>
         </Stack>
       )}
-    </MainLink>
+    </LinkBlock>
   );
 };
 

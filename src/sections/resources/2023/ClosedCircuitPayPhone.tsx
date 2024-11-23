@@ -157,7 +157,7 @@ const ClosedCircuitPayPhone = () => {
         <Tile
           header={`${shadowLodestones} Rufus's shadow lodestones`}
           id="shadow-lodestone-tile"
-          imageUrl="/images/itemimages/shadowlodestone.gif"
+          imageUrl="/images/itemimages/shadowlode.gif"
         >
           <Line>
             30 advs of +100% init, +100% item, +200% meat, -10% combat.

@@ -178,7 +178,7 @@ const AGuideToBurningLeaves: FC = () => {
         !haveResined &&
         (haveResin || leafCount >= 50) && (
           <Tile
-            header="Use distilled resin"
+            header="Get Resined"
             imageUrl="/images/itemimages/al_resin.gif"
             href={
               haveResin

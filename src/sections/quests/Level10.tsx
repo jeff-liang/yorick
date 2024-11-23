@@ -33,7 +33,10 @@ const Level10: FC = () => {
       : [];
   needs.push("to find Cid");
 
-  const delayRemaining = 25 - neededImmateria.length - airship.turnsSpent;
+  const delayRemaining =
+    (have($item`bat wings`) ? 20 : 25) -
+    neededImmateria.length -
+    airship.turnsSpent;
 
   if (step === Step.FINISHED) return null;
 

@@ -42,7 +42,7 @@ interface MonsterTextProps {
 }
 
 const MonsterText: FC<MonsterTextProps> = ({ monster, isBanished }) => (
-  <Text as="span" color={isBanished ? "gray.solid" : "inherit"}>
+  <Text as="span" color={isBanished ? "fg.subtle" : undefined}>
     {monster}
   </Text>
 );
@@ -57,19 +57,25 @@ const Junkyard: FC = () => {
 
   const getStasisAdvice = () => {
     if (have($item`dictionary`)) {
-      return "Read from the dictionary to stasis gremlins.";
+      return <Line>Read from the dictionary to stasis gremlins.</Line>;
     } else if (have($item`facsimile dictionary`)) {
-      return "Read from the facsimile dictionary to stasis gremlins.";
+      return (
+        <Line>Read from the facsimile dictionary to stasis gremlins.</Line>
+      );
     } else if (have($item`seal tooth`)) {
-      return "Use your seal tooth to stasis gremlins.";
+      return <Line>Use your seal tooth to stasis gremlins.</Line>;
     } else if (have($skill`Suckerpunch`)) {
-      return "Cast suckerpunch to stasis gremlins.";
+      return <Line>Cast suckerpunch to stasis gremlins.</Line>;
     } else if (myPath() !== $path`Zombie Slayer`) {
-      return "Acquire a seal tooth (from hermit) to stasis gremlins.";
+      return (
+        <Line command="coinmaster buy hermit seal tooth">
+          Acquire a seal tooth (from hermit) to stasis gremlins.
+        </Line>
+      );
     } else if (have($item`beehive`)) {
-      return "Use your beehive to stasis gremlins.";
+      return <Line>Use your beehive to stasis gremlins.</Line>;
     }
-    return "";
+    return null;
   };
 
   if (isQuestFinished) {
@@ -113,7 +119,7 @@ const Junkyard: FC = () => {
               {!isBanished($monster`A.M.C. gremlin`) && (
                 <Line>Potentially banish A.M.C. Gremlin.</Line>
               )}
-              <Line>{getStasisAdvice()}</Line>
+              {getStasisAdvice()}
             </>
           )}
         </>

@@ -10,11 +10,15 @@ import { haveUnrestricted } from "../../../util/available";
 import { skillLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
-const LinkOrEquip: FC<LinkProps> = ({ href, ...props }) =>
+const LinkOrEquip: FC<LinkProps> = ({ href, children, ...props }) =>
   !haveEquipped($item`designer sweatpants`) ? (
-    <AsyncLink command="equip designer sweatpants" {...props} />
+    <AsyncLink display="inline" command="equip designer sweatpants" {...props}>
+      {children}
+    </AsyncLink>
   ) : (
-    <MainLink href={href} {...props} />
+    <MainLink display="inline" href={href} {...props}>
+      {children}
+    </MainLink>
   );
 
 const DesignerSweatpants = () => {
@@ -53,7 +57,9 @@ const DesignerSweatpants = () => {
               href={skillLink($skill`Sweat Out Some Booze`)}
               color="orange.solid"
             >
-              {` -1 Drunkenness. ${plural(boozeSweatsLeft, "use")} left for today.`}
+              {" "}
+              -1&nbsp;Drunkenness. {plural(boozeSweatsLeft, "use")} left for
+              today.
               {myInebriety() === 0 && " Drink some booze first."}
             </LinkOrEquip>
           </List.Item>

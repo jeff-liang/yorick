@@ -1,7 +1,14 @@
-import { Box, Strong } from "@chakra-ui/react";
-import { canAdventure, haveEquipped, myPath, totalTurnsPlayed } from "kolmafia";
+import { Strong } from "@chakra-ui/react";
+import {
+  canAdventure,
+  ElementType,
+  haveEquipped,
+  myPath,
+  totalTurnsPlayed,
+} from "kolmafia";
 import { $item, $location, $path, get, have } from "libram";
 
+import ElementName from "../../../components/ElementName";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -9,7 +16,7 @@ import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
 import { inRun, questStarted } from "../../../util/quest";
 
-const ELEMENTS_TO_RESIST: Record<string, string> = {
+const ELEMENTS_TO_RESIST: Record<string, ElementType> = {
   "Cobb's Knob Treasury": "spooky",
   "The Haunted Conservatory": "stench",
   "The Haunted Gallery": "hot",
@@ -41,7 +48,7 @@ const ProtonicAcceleratorPack = () => {
       imageUrl: "/images/itemimages/protonpack.gif",
       node: haveProtonPack && nextGhostTurn <= totalTurnsPlayed() && (
         <Tile header="It's ghost bustin' time!" linkedContent={protonPack}>
-          {protonPackEquipped ? (
+          {!protonPackEquipped ? (
             <Line color="red.solid">Equip the protopack first.</Line>
           ) : (
             <Line color="blue.solid">Who you gonna call? You!</Line>
@@ -86,10 +93,9 @@ const ProtonicAcceleratorPack = () => {
               ([location, element]) =>
                 ghostLocation?.identifierString === location && (
                   <Line key={location}>
-                    <Box
-                      as="span"
-                      className={`r_element_${element}`}
-                    >{`+${element} resist`}</Box>
+                    <ElementName element={element}>
+                      {`+${element} resist`}
+                    </ElementName>
                   </Line>
                 ),
             )}

@@ -188,6 +188,16 @@ const Timeline: FC<StackProps> = (props) => {
     });
   }
 
+  if (getWorkshed() === $item`model train set`) {
+    elements.push({
+      name: "MTS",
+      turns: 40 - (get("trainsetPosition") - get("lastTrainsetConfiguration")),
+      color: "orange.solid",
+      label: (turns) =>
+        `${plural(turns, "combat")} until train set reconfigurable.`,
+    });
+  }
+
   const elementsFiltered = elements.filter(({ turns }) => turns > 0);
   elementsFiltered.sort(
     ({ turns: turnsA }, { turns: turnsB }) => turnsA - turnsB,

@@ -9,7 +9,7 @@ import { inDevMode } from "../util/env";
 import { capitalizeWords } from "../util/text";
 
 import ContentButtons from "./ContentButtons";
-import H4 from "./H4";
+import H3 from "./H3";
 import MainLink from "./MainLink";
 import TileImage from "./TileImage";
 
@@ -85,13 +85,13 @@ const Tile: FC<TileProps> = ({
   const tileContents = (
     <VStack align="start" gap={0.5}>
       <HStack gap={1} align="center">
-        <H4>
+        <H3 lineHeight="tall">
           {!collapsed && !disabled && !linkEntireTile && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (
             heading
           )}
-        </H4>
+        </H3>
         <HStack
           gap={1}
           css={{

@@ -173,7 +173,7 @@ const Timeline: FC<StackProps> = (props) => {
   if (AutumnAton.have()) {
     elements.push({
       name: "AA",
-      turns: AutumnAton.turnsLeft() + 1,
+      turns: AutumnAton.available() ? 0 : AutumnAton.turnsLeft() + 1,
       color: "orange.solid",
       label: (turns) => `${plural(turns, "turn")} until autumn-aton returns.`,
     });

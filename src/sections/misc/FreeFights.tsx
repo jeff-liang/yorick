@@ -5,7 +5,7 @@ import {
   isUnrestricted,
   myPath,
 } from "kolmafia";
-import { $item, $location, $path, $skill, get } from "libram";
+import { $item, $location, $path, $skill, get, have } from "libram";
 import { CircleHelp } from "lucide-react";
 import { FC } from "react";
 
@@ -13,7 +13,7 @@ import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
-import { skillLink } from "../../util/links";
+import { inventoryLink, skillLink } from "../../util/links";
 import { questStarted } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
@@ -82,6 +82,30 @@ const FREE_FIGHTS: Source[] = [
         </Line>
       );
     },
+  },
+  {
+    name: "Trick-or-Treating",
+    remaining: () =>
+      +(
+        have($item`map to a candy-rich block`) &&
+        !get("_mapToACandyRichBlockUsed")
+      )
+        ? 5
+        : [...get("_trickOrTreatBlock")].filter((c) => c === "D").length,
+    render: ({ remaining }) => (
+      <Line
+        href={
+          [...get("_trickOrTreatBlock")].filter((c) => c === "D").length > 0
+            ? "/place.php?whichplace=town&action=town_trickortreat"
+            : have($item`map to a candy-rich block`) &&
+                !get("_mapToACandyRichBlockUsed")
+              ? inventoryLink($item`map to a candy-rich block`)
+              : undefined
+        }
+      >
+        {remaining} trick-or-treat fights.
+      </Line>
+    ),
   },
   {
     name: "LOV Tunnel",

@@ -21,7 +21,7 @@ const ZoneList: FC<{
       <MainLink href={parentPlaceLink(zone)}>
         <List.Item
           key={zone.identifierString}
-          color={available ? undefined : "gray.solid"}
+          color={available ? undefined : "fg.subtle"}
         >
           {plural(remaining, "turn")} in {zone.identifierString}.
         </List.Item>

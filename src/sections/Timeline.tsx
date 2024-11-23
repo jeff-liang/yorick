@@ -162,7 +162,7 @@ const Timeline: FC<StackProps> = (props) => {
         (1 + totalTurnsPlayed() - (lastTurn || totalTurnsPlayed())),
     );
     elements.push({
-      name: "Kram",
+      name: "KRAM",
       turns: turnsToNextGuaranteedFight,
       color: "purple.solid",
       label: (turns) =>

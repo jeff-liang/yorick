@@ -21,7 +21,11 @@ const AdviceTooltipText: FC<AdviceTooltipProps> = ({
 }) => {
   const toolTip = (
     <Box bg="bg.muted" p={2} rounded="md" fontSize="xs">
-      {typeof advice === "string" ? <Text>{advice}</Text> : advice}
+      {typeof advice === "string" ? (
+        <Text color="fg.muted">{advice}</Text>
+      ) : (
+        advice
+      )}
     </Box>
   );
 

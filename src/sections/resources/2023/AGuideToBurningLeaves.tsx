@@ -276,29 +276,27 @@ const AGuideToBurningLeaves: FC = () => {
               })}
             </List.Root>
           </LinkBlock>
-          <Line>
-            {leafCount >= 111 * fightsRemaining ? (
-              <AdviceTooltipText
-                advice={`You can summon ${fightsRemaining} monstera for scaling fights.`}
-              >
-                {`You have enough leaves for ${fightsRemaining} monstera.`}
-              </AdviceTooltipText>
-            ) : leafCount >= 11 * fightsRemaining ? (
-              <AdviceTooltipText
-                advice={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
-              >
-                {`You have enough leaves for ${fightsRemaining} leaflets.`}
-              </AdviceTooltipText>
-            ) : leafCount >= 11 ? (
-              <AdviceTooltipText advice="Save leaves for more fights!">
-                {`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}
-              </AdviceTooltipText>
-            ) : (
-              <AdviceTooltipText advice="Save leaves for fights!">
-                You cannot currently summon a free fight.
-              </AdviceTooltipText>
-            )}
-          </Line>
+          {leafCount >= 111 * fightsRemaining ? (
+            <AdviceTooltipText
+              advice={`You can summon ${fightsRemaining} monstera for scaling fights.`}
+            >
+              <Line>{`You have enough leaves for ${fightsRemaining} monstera.`}</Line>
+            </AdviceTooltipText>
+          ) : leafCount >= 11 * fightsRemaining ? (
+            <AdviceTooltipText
+              advice={`You can summon ${fightsRemaining} leaflets for familiar turns.`}
+            >
+              <Line>{`You have enough leaves for ${fightsRemaining} leaflets.`}</Line>
+            </AdviceTooltipText>
+          ) : leafCount >= 11 ? (
+            <AdviceTooltipText advice="Save leaves for more fights!">
+              <Line>{`You can currently summon ${plural(leafletsUserCanSummon, "leaflet")}.`}</Line>
+            </AdviceTooltipText>
+          ) : (
+            <AdviceTooltipText advice="Save leaves for fights!">
+              <Line>You cannot currently summon a free fight.</Line>
+            </AdviceTooltipText>
+          )}
         </>
       )}
     </Tile>

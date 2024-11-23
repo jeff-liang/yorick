@@ -72,7 +72,7 @@ export function parentPlaceNameLink(
     return "/place.php?whichplace=town_wrong";
   } else if (
     locationName === "The Outskirts of Cobb's Knob" &&
-    questStep("questL05Goblin") >= 1
+    questStep("questL05Goblin") < 1
   ) {
     return "/place.php?whichplace=plains";
   } else if (parentLink) {

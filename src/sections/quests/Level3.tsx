@@ -40,6 +40,7 @@ const Level3: FC = () => {
         [2, "/tavern.php?place=barkeep"],
         [Step.FINISHED, undefined],
       ])}
+      linkEntireTile
       minLevel={3}
       disabled={!questFinished("questL02Larva")}
     >

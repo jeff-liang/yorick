@@ -204,6 +204,7 @@ const AugustScepter: FC = () => {
   }
 
   const table = usefulAugustSkills
+    .filter(([day]) => !get(`_aug${day}Cast`))
     .sort(([a], [b]) => a - b)
     .map(([day, reason]) => {
       const skillName = `Aug. ${ordinal(day)}: ${ALL_SKILLS.get(day)?.[0]}`;

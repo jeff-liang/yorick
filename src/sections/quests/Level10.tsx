@@ -72,7 +72,10 @@ const Level10: FC = () => {
           1,
           <>
             {delayRemaining > 0 && (
-              <Line>You need to burn {delayRemaining} more total delay.</Line>
+              <Line>
+                You need to burn {delayRemaining} more total delay in the
+                Airship.
+              </Line>
             )}
             <Line>You need {commaAnd(needs)}.</Line>
             {airship.turnsSpent / 5 >= step - 1 && (

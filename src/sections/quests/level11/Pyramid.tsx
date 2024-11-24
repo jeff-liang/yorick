@@ -40,7 +40,7 @@ const MiddleChamber: FC<ChamberProps> = ({ extraSpinsNeeded }) => {
         <Line>
           Use +400% item drop and olfact tomb rats to get ratchets.
           {tangles > 0 &&
-            `Use ${plural(tangles, "tangle")} of rat tails on tomb rats.`}
+            ` Use ${plural(tangles, "tangle")} of rat tails on tomb rats.`}
         </Line>
       )}
     </>

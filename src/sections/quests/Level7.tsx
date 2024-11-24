@@ -207,12 +207,13 @@ const Level7: FC = () => {
           Step.STARTED,
           get("cyrptTotalEvilness") !== 0 ? "/crypt.php" : undefined,
         ],
-        [Step.FINISHED, undefined],
+        [1, "/council.php"],
       ])}
     >
       {atStep(step, [
         [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
         [Step.STARTED, mainElement],
+        [1, <Line>Visit Council to finish quest.</Line>],
       ])}
     </QuestTile>
   );

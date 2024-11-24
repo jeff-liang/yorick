@@ -32,7 +32,7 @@ export function factorial(n: number): number {
 }
 
 export function binomialCoefficient(n: number, k: number): number {
-  return (factorial(n) / factorial(k)) * factorial(n - k);
+  return factorial(n) / factorial(k) / factorial(n - k);
 }
 
 // What is the probability we get exactly needed successes in trials trials?

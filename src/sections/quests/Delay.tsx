@@ -51,6 +51,8 @@ const Delay: FC = () => {
   }
 
   const total = sum(allRemaining, ({ remaining }) => remaining);
+  if (total <= 0) return null;
+
   return (
     <Tile
       header={`${plural(total, "turn")} of delay`}

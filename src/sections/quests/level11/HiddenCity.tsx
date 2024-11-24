@@ -193,7 +193,6 @@ const Apartment = () => {
 };
 
 const Office = () => {
-  const step = questStep("questL11Business");
   const haveClip =
     have($item`boring binder clip`) || have($item`McClusky file (complete)`);
   const needToUseClip =
@@ -215,16 +214,16 @@ const Office = () => {
     office.turnsSpent === nextHoliday || get("noncombatForcerActive");
 
   return (
-    atStep(step, [
+    atStep(get("hiddenOfficeProgress"), [
       [
-        Step.UNSTARTED,
+        0,
         <Unlock
           shrine={$location`An Overgrown Shrine (Northeast)`}
           location={office}
         />,
       ],
       [
-        Step.STARTED,
+        1,
         <MainLink href={CITY_LINK}>
           <Stack gap={0.5}>
             <Line fontWeight="bold">Hidden Office Building</Line>
@@ -262,6 +261,8 @@ const Office = () => {
           </Stack>
         </MainLink>,
       ],
+      [7, <Line href={CITY_LINK}>Return the sphere to the NE shrine.</Line>],
+      [8, null],
     ]) ?? null
   );
 };

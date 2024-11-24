@@ -112,7 +112,7 @@ const Layout = () => {
   }
   return (
     <Container centerContent maxW={1000}>
-      <Stack gap={4} w="full">
+      <Stack gap={4} w="full" align="center">
         <Heading textAlign="center">YORICK Development Overrides</Heading>
         <ValidatedInput
           value={filter}
@@ -120,6 +120,8 @@ const Layout = () => {
           valid={filterValid}
           onChange={handleChange}
           placeholder="Filter (regex)"
+          size="sm"
+          minW="20rem"
         />
         <Stack direction="row" align="flex-start" justify="center">
           <Stack>

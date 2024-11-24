@@ -38,20 +38,21 @@ const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
 
   return (
     <Table.Row>
-      <Table.Cell>
+      <Table.Cell p={1}>
         <Text textAlign="right" my="auto">
           {label ?? override}
         </Text>
       </Table.Cell>
-      <Table.Cell>
+      <Table.Cell p={1}>
         <ValidatedInput
           value={value}
           valid={valid}
           onChange={handleChangeProperty}
           onBlur={handleBlur}
-          size="sm"
+          size="2xs"
           minW="6rem"
           placeholder={current}
+          data-lpignore
         />
       </Table.Cell>
     </Table.Row>

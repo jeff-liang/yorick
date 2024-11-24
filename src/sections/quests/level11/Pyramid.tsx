@@ -4,8 +4,8 @@ import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
-import { atStep, Step } from "../../../util/quest";
-import { plural, pluralJustDesc } from "../../../util/text";
+import { atStep, questFinished, Step } from "../../../util/quest";
+import { capitalize, plural, pluralJustDesc } from "../../../util/text";
 
 const PYRAMID_URL = "/place.php?whichplace=pyramid";
 
@@ -59,10 +59,14 @@ const ControlRoom: FC<ControlRoomProps> = ({
 }) => {
   return (
     <>
-      <Line href={PYRAMID_URL}>
-        Spin the pyramid {spinsNeeded} time{spinsNeeded !== 1 ? "s" : ""}, then{" "}
-        {task}.
-      </Line>
+      {spinsNeeded > 0 ? (
+        <Line href={PYRAMID_URL}>
+          Spin the pyramid {spinsNeeded} time{spinsNeeded !== 1 ? "s" : ""},
+          then {task}.
+        </Line>
+      ) : (
+        <Line href={PYRAMID_URL}>{capitalize(task)}.</Line>
+      )}
       {extraSpinsNeeded > 0 && (
         <Line>
           Need{" "}
@@ -77,6 +81,8 @@ const ControlRoom: FC<ControlRoomProps> = ({
 
 const Pyramid: FC = () => {
   const step = questStep("questL11Pyramid");
+
+  if (questFinished("questL11MacGuffin")) return null;
 
   const haveStaffOfEd =
     have($item`[7961]Staff of Ed`) ||
@@ -117,8 +123,6 @@ const Pyramid: FC = () => {
     availableAmount($item`crumbling wooden wheel`);
   const extraSpinsNeeded = Math.max(0, totalSpinsNeeded - spinsAvailable);
 
-  if (step === Step.FINISHED) return null;
-
   return (
     <QuestTile
       header="Descend the Pyramid"
@@ -149,6 +153,14 @@ const Pyramid: FC = () => {
               spinsNeeded={spinsNeeded}
               extraSpinsNeeded={extraSpinsNeeded}
             />
+          ),
+        ],
+        [
+          Step.FINISHED,
+          questStep("questL11MacGuffin") === 2 && (
+            <Line href="/council.php">
+              Return the Holy MacGuffin to the Council!
+            </Line>
           ),
         ],
       ])}

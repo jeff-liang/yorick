@@ -21,7 +21,7 @@ const DigitalKeyQuest: FC = () => {
     myPath() === $path`Kingdom of Exploathing` ||
     get("kingLiberated") ||
     have(digitalKey) ||
-    get("nsTowerDoorKeysUsed").includes("Digital");
+    get("nsTowerDoorKeysUsed").includes("digital key");
 
   const currentScore = get("8BitScore");
   const currentColor = (get("8BitColor") || "black") as Color;

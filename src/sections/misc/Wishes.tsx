@@ -3,6 +3,7 @@ import { $item, $skill, CursedMonkeyPaw, get, sum } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
+import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
 import { renderSourceList, Source } from "../../util/source";
 import { commaAnd, plural } from "../../util/text";
@@ -53,7 +54,7 @@ const WISH_SOURCES: Source[] = [
     remaining: () => +CursedMonkeyPaw.have() && CursedMonkeyPaw.wishes(),
     render: ({ remaining }) => (
       <Line>
-        {plural(remaining, "monkey's paw wish", "monkey's paw wishes")}
+        {plural(remaining, "monkey's paw wish", "monkey's paw wishes")}.
       </Line>
     ),
   },
@@ -63,7 +64,14 @@ const Wishes: FC = () => {
   const { total, rendered } = renderSourceList(WISH_SOURCES);
   if (total <= 0) return null;
 
-  return <>{rendered}</>;
+  return (
+    <Tile
+      header={plural(total, "effect wish", "effect wishes")}
+      linkedContent={$item`pocket wish`}
+    >
+      {rendered}
+    </Tile>
+  );
 };
 
 export default Wishes;

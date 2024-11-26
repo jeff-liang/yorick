@@ -32,7 +32,11 @@ export function pluralJustDescItem(item: Item, count?: number) {
 }
 
 export function pluralItem(item: Item, count?: number) {
-  return plural(count ?? availableAmount(item), item.name, item.plural);
+  return plural(
+    count ?? availableAmount(item),
+    item.identifierString,
+    item.plural,
+  );
 }
 
 export function separate(

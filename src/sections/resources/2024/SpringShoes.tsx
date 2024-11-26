@@ -29,13 +29,13 @@ const SpringShoes = () => {
           id="spring-shoes-nag"
           linkedContent={springShoes}
         >
-          <Line>
-            <Text as="span" color="green.solid">
-              Free-run away from your problems with the{" "}
-              <Strong>Spring Away</Strong> skill!
-            </Text>
-          </Line>
-          {!haveShoesEquipped && (
+          {haveShoesEquipped ? (
+            <Line>
+              <Text as="span" color="green.solid">
+                Free run with the <Strong>Spring Away</Strong> skill!
+              </Text>
+            </Line>
+          ) : (
             <Line>
               <Text as="span" color="red.solid">
                 Equip the spring shoes first.

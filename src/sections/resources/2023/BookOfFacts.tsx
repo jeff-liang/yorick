@@ -1,5 +1,5 @@
 import { haveEffect, isBanished, Phylum } from "kolmafia";
-import { $effect, $familiar, $item, $skill, get, have } from "libram";
+import { $effect, $familiar, $item, $skill, clamp, get, have } from "libram";
 
 import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
@@ -122,20 +122,11 @@ const BookOfFacts = () => {
   const horrorDescriptor = have(closedCircuitPayPhone) ? " + shadow rifts" : "";
 
   const circadianRhythmsRecalled = get("_circadianRhythmsRecalled");
-  const habitatRecallsLeft = Math.max(
-    0,
-    Math.min(3 - get("_monsterHabitatsRecalled"), 3),
-  );
-  const bookOfFactsWishes = Math.max(
-    0,
-    Math.min(3 - get("_bookOfFactsWishes"), 3),
-  );
+  const habitatRecallsLeft = clamp(3 - get("_monsterHabitatsRecalled"), 0, 3);
+  const bookOfFactsWishes = clamp(3 - get("_bookOfFactsWishes"), 0, 3);
   const springShoes = $item`spring shoes`;
   const romanCandelabra = $item`Roman Candelabra`;
-  const bookOfFactsTatters = Math.max(
-    0,
-    Math.min(11 - get("_bookOfFactsTatters"), 11),
-  );
+  const bookOfFactsTatters = clamp(11 - get("_bookOfFactsTatters"), 0, 11);
 
   if (!haveUnrestricted(justTheFactsSkill)) {
     return null;

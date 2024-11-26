@@ -9,6 +9,7 @@ import FreeKills from "./misc/FreeKills";
 import FreeRuns from "./misc/FreeRuns";
 import LuckyAdventures from "./misc/LuckyAdventures";
 import NoncombatForces from "./misc/NoncombatForces";
+import Wishes from "./misc/Wishes";
 import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
 import PuckMan from "./resources/2015/PuckMan";
@@ -80,6 +81,7 @@ const ResourceSection = () => (
       FreeFights,
       FreeKills,
       FreeRuns,
+      Wishes,
       Faxes,
       Copies,
       NoncombatForces,

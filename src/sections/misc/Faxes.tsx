@@ -57,7 +57,8 @@ const FAX_SOURCES: FaxSource[] = [
     name: "pocket wish",
     remaining: () =>
       Math.min(
-        availableAmount($item`pocket wish`),
+        (+haveUnrestricted($item`genie bottle`) &&
+          3 - get("_genieWishesUsed")) + availableAmount($item`pocket wish`),
         3 - get("_genieFightsUsed"),
       ),
     render: ({ remaining }) => (

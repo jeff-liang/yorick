@@ -2,9 +2,7 @@ import { List, Strong, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
-  Effect,
   haveEquipped,
-  Item,
   myAscensions,
   Skill,
 } from "kolmafia";
@@ -18,21 +16,14 @@ import {
   have,
   questStep,
 } from "libram";
-import { ReactNode } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
+import { inRunEffectWishes, WishInfo } from "../../../resourceInfo/wishes";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink } from "../../../util/links";
-import { inRun, questFinished, questStarted } from "../../../util/quest";
+import { inRun, questFinished } from "../../../util/quest";
 import { plural } from "../../../util/text";
-
-interface MonkeyWish {
-  target: Item | Effect;
-  additionalDescription?: ReactNode;
-  shouldDisplay: boolean;
-  currentlyAccessible: boolean;
-}
 
 interface MonkeySkill {
   fingerCount: number;
@@ -40,7 +31,7 @@ interface MonkeySkill {
   description: string;
 }
 
-function inRunWishes() {
+function inRunItemWishes(): WishInfo[] {
   return [
     {
       target: $item`sonar-in-a-biscuit`,
@@ -172,97 +163,12 @@ function inRunWishes() {
       currentlyAccessible: true,
     },
     {
-      target: $item`green smoke bomb`,
-      shouldDisplay:
-        !questFinished("questL12War") &&
-        get("sidequestArenaCompleted") !== "hippy",
-      currentlyAccessible:
-        questStarted("questL12War") && get("hippiesDefeated") >= 400,
-    },
-    {
       target: $item`star chart`,
       shouldDisplay:
         !get("nsTowerDoorKeysUsed").includes("Richard's star key") &&
         !have($item`Richard's star key`) &&
         !have($item`star chart`),
       currentlyAccessible: canAdventure($location`The Hole in the Sky`),
-    },
-    {
-      target: $effect`Frosty`,
-      additionalDescription: "init/item/meat",
-      shouldDisplay:
-        !get("nsTowerDoorKeysUsed").includes("digital key") &&
-        !have($item`digital key`) &&
-        get("8BitScore") < 10000,
-      currentlyAccessible: true,
-    },
-    {
-      target: $effect`Staying Frosty`,
-      additionalDescription: (
-        <Text as="span" color="blue.solid">
-          cold damage race
-        </Text>
-      ),
-      shouldDisplay:
-        get("nsContestants3") !== -1 && get("nsChallenge2") === "cold",
-      currentlyAccessible: true,
-    },
-    {
-      target: $effect`Dragged Through the Coals`,
-      additionalDescription: (
-        <Text as="span" color="red.solid">
-          hot damage race
-        </Text>
-      ),
-      shouldDisplay:
-        get("nsContestants3") !== -1 && get("nsChallenge2") === "hot",
-      currentlyAccessible: true,
-    },
-    {
-      target: $effect`Bored Stiff`,
-      additionalDescription: (
-        <Text as="span" color="gray.solid">
-          spooky damage race
-        </Text>
-      ),
-      shouldDisplay:
-        get("nsContestants3") !== -1 && get("nsChallenge2") === "spooky",
-      currentlyAccessible: true,
-    },
-    {
-      target: $effect`Sewer-Drenched`,
-      additionalDescription: (
-        <Text as="span" color="green.solid">
-          stench damage race
-        </Text>
-      ),
-      shouldDisplay:
-        get("nsContestants3") !== -1 && get("nsChallenge2") === "stench",
-      currentlyAccessible: true,
-    },
-    {
-      target: $effect`Fifty Ways to Bereave Your Lover`,
-      additionalDescription: (
-        <Text as="span" color="purple.solid">
-          sleaze damage race
-        </Text>
-      ),
-      shouldDisplay:
-        get("nsContestants3") !== -1 &&
-        get("nsChallenge2") === "sleaze" &&
-        get("zeppelinProtestors") > 79,
-      currentlyAccessible: true,
-    },
-    {
-      target: $item`lowercase N`,
-      additionalDescription: "summon the nagamar",
-      shouldDisplay:
-        questStep("questL13Final") < 14 &&
-        !have($item`lowercase N`) &&
-        have($item`ruby W`) &&
-        have($item`metallic A`) &&
-        have($item`heavy D`),
-      currentlyAccessible: canAdventure($location`The Valley of Rof L'm Fao`),
     },
   ];
 }
@@ -307,7 +213,7 @@ function showWish({
   target,
   currentlyAccessible,
   additionalDescription,
-}: MonkeyWish) {
+}: WishInfo) {
   const color = currentlyAccessible ? "black" : "gray.solid";
 
   return (
@@ -318,7 +224,7 @@ function showWish({
   );
 }
 
-function showWishes(wishes: MonkeyWish[]) {
+function showWishes(wishes: WishInfo[]) {
   const currentWishes = wishes
     .filter((wish) => wish.shouldDisplay && wish.currentlyAccessible)
     .map(showWish);
@@ -338,7 +244,7 @@ const CursedMonkeysPaw = () => {
   }
 
   const options = inRun()
-    ? showWishes(inRunWishes())
+    ? showWishes([...inRunItemWishes(), ...inRunEffectWishes()])
     : showWishes(aftercoreWishes());
 
   return (

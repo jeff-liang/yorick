@@ -1,19 +1,29 @@
-import { Text } from "@chakra-ui/react";
+import { List, Strong, Text } from "@chakra-ui/react";
+import { decodeEntity } from "html-entities";
 import {
   availableAmount,
+  Element,
+  elementalResistance,
   ElementType,
+  Familiar,
   getIngredients,
   haveEquipped,
   initiativeModifier,
   Item,
   myBuffedstat,
+  myFamiliar,
+  myHp,
+  myMaxhp,
   myPath,
   numericModifier,
+  toSkill,
 } from "kolmafia";
 import {
   $effects,
+  $familiar,
   $item,
   $items,
+  $location,
   $path,
   $skill,
   $stat,
@@ -29,11 +39,14 @@ import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
 import AdviceTooltipText from "../../components/AdviceTooltipText";
+import AsyncLink from "../../components/AsyncLink";
 import ElementName from "../../components/ElementName";
 import Line from "../../components/Line";
+import LinkBlock from "../../components/LinkBlock";
 import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
+import { parentPlaceLink } from "../../util/links";
 import { questFinished, Step } from "../../util/quest";
 import {
   capitalize,
@@ -41,6 +54,7 @@ import {
   commaOr,
   plural,
   pluralItem,
+  separate,
 } from "../../util/text";
 
 const OTHER_QUESTS = [
@@ -63,6 +77,7 @@ interface RaceProps {
   contestants: number;
   value: number;
   needed: number;
+  percent?: boolean;
 }
 
 const elements = ["hot", "cold", "spooky", "stench", "sleaze"] as const;
@@ -70,7 +85,32 @@ function isElement(name: string): name is ElementType {
   return (elements as readonly string[]).includes(name);
 }
 
-const Race: FC<RaceProps> = ({ name, contestants, value, needed }) =>
+const telescope3Map: Record<string, ElementType> = {
+  "creepy-looking black bushes on the outskirts of a hedge maze": "spooky",
+  "nasty-looking, dripping green bushes on the outskirts of a hedge maze":
+    "stench",
+  "purplish, greasy-looking hedges": "sleaze",
+  "smoldering bushes on the outskirts of a hedge maze": "hot",
+  "frost-rimed bushes on the outskirts of a hedge maze": "cold",
+};
+
+const telescope4Map: Record<string, ElementType> = {
+  "a greasy purple cloud hanging over the center of the maze": "sleaze",
+  "smoke rising from deeper within the maze": "hot",
+  "a miasma of eldritch vapors rising from deeper within the maze": "spooky",
+  "a cloud of green gas hovering over the maze": "stench",
+  "wintry mists rising from deeper within the maze": "cold",
+};
+
+const telescope5Map: Record<string, ElementType> = {
+  "occasionally disgorging a bunch of ice cubes": "cold",
+  "that occasionally vomits out a greasy ball of hair": "sleaze",
+  "surrounded by creepy black mist": "spooky",
+  "disgorging a really surprising amount of sewage": "stench",
+  "with lava slowly oozing out of it": "hot",
+};
+
+const Race: FC<RaceProps> = ({ name, contestants, value, needed, percent }) =>
   contestants !== 0 && (
     <Line>
       {isElement(name) ? (
@@ -80,17 +120,30 @@ const Race: FC<RaceProps> = ({ name, contestants, value, needed }) =>
       )}{" "}
       Race:{" "}
       {contestants < 0 && (
-        <Text
-          as="span"
-          color={value >= needed ? "fg.success" : "fg.error"}
-          fontWeight={value >= needed ? undefined : "bold"}
-        >
-          {value.toFixed(0)}/400
-        </Text>
+        <>
+          <Text
+            as="span"
+            color={value >= needed ? "fg.success" : "fg.error"}
+            fontWeight={value >= needed ? undefined : "bold"}
+          >
+            {value.toFixed(0)}/400{percent && "%"}
+          </Text>
+          .
+        </>
       )}
       {contestants > 0 && `${plural(contestants, "contestant")} left.`}
     </Line>
   );
+
+const NSTOWER_URL = "/place.php?whichplace=nstower";
+
+function damageEffects() {
+  return $effects`Jalapeño Saucesphere, Scarysauce, Spiky Shell, Psalm of Pointiness`;
+}
+
+function damageItems() {
+  return $items`Hand in Glove, bottle opener belt buckle, Buddy Bjorn, smirking shrunken head, Kremlin's Greatest Briefcase, tiny bowler`;
+}
 
 const Level13: FC = () => {
   const step = questStep("questL13Final");
@@ -104,12 +157,7 @@ const Level13: FC = () => {
   const statRaceModifier = statRaceType?.identifierString as
     | NumericModifier
     | undefined;
-  const elementalDamageRaceType = get("nsChallenge2");
-  const hedgeMazeElements = [
-    get("telescope3"),
-    get("telescope4"),
-    get("telescope5"),
-  ].filter(Boolean);
+  const elementalDamageRaceType = capitalize(get("nsChallenge2"));
 
   const pastRaces = step >= 4;
   const pastHedgeMaze = step >= 5;
@@ -137,7 +185,7 @@ const Level13: FC = () => {
       <QuestTile
         header="Find the Naughty Sorceress"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
         imageUrl="/images/adventureimages/regdesk.gif"
         minLevel={13}
@@ -156,6 +204,7 @@ const Level13: FC = () => {
               contestants={get("nsContestants1")}
               value={getModifier("Initiative")}
               needed={400}
+              percent
             />
             <Race
               name={statRaceModifier ?? "Elemental"}
@@ -200,17 +249,80 @@ const Level13: FC = () => {
   }
 
   if (!pastHedgeMaze) {
+    const elements: ElementType[] = [
+      telescope3Map[get("telescope3")],
+      telescope4Map[get("telescope4")],
+      telescope5Map[get("telescope5")],
+    ].filter((e) => e);
+
+    // 90% for first test, 80% second, 70% third.
+    // TODO: What if we don't know the elements? Guess our worst three elements.
+    const damages = elements.map((element, index): [ElementType, number] => [
+      element,
+      myMaxhp() *
+        (0.9 - 0.1 * index) *
+        (1 - elementalResistance(Element.get(element)) / 100),
+    ]);
+    const totalDamage = sum(damages, ([, d]) => Math.ceil(d));
+
     return (
       <Tile
         header="Hedge Maze"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
-        linkEntireTile
+        href={NSTOWER_URL}
         imageUrl="/images/adventureimages/hedgemaze.gif"
       >
-        <Line>Navigate the Hedge Maze in the Naughty Sorceress' Tower.</Line>
-        {hedgeMazeElements.length > 0 && (
-          <Line>Elements needed: {hedgeMazeElements.join(", ")}</Line>
+        <LinkBlock href={NSTOWER_URL}>
+          <Line>Navigate the Hedge Maze below the tower.</Line>
+          <Line>Choose the second option each time.</Line>
+          {elements.every((e) => e) && (
+            <>
+              <Line>
+                Elements needed:{" "}
+                {commaAnd(
+                  elements.map(
+                    (element) => element && <ElementName element={element} />,
+                  ),
+                  elements,
+                )}
+                .
+              </Line>
+              <Line>
+                Predicted damage:{" "}
+                {separate(
+                  damages.map(
+                    ([element, damage]) =>
+                      element && (
+                        <ElementName element={element}>
+                          {Math.ceil(damage)}
+                        </ElementName>
+                      ),
+                  ),
+                  " + ",
+                  elements,
+                )}{" "}
+                = <Strong>{totalDamage}</Strong>.
+              </Line>
+            </>
+          )}
+        </LinkBlock>
+        {totalDamage > myMaxhp() ? (
+          <Line color="red.solid">
+            You do not have enough resistance / max HP.
+          </Line>
+        ) : (
+          totalDamage > myHp() && (
+            <Line
+              color="red.solid"
+              command={
+                haveUnrestricted($skill`Cannelloni Cocoon`)
+                  ? `cast ${Math.ceil((myMaxhp() - myHp()) / 999)} Cannelloni Cocoon`
+                  : undefined
+              }
+            >
+              Restore your HP first.
+            </Line>
+          )
         )}
       </Tile>
     );
@@ -229,35 +341,95 @@ const Level13: FC = () => {
       <Tile
         header="Tower Door"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
-        imageUrl="/images/adventureimages/nstower_door.gif"
+        imageUrl="/images/itemimages/keya.gif"
       >
-        <Line>Open the tower door.</Line>
-        {missingKeys.length > 0 && (
-          <Line>Missing keys: {missingKeys.join(", ")}</Line>
+        {missingKeys.length > 0 ? (
+          <Line>Missing keys: {commaAnd(missingKeys)}.</Line>
+        ) : (
+          <Line>Open the tower door.</Line>
         )}
       </Tile>
     );
   }
 
   if (!pastTowerLevel1) {
-    // TODO: Provide tower-killing instruction.
+    const haveBeehive = have($item`beehive`);
+
+    const effectSources = damageEffects().filter((effect) => !have(effect));
+    const itemSources = damageItems().filter(
+      (item) => have(item) && !haveEquipped(item),
+    );
+
+    const familiars: [Familiar, number][] = [
+      [$familiar`Mu`, 5],
+      [$familiar`Imitation Crab`, 4],
+      [$familiar`Sludgepuppy`, 3],
+      [$familiar`Mini-Crimbot`, 3],
+    ];
+
+    const current =
+      getModifier("Thorns") +
+      getModifier("Damage Aura") +
+      (familiars.find(([familiar]) => familiar === myFamiliar())?.[1] ?? 0);
+
     return (
       <Tile
         header="Wall of Skin"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
-        linkEntireTile
-        imageUrl="/images/adventureimages/ns_wall1.gif"
+        href={NSTOWER_URL}
+        linkEntireTile={haveBeehive}
+        imageUrl="/images/itemimages/beehive.gif"
       >
-        <Line>Defeat the Wall of Skin.</Line>
-        {have($item`beehive`) ? (
+        <Line href={haveBeehive ? undefined : NSTOWER_URL}>
+          Defeat the Wall of Skin.
+        </Line>
+        {haveBeehive ? (
           <Line>Use the beehive against it.</Line>
         ) : (
-          <Line>
-            Find the beehive in the Black Forest (-combat), or towerkill.
-          </Line>
+          <>
+            <Line href={parentPlaceLink($location`The Black Forest`)}>
+              Find the beehive in the Black Forest (-combat), or towerkill.
+            </Line>
+            <Line>Current damage per turn: {current}.</Line>
+            {effectSources.length > 0 && (
+              <>
+                <Line>Get effects:</Line>
+                <List.Root>
+                  {effectSources.map((effect) => (
+                    <AsyncLink
+                      key={effect.identifierString}
+                      alignSelf="start"
+                      command={`cast ${decodeEntity(toSkill(effect).identifierString)}`}
+                    >
+                      <List.Item>
+                        {decodeEntity(effect.identifierString)}
+                      </List.Item>
+                    </AsyncLink>
+                  ))}
+                </List.Root>
+              </>
+            )}
+            {itemSources.length > 0 && (
+              <>
+                <Line>Equip items:</Line>
+                <List.Root>
+                  {itemSources.map((item) => (
+                    <AsyncLink
+                      key={item.identifierString}
+                      alignSelf="start"
+                      command={`equip ${decodeEntity(item.identifierString)}`}
+                    >
+                      <List.Item>
+                        {decodeEntity(item.identifierString)}
+                      </List.Item>
+                    </AsyncLink>
+                  ))}
+                </List.Root>
+              </>
+            )}
+          </>
         )}
       </Tile>
     );
@@ -268,7 +440,7 @@ const Level13: FC = () => {
       <Tile
         header="Wall of Meat"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
         imageUrl="/images/adventureimages/ns_wall2.gif"
       >
@@ -302,16 +474,13 @@ const Level13: FC = () => {
         (60 + 0.4 * myBuffedstat($stat`Mysticality`)) +
         numericModifier("Spell Damage"));
 
-    const badEffects =
-      $effects`Jalapeño Saucesphere, Scarysauce, Spiky Shell, Psalm of Pointiness`.filter(
-        (effect) => have(effect),
-      );
+    const badEffects = damageEffects().filter(have);
 
     return (
       <Tile
         header="Defeat the Wall of Bones"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile={
           haveBoningKnife ||
           (badEffects.length === 0 &&
@@ -372,7 +541,7 @@ const Level13: FC = () => {
       <Tile
         header="Mirror"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
         imageUrl="/images/adventureimages/mirror.gif"
       >
@@ -396,7 +565,7 @@ const Level13: FC = () => {
       <Tile
         header="Your Shadow"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
         imageUrl="/images/adventureimages/shadow.gif"
       >
@@ -425,12 +594,13 @@ const Level13: FC = () => {
       <Tile
         header="Naughty Sorceress"
         id="level-13-quest"
-        href="/place.php?whichplace=nstower"
+        href={NSTOWER_URL}
         linkEntireTile
         imageUrl="/images/adventureimages/ns.gif"
         disabled={!have($item`Wand of Nagamar`)}
       >
         <Line>Defeat the Naughty Sorceress.</Line>
+        <Line>Remember: she will remove all your buffs.</Line>
         <Line>Good luck!</Line>
       </Tile>
     );
@@ -440,7 +610,7 @@ const Level13: FC = () => {
     <Tile
       header="Free King Ralph"
       id="level-13-quest"
-      href="/place.php?whichplace=nstower"
+      href={NSTOWER_URL}
       linkEntireTile
       imageUrl="/images/otherimages/gash.gif"
     >

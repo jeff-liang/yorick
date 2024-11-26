@@ -31,14 +31,18 @@ const Line: FC<Props> = ({
   return (
     <Text {...props}>
       {command ? (
-        <AsyncLink command={command}>
+        <AsyncLink command={command} color="inherit">
           <Text as="span">{children}</Text>
         </AsyncLink>
       ) : href ? (
         async ? (
-          <AsyncLink href={href}>{children}</AsyncLink>
+          <AsyncLink href={href} color="inherit">
+            {children}
+          </AsyncLink>
         ) : (
-          <MainLink href={href}>{children}</MainLink>
+          <MainLink href={href} color="inherit">
+            {children}
+          </MainLink>
         )
       ) : (
         children

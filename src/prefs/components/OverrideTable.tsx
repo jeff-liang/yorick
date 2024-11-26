@@ -24,16 +24,20 @@ const OverrideTable: FC<OverrideTableProps> = ({
     <H3 textAlign="center">{heading}</H3>
     <Table.Root size="sm">
       <Table.Body>
-        {data
-          .filter((item) => !filterRegex || filterRegex.test(getOverride(item)))
-          .map((item) => (
-            <OverrideRow
-              key={getOverride(item)}
-              override={getOverride(item)}
-              label={item}
-              current={getCurrent(item)}
-            />
-          ))}
+        {data.map((item) => {
+          const override = getOverride(item);
+          return (
+            !filterRegex ||
+            (filterRegex.test(override) && (
+              <OverrideRow
+                key={override}
+                override={override}
+                label={item}
+                current={getCurrent(item)}
+              />
+            ))
+          );
+        })}
       </Table.Body>
     </Table.Root>
   </>

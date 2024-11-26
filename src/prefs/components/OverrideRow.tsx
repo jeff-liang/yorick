@@ -6,13 +6,18 @@ import { validityType, validValue } from "../util/valid";
 import ValidatedInput from "./ValidatedInput";
 
 // override is the key in localStorage
-interface OverrideRowProps {
+interface OverrideRowProps extends Table.RowProps {
   label?: string;
   override: string;
   current: string;
 }
 
-const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
+const OverrideRow: FC<OverrideRowProps> = ({
+  label,
+  override,
+  current,
+  ...props
+}) => {
   const [value, setValue] = useState(localStorage.getItem(override) ?? "");
 
   const handleChangeProperty = useCallback(
@@ -37,7 +42,7 @@ const OverrideRow: FC<OverrideRowProps> = ({ label, override, current }) => {
   const valid = validValue(validity, value);
 
   return (
-    <Table.Row>
+    <Table.Row {...props}>
       <Table.Cell p={1}>
         <Text textAlign="right" my="auto">
           {label ?? override}

@@ -8,6 +8,11 @@ import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { inRunEffectWishes } from "../../resourceInfo/wishes";
 import { haveUnrestricted } from "../../util/available";
+import {
+  inventoryActionLink,
+  inventoryUseLink,
+  mainActionLink,
+} from "../../util/links";
 import { inRun } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { commaAnd, plural } from "../../util/text";
@@ -42,7 +47,7 @@ const WISH_SOURCES: Source[] = [
     render: () => {
       const { total, rendered } = renderSourceList(GENIE_SOURCES);
       return (
-        <Line>
+        <Line href={inventoryUseLink($item`pocket wish`)}>
           {plural(total, "wish", "wishes")} ({commaAnd(rendered)}).
         </Line>
       );
@@ -51,13 +56,17 @@ const WISH_SOURCES: Source[] = [
   {
     name: "Cargo Shorts",
     remaining: () => +!get("_cargoPocketEmptied"),
-    render: () => <Line>1 cargo shorts pocket (limited).</Line>,
+    render: () => (
+      <Line href={inventoryActionLink("pocket")}>
+        1 cargo shorts pocket (limited).
+      </Line>
+    ),
   },
   {
     name: "Cursed Monkey's Paw",
     remaining: () => +CursedMonkeyPaw.have() && CursedMonkeyPaw.wishes(),
     render: ({ remaining }) => (
-      <Line>
+      <Line href={mainActionLink("cmonk")}>
         {plural(remaining, "monkey's paw wish", "monkey's paw wishes")}.
       </Line>
     ),

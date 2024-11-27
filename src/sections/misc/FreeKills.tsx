@@ -111,6 +111,15 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
       ),
   },
   {
+    source: $item`shadow brick`,
+    thing: $item`shadow brick`,
+    remaining: () =>
+      Math.min(
+        availableAmount($item`shadow brick`),
+        13 - get("_shadowBricksUsed"),
+      ),
+  },
+  {
     source: $item`powdered madness`,
     thing: $item`powdered madness`,
     remaining: () =>

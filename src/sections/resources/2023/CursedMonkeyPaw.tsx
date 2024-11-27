@@ -21,7 +21,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { inRunEffectWishes, WishInfo } from "../../../resourceInfo/wishes";
 import { haveUnrestricted } from "../../../util/available";
-import { inventoryLink } from "../../../util/links";
+import { inventoryLink, mainActionLink } from "../../../util/links";
 import { inRun, questFinished } from "../../../util/quest";
 import { plural } from "../../../util/text";
 
@@ -272,7 +272,7 @@ const CursedMonkeysPaw = () => {
       }
       linkedContent={cursedMonkeysPaw}
     >
-      <Line href="/main.php?action=cmonk">
+      <Line href={mainActionLink("cmonk")}>
         Return to monke. Wish for items or effects:
       </Line>
       {options.length > 0 && (

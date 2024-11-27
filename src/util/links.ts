@@ -80,6 +80,14 @@ export function parentPlaceNameLink(
   }
 }
 
+export function mainActionLink(action: string): string {
+  return `/main.php?pwd=${getHashIfAvailable()}&action=${action}`;
+}
+
 export function inventoryActionLink(action: string): string {
   return `/inventory.php?pwd=${getHashIfAvailable()}&action=${action}`;
+}
+
+export function inventoryUseLink(item: Item): string {
+  return `/inv_use.php?pwd=${getHashIfAvailable()}&whichitem=${item.id}`;
 }

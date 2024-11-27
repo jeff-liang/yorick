@@ -35,6 +35,7 @@ const ClanFloundry = () => {
       header="Rent Floundry Equipment"
       imageUrl="/images/itemimages/fishhatchet.gif"
       href="/clan_viplounge.php?action=floundry"
+      linkEntireTile
     >
       {canEquipWeapons && (
         <>

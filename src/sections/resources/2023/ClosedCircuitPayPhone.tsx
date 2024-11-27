@@ -20,7 +20,6 @@ const ClosedCircuitPayPhone = () => {
   const closedCircuitPayPhone = $item`closed-circuit pay phone`;
   const havePayPhone = haveUnrestricted(closedCircuitPayPhone);
   const shadowLodestone = $item`Rufus's shadow lodestone`;
-  const shadowBrick = $item`shadow brick`;
   const shadowAffinity = $effect`Shadow Affinity`;
 
   const rufusQuestState = get("questRufus");
@@ -29,8 +28,6 @@ const ClosedCircuitPayPhone = () => {
   const riftAdvsUntilNC = get("encountersUntilSRChoice");
   const calledRufusToday = get("_shadowAffinityToday");
   const shadowAffinityTurns = haveEffect(shadowAffinity);
-  const shadowBricks = availableAmount(shadowBrick);
-  const shadowBrickUsesLeft = Math.min(13 - get("_shadowBricksUsed"), 13);
 
   const shadowBrickLocations: ShadowBrickLocation[] = [
     {
@@ -143,16 +140,6 @@ const ClosedCircuitPayPhone = () => {
         </Tile>
       )}
 
-      {shadowBricks > 0 && (
-        <Tile
-          header={`${plural(shadowBricks, "shadow brick")}${shadowBrickUsesLeft < shadowBricks ? ` (${shadowBrickUsesLeft} usable today)` : ""}`}
-          id="shadow-brick-tile"
-          imageUrl="/images/itemimages/shadowbrick.gif"
-        >
-          <Line>Win a fight without taking a turn.</Line>
-        </Tile>
-      )}
-
       {shadowLodestones > 0 && (
         <Tile
           header={`${shadowLodestones} Rufus's shadow lodestones`}
@@ -163,16 +150,6 @@ const ClosedCircuitPayPhone = () => {
             30 advs of +100% init, +100% item, +200% meat, -10% combat.
           </Line>
           <Line>Triggers on next visit to any Shadow Rift.</Line>
-        </Tile>
-      )}
-
-      {!calledRufusToday && (
-        <Tile
-          header="Shadow Affinity free fights"
-          imageUrl="/images/itemimages/rufusphone.gif"
-          linkedContent={closedCircuitPayPhone}
-        >
-          <Line>Call Rufus to get 11+ free Shadow Rift combats.</Line>
         </Tile>
       )}
     </>

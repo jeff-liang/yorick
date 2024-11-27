@@ -33,7 +33,9 @@ const PeaceTurkey = () => {
 
   return (
     <Tile linkedContent={turkey}>
-      <Line>Provides {combatRate}% combat.</Line>
+      <Line>
+        Provides {combatRate}% combat and a free run banish every 8 drops.
+      </Line>
       {banishes === 0 && potentialBanishes > 0 && (
         <Line command={`create ${potentialBanishes} handful of split pea soup`}>
           Make {potentialBanishes} banishes from whirled peas.

@@ -14,7 +14,9 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { isNormalCampgroundPath } from "../../../util/paths";
-import { commaAnd, plural } from "../../../util/text";
+import { commaAnd, commaOr, plural } from "../../../util/text";
+
+const TERMINAL_URL = "/campground.php?action=terminal";
 
 const SourceTerminalTile = () => {
   const sourceTerminal = $item`Source terminal`;
@@ -30,6 +32,7 @@ const SourceTerminalTile = () => {
   const installedChips = SourceTerminal.getChips();
 
   const activeSkills = SourceTerminal.getSkills();
+  const digitizeActive = activeSkills.includes(SourceTerminal.Skills.Digitize);
   const extractActive = activeSkills.includes(SourceTerminal.Skills.Extract);
   const turboActive = activeSkills.includes(SourceTerminal.Skills.Turbo);
 
@@ -102,10 +105,12 @@ const SourceTerminalTile = () => {
           header={plural(enhancementsRemaining, "enhancement")}
           id="source-terminal-enhance-resource"
           imageUrl="/images/itemimages/10101.gif"
+          href={TERMINAL_URL}
+          linkEntireTile
         >
-          <Line>items.enh: +30% item ({turnDuration} turns).</Line>
-          <Line>meat.enh: +60% meat ({turnDuration} turns).</Line>
-          <Line>init.enh: +50% init ({turnDuration} turns).</Line>
+          <Line>
+            +30% item, +60% meat, or +50% init ({turnDuration} turns).
+          </Line>
         </Tile>
       )}
 
@@ -114,10 +119,13 @@ const SourceTerminalTile = () => {
           header={plural(digitizesLeft, "digitization")}
           id="source-terminal-digitize-resource"
           imageUrl="/images/itemimages/watch.gif"
+          href={!digitizeActive ? TERMINAL_URL : undefined}
+          linkEntireTile={!digitizeActive}
         >
-          {targetMonsters.map((monster, i) => (
-            <Line key={i}>Could target a {monster}.</Line>
-          ))}
+          {!digitizeActive && (
+            <Line fontWeight="bold">Need to learn digitize!</Line>
+          )}
+          <Line>Could target a {commaOr(targetMonsters)}.</Line>
           {0 < digitizesLeft &&
             SourceTerminal.getDigitizeMonster() !== null && (
               <Line>Could re-digitize to reset the window.</Line>
@@ -130,6 +138,8 @@ const SourceTerminalTile = () => {
           header={plural(3 - extrudes, "extrusion")}
           id="source-terminal-extrude-resource"
           imageUrl="/images/itemimages/browsercookie.gif"
+          href={TERMINAL_URL}
+          linkEntireTile
         >
           <Line>Food: 4 fullness epic food.</Line>
           <Line>Drink: 4 drunkenness epic booze.</Line>

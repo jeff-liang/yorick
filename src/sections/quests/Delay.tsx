@@ -18,11 +18,8 @@ const ZoneList: FC<{
 }> = ({ zones }) => (
   <List.Root>
     {zones.map(({ zone, remaining, available }) => (
-      <MainLink href={parentPlaceLink(zone)}>
-        <List.Item
-          key={zone.identifierString}
-          color={available ? undefined : "fg.subtle"}
-        >
+      <MainLink key={zone.identifierString} href={parentPlaceLink(zone)}>
+        <List.Item color={available ? undefined : "fg.subtle"}>
           {plural(remaining, "turn")} in {zone.identifierString}.
         </List.Item>
       </MainLink>

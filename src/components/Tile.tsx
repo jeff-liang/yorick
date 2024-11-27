@@ -115,7 +115,10 @@ const Tile: FC<TileProps> = ({
               fontSize="20px"
               variant="ghost"
               color="inherit"
-              onClick={() => setCollapsed((collapsed) => !collapsed)}
+              onClick={(event) => {
+                event.preventDefault();
+                setCollapsed((collapsed) => !collapsed);
+              }}
             >
               {collapsed ? <ChevronUp /> : <ChevronDown />}
             </IconButton>

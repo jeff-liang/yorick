@@ -3,6 +3,7 @@ import { availableAmount, getCampground } from "kolmafia";
 import { $item, get, have } from "libram";
 
 import Line from "../../../components/Line";
+import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { inventoryLink } from "../../../util/links";
 import { canAccessGarden } from "../../../util/paths";
@@ -18,19 +19,19 @@ const gravelMessage = (gravels: number) => {
 
 const whetStoneMessage = (whetStones: number) => {
   return (
-    <>
+    <MainLink href={inventoryLink($item`whet stone`)}>
       <Strong>{whetStones}</Strong>x whet stone (+1 adv on food)
-    </>
+    </MainLink>
   );
 };
 
 const milestoneMessage = (milestones: number) => {
   const desertProgress = get("desertExploration");
   return (
-    <>
+    <MainLink href={inventoryLink($item`milestone`)}>
       <Strong>{milestones}</Strong>x milestone (+5% desert progress),{" "}
       {100 - desertProgress}% remaining
-    </>
+    </MainLink>
   );
 };
 

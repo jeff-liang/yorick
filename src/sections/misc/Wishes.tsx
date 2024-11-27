@@ -1,10 +1,14 @@
+import { List } from "@chakra-ui/react";
 import { availableAmount, isUnrestricted } from "kolmafia";
 import { $item, $skill, CursedMonkeyPaw, get, sum } from "libram";
 import { FC } from "react";
 
+import AdviceTooltipText from "../../components/AdviceTooltipText";
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { inRunEffectWishes } from "../../resourceInfo/wishes";
 import { haveUnrestricted } from "../../util/available";
+import { inRun } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { commaAnd, plural } from "../../util/text";
 
@@ -64,12 +68,37 @@ const Wishes: FC = () => {
   const { total, rendered } = renderSourceList(WISH_SOURCES);
   if (total <= 0) return null;
 
+  const effects = inRunEffectWishes().filter(
+    ({ shouldDisplay }) => shouldDisplay,
+  );
+
   return (
     <Tile
       header={plural(total, "effect wish", "effect wishes")}
       linkedContent={$item`pocket wish`}
     >
       {rendered}
+      {inRun() && effects.length > 0 && (
+        <AdviceTooltipText
+          advice={
+            <List.Root>
+              {effects.map(
+                ({ target, additionalDescription, currentlyAccessible }) => (
+                  <List.Item
+                    key={target.identifierString}
+                    color={currentlyAccessible ? "fg.muted" : undefined}
+                  >
+                    {target.identifierString}
+                    {additionalDescription && <> ({additionalDescription})</>}
+                  </List.Item>
+                ),
+              )}
+            </List.Root>
+          }
+        >
+          Suggested effects.
+        </AdviceTooltipText>
+      )}
     </Tile>
   );
 };

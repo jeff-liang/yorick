@@ -1,14 +1,6 @@
 import { Text } from "@chakra-ui/react";
-import { canAdventure, Effect, Item } from "kolmafia";
-import {
-  $effect,
-  $item,
-  $location,
-  $skill,
-  get,
-  have,
-  questStep,
-} from "libram";
+import { Effect, Item } from "kolmafia";
+import { $effect, $item, $skill, get, have } from "libram";
 import { ReactNode } from "react";
 
 import { haveUnrestricted } from "../util/available";
@@ -20,7 +12,7 @@ export interface WishInfo {
   currentlyAccessible: boolean;
 }
 
-export function inRunEffectWishes(): WishInfo[] {
+export function inRunEffectWishes(): (WishInfo & { target: Effect })[] {
   return [
     {
       target: $effect`Frosty`,
@@ -89,17 +81,6 @@ export function inRunEffectWishes(): WishInfo[] {
         get("nsChallenge2") === "sleaze" &&
         get("zeppelinProtestors") > 79,
       currentlyAccessible: true,
-    },
-    {
-      target: $item`lowercase N`,
-      additionalDescription: "summon the nagamar",
-      shouldDisplay:
-        questStep("questL13Final") < 14 &&
-        !have($item`lowercase N`) &&
-        have($item`ruby W`) &&
-        have($item`metallic A`) &&
-        have($item`heavy D`),
-      currentlyAccessible: canAdventure($location`The Valley of Rof L'm Fao`),
     },
   ];
 }

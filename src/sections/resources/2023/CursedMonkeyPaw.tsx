@@ -170,6 +170,17 @@ function inRunItemWishes(): WishInfo[] {
         !have($item`star chart`),
       currentlyAccessible: canAdventure($location`The Hole in the Sky`),
     },
+    {
+      target: $item`lowercase N`,
+      additionalDescription: "summon the nagamar",
+      shouldDisplay:
+        questStep("questL13Final") < 14 &&
+        !have($item`lowercase N`) &&
+        have($item`ruby W`) &&
+        have($item`metallic A`) &&
+        have($item`heavy D`),
+      currentlyAccessible: canAdventure($location`The Valley of Rof L'm Fao`),
+    },
   ];
 }
 

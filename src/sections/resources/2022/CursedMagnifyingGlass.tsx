@@ -6,7 +6,6 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
-import { plural } from "../../../util/text";
 
 const CursedMagnifyingGlass = () => {
   const cursedMagnifyingGlass = $item`cursed magnifying glass`;
@@ -43,22 +42,7 @@ const CursedMagnifyingGlass = () => {
     ],
   );
 
-  if (!haveCmg || voidFreeFights >= 5) return null;
-
-  return (
-    <Tile linkedContent={cursedMagnifyingGlass}>
-      <Line>
-        {plural(5 - voidFreeFights, "free void monster")} remaining today.
-      </Line>
-      <Line>
-        Void monster fight{" "}
-        {turnsToVoid === 0
-          ? "available now"
-          : `in ${plural(turnsToVoid, "turn")}`}
-        .
-      </Line>
-    </Tile>
-  );
+  return null;
 };
 
 export default CursedMagnifyingGlass;

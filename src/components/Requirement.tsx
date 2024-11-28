@@ -15,6 +15,7 @@ const Requirement: FC<RequirementProps> = ({
   <Badge
     colorScheme={disabled ? "gray" : met ? "blue" : "red"}
     p={0.5}
+    textTransform="uppercase"
     {...props}
   >
     {children}

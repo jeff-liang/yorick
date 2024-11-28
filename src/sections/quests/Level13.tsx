@@ -1,5 +1,5 @@
 import { List, Strong, Text } from "@chakra-ui/react";
-import { decodeEntity } from "html-entities";
+import { decode } from "html-entities";
 import {
   availableAmount,
   Element,
@@ -401,11 +401,9 @@ const Level13: FC = () => {
                     <AsyncLink
                       key={effect.identifierString}
                       alignSelf="start"
-                      command={`cast ${decodeEntity(toSkill(effect).identifierString)}`}
+                      command={`cast ${decode(toSkill(effect).identifierString)}`}
                     >
-                      <List.Item>
-                        {decodeEntity(effect.identifierString)}
-                      </List.Item>
+                      <List.Item>{decode(effect.identifierString)}</List.Item>
                     </AsyncLink>
                   ))}
                 </List.Root>
@@ -419,11 +417,9 @@ const Level13: FC = () => {
                     <AsyncLink
                       key={item.identifierString}
                       alignSelf="start"
-                      command={`equip ${decodeEntity(item.identifierString)}`}
+                      command={`equip ${decode(item.identifierString)}`}
                     >
-                      <List.Item>
-                        {decodeEntity(item.identifierString)}
-                      </List.Item>
+                      <List.Item>{decode(item.identifierString)}</List.Item>
                     </AsyncLink>
                   ))}
                 </List.Root>

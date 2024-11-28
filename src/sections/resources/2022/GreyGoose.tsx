@@ -15,7 +15,6 @@ const GreyGoose: FC = () => {
   const gooseWeight = Math.min(Math.floor(Math.sqrt(greyGoose.experience)), 20);
   const gooseExperience = greyGoose.experience;
   const famExperienceGain = numericModifier("familiar experience") + 1;
-  const newGooseExp = gooseExperience + famExperienceGain;
   const famExpNeededForNextPound = (gooseWeight + 1) ** 2 - gooseExperience;
   const famExpNeededForTwoPounds = (gooseWeight + 2) ** 2 - gooseExperience;
   const horribleFamExpCalculation = Math.ceil(
@@ -79,18 +78,8 @@ const GreyGoose: FC = () => {
   return (
     <Tile linkedContent={greyGoose}>
       <Line>
-        Currently have <Strong>{gooseWeight}</Strong> weight (
-        <Strong>{gooseExperience}</Strong> experience), currently gain{" "}
-        <Strong>{famExperienceGain}</Strong> fam exp per fight. (Will become{" "}
-        <Text
-          as="b"
-          color={
-            (gooseWeight + 1) ** 2 > newGooseExp ? "red.solid" : "blue.solid"
-          }
-        >
-          {newGooseExp}
-        </Text>
-        )
+        <Strong>{gooseExperience}</Strong> experience, currently gain{" "}
+        <Strong>{famExperienceGain}</Strong> per fight.
       </Line>
       {gooseWeight < 6 ? (
         <Line>
@@ -104,7 +93,7 @@ const GreyGoose: FC = () => {
       ) : (
         <>
           <Line>
-            <Strong>{famExpNeededForNextPound}</Strong> famxp needed for next
+            <Strong>{famExpNeededForNextPound}</Strong> xp needed for next
             pound, or <Strong>{famExpNeededForTwoPounds}</Strong> for the one
             after that.
           </Line>

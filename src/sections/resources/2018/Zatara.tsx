@@ -25,7 +25,7 @@ const ClanFortune = () => {
 
   return (
     <Tile
-      header="Fortune Teller Buff"
+      header="Fortune Teller"
       imageUrl="/images/adventureimages/madamezatara.gif"
       href="/clan_viplounge.php?preaction=lovetester"
     >

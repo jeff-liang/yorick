@@ -44,7 +44,8 @@ const PeaceTurkey = () => {
         </Line>
       )}
       <Line>
-        Next drop: {nextDropName} ({dropChance.toFixed(0)}%).
+        Next drop: {nextDropName} ({dropChance.toFixed(0)}%, ~
+        {(100 / dropChance).toFixed(1)} turns).
         {nextDrop !== $item`whirled peas` &&
           ` ${plural(dropsUntilWhirledPeas, "drop")} until next whirled peas.`}
       </Line>

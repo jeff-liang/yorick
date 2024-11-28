@@ -69,20 +69,18 @@ const CosmicBowlingBall = () => {
       {youHaveTheBall && (
         <>
           <Line>
-            <Strong>Bowl a Curveball:</Strong> Banish the monster, for free!
+            <Strong>Curveball:</Strong> Banish the monster, for free!
           </Line>
           <Line>
-            <Strong>Bowl Sideways:</Strong> Gain ~ 1.5x stats within{" "}
-            {currentZone?.identifierString}
+            <Strong>Sideways:</Strong> Gain ~ 1.5x stats within{" "}
+            {currentZone?.identifierString}.
           </Line>
           <Line>
-            <Strong>Bowl Straight Up:</Strong> Gain +25% items / +50% meat
+            <Strong>Straight Up:</Strong> Gain +25% items / +50% meat.
           </Line>
-          <Line>
-            <Text as="span" color="gray.emphasized">
-              <Strong>Bowl Backwards:</Strong> Pickpocket from the rest of your
-              current CSV.
-            </Text>
+          <Line color="fg.subtle">
+            <Strong>Backwards:</Strong> Pickpocket from the rest of your current
+            zone.
           </Line>
         </>
       )}

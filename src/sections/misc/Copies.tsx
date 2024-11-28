@@ -53,7 +53,7 @@ const Copies: FC = () => {
                   : $familiar`Obtuse Angel`
               }
             >
-              {plural(remaining, `${descriptor} fight`)} left.
+              {plural(remaining, `${descriptor} fight`)}.
             </Line>
           ) : (
             <Line>

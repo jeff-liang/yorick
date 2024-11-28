@@ -11,6 +11,7 @@ import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { inventoryLink } from "../../util/links";
 import { plural } from "../../util/text";
 
 // Item, Skill, or [name, have()]
@@ -154,7 +155,12 @@ const FreeKills: FC = () => {
                 key={
                   Array.isArray(source) ? source[0] : source.identifierString
                 }
-                color={have(thing) ? undefined : "gray.solid"}
+                color={have(thing) ? undefined : "fg.subtle"}
+                href={
+                  source instanceof Item && !have(thing)
+                    ? inventoryLink(source)
+                    : undefined
+                }
               >
                 {plural(
                   remaining(),

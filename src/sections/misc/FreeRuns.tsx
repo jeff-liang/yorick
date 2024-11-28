@@ -1,10 +1,10 @@
-import { Text } from "@chakra-ui/react";
 import { availableAmount, Item, Skill } from "kolmafia";
 import { $item, $skill, get, have, sum } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { inventoryLink } from "../../util/links";
 import { plural } from "../../util/text";
 
 interface FreeRunSource {
@@ -84,16 +84,22 @@ const FreeRuns: FC = () => {
         {freeRunSources.map(
           ({ source, thing, caption, captionPlural, remaining }) =>
             !have(source) || remaining() <= 0 ? null : (
-              <Line key={source.identifierString}>
-                <Text as="span" color={have(thing) ? undefined : "gray.solid"}>
-                  {plural(
-                    remaining(),
-                    caption?.() ?? thing.name,
-                    captionPlural?.() ??
-                      ("plural" in thing ? thing.plural : `${thing.name}s`),
-                  )}
-                  .
-                </Text>
+              <Line
+                key={source.identifierString}
+                color={have(thing) ? undefined : "fg.subtle"}
+                href={
+                  source instanceof Item && !have(thing)
+                    ? inventoryLink(source)
+                    : undefined
+                }
+              >
+                {plural(
+                  remaining(),
+                  caption?.() ?? thing.name,
+                  captionPlural?.() ??
+                    ("plural" in thing ? thing.plural : `${thing.name}s`),
+                )}
+                .
               </Line>
             ),
         )}

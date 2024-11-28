@@ -8,7 +8,6 @@ import {
 } from "kolmafia";
 import { $item, $location, $locations, get, have, questStep } from "libram";
 
-import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
@@ -189,15 +188,12 @@ const CandyCaneSwordCane = () => {
         header="Candy Cane Sword Cane NCs"
         linkedContent={candyCaneSwordCane}
       >
-        <Line>Ensure your CCSC is equipped for useful NCs:</Line>
-        <List.Root>{availableOptions.map(({ node }) => node)}</List.Root>
-        {!ccscEquipped && (
-          <Line>
-            <AdviceTooltipText advice="This is important!">
-              Equip the Candy Cane Sword Cane!
-            </AdviceTooltipText>
-          </Line>
+        {!ccscEquipped ? (
+          <Line>Ensure your CCSC is equipped for useful NCs:</Line>
+        ) : (
+          <Line>CCSC equipped! Useful NCs:</Line>
         )}
+        <List.Root>{availableOptions.map(({ node }) => node)}</List.Root>
       </Tile>
     )
   );

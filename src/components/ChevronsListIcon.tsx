@@ -12,8 +12,10 @@ const ChevronsList: FC<ChevronsListProps> = (props) => (
   <List.Indicator
     asChild
     display="inline-flex"
-    verticalAlign="center"
-    my="auto"
+    alignItems="center"
+    height="1rem"
+    mt="1px"
+    marginInlineEnd={0}
   >
     <Chevrons {...props} />
   </List.Indicator>

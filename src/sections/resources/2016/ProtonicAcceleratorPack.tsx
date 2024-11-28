@@ -44,7 +44,7 @@ const ProtonicAcceleratorPack = () => {
   useNag(
     () => ({
       id: "protonic-pack-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/protonpack.gif",
       node: haveProtonPack && nextGhostTurn <= totalTurnsPlayed() && (
         <Tile header="It's ghost bustin' time!" linkedContent={protonPack}>

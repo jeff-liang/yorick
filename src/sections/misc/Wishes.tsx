@@ -84,7 +84,8 @@ const Wishes: FC = () => {
   return (
     <Tile
       header={plural(total, "effect wish", "effect wishes")}
-      linkedContent={$item`pocket wish`}
+      id="wishes-resource"
+      imageUrl="/images/itemimages/whitecard.gif"
     >
       {rendered}
       {inRun() && effects.length > 0 && (

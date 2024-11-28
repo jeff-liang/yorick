@@ -55,7 +55,7 @@ const KramcoSausageOMatic = () => {
             linkedContent={kramcoSausageOMatic}
           >
             {!kramcosEquipped && (
-              <Line color="red.solid">
+              <Line color="red.solid" command="equip Kramco Sausage-o-Matic™">
                 Equip the Kramco Sausage-o-Matic™ first.
               </Line>
             )}

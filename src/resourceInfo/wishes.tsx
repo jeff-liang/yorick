@@ -1,9 +1,10 @@
 import { Text } from "@chakra-ui/react";
-import { Effect, Item } from "kolmafia";
-import { $effect, $item, $skill, get, have } from "libram";
+import { Effect, Item, myPath } from "kolmafia";
+import { $effect, $item, $path, $skill, get, have } from "libram";
 import { ReactNode } from "react";
 
 import { haveUnrestricted } from "../util/available";
+import { questFinished } from "../util/quest";
 
 export interface WishInfo {
   target: Item | Effect;
@@ -13,14 +14,19 @@ export interface WishInfo {
 }
 
 export function inRunEffectWishes(): (WishInfo & { target: Effect })[] {
+  const needDigitalKey =
+    !get("nsTowerDoorKeysUsed").includes("digital key") &&
+    !have($item`digital key`) &&
+    get("8BitScore") < 10000;
+  const needNuns =
+    myPath() !== $path`Two Crazy Random Summer` &&
+    get("sidequestNunsCompleted") === "none" &&
+    !questFinished("questL12War");
   return [
     {
       target: $effect`Frosty`,
       additionalDescription: "init/item/meat",
-      shouldDisplay:
-        !get("nsTowerDoorKeysUsed").includes("digital key") &&
-        !have($item`digital key`) &&
-        get("8BitScore") < 10000,
+      shouldDisplay: needDigitalKey || needNuns,
       currentlyAccessible: true,
     },
     {

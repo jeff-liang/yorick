@@ -65,7 +65,7 @@ const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
             <Strong>{text}</Strong>
           ) : banisher ? (
             <Tooltip showArrow content={`Banished: ${banisher.name}`}>
-              <Text as="span" color="gray.solid">
+              <Text as="span" color="fg.subtle">
                 {text}
               </Text>
             </Tooltip>

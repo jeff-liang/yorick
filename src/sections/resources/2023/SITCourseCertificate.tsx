@@ -1,6 +1,5 @@
-import { Strong } from "@chakra-ui/react";
-import { $item, $skill, get, have } from "libram";
-import { ReactNode, useMemo } from "react";
+import { $item, $skill, have } from "libram";
+import { useMemo } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -22,7 +21,6 @@ const SITCertificate = () => {
   const sitCertificate = $item`S.I.T. Course Completion Certificate`;
   const haveSit = haveUnrestricted(sitCertificate);
   const currentlyInRun = inRun();
-  const sitChanged = get("_sitCourseCompleted");
 
   const havePsychogeologist = have($skill`Psychogeologist`);
   const haveInsectologist = have($skill`Insectologist`);
@@ -36,60 +34,18 @@ const SITCertificate = () => {
     [],
   );
 
-  const subtitle: ReactNode = useMemo(() => {
-    if (havePsychogeologist) {
-      return (
-        <>
-          You have ML; consider <Strong>Insectology</Strong>, for meat?
-        </>
-      );
-    } else if (haveInsectologist) {
-      return (
-        <>
-          You have Meat; consider <Strong>Psychogeology</Strong>, for ML?
-        </>
-      );
-    } else if (haveCryptobotanist) {
-      return (
-        <>
-          You have Init; consider <Strong>Insectology</Strong>, for meat?
-        </>
-      );
-    } else return <></>;
-  }, [haveCryptobotanist, haveInsectologist, havePsychogeologist]);
-
   useNag(
     () => ({
       id: "sit-course-certificate-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/sitcert.gif",
-      node: haveSit && currentlyInRun && !sitChanged && (
+      node: haveSit && currentlyInRun && !hasAnySkill && (
         <Tile header="S.I.T. Course Enrollment" linkedContent={sitCertificate}>
-          {!hasAnySkill && (
-            <Line color="red.solid">
-              {randomPhrase} Take your S.I.T. course!
-            </Line>
-          )}
-          {hasAnySkill && (
-            <>
-              <Line>
-                Try changing your S.I.T. course to accumulate different items.
-              </Line>
-              <Line>{subtitle}</Line>
-            </>
-          )}
+          <Line color="red.solid">{randomPhrase} Take your S.I.T. course!</Line>
         </Tile>
       ),
     }),
-    [
-      currentlyInRun,
-      hasAnySkill,
-      haveSit,
-      randomPhrase,
-      sitCertificate,
-      sitChanged,
-      subtitle,
-    ],
+    [currentlyInRun, hasAnySkill, haveSit, randomPhrase, sitCertificate],
   );
 
   return null;

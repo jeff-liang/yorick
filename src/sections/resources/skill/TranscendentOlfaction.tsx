@@ -1,3 +1,4 @@
+import { Strong } from "@chakra-ui/react";
 import { $skill, get } from "libram";
 import { FC } from "react";
 
@@ -21,7 +22,11 @@ const TranscendentOlfaction: FC = () => {
       imageUrl="/images/itemimages/snout.gif"
     >
       <Line>Make encountering a zone monster much more likely.</Line>
-      {tracked && <Line>Currently tracking {tracked.identifierString}.</Line>}
+      {tracked && (
+        <Line>
+          Currently tracking <Strong>{tracked.identifierString}</Strong>.
+        </Line>
+      )}
     </Tile>
   );
 };

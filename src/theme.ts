@@ -25,6 +25,12 @@ const buttonRecipe = defineRecipe({
   ],
 });
 
+const linkRecipe = defineRecipe({
+  base: {
+    display: "inline",
+  },
+});
+
 const config = defineConfig({
   globalCss: {
     html: {
@@ -45,6 +51,7 @@ const config = defineConfig({
     },
     recipes: {
       button: buttonRecipe,
+      link: linkRecipe,
     },
   },
 });

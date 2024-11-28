@@ -25,7 +25,11 @@ const RomanCandelabra = () => {
       priority: haveSpringShoes ? NagPriority.MID : NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/romcandel.gif",
       node: haveCandelabra && (!haveELP || (!haveELG && !haveSpringShoes)) && (
-        <Tile linkedContent={romanCandelabra} id="roman-candelabra-nag">
+        <Tile
+          header="Candelabra monster chain"
+          linkedContent={romanCandelabra}
+          id="roman-candelabra-nag"
+        >
           {!haveELG && !haveSpringShoes && (
             <>
               <Line color="green.solid">Green candle runaway!</Line>
@@ -38,14 +42,13 @@ const RomanCandelabra = () => {
           )}
           {!haveELP && (
             <>
-              <Line>Roman Candelabra monster chain ready.</Line>
               {candelabraEquipped ? (
                 <Line color="purple.solid">
-                  Candelabra equipped, blow your purple candle!
+                  Equipped, blow your purple candle!
                 </Line>
               ) : (
                 <Line color="red.solid">
-                  Equip the Roman Candelabra, for your purple ray.
+                  Equip the candelabra and purple ray.
                 </Line>
               )}
             </>

@@ -95,7 +95,7 @@ const Tile: FC<TileProps> = ({
         <HStack
           gap={1}
           css={{
-            ".chakra-portal &": {
+            ".chakra-tooltip__content &": {
               display: "none",
             },
           }}

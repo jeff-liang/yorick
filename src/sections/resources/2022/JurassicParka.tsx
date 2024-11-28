@@ -33,6 +33,7 @@ const JurassicParka: FC = () => {
         !haveELY &&
         !haveFondeluge && (
           <Tile
+            header="Spit Jurassic Acid"
             linkedContent={jurassicParka}
             id="jurassic-parka-nag"
             extraLinks={
@@ -44,15 +45,14 @@ const JurassicParka: FC = () => {
             {!parkaEquipped && (
               <Line color="red.solid">Equip your Jurassic Parka!</Line>
             )}
-            {parkaEquipped && <Line color="orange.solid">Parka equipped.</Line>}
-            {parkaMode !== "dilophosaur" ? (
-              <Line color="red.solid" command="parka dilophosaur">
-                Change your parka to dilophosaur mode!
-              </Line>
-            ) : (
-              <Line color="orange.solid">Dilophosaur mode enabled.</Line>
-            )}
-            <Line>Parka yellow ray is ready; spit some acid!</Line>
+            {parkaEquipped &&
+              (parkaMode === "dilophosaur" ? (
+                <Line color="orange.solid">Parka equipped.</Line>
+              ) : (
+                <Line color="red.solid" command="parka dilophosaur">
+                  Change your parka to dilophosaur mode!
+                </Line>
+              ))}
           </Tile>
         ),
     }),

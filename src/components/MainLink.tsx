@@ -7,11 +7,11 @@ export type MainLinkProps = Omit<LinkProps, "href" | "target"> & {
 
 const MainLink: FC<MainLinkProps> = ({ href, children, ...props }) =>
   href ? (
-    <Link target="mainpane" href={href} display="inline" {...props}>
+    <Link target="mainpane" href={href} {...props}>
       {children}
     </Link>
   ) : (
-    <>{children}</>
+    children
   );
 
 export default MainLink;

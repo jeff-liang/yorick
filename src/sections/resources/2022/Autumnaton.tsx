@@ -23,6 +23,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
+import { inventoryUseLink } from "../../../util/links";
 
 const Autumnaton = () => {
   const autumnatonItem = $item`autumn-aton`;
@@ -44,7 +45,8 @@ const Autumnaton = () => {
         <Tile
           header="Use your autumn-aton"
           imageUrl="/images/itemimages/autumnaton.gif"
-          linkedContent={autumnatonItem}
+          href={inventoryUseLink(autumnatonItem)}
+          linkEntireTile
         >
           <Line>
             Next use will take{" "}
@@ -134,7 +136,8 @@ const Autumnaton = () => {
     <Tile
       header="Autumn-aton"
       imageUrl="/images/itemimages/autumnaton.gif"
-      linkedContent={autumnatonItem}
+      href={inventoryUseLink(autumnatonItem)}
+      linkEntireTile
     >
       <Line>Grabs items from a zone you've previously visited.</Line>
       {have(autumnatonItem) ? (

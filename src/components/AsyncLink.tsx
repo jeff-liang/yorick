@@ -64,7 +64,7 @@ const AsyncLink = forwardRef<HTMLAnchorElement, AsyncLinkProps>(
         {...props}
         textDecoration="none !important"
         pointerEvents="none"
-        color="gray.solid"
+        color="fg.subtle"
       >
         {children} <Spinner as="span" size="xs" />
       </Link>

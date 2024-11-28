@@ -7,6 +7,7 @@ import Faxes from "./misc/Faxes";
 import FreeFights from "./misc/FreeFights";
 import FreeKills from "./misc/FreeKills";
 import FreeRuns from "./misc/FreeRuns";
+import FreeZones from "./misc/FreeZones";
 import LuckyAdventures from "./misc/LuckyAdventures";
 import NoncombatForces from "./misc/NoncombatForces";
 import Wishes from "./misc/Wishes";
@@ -79,6 +80,7 @@ const ResourceSection = () => (
     tiles={[
       ActiveBanishes,
       FreeFights,
+      FreeZones,
       FreeKills,
       FreeRuns,
       Wishes,

@@ -59,8 +59,6 @@ const FrumiousBandersnatch = () => {
       : boots;
   const maxObservedWeight = useMaxObservedWeight(familiar);
 
-  if (!have(familiar)) return null;
-
   const needOde =
     have($skill`The Ode to Booze`) && !have($effect`Ode to Booze`);
 
@@ -82,6 +80,8 @@ const FrumiousBandersnatch = () => {
     }),
     [bander, current, needOde],
   );
+
+  if (!have(familiar)) return null;
 
   const availableBuffs = LIMITED_BUFFS.filter(
     ([, effect, available]) => !have(effect) && available(),

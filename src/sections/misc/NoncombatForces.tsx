@@ -4,7 +4,7 @@ import {
   mySpleenUse,
   spleenLimit,
 } from "kolmafia";
-import { $familiar, $item, $skill, CinchoDeMayo, get } from "libram";
+import { $familiar, $item, $skill, CinchoDeMayo, clamp, get } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
@@ -32,9 +32,19 @@ const FORCE_SOURCES: Source[] = [
   {
     name: "stench jelly",
     remaining: () =>
-      availableAmount($item`stench jelly`) +
-      +haveUnrestricted($familiar`Space Jellyfish`) *
-        Math.max(0, 3 - get("_spaceJellyfishDrops")),
+      clamp(
+        availableAmount($item`stench jelly`) +
+          +haveUnrestricted($familiar`Space Jellyfish`) *
+            Math.max(0, 3 - get("_spaceJellyfishDrops")),
+        0,
+        spleenLimit() -
+          mySpleenUse() +
+          clamp(
+            availableAmount($item`mojo filter`),
+            0,
+            3 - get("currentMojoFilters"),
+          ),
+      ),
     render: () => {
       const available = availableAmount($item`stench jelly`);
       const probability =

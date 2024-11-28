@@ -29,6 +29,8 @@ const PeaceTurkey = () => {
     typeof nextDrop === "string" ? nextDrop : nextDrop.identifierString;
   const dropsUntilWhirledPeas = 4 - (get("peaceTurkeyIndex") % 4);
 
+  const dropChance = 24 + Math.sqrt(totalFamiliarWeight(turkey));
+
   if (!haveUnrestricted(turkey)) return null;
 
   return (
@@ -42,7 +44,7 @@ const PeaceTurkey = () => {
         </Line>
       )}
       <Line>
-        Next drop: {nextDropName}.
+        Next drop: {nextDropName} ({dropChance.toFixed(0)}%).
         {nextDrop !== $item`whirled peas` &&
           ` ${plural(dropsUntilWhirledPeas, "drop")} until next whirled peas.`}
       </Line>

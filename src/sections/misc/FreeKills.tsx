@@ -98,7 +98,7 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
     ],
     thing: $skill`Assert your Authority`,
     caption: () => "authority assertion",
-    remaining: () => 3 - get("_authorityUsed", 0),
+    remaining: () => 3 - get("_assertYourAuthorityCast"),
   },
   {
     source: $item`Breathitin™`,

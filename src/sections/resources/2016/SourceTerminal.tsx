@@ -23,7 +23,7 @@ const SourceTerminalTile = () => {
   const sourceEssence = $item`Source essence`;
 
   const haveTerminal =
-    (!isNormalCampgroundPath() && myPath() !== $path`Nuclear Autumn`) ||
+    (isNormalCampgroundPath() || myPath() === $path`Nuclear Autumn`) &&
     haveInCampground(sourceTerminal);
 
   const extrudes = get("_sourceTerminalExtrudes");

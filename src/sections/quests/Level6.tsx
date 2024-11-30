@@ -81,7 +81,7 @@ const Level6: FC = () => {
                 Your -combat% is less than 25%, you want more!
               </Line>
             )}
-            <List.Root>{listItems}</List.Root>
+            <List.Root variant="plain">{listItems}</List.Root>
           </>,
         ],
         [2, <Line>Conduct the ritual to finish the quest.</Line>],

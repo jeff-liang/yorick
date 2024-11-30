@@ -39,9 +39,8 @@ const EmotionChip = () => {
       return (
         <List.Item
           key={skillDescription}
-          pl="1"
-          display="flex"
-          color={casts === 0 ? "gray.solid" : undefined}
+          pl={1}
+          color={casts === 0 ? "fg.subtle" : undefined}
         >
           <ChevronsListIcon
             usesLeft={casts}
@@ -75,7 +74,7 @@ const EmotionChip = () => {
   //   - My lean is to not include hatred and leave it for the banish tile I'm making.
   return (
     <Tile header="Emotion Chip" imageUrl="/images/itemimages/emochip1.gif">
-      <List.Root>{listItems}</List.Root>
+      <List.Root variant="plain">{listItems}</List.Root>
     </Tile>
   );
 };

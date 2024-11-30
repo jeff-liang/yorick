@@ -126,11 +126,15 @@ const PatrioticEagle = () => {
         pledgeZoneEffect &&
         pledgeZoneName && (
           <Tile
-            header="Pledge to a zone!"
+            header="Pledge to a zone?"
             imageUrl="/images/itemimages/flag1.gif"
             linkedContent={patrioticEagle}
           >
-            {!withEagle && <Line>Take your Patriotic Eagle with you.</Line>}
+            {!withEagle && (
+              <Line command="familiar Patriotic Eagle">
+                Take your Patriotic Eagle with you.
+              </Line>
+            )}
             <Line>
               Pledge allegiance to <Strong>{pledgeZoneName}</Strong> for{" "}
               {pledgeZoneEffect}.

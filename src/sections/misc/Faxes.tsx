@@ -68,6 +68,19 @@ const FAX_SOURCES: FaxSource[] = [
     ),
   },
   {
+    name: "Cargo Shorts",
+    remaining: () =>
+      +(
+        haveUnrestricted($item`Cargo Cultist Shorts`) &&
+        !get("_cargoPocketEmptied")
+      ),
+    render: () => (
+      <Line href={inventoryLink($item`Cargo Cultist Shorts`)}>
+        1 cargo pocket (limited).
+      </Line>
+    ),
+  },
+  {
     name: "mimic egg",
     remaining: () =>
       +haveUnrestricted($familiar`Chest Mimic`) &&

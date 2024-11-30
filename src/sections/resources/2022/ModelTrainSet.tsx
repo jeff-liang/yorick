@@ -173,7 +173,7 @@ const ModelTrainSet = () => {
   useNag(
     () => ({
       id: "model-train-set-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.LOW,
       imageUrl,
       node: shouldNag && (
         <Tile

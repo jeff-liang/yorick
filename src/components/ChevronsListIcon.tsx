@@ -15,7 +15,7 @@ const ChevronsList: FC<ChevronsListProps> = (props) => (
     alignItems="center"
     height="1rem"
     mt="1px"
-    marginInlineEnd={0}
+    marginInlineEnd={0.5}
   >
     <Chevrons {...props} />
   </List.Indicator>

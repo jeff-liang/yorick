@@ -1,6 +1,8 @@
 import { List } from "@chakra-ui/react";
 import {
+  canInteract,
   fullnessLimit,
+  inHardcore,
   isUnrestricted,
   Item,
   myAscensions,
@@ -22,7 +24,7 @@ import { spinStatus } from "../../questInfo/pyramid";
 import { neededNinjaItems } from "../../questInfo/trapper";
 import { bitCount } from "../../util/calc";
 import { mallLink, storageLink } from "../../util/links";
-import { questFinished, questPastStep, Step } from "../../util/quest";
+import { inRun, questFinished, questPastStep, Step } from "../../util/quest";
 import { commaAnd, plural, truthy } from "../../util/text";
 
 interface Pull {
@@ -33,9 +35,9 @@ interface Pull {
 }
 
 const Pulls: FC = () => {
-  // if (!inRun() || inHardcore() || canInteract()) {
-  //   return null;
-  // }
+  if (!inRun() || inHardcore() || canInteract()) {
+    return null;
+  }
 
   const path = myPath();
 

@@ -67,27 +67,27 @@ const Thanksgarden = () => {
         <Line href="/shop.php?whichshop=thankshop">
           Could make into{" "}
           <Box as="span">
-            {commaSeparate([
-              <AdviceTooltipText key="turkey" advice="Requires 3 cashews each.">
-                {`${plural(
-                  Math.floor(availableAmount(cashew) / 3),
-                  turkeyBlaster,
-                )} to burn delay`}
-              </AdviceTooltipText>,
-              <AdviceTooltipText
-                key="stuffing"
-                advice="Requires 3 cashews each."
-              >
-                {`${plural(
-                  Math.floor(availableAmount(cashew) / 3),
-                  stuffingFluffer,
-                )} for the war`}
-              </AdviceTooltipText>,
-              "various foods",
-              <AdviceTooltipText key="boat" advice="Requires 3 cashews.">
-                gravy boat for the crypt (somewhat marginal)
-              </AdviceTooltipText>,
-            ])}
+            {commaSeparate(
+              [
+                <AdviceTooltipText advice="Requires 3 cashews each.">
+                  {`${plural(
+                    Math.floor(availableAmount(cashew) / 3),
+                    turkeyBlaster,
+                  )} to burn delay`}
+                </AdviceTooltipText>,
+                <AdviceTooltipText advice="Requires 3 cashews each.">
+                  {`${plural(
+                    Math.floor(availableAmount(cashew) / 3),
+                    stuffingFluffer,
+                  )} for the war`}
+                </AdviceTooltipText>,
+                "various foods",
+                <AdviceTooltipText advice="Requires 3 cashews.">
+                  gravy boat for the crypt (somewhat marginal)
+                </AdviceTooltipText>,
+              ],
+              ["turkey", "stuffing", "foods", "boat"],
+            )}
             .
           </Box>
         </Line>

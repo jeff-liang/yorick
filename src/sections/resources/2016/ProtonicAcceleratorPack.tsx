@@ -14,6 +14,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
+import { parentPlaceLink } from "../../../util/links";
 import { inRun, questStarted } from "../../../util/quest";
 
 const ELEMENTS_TO_RESIST: Record<string, ElementType> = {
@@ -69,8 +70,9 @@ const ProtonicAcceleratorPack = () => {
         haveProtonPack &&
         canAdventure(ghostLocation) && (
           <Tile
-            header={`Defeat the ghost in ${ghostLocation}`}
+            header={`Defeat the ghost in ${ghostLocation.identifierString}`}
             linkedContent={protonPack}
+            href={parentPlaceLink(ghostLocation)}
           >
             <Line>This won't cost a turn.</Line>
             {protonPackEquipped ? (

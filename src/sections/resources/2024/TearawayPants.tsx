@@ -21,13 +21,11 @@ const TearawayPants = () => {
     return null;
   }
 
-  const url = havePantsEquipped ? "guild.php" : inventoryLink(tearawayPants);
-
   return (
     <Tile
       header="Tearaway Pants"
-      imageUrl="/images/itemimages/tearaway.gif"
-      href={url}
+      linkedContent={tearawayPants}
+      href={havePantsEquipped ? "guild.php" : inventoryLink(tearawayPants)}
     >
       {havePantsEquipped ? (
         <Line>

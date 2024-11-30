@@ -107,11 +107,11 @@ const Junkyard: FC = () => {
                     {commaSeparate(
                       getMonsters(location).map((monster) => (
                         <MonsterText
-                          key={monster.id}
                           monster={gremlinShortName(monster)}
                           isBanished={isBanished(monster)}
                         />
                       )),
+                      getMonsters(location).map((monster) => monster.id),
                     )}
                   </Line>
                 ),

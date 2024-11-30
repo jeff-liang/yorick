@@ -76,28 +76,34 @@ const CMCTimeline: FC = () => {
             key={index}
             w="14px"
             px={0}
-            textAlign="center"
             fontSize="xs"
             color="white"
             bgColor={ENV_COLORS[c]}
+            alignItems="center"
+            justifyContent="center"
           >
             {c}
           </Badge>
         ))}
       </Stack>
-      <Stack flexFlow="row wrap" gap={1} align="center">
-        <Strong>
-          {turnsToConsult > 0 ? (
-            plural(turnsToConsult, "turn")
-          ) : (
-            <MainLink href="/campground.php?action=workshed">NOW</MainLink>
-          )}
-          :
-        </Strong>
-        <Badge fontSize="xs" color="white" bgColor={ENV_COLORS[maxEnvironment]}>
-          {result}
-        </Badge>
-      </Stack>
+      <MainLink
+        href={
+          turnsToConsult <= 0 ? "/campground.php?action=workshed" : undefined
+        }
+      >
+        <Stack flexFlow="row wrap" gap={1} align="center">
+          <Strong>
+            {turnsToConsult > 0 ? plural(turnsToConsult, "turn") : "NOW"}:
+          </Strong>
+          <Badge
+            fontSize="xs"
+            color="white"
+            bgColor={ENV_COLORS[maxEnvironment]}
+          >
+            {result}
+          </Badge>
+        </Stack>
+      </MainLink>
     </Stack>
   );
 };

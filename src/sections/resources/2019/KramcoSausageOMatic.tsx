@@ -7,6 +7,7 @@ import {
 } from "kolmafia";
 import { $item, $path, get, getKramcoWandererChance, have } from "libram";
 
+import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -54,13 +55,14 @@ const KramcoSausageOMatic = () => {
             id="kramco-sausage-goblin-nag"
             linkedContent={kramcoSausageOMatic}
           >
-            {!kramcosEquipped && (
+            {!kramcosEquipped ? (
               <Line color="red.solid" command="equip Kramco Sausage-o-Matic™">
-                Equip the Kramco Sausage-o-Matic™ first.
+                Equip the Kramco Sausage-o-Matic™ first.{" "}
+                <AdviceTooltipIcon advice="Free fight that burns delay." />
               </Line>
+            ) : (
+              <Line>Free fight that burns delay.</Line>
             )}
-            <Line>Free fight that burns delay.</Line>
-            {/* TODO: Add delay suggestions. */}
           </Tile>
         ),
     }),

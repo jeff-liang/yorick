@@ -2,6 +2,8 @@ import { availableAmount, Item } from "kolmafia";
 import { Fragment, ReactNode } from "react";
 import { AnyIdentified, isIdentified } from "tome-kolmafia-lib";
 
+type Falsey = undefined | null | false;
+
 export function pluralJustDesc(
   count: number,
   description: string | { name: string; plural: string },
@@ -39,8 +41,8 @@ export function pluralItem(item: Item, count?: number) {
   );
 }
 
-export function separate(
-  values: string[] | ReactNode[] | AnyIdentified[],
+function separateInternal(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
   separator: string,
   keys?: string[] | number[],
 ) {
@@ -67,15 +69,39 @@ export function separate(
   }
 }
 
-export function commaSeparate(
-  values: string[] | ReactNode[] | AnyIdentified[],
+export function separate(
+  values: (string | AnyIdentified | Falsey)[],
+  separator: string,
+): string;
+export function separate(
+  values: ReactNode[],
+  separator: string,
+  keys: string[] | number[],
+): ReactNode;
+export function separate(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
+  separator: string,
   keys?: string[] | number[],
-) {
-  return separate(values, ", ", keys);
+): ReactNode {
+  return separateInternal(values, separator, keys);
 }
 
-export function commaList(
-  values: string[] | ReactNode[] | AnyIdentified[],
+export function commaSeparate(
+  values: (string | AnyIdentified | Falsey)[],
+): string;
+export function commaSeparate(
+  values: ReactNode[],
+  keys: string[] | number[],
+): ReactNode;
+export function commaSeparate(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
+  keys?: string[] | number[],
+): ReactNode {
+  return separateInternal(values, ", ", keys);
+}
+
+function commaListInternal(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
   connector: string,
   keys?: string[] | number[],
 ): ReactNode {
@@ -118,21 +144,38 @@ export function commaList(
   }
 }
 
-export function commaAnd(
-  values: string[] | ReactNode[] | AnyIdentified[],
+export function commaList(
+  values: (string | AnyIdentified | Falsey)[],
+  connector: string,
+): string;
+export function commaList(
+  values: ReactNode[],
+  connector: string,
+  keys: string[] | number[],
+): ReactNode;
+export function commaList(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
+  connector: string,
   keys?: string[] | number[],
 ): ReactNode {
-  return commaList(values, "and", keys);
+  return commaListInternal(values, connector, keys);
+}
+
+export function commaAnd(
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
+  keys?: string[] | number[],
+): ReactNode {
+  return commaListInternal(values, "and", keys);
 }
 
 export function commaOr(
-  values: string[] | ReactNode[] | AnyIdentified[],
+  values: (string | AnyIdentified | Falsey)[] | ReactNode[],
   keys?: string[] | number[],
 ): ReactNode {
-  return commaList(values, "or", keys);
+  return commaListInternal(values, "or", keys);
 }
 
-export function truthy<T>(values: (T | false)[]): T[] {
+export function truthy<T>(values: (T | Falsey)[]): T[] {
   return values.filter((x) => x) as T[];
 }
 

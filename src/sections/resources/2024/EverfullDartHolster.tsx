@@ -35,9 +35,7 @@ const EverfullDartHolster = () => {
           linkedContent={everfullDartHolster}
         >
           {holsterEquipped ? (
-            <Line color="red.700" _dark={{ color: "red.300" }}>
-              Shoot a bullseye! ({dartCooldown} turns ELR)
-            </Line>
+            <Line>Shoot a bullseye! ({dartCooldown} turns ELR)</Line>
           ) : (
             <Line color="red.solid">Equip the dart holster first.</Line>
           )}

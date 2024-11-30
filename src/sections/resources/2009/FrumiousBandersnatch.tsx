@@ -73,7 +73,8 @@ const FrumiousBandersnatch = () => {
           imageUrl="/images/itemimages/odetobooze.gif"
         >
           <Line command="cast Ode to Booze">
-            Make sure you have Ode before adventuring!
+            Make sure you have Ode before adventuring with your Frumious
+            Bandersnatch!
           </Line>
         </Tile>
       ),

@@ -1,4 +1,4 @@
-import { List } from "@chakra-ui/react";
+import { List, ListItemProps } from "@chakra-ui/react";
 import { canAdventure, Location } from "kolmafia";
 import { sum } from "libram";
 import { FC } from "react";
@@ -15,11 +15,12 @@ type Details = { zone: Location; remaining: number; available: boolean };
 
 const ZoneList: FC<{
   zones: Details[];
-}> = ({ zones }) => (
+  disabledColor: ListItemProps["color"];
+}> = ({ zones, disabledColor = "fg.subtle" }) => (
   <List.Root>
     {zones.map(({ zone, remaining, available }) => (
       <MainLink key={zone.identifierString} href={parentPlaceLink(zone)}>
-        <List.Item color={available ? undefined : "fg.subtle"}>
+        <List.Item color={available ? undefined : disabledColor}>
           {plural(remaining, "turn")} in {zone.identifierString}.
         </List.Item>
       </MainLink>
@@ -57,9 +58,11 @@ const Delay: FC = () => {
       imageUrl="/images/itemimages/al_dayshorter.gif"
     >
       <Line>Use free runs and free wanderers to avoid spending turns.</Line>
-      <ZoneList zones={allRemaining} />
+      <ZoneList zones={allRemaining} disabledColor="fg.subtle" />
       {truncated.length > 0 && (
-        <AdviceTooltipText advice={<ZoneList zones={truncated} />}>
+        <AdviceTooltipText
+          advice={<ZoneList zones={truncated} disabledColor="fg.muted" />}
+        >
           <Line>Later zones.</Line>
         </AdviceTooltipText>
       )}

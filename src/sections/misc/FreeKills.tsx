@@ -1,3 +1,4 @@
+import { decode } from "html-entities";
 import {
   availableAmount,
   getWorkshed,
@@ -55,6 +56,7 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
     source: $skill`Shattering Punch`,
     thing: $skill`Shattering Punch`,
     remaining: () => 3 - get("_shatteringPunchUsed"),
+    captionPlural: () => "Shattering Punches",
   },
   {
     source: $skill`Gingerbread Mob Hit`,
@@ -80,6 +82,7 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
     source: $item`replica bat-oomerang`,
     thing: $item`replica bat-oomerang`,
     remaining: () => 3 - get("_usedReplicaBatoomerang"),
+    caption: () => "replica bat-oomerang use",
   },
   {
     source: ["Shocking Lick", () => true],
@@ -105,11 +108,14 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
     source: $item`Breathitin™`,
     thing: $item`Breathitin™`,
     remaining: () =>
-      clamp(
-        availableAmount($item`Breathitin™`),
-        0,
-        Math.floor((spleenLimit() - mySpleenUse()) / 2),
-      ),
+      5 *
+        clamp(
+          availableAmount($item`Breathitin™`),
+          0,
+          Math.floor((spleenLimit() - mySpleenUse()) / 2),
+        ) +
+      get("breathitinCharges"),
+    caption: () => "Breathitin™ charge",
   },
   {
     source: $item`shadow brick`,
@@ -164,9 +170,13 @@ const FreeKills: FC = () => {
               >
                 {plural(
                   remaining(),
-                  caption?.() ?? thing.name,
+                  caption?.() ?? decode(thing.name),
                   captionPlural?.() ??
-                    ("plural" in thing ? thing.plural : `${thing.name}s`),
+                    (caption
+                      ? `${caption()}s`
+                      : "plural" in thing
+                        ? decode(thing.plural)
+                        : `${decode(thing.name)}s`),
                 )}
                 .
               </Line>

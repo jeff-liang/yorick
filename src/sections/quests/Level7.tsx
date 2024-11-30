@@ -115,7 +115,7 @@ const Level7: FC = () => {
   useNag(
     () => ({
       id: "level-7-retrocape-nag",
-      priority: NagPriority.MID,
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/retrocape1.gif",
       node: inCyrpt &&
         (nookEvil > 13 ||
@@ -124,8 +124,13 @@ const Level7: FC = () => {
           alcoveEvil > 13) &&
         haveRetroCape &&
         (!retroCapeEquipped || !swordEquipped) && (
-          <Tile header={header} imageUrl="/images/itemimages/retrocape1.gif">
-            <Line>Equip your retro cape and a sword to Slay the Dead.</Line>
+          <Tile
+            header="Slay the Dead"
+            imageUrl="/images/itemimages/retrocape1.gif"
+          >
+            <Line>
+              Equip your retro cape and a sword to clear additional evil.
+            </Line>
           </Tile>
         ),
     }),
@@ -133,7 +138,6 @@ const Level7: FC = () => {
       alcoveEvil,
       crannyEvil,
       haveRetroCape,
-      header,
       inCyrpt,
       nicheEvil,
       nookEvil,

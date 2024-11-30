@@ -53,7 +53,7 @@ function haveOrRestricted(thing: Item | Skill | Familiar): boolean {
 }
 
 interface ColdResSource {
-  thing: Skill | Item | Effect | Familiar;
+  thing: Skill | Item | Effect | Familiar | string;
   available: () => boolean;
   value?: () => number;
 }
@@ -193,6 +193,7 @@ const Leveling: React.FC = () => {
     skill($skill`Elemental Saucesphere`),
     skill($skill`Scarysauce`),
     skill($skill`Astral Shell`),
+    skill($skill`Feel Peaceful`),
 
     equipment($item`astronaut helmet`),
     equipment(
@@ -246,6 +247,15 @@ const Leveling: React.FC = () => {
     effect($effect`Imagining Guts`, () =>
       haveUnrestricted($skill`Just the Facts`),
     ),
+
+    {
+      thing: "pale horse",
+      available: () =>
+        get("horseryAvailable") &&
+        isUnrestricted($item`Horsery contract`) &&
+        get("_horsery") !== "pale horse",
+      value: () => 1,
+    },
   ];
 
   const haveSeptEmber = haveUnrestricted($item`Sept-Ember Censer`);
@@ -311,15 +321,19 @@ const Leveling: React.FC = () => {
           <List.Root>
             {coldResSources
               .filter(({ available }) => available())
-              .map(({ thing, value }) => (
-                <List.Item key={thing.identifierString}>
-                  {thing.identifierString}{" "}
-                  <Cold>
-                    (+
-                    {value ? value() : getModifier("Cold Resistance", thing)})
-                  </Cold>
-                </List.Item>
-              ))}
+              .map(({ thing, value }) => {
+                const identifier =
+                  typeof thing === "string" ? thing : thing.identifierString;
+                return (
+                  <List.Item key={identifier}>
+                    {identifier}{" "}
+                    <Cold>
+                      (+
+                      {value ? value() : getModifier("Cold Resistance", thing)})
+                    </Cold>
+                  </List.Item>
+                );
+              })}
           </List.Root>
         </>
       )}

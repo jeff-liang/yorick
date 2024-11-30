@@ -4,12 +4,40 @@ import { getHashIfAvailable } from "tome-kolmafia-lib";
 
 export const BLACK_MARKET_URL = "/shop.php?whichshop=blackmarket";
 
-export function inventoryLink(filter: string | Item) {
+export function mainActionLink(action: string): string {
+  return `/main.php?pwd=${getHashIfAvailable()}&action=${action}`;
+}
+
+function urlFilter(filter: string | Item) {
   if (typeof filter !== "string") {
     filter = filter.identifierString;
     filter = filter.replace(/^\[[0-9]+\]/, "");
   }
-  return `/inventory.php?ftext=${encodeURIComponent(filter)}`;
+  return encodeURIComponent(filter);
+}
+
+function filterLink(file: string, filter: string | Item) {
+  return `/${file}?ftext=${urlFilter(filter)}`;
+}
+
+export function inventoryLink(filter: string | Item) {
+  return filterLink("inventory.php", filter);
+}
+
+export function inventoryActionLink(action: string): string {
+  return `/inventory.php?pwd=${getHashIfAvailable()}&action=${action}`;
+}
+
+export function inventoryUseLink(item: Item): string {
+  return `/inv_use.php?pwd=${getHashIfAvailable()}&whichitem=${item.id}`;
+}
+
+export function storageLink(filter: string | Item) {
+  return filterLink("storage.php", filter);
+}
+
+export function mallLink(filter: string | Item) {
+  return `/mall.php?pudnuggler=${urlFilter(filter)}`;
 }
 
 export function skillLink(filter: string | Skill) {
@@ -78,16 +106,4 @@ export function parentPlaceNameLink(
   } else if (parentLink) {
     return parentLink;
   }
-}
-
-export function mainActionLink(action: string): string {
-  return `/main.php?pwd=${getHashIfAvailable()}&action=${action}`;
-}
-
-export function inventoryActionLink(action: string): string {
-  return `/inventory.php?pwd=${getHashIfAvailable()}&action=${action}`;
-}
-
-export function inventoryUseLink(item: Item): string {
-  return `/inv_use.php?pwd=${getHashIfAvailable()}&whichitem=${item.id}`;
 }

@@ -1,18 +1,11 @@
 import { itemAmount, myPath, numericModifier, toItem } from "kolmafia";
-import {
-  $item,
-  $location,
-  $monster,
-  $path,
-  get,
-  have,
-  questStep,
-} from "libram";
+import { $item, $location, $monster, $path, get, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
 import Monsters from "../../components/Monsters";
 import QuestTile from "../../components/QuestTile";
+import { neededNinjaItems } from "../../questInfo/trapper";
 import faxLikes from "../../util/faxLikes";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, commaOr, plural, truthy } from "../../util/text";
@@ -26,10 +19,8 @@ const Level8: FC = () => {
   const oreType = get("trapperOre") || "none";
   const ore = oreType !== "none" ? itemAmount(toItem(oreType)) : 0;
 
-  const rope = have($item`ninja rope`);
-  const crampons = have($item`ninja crampons`);
-  const carabiner = have($item`ninja carabiner`);
-  const ninjaCount = (rope ? 1 : 0) + (crampons ? 1 : 0) + (carabiner ? 1 : 0);
+  const neededNinja = neededNinjaItems();
+  const neededNinjaCount = neededNinja.length;
 
   const coldRes = Math.floor(numericModifier("Cold Resistance"));
 
@@ -91,23 +82,15 @@ const Level8: FC = () => {
         ],
         [
           2,
-          ninjaCount < 3 ? (
+          neededNinjaCount > 0 ? (
             <Line>
               Stack +combat and adventure for{" "}
               {plural(
-                3 - ninjaCount,
+                neededNinjaCount,
                 "ninja snowman assassin",
                 "ninja snowmen assassins",
               )}
-              . Need{" "}
-              {commaAnd(
-                truthy([
-                  !rope && "ninja rope",
-                  !crampons && "ninja crampons",
-                  !carabiner && "ninja carabiner",
-                ]),
-              )}
-              .
+              . Need {commaAnd(neededNinja)}.
             </Line>
           ) : (
             <Line>

@@ -21,6 +21,11 @@ import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import {
   currentExplorationPerTurn,
+  needBlackPaint,
+  needKillingJar,
+  needManualPages,
+  needStoneRose,
+  needWormRiding,
   possibleExplorationPerTurn,
 } from "../../../questInfo/desert";
 import {
@@ -38,7 +43,6 @@ const DesertQuest = () => {
   const step = questStep("questL11Desert");
 
   const desertExploration = get("desertExploration");
-  const gnasirProgress = get("gnasirProgress");
   const currentExploration = currentExplorationPerTurn();
   const possibleExploration = possibleExplorationPerTurn();
 
@@ -51,12 +55,6 @@ const DesertQuest = () => {
   const usingMelodramedary = myFamiliar() === melodramedary;
 
   const needMoreExploration = currentExploration < possibleExploration;
-
-  const needStoneRose = !(gnasirProgress & 1);
-  const needBlackPaint = !(gnasirProgress & 2);
-  const needKillingJar = !(gnasirProgress & 4);
-  const needManualPages = !(gnasirProgress & 8);
-  const needWormRiding = !(gnasirProgress & 16);
 
   if (step === Step.FINISHED) return null;
 
@@ -80,7 +78,7 @@ const DesertQuest = () => {
         </Line>
       )}
 
-      {needStoneRose && (
+      {needStoneRose() && (
         <Line href={BEACH_URL}>
           {have($item`stone rose`) &&
             desertExploration >= 10 &&
@@ -90,7 +88,7 @@ const DesertQuest = () => {
         </Line>
       )}
 
-      {needBlackPaint && desertExploration >= 10 && (
+      {needBlackPaint() && desertExploration >= 10 && (
         <>
           {have($item`can of black paint`) ? (
             <Line href={GNASIR_URL}>
@@ -107,7 +105,7 @@ const DesertQuest = () => {
         </>
       )}
 
-      {needKillingJar && (
+      {needKillingJar() && (
         <>
           {have($item`killing jar`) && desertExploration >= 10 && (
             <Line href={GNASIR_URL}>Give killing jar to Gnasir (15%).</Line>
@@ -120,7 +118,7 @@ const DesertQuest = () => {
         </>
       )}
 
-      {needManualPages && (
+      {needManualPages() && (
         <Line>
           {availableAmount($item`worm-riding manual page`) >= 15
             ? "Give worm-riding manual pages to Gnasir."
@@ -128,7 +126,7 @@ const DesertQuest = () => {
         </Line>
       )}
 
-      {needWormRiding &&
+      {needWormRiding() &&
         have($item`worm-riding hooks`) &&
         (have($item`Apriling band quad tom`) && get("_aprilBandTomUses") < 3 ? (
           <Line href={inventoryLink($item`Apriling band quad tom`)}>

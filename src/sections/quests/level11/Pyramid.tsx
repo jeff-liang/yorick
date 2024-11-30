@@ -1,9 +1,10 @@
 import { availableAmount } from "kolmafia";
-import { $item, $location, get, have, questStep } from "libram";
+import { $item, $location, have, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
+import { spinStatus } from "../../../questInfo/pyramid";
 import { atStep, questFinished, Step } from "../../../util/quest";
 import { capitalize, plural, pluralJustDesc } from "../../../util/text";
 
@@ -56,28 +57,26 @@ const ControlRoom: FC<ControlRoomProps> = ({
   task,
   spinsNeeded,
   extraSpinsNeeded,
-}) => {
-  return (
-    <>
-      {spinsNeeded > 0 ? (
-        <Line href={PYRAMID_URL}>
-          Spin the pyramid {spinsNeeded} time{spinsNeeded !== 1 ? "s" : ""},
-          then {task}.
-        </Line>
-      ) : (
-        <Line href={PYRAMID_URL}>{capitalize(task)}.</Line>
-      )}
-      {extraSpinsNeeded > 0 && (
-        <Line>
-          Need{" "}
-          {`${plural(extraSpinsNeeded, "more ratchet")}/${pluralJustDesc(extraSpinsNeeded, "wheel")}`}
-          . Adventure in the Middle Chamber (+400% item) or Upper Chamber
-          (-combat) to acquire them.
-        </Line>
-      )}
-    </>
-  );
-};
+}) => (
+  <>
+    {spinsNeeded > 0 ? (
+      <Line href={PYRAMID_URL}>
+        Spin the pyramid {spinsNeeded} time{spinsNeeded !== 1 ? "s" : ""}, then{" "}
+        {task}.
+      </Line>
+    ) : (
+      <Line href={PYRAMID_URL}>{capitalize(task)}.</Line>
+    )}
+    {extraSpinsNeeded > 0 && (
+      <Line>
+        Need{" "}
+        {`${plural(extraSpinsNeeded, "more ratchet")}/${pluralJustDesc(extraSpinsNeeded, "wheel")}`}
+        . Adventure in the Middle Chamber (+400% item) or Upper Chamber
+        (-combat) to acquire them.
+      </Line>
+    )}
+  </>
+);
 
 const Pyramid: FC = () => {
   const step = questStep("questL11Pyramid");
@@ -93,35 +92,7 @@ const Pyramid: FC = () => {
   const upperChamberTurns = $location`The Upper Chamber`.turnsSpent;
   const middleChamberTurns = $location`The Middle Chamber`.turnsSpent;
 
-  const pyramidPosition = get("pyramidPosition");
-  const edChamberOpen = get("pyramidBombUsed");
-  const tokenAvailable = have($item`ancient bronze token`);
-  const ancientBombAvailable = have($item`ancient bomb`);
-
-  let nextPositionNeeded = -1;
-  let additionalTurnsAfterThat = 0;
-  let task = "";
-
-  if (ancientBombAvailable || edChamberOpen) {
-    nextPositionNeeded = 1;
-    additionalTurnsAfterThat = 0;
-    task = `fight Ed in the lower chambers`;
-  } else if (tokenAvailable) {
-    nextPositionNeeded = 3;
-    additionalTurnsAfterThat = 3;
-    task = `acquire ancient bomb in lower chamber`;
-  } else {
-    nextPositionNeeded = 4;
-    additionalTurnsAfterThat = 3 + 4;
-    task = "acquire token in lower chamber";
-  }
-
-  const spinsNeeded = (nextPositionNeeded - pyramidPosition + 10) % 5;
-  const totalSpinsNeeded = spinsNeeded + additionalTurnsAfterThat;
-  const spinsAvailable =
-    availableAmount($item`tomb ratchet`) +
-    availableAmount($item`crumbling wooden wheel`);
-  const extraSpinsNeeded = Math.max(0, totalSpinsNeeded - spinsAvailable);
+  const { task, spinsNeeded, extraSpinsNeeded } = spinStatus();
 
   return (
     <QuestTile

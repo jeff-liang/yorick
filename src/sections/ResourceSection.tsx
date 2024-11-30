@@ -10,6 +10,7 @@ import FreeRuns from "./misc/FreeRuns";
 import FreeZones from "./misc/FreeZones";
 import LuckyAdventures from "./misc/LuckyAdventures";
 import NoncombatForces from "./misc/NoncombatForces";
+import Pulls from "./misc/Pulls";
 import Wishes from "./misc/Wishes";
 import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
@@ -90,6 +91,7 @@ const ResourceSection = () => (
       TranscendentOlfaction,
       Numberology,
       LuckyAdventures,
+      Pulls,
 
       /* 2009 */
       FrumiousBandersnatch,

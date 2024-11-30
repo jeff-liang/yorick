@@ -1,49 +1,24 @@
 import { Em } from "@chakra-ui/react";
-import { availableAmount, Item } from "kolmafia";
-import { $item, $items, get, have, questStep } from "libram";
+import { get, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
+import { bridgeItemsNeeded } from "../../../questInfo/bridgeItemsNeeded";
 import { atStep, Step } from "../../../util/quest";
 import { commaAnd, plural } from "../../../util/text";
-
-const countItems = (items: Item[], multiplier = 1) => {
-  return items
-    .map((item) => availableAmount(item) * multiplier)
-    .reduce((prev, current) => prev + current);
-};
 
 const OrcChasm: FC = () => {
   const step = questStep("questL09Topping");
   const orcProgress = get("smutOrcNoncombatProgress");
-  const bridgeProgress =
-    get("chasmBridgeProgress") + (+have($item`bat wings`) && 5);
+  const { fastenersNeeded, lumberNeeded } = bridgeItemsNeeded();
 
-  const numExtras = countItems($items`smut orc keepsake box, snow boards`, 5);
+  const needs = [
+    fastenersNeeded > 0 && plural(fastenersNeeded, "fastener"),
+    lumberNeeded > 0 && plural(lumberNeeded, "piece"),
+  ];
 
-  const numFasteners = countItems(
-    $items`thick caulk, long hard screw, messy butt joint`,
-  );
-  const fastenersNeeded = Math.max(
-    0,
-    30 - bridgeProgress - numFasteners - numExtras,
-  );
-
-  const numLumber = countItems(
-    $items`morningwood plank, raging hardwood plank, weirdwood plank`,
-  );
-  const lumberNeeded = Math.max(0, 30 - bridgeProgress - numLumber - numExtras);
-
-  const needs = [];
-  if (fastenersNeeded > 0) {
-    needs.push(plural(fastenersNeeded, "fastener"));
-  }
-  if (lumberNeeded > 0) {
-    needs.push(`${plural(lumberNeeded, "piece")} of lumber`);
-  }
-
-  const inProgress = lumberNeeded > 0 || fastenersNeeded > 0;
+  const needMoreItems = lumberNeeded > 0 || fastenersNeeded > 0;
 
   if (step >= 1) return null;
 
@@ -61,7 +36,7 @@ const OrcChasm: FC = () => {
         [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
         [
           Step.STARTED,
-          inProgress ? (
+          needMoreItems ? (
             <>
               <Line>
                 Build a bridge. <Em>(+item, -ML)</Em>

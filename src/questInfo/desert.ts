@@ -60,3 +60,23 @@ export function possibleExplorationPerTurn(): number {
   }
   return exploration;
 }
+
+export function needStoneRose(): boolean {
+  return !(get("gnasirProgress") & 1);
+}
+
+export function needBlackPaint(): boolean {
+  return !(get("gnasirProgress") & 2);
+}
+
+export function needKillingJar(): boolean {
+  return !(get("gnasirProgress") & 4);
+}
+
+export function needManualPages(): boolean {
+  return !(get("gnasirProgress") & 8);
+}
+
+export function needWormRiding(): boolean {
+  return !(get("gnasirProgress") & 16);
+}

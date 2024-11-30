@@ -4,7 +4,6 @@ import { Tooltip, TooltipProps } from "./ui/tooltip";
 
 const AdviceTooltip: FC<TooltipProps> = ({ content, ...props }) => (
   <Tooltip
-    showArrow
     openDelay={0}
     contentProps={{
       css: { "--tooltip-bg": "bg" },
@@ -13,8 +12,7 @@ const AdviceTooltip: FC<TooltipProps> = ({ content, ...props }) => (
       border: "1px solid border",
       shadow: "xs",
       rounded: "md",
-      mx: 5,
-      p: 3,
+      p: 2,
     }}
     content={content}
     {...props}

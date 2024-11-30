@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, TextProps } from "@chakra-ui/react";
 import { FC } from "react";
 
 import AdviceTooltip from "./AdviceTooltip";
@@ -6,6 +6,7 @@ import { TooltipProps } from "./ui/tooltip";
 
 interface AdviceTooltipProps extends Omit<TooltipProps, "content"> {
   advice: string | JSX.Element;
+  textProps?: TextProps;
 }
 /**
  * A tooltip generated on text for a quick descriptive tooltip.
@@ -16,6 +17,7 @@ interface AdviceTooltipProps extends Omit<TooltipProps, "content"> {
 
 const AdviceTooltipText: FC<AdviceTooltipProps> = ({
   advice,
+  textProps,
   children,
   ...props
 }) => {
@@ -29,10 +31,9 @@ const AdviceTooltipText: FC<AdviceTooltipProps> = ({
     <AdviceTooltip content={toolTip} {...props}>
       <Text
         as="span"
-        fontWeight="bold"
-        color="fg.muted"
         textDecoration="underline dotted"
         cursor="pointer"
+        {...textProps}
       >
         {children}
       </Text>

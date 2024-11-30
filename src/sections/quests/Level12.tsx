@@ -1,12 +1,13 @@
-import { haveOutfit, myAscensions, myLevel } from "kolmafia";
+import { haveOutfit, isWearingOutfit, myAscensions, myLevel } from "kolmafia";
 import { get, questStep } from "libram";
 import { FC } from "react";
 
+import AsyncLink from "../../components/AsyncLink";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { turnsToSeeNoncombat } from "../../util/calc";
 import { atStep, Step } from "../../util/quest";
-import { plural } from "../../util/text";
+import { commaOr, plural } from "../../util/text";
 
 import Arena from "./level12/Arena";
 import Farm from "./level12/Farm";
@@ -50,8 +51,11 @@ const Level12: FC = () => {
   const step = questStep("questL12War");
   const hippiesDefeated = get("hippiesDefeated");
   const fratboysDefeated = get("fratboysDefeated");
+  const outfits = ["War Hippy Fatigues", "Frat Warrior Fatigues"];
   const haveHippyFatigues = haveOutfit("War Hippy Fatigues");
+  const hippyFatiguesEquipped = isWearingOutfit("War Hippy Fatigues");
   const haveFratFatigues = haveOutfit("Frat Warrior Fatigues");
+  const fratFatiguesEquipped = isWearingOutfit("Frat Warrior Fatigues");
 
   const sideQuestNames = [
     "Lighthouse",
@@ -130,8 +134,29 @@ const Level12: FC = () => {
                 <Line>
                   Acquire either war hippy fatigues or frat warrior fatigues.
                 </Line>
+              ) : !hippyFatiguesEquipped && !fratFatiguesEquipped ? (
+                <Line color="fg.error">
+                  Equip the{" "}
+                  {commaOr(
+                    outfits.map(
+                      (outfit) =>
+                        haveOutfit(outfit) && (
+                          <AsyncLink command={`outfit ${outfit}`}>
+                            {outfit}
+                          </AsyncLink>
+                        ),
+                    ),
+                    outfits,
+                  )}
+                  .
+                </Line>
               ) : (
-                <Line>Start the war!</Line>
+                <Line>
+                  {hippyFatiguesEquipped
+                    ? "War Hippy Fatigues equipped."
+                    : "Frat Warrior Fatigues equipped."}{" "}
+                  Start the war!
+                </Line>
               )}
               <Line>Run -combat and adventure in the enemy camp.</Line>
               <Line>

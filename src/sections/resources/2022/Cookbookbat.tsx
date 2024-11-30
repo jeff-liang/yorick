@@ -65,19 +65,21 @@ const Cookbookbat = () => {
         year === 2024 &&
         (path === $path`Avant Guard` || path === $path`Standard`) &&
         daycount === 1 && (
-          <Tile header="Cookbookbat Quest" linkedContent={cookbookbat}>
+          <Tile
+            header="Cookbookbat Quest"
+            linkedContent={cookbookbat}
+            href={
+              questLocation !== null
+                ? parentPlaceLink(questLocation)
+                : undefined
+            }
+            linkEntireTile
+          >
             <Line>
-              Fight a {questMonster.identifierString} for{" "}
-              {questIngredient && plural(3, questIngredient)}.
-            </Line>
-            <Line
-              href={
-                questLocation !== null
-                  ? parentPlaceLink(questLocation)
-                  : undefined
-              }
-            >
-              Could find one in {questLocation?.identifierString}.
+              Fight {questMonster.article || "a"}{" "}
+              {questMonster.identifierString} ({questLocation?.identifierString}
+              ) for {questIngredient && plural(3, questIngredient)}. Reroll in{" "}
+              {plural(get("_cookbookbatCombatsUntilNewQuest"), "combat")}.
             </Line>
           </Tile>
         ),

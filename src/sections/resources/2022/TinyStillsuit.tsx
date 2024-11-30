@@ -199,11 +199,12 @@ const TinyStillsuit = () => {
           advice={
             <List.Root>
               <List.Item>Cubeling / Stomping Boots: +item</List.Item>
+              <List.Item>Slimeing: +item, +food, +sleaze</List.Item>
               <List.Item>
-                Levitating Potato / Candy Carnie / Flan: +item and +food
+                Levitating Potato / Candy Carnie / Flan: +item, +food
               </List.Item>
               <List.Item>
-                Star Starfish / Emilio / Globmule / Waifuton: +item and +sleaze
+                Star Starfish / Emilio / Globmule / Waifuton: +item, +sleaze
               </List.Item>
             </List.Root>
           }

@@ -17,7 +17,9 @@ const Level3: FC = () => {
   const spooky = numericModifier("Spooky Damage");
   const sleaze = numericModifier("Sleaze Damage");
   const combat = numericModifier("Combat Rate");
-  const ml = numericModifier("Monster Level");
+  const ml =
+    numericModifier("Monster Level") *
+    (1 + numericModifier("Monster Level Percent") / 100);
 
   const all = Object.entries({ cold, hot, stench, spooky, sleaze });
   const needed = all.filter(([, value]) => value < 20);
@@ -38,7 +40,6 @@ const Level3: FC = () => {
         [Step.STARTED, "/tavern.php?place=barkeep"],
         [1, "/cellar.php"],
         [2, "/tavern.php?place=barkeep"],
-        [Step.FINISHED, undefined],
       ])}
       linkEntireTile
       minLevel={3}
@@ -58,7 +59,12 @@ const Level3: FC = () => {
             {ml < 300 && <Line>Could use up to {300 - ml} more ML.</Line>}
           </>,
         ],
-        [2, <Line></Line>],
+        [
+          2,
+          <Line>
+            Now that the rat supply is off, talk to Bart Ender again.
+          </Line>,
+        ],
       ])}
     </QuestTile>
   );

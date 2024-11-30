@@ -54,7 +54,13 @@ const AsyncLink = forwardRef<HTMLAnchorElement, AsyncLinkProps>(
     );
 
     const link = (
-      <Link ref={ref} href={href} onClick={handleClick} {...props}>
+      <Link
+        ref={ref}
+        href={href}
+        onClick={handleClick}
+        color="inherit"
+        {...props}
+      >
         {children}
       </Link>
     );

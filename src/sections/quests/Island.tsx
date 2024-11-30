@@ -34,7 +34,11 @@ const Island: FC = () => {
     <QuestTile
       header="Unlock Mysterious Island"
       imageUrl="/images/itemimages/dinghy.gif"
-      href="/place.php?whichplace=desertbeach"
+      href={
+        !have($item`dinghy plans`)
+          ? "/place.php?whichplace=desertbeach"
+          : undefined
+      }
     >
       {shoreScrip < 3 && !have($item`dinghy plans`) && (
         <>
@@ -51,9 +55,16 @@ const Island: FC = () => {
       {shoreScrip >= 3 && !have($item`dinghy plans`) && (
         <Line href="/shop.php?whichshop=shore">Buy dinghy plans.</Line>
       )}
-      {have($item`dinghy plans`) && (
-        <Line>Use your dinghy plans to make a boat.</Line>
-      )}
+      {have($item`dinghy plans`) &&
+        (!have($item`dingy planks`) ? (
+          <Line command="buy dingy planks">
+            Get some dingy planks to make a boat.
+          </Line>
+        ) : (
+          <Line command="use dinghy plans">
+            Use your dinghy plans to make a boat.
+          </Line>
+        ))}
       {(haveUnrestricted($familiar`Puck Man`) ||
         haveUnrestricted($familiar`Ms. Puck Man`)) &&
         (pixelsNeeded.length > 0 ? (

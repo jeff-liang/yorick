@@ -100,6 +100,7 @@ const Junkyard: FC = () => {
             <Line>Talk to Yossarian to complete quest.</Line>
           ) : (
             <>
+              {getStasisAdvice()}
               {LOCATION_DATA.filter(({ item }) => !have($item`${item}`)).map(
                 ({ location, shorthand }) => (
                   <Line key={location.id}>
@@ -119,7 +120,6 @@ const Junkyard: FC = () => {
               {!isBanished($monster`A.M.C. gremlin`) && (
                 <Line>Potentially banish A.M.C. Gremlin.</Line>
               )}
-              {getStasisAdvice()}
             </>
           )}
         </>

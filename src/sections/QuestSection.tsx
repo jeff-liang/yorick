@@ -1,5 +1,5 @@
-import { myPath } from "kolmafia";
-import { $path } from "libram";
+import { myBasestat, myPath } from "kolmafia";
+import { $path, $stat } from "libram";
 
 import TileSection from "../components/TileSection";
 import { inRun } from "../util/quest";
@@ -31,7 +31,8 @@ const QuestSection = () => {
   const showStandardQuests =
     inRun() &&
     myPath() !== $path`Community Service` &&
-    myPath() !== $path`Grey Goo`;
+    myPath() !== $path`Grey Goo` &&
+    myBasestat($stat`Muscle`) > 0; // Not Astral Spirit
   return (
     <TileSection
       name="Quests"

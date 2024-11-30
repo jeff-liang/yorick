@@ -20,7 +20,7 @@ const gravelMessage = (gravels: number) => {
 const whetStoneMessage = (whetStones: number) => {
   return (
     <MainLink href={inventoryLink($item`whet stone`)}>
-      <Strong>{whetStones}</Strong>x whet stone (+1 adv on food)
+      <Strong>{whetStones}</Strong>x whet stone (+1 adv on food).
     </MainLink>
   );
 };
@@ -30,7 +30,7 @@ const milestoneMessage = (milestones: number) => {
   return (
     <MainLink href={inventoryLink($item`milestone`)}>
       <Strong>{milestones}</Strong>x milestone (+5% desert progress),{" "}
-      {100 - desertProgress}% remaining
+      {100 - desertProgress}% remaining.
     </MainLink>
   );
 };

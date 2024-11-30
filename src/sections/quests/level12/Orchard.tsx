@@ -98,7 +98,7 @@ const Orchard: FC = () => {
             </Line>
           )}
           <Line href={have(droneStench) ? ORCHARD_URL : undefined}>
-            Adventure with +item in the guards' chamber.
+            Filthworms! Adventure with +item in the guards' chamber.
           </Line>
         </>
       );
@@ -111,14 +111,14 @@ const Orchard: FC = () => {
             </Line>
           )}
           <Line href={have(larvaStench) ? ORCHARD_URL : undefined}>
-            Adventure with +item in the feeding chamber.
+            Filthworms! Adventure with +item in the feeding chamber.
           </Line>
         </>
       );
     } else {
       return (
         <Line href={ORCHARD_URL}>
-          Adventure with +item in the hatching chamber.
+          Filthworms! Adventure with +item in the hatching chamber.
         </Line>
       );
     }

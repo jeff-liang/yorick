@@ -175,7 +175,7 @@ const DesertQuest = () => {
           to speed up exploration
           {explorationItemsToEquip.includes($item`survival knife`) &&
             !have($effect`Ultrahydrated`) &&
-            " and get Ultrahydrated for survival knife"}
+            " (need Ultrahydrated for knife)"}
           .
         </Line>
       )}

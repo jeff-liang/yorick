@@ -47,7 +47,7 @@ const JurassicParka: FC = () => {
             )}
             {parkaEquipped &&
               (parkaMode === "dilophosaur" ? (
-                <Line color="orange.solid">Free YR. Parka equipped.</Line>
+                <Line color="fg.success">Free YR. Parka equipped.</Line>
               ) : (
                 <Line color="red.solid" command="parka dilophosaur">
                   Change your parka to dilophosaur mode!

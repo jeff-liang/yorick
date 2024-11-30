@@ -59,72 +59,67 @@ const Level10: FC = () => {
       ])}
       minLevel={10}
     >
-      {step === 0 && !have($item`enchanted bean`) && (
-        <Line>Acquire an enchanted bean.</Line>
-      )}
-      {atStep(step, [
-        [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
-        [
-          Step.STARTED,
-          <Line>Plant an enchanted bean in the nearby plains.</Line>,
-        ],
-        [
-          1,
-          <>
-            {delayRemaining > 0 && (
-              <Line>
-                You need to burn {delayRemaining} more total delay in the
-                Airship.
-              </Line>
-            )}
-            <Line>You need {commaAnd(needs)}.</Line>
-            {airship.turnsSpent / 5 >= step - 1 && (
+      {step === Step.UNSTARTED ? (
+        <Line>Visit Council to start quest.</Line>
+      ) : step < 1 ? (
+        <>
+          {!have($item`enchanted bean`) ? (
+            <Line>Acquire an enchanted bean from the Beanbat Chamber.</Line>
+          ) : (
+            <Line>Plant an enchanted bean in the nearby plains.</Line>
+          )}
+        </>
+      ) : step < 7 ? (
+        <>
+          {delayRemaining > 0 && (
+            <Line>
+              You need to burn {delayRemaining} more total delay in the Airship.
+            </Line>
+          )}
+          <Line>You need {commaAnd(needs)}.</Line>
+          {step >= 2 &&
+            airship.turnsSpent / (have($item`bat wings`) ? 4 : 5) >=
+              step - 1 && (
               <Line>You have an NC available, maximize -combat.</Line>
             )}
-          </>,
-        ],
-        [
-          7,
-          <>
-            {!haveEquipped($item`amulet of extreme plot significance`) &&
-              !haveEquipped($item`titanium assault umbrella`) &&
-              !haveEquipped($item`unbreakable umbrella`) && (
-                <Line fontWeight="bold" color="red.solid">
-                  Equip an umbrella or the amulet of extreme plot significance.
-                </Line>
-              )}
-            <Line>Maximize -combat and adventure in the castle basement.</Line>
-          </>,
-        ],
-        [
-          8,
-          groundFloor.turnsSpent < 10 ? (
-            <Line>
-              Delay {10 - groundFloor.turnsSpent} more turns on the ground floor
-              to unlock the Castle Top Floor.
-            </Line>
-          ) : (
-            <Line>Unlock the Castle Top Floor next turn.</Line>
-          ),
-        ],
-        [
-          9,
-          <>
-            {!haveEquipped($item`Mohawk wig`) && (
+        </>
+      ) : step < 8 ? (
+        <>
+          {!haveEquipped($item`amulet of extreme plot significance`) &&
+            !haveEquipped($item`titanium assault umbrella`) &&
+            !haveEquipped($item`unbreakable umbrella`) && (
               <Line fontWeight="bold" color="red.solid">
-                Equip a Mohawk wig.
+                Equip an umbrella or the amulet of extreme plot significance.
               </Line>
             )}
-            <Line>Maximize -combat and adventure in the top floor.</Line>
-            {!have($item`steam-powered model rocketship`) && (
-              <Line>
-                Consider getting the rocketship to access the Hole in the Sky.
-              </Line>
-            )}
-          </>,
-        ],
-        [10, <Line>Visit the council to inform them of your success.</Line>],
-      ])}
+          <Line>Maximize -combat and adventure in the castle basement.</Line>
+        </>
+      ) : step < 9 ? (
+        groundFloor.turnsSpent < 10 ? (
+          <Line>
+            Delay {10 - groundFloor.turnsSpent} more turns on the ground floor
+            to unlock the Castle Top Floor.
+          </Line>
+        ) : (
+          <Line>Unlock the Castle Top Floor next turn.</Line>
+        )
+      ) : step < 10 ? (
+        <>
+          {!haveEquipped($item`Mohawk wig`) && (
+            <Line fontWeight="bold" color="red.solid">
+              Equip a Mohawk wig.
+            </Line>
+          )}
+          <Line>Maximize -combat and adventure in the top floor.</Line>
+          {!have($item`steam-powered model rocketship`) && (
+            <Line>
+              Consider getting the rocketship to access the Hole in the Sky.
+            </Line>
+          )}
+        </>
+      ) : (
+        <Line>Visit the council to inform them of your success.</Line>
+      )}
     </QuestTile>
   );
 };

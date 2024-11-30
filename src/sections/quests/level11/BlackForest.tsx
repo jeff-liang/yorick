@@ -107,7 +107,7 @@ const BlackForest: FC = () => {
         [
           2,
           have($item`forged identification documents`)
-            ? "/adventure.php?snarfblat=355"
+            ? "/desertbeach.php"
             : "/shop.php?whichshop=blackmarket",
         ],
         [3, "/adventure.php?snarfblat=355"],

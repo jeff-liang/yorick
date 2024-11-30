@@ -15,7 +15,7 @@ const OrcChasm: FC = () => {
 
   const needs = [
     fastenersNeeded > 0 && plural(fastenersNeeded, "fastener"),
-    lumberNeeded > 0 && plural(lumberNeeded, "piece"),
+    lumberNeeded > 0 && `${lumberNeeded} lumber`,
   ];
 
   const needMoreItems = lumberNeeded > 0 || fastenersNeeded > 0;

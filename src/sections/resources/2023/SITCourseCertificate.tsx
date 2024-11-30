@@ -6,6 +6,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
+import { inventoryUseLink } from "../../../util/links";
 import { inRun } from "../../../util/quest";
 
 const MISC_PHRASES = [
@@ -40,8 +41,13 @@ const SITCertificate = () => {
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/sitcert.gif",
       node: haveSit && currentlyInRun && !hasAnySkill && (
-        <Tile header="S.I.T. Course Enrollment" linkedContent={sitCertificate}>
-          <Line color="red.solid">{randomPhrase} Take your S.I.T. course!</Line>
+        <Tile
+          header="S.I.T. Course Enrollment"
+          imageUrl="/images/itemimages/sitcert.gif"
+          href={inventoryUseLink(sitCertificate)}
+          linkEntireTile
+        >
+          <Line>{randomPhrase} Take your S.I.T. course!</Line>
         </Tile>
       ),
     }),

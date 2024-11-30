@@ -449,6 +449,8 @@ const HiddenCity = () => {
             header="You Are Stone-Faced"
             imageUrl="/images/itemimages/stonewool.gif"
             imageAlt="stone wool"
+            href="/woods.php"
+            linkEntireTile
           >
             <Line>
               Adventure in the Hidden Temple in the next {stoneFacedTurns}{" "}

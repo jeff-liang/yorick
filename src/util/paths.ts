@@ -1,7 +1,11 @@
-import { myPath, Path } from "kolmafia";
+import { myBasestat, myPath, Path } from "kolmafia";
+import { $stat } from "libram";
 
 export function isNormalCampgroundPath(path?: Path) {
-  const actual_path = path ?? myPath();
+  const currentPath = path ?? myPath();
+
+  // Astral Spirit
+  if (myBasestat($stat`Muscle`) === 0) return false;
 
   // The list of paths that don't give access to a regular campground (thus, no workshed, garden, etc.)
   if (
@@ -10,7 +14,7 @@ export function isNormalCampgroundPath(path?: Path) {
       "Nuclear Autumn",
       "You, Robot",
       "WereProfessor",
-    ].includes(actual_path.name)
+    ].includes(currentPath.name)
   ) {
     return false;
   }

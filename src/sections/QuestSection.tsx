@@ -36,12 +36,12 @@ const QuestSection = () => {
     <TileSection
       name="Quests"
       tiles={[
-        Manor,
         ...(showStandardQuests
           ? [
+              Level1,
               Leveling,
               Delay,
-              Level1,
+              Manor,
               Level2,
               Level3,
               Level4,
@@ -61,7 +61,7 @@ const QuestSection = () => {
               WandOfNagamar,
               Level13,
             ]
-          : []),
+          : [Manor]),
       ]}
     />
   );

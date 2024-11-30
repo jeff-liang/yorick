@@ -1,10 +1,41 @@
-import { $item, $location, have, questStep } from "libram";
+import { haveEquipped } from "kolmafia";
+import { $item, $location, get, have, questStep } from "libram";
+import { BooleanProperty } from "libram/dist/propertyTypes";
 import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { atStep, Step } from "../../util/quest";
-import { plural } from "../../util/text";
+import { commaAnd, plural } from "../../util/text";
+
+interface BatWingLocation {
+  name: string;
+  pref: BooleanProperty;
+  item: string;
+}
+
+const BAT_WINGS_LOCATIONS: BatWingLocation[] = [
+  {
+    name: "the Bat Hole Entrance",
+    pref: "batWingsBatHoleEntrance",
+    item: "bat wing",
+  },
+  {
+    name: "Guano Junction",
+    pref: "batWingsGuanoJunction",
+    item: "sonar-in-a-biscuit",
+  },
+  {
+    name: "the Batrat Burrow",
+    pref: "batWingsBatratBurrow",
+    item: "sonar-in-a-biscuit",
+  },
+  {
+    name: "the Beanbat Chamber",
+    pref: "batWingsBeanbatChamber",
+    item: "enchanted bean",
+  },
+];
 
 const Level4: FC = () => {
   const step = questStep("questL04Bat");
@@ -12,6 +43,13 @@ const Level4: FC = () => {
   const beanstalk = questStep("questL10Garbage") >= 1;
 
   if (step === Step.FINISHED) return null;
+
+  const batWings = $item`bat wings`;
+  const haveBatWings = have(batWings);
+  const haveBatWingsEquipped = haveEquipped(batWings);
+  const availableLocations = BAT_WINGS_LOCATIONS.filter(
+    ({ pref }) => !get(pref),
+  );
 
   return (
     <QuestTile
@@ -26,7 +64,20 @@ const Level4: FC = () => {
     >
       {step >= 0 && !have($item`enchanted bean`) && !beanstalk && (
         <Line>
-          Get an enchanted bean from a beanbat for the level 10 quest.
+          Get an enchanted bean from{" "}
+          {haveBatWings ? "bat wings NC" : "a beanbat"} for the level 10 quest.
+        </Line>
+      )}
+      {haveBatWings && availableLocations.length > 0 && (
+        <Line>
+          {haveBatWingsEquipped
+            ? "Equip bat wings and adventure "
+            : "Adventure"}{" "}
+          for stuff in{" "}
+          {commaAnd(
+            availableLocations.map(({ name, item }) => `${name} (${item})`),
+          )}
+          .
         </Line>
       )}
       {atStep(step, [

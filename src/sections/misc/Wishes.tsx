@@ -55,7 +55,11 @@ const WISH_SOURCES: Source[] = [
   },
   {
     name: "Cargo Shorts",
-    remaining: () => +!get("_cargoPocketEmptied"),
+    remaining: () =>
+      +(
+        haveUnrestricted($item`Cargo Cultist Shorts`) &&
+        !get("_cargoPocketEmptied")
+      ),
     render: () => (
       <Line href={inventoryActionLink("pocket")}>
         1 cargo shorts pocket (limited).

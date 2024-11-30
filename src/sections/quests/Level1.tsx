@@ -15,6 +15,7 @@ const Level1: FC = () => {
       header="Toot Oriole"
       imageUrl="/images/otherimages/oriole.gif"
       href="/tutorial.php?action=toot"
+      linkEntireTile
     >
       <Line>Visit the Toot Oriole.</Line>
     </Tile>

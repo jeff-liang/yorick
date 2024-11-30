@@ -4,6 +4,7 @@ import { FC } from "react";
 
 import AdviceTooltipIcon from "../../../components/AdviceTooltipIcon";
 import Line from "../../../components/Line";
+import MainLink from "../../../components/MainLink";
 import QuestTile from "../../../components/QuestTile";
 import { currentSnake, SHEN_DAYS } from "../../../questInfo/copperhead";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
@@ -82,9 +83,11 @@ const Copperhead: FC = () => {
               </Line>
             )}
             {copperheadTurns < 14 && (
-              <Line href={parentPlaceLink(copperhead)}>
-                Or work on burning {14 - (3 - shenMeetings) - copperheadTurns}{" "}
-                turns of delay in the Copperhead Club.{" "}
+              <Line>
+                <MainLink href={parentPlaceLink(copperhead)}>
+                  Or work on burning {14 - (3 - shenMeetings) - copperheadTurns}{" "}
+                  turns of delay in the Copperhead Club.
+                </MainLink>{" "}
                 <AdviceTooltipIcon advice="This delay count does not include the meetings with Shen." />
               </Line>
             )}

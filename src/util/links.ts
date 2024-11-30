@@ -35,7 +35,7 @@ const PARENTS = {
   "Degrassi Knoll": "/place.php?whichplace=knoll_friendly",
   Beanstalk: "/place.php?whichplace=beanstalk",
   Knob: "/cobbsknob.php",
-  Mountains: "/mountains.php",
+  Mountain: "/mountains.php",
   "The Red Zeppelin's Mooring": "/place.php?whichplace=zeppelin",
   McLarge: "/place.php?whichplace=mclargehuge",
   Highlands: "/place.php?whichplace=highlands",
@@ -68,6 +68,8 @@ export function parentPlaceNameLink(
     ].includes(locationName)
   ) {
     return "/place.php?whichplace=town_wrong";
+  } else if (["Noob Cave", "The Dire Warren"].includes(locationName)) {
+    return "/tutorial.php";
   } else if (
     locationName === "The Outskirts of Cobb's Knob" &&
     questStep("questL05Goblin") < 1

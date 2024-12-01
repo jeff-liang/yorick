@@ -1,6 +1,12 @@
 import { haveEquipped } from "kolmafia";
-import { $item, $location, get, have, questStep } from "libram";
-import { BooleanProperty } from "libram/dist/propertyTypes";
+import {
+  $item,
+  $location,
+  BooleanProperty,
+  get,
+  have,
+  questStep,
+} from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";

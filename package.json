@@ -19,7 +19,7 @@
     "globals": "^15.9.0",
     "html-entities": "^2.5.2",
     "kolmafia": "npm:tome-kolmafia-mock@5.28118.0",
-    "libram": "^0.9.18",
+    "libram": "^0.9.21",
     "lucide-react": "^0.460.0",
     "next-themes": "^0.4.3",
     "postcss": "^8.4.41",

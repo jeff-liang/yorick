@@ -1,6 +1,7 @@
 import { Table, Text } from "@chakra-ui/react";
 import { ChangeEvent, FC, useCallback, useState } from "react";
 
+import useLocalStorage from "../../hooks/useLocalStorage";
 import { validityType, validValue } from "../util/valid";
 
 import ValidatedInput from "./ValidatedInput";
@@ -23,18 +24,17 @@ const OverrideRow: FC<OverrideRowProps> = ({
   current,
   ...props
 }) => {
-  const [value, setValue] = useState(localStorage.getItem(override) ?? "");
+  const [storedValue, setStoredValue] = useLocalStorage<string>(override, "");
+  const [value, setValue] = useState(storedValue);
 
   const changeValue = useCallback(
     (value: string) => {
       setValue(value);
-      if (value === "") {
-        localStorage.removeItem(override);
-      } else if (validValue(validityType(override), value)) {
-        localStorage.setItem(override, value);
+      if (value === "" || validValue(validityType(override), value)) {
+        setStoredValue(value);
       }
     },
-    [override],
+    [override, setStoredValue],
   );
 
   const handleChange = useCallback(

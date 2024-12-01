@@ -3,17 +3,24 @@ import { Check, CircleAlert } from "lucide-react";
 import { useCallback } from "react";
 
 import { CloseButton } from "../../components/ui/close-button";
-import { InputGroup } from "../../components/ui/input-group";
+import { InputGroup, InputGroupProps } from "../../components/ui/input-group";
 
-interface ValidatedInputProps extends InputProps {
+interface ValidatedInputProps extends Omit<InputGroupProps, "children"> {
+  value: string;
+  placeholder?: string;
+  size: InputProps["size"];
+  onChange: InputProps["onChange"];
   valid: boolean;
   changeValue: (value: string) => void;
   refresh?: () => void;
 }
 
 const ValidatedInput = ({
-  valid,
   value,
+  placeholder,
+  size,
+  onChange,
+  valid,
   changeValue,
   refresh,
   ...props
@@ -45,16 +52,19 @@ const ValidatedInput = ({
             </Icon>
           )
         }
+        {...props}
       >
         <Input
           value={value}
+          placeholder={placeholder}
+          size={size}
+          onChange={onChange}
           {...colorProps}
           _focus={colorProps}
           _hover={colorProps}
-          {...props}
         />
       </InputGroup>
-      <CloseButton size={props.size} onClick={handleClear} />
+      <CloseButton size={size} onClick={handleClear} />
     </Stack>
   );
 };

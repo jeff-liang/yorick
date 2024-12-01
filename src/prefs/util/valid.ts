@@ -12,17 +12,29 @@ export type ValidityType =
   | "quest";
 
 export function validityType(override: string): ValidityType {
+  const propertyMatch = /^override:getProperty\((.*)\)$/.exec(override);
+  let propertyName: string | null = null;
+  if (propertyMatch) {
+    try {
+      const parsed = JSON.parse(propertyMatch[1]);
+      if (typeof parsed === "string") propertyName = parsed;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
+      /* empty */
+    }
+  }
   if (
-    isNumericProperty(override) ||
-    /^\$location\[.*\].turns_spent$/.test(override) ||
-    /$available_amount\(\$item\[.*\]\)/.test(override)
+    (propertyName && isNumericProperty(propertyName)) ||
+    /^override:Location.get\(.*\).turnsSpent$/.test(override) ||
+    /^override:haveEffect\(.*\)$/.test(override) ||
+    /^override:availableAmount\(.*\)$/.test(override)
   ) {
     return "number";
-  } else if (isBooleanProperty(override)) {
+  } else if (propertyName && isBooleanProperty(propertyName)) {
     return "boolean";
-  } else if (isNumericOrStringProperty(override)) {
+  } else if (propertyName && isNumericOrStringProperty(propertyName)) {
     return "string | number";
-  } else if (override.startsWith("quest")) {
+  } else if (propertyName && propertyName.startsWith("quest")) {
     return "quest";
   } else {
     return "string";

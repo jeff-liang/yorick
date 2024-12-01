@@ -1,10 +1,11 @@
-import { Container, Heading, Stack } from "@chakra-ui/react";
+import { Button, Container, Heading, Stack } from "@chakra-ui/react";
 import { Effect, Item, Location } from "kolmafia";
 import { KnownProperty } from "libram";
 import { ChangeEvent, FC, useCallback, useContext, useState } from "react";
 import { makePlaceholder, remoteCall } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
 
+import { fireStorageListeners } from "../../hooks/useLocalStorage";
 import effects from "../data/effects.json";
 import items from "../data/items.json";
 import locationsNoncombatQueue from "../data/noncombatQueue.json";
@@ -105,6 +106,20 @@ const EffectsTable: FC<GenericTableProps> = ({ filterRegex }) => (
   />
 );
 
+function resetAll() {
+  const overrideKeys = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    if (key?.startsWith("override:")) {
+      overrideKeys.push(key);
+    }
+  }
+  for (const key of overrideKeys) {
+    localStorage.removeItem(key);
+    fireStorageListeners(key, null);
+  }
+}
+
 const Layout = () => {
   useContext(RefreshContext);
   const [filter, setFilter] = useState("");
@@ -132,6 +147,9 @@ const Layout = () => {
           size="sm"
           minW="20rem"
         />
+        <Button variant="outline" onClick={resetAll}>
+          Reset All
+        </Button>
         <Stack direction="row" align="flex-start" justify="center">
           <Stack>
             <PreferencesTable filterRegex={filterRegex} />

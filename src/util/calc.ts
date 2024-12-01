@@ -23,24 +23,34 @@ export function range(lo: number, hi: number): number[];
 export function range(m: number, n?: number): number[] {
   const lo = n === undefined ? 0 : m;
   const hi = n === undefined ? m : n;
-  return [...Array(Math.max(0, hi)).slice(0, lo).keys()];
+  return [...Array(Math.max(0, hi)).keys()].slice(lo);
+}
+
+export function factorialQuotient(n: number, k: number): number {
+  if (!Number.isSafeInteger(n) || n < 0 || !Number.isSafeInteger(k) || k < 0) {
+    throw new Error(
+      "Can't take factorial of anything but a nonnegative integer.",
+    );
+  }
+  return n <= k ? 1 : n * factorialQuotient(n - 1, k);
 }
 
 export function factorial(n: number): number {
-  n = Math.round(n);
-  return n <= 1 ? 1 : n * factorial(n - 1);
+  return factorialQuotient(n, 1);
 }
 
 export function binomialCoefficient(n: number, k: number): number {
-  return factorial(n) / factorial(k) / factorial(n - k);
+  const hi = Math.max(k, n - k);
+  const lo = Math.min(k, n - k);
+  return factorialQuotient(n, hi) / factorial(lo);
 }
 
 // What is the probability we get exactly needed successes in trials trials?
 export function binomialPdf(needed: number, trials: number, p: number): number {
   return (
     binomialCoefficient(trials, needed) *
-    Math.pow(p, trials) *
-    Math.pow(1 - p, needed - trials)
+    Math.pow(p, needed) *
+    Math.pow(1 - p, trials - needed)
   );
 }
 
@@ -50,7 +60,7 @@ export function binomialAtLeast(
   trials: number,
   p: number,
 ): number {
-  return sum(range(needed, trials), (n) => binomialPdf(n, trials, p));
+  return sum(range(needed, trials + 1), (n) => binomialPdf(n, trials, p));
 }
 
 export function bitCount(n: number): number {

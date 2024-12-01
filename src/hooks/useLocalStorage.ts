@@ -30,7 +30,13 @@ function useLocalStorage<T extends number | string | boolean>(
 
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      return item
+        ? ((typeof initialValue === "boolean"
+            ? item === "true"
+            : typeof initialValue === "number"
+              ? parseInt(item)
+              : item) as T)
+        : initialValue;
     } catch (error) {
       console.warn(`Error reading localStorage key "${key}":`, error);
       return initialValue;

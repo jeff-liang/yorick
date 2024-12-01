@@ -1,5 +1,5 @@
-import { combatRateModifier } from "kolmafia";
-import { sum } from "libram";
+import { combatRateModifier, Location } from "kolmafia";
+import { clamp, sum } from "libram";
 
 export function turnsToSeeNoncombat(combatRate: number, encounters = 1) {
   const noncombatRate = 1 - (combatRate + combatRateModifier()) / 100;
@@ -8,12 +8,33 @@ export function turnsToSeeNoncombat(combatRate: number, encounters = 1) {
     : Number.POSITIVE_INFINITY;
 }
 
+// How many turns until we see this NC? Includes the turn spent on the NC.
+// Cap should be the number of encounters ("clicks") before the next click guarantees the NC, including that click.
+// For forcenoncombat zones, this is the forcenoncombat value + 1.
 export function turnsToSeeSingleNoncombatCapped(
   combatRate: number,
   cap: number,
+  progress = 0,
 ) {
-  if (cap < 1) return 1;
   const p = 1 - (combatRate + combatRateModifier()) / 100;
+  cap -= progress;
+  if (cap <= 0 || p >= 1) return 1;
+  if (p <= 0) return cap;
+  return (1 / p) * (1 - Math.pow(1 - p, cap));
+}
+
+export function turnsToSeeSingleNoncombat(location: Location) {
+  const p = 1 - location.combatPercent / 100;
+  if (location.forceNoncombat <= 0) {
+    return 1 / p;
+  }
+  const progress = clamp(
+    location.turnsSpent - location.lastNoncombatTurnsSpent,
+    0,
+    location.forceNoncombat,
+  );
+  const cap = location.forceNoncombat + 1 - progress;
+  if (cap <= 0 || p >= 1) return 1;
   if (p <= 0) return cap;
   return (1 / p) * (1 - Math.pow(1 - p, cap));
 }
@@ -47,6 +68,8 @@ export function binomialCoefficient(n: number, k: number): number {
 
 // What is the probability we get exactly needed successes in trials trials?
 export function binomialPdf(needed: number, trials: number, p: number): number {
+  if (needed > trials) return 0;
+  p = clamp(p, 0, 1);
   return (
     binomialCoefficient(trials, needed) *
     Math.pow(p, needed) *

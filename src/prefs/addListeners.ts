@@ -37,10 +37,10 @@ export function addDevelopmentListeners() {
     let applied = false;
     if (isIdentifiedType(value, "Location")) {
       const turnsSpentOverride = localStorage.getItem(
-        `${jsName(value)}.turnsSpent`,
+        `override:${jsName(value)}.turnsSpent`,
       );
       const noncombatQueueOverride = localStorage.getItem(
-        `${jsName(value)}.noncombatQueue`,
+        `override:${jsName(value)}.noncombatQueue`,
       );
       if (turnsSpentOverride !== null) {
         applied = true;

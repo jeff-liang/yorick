@@ -1,5 +1,11 @@
-import { haveOutfit, isWearingOutfit, myAscensions, myLevel } from "kolmafia";
-import { get, questStep } from "libram";
+import {
+  haveEquipped,
+  haveOutfit,
+  isWearingOutfit,
+  myAscensions,
+  myLevel,
+} from "kolmafia";
+import { $item, get, have, questStep } from "libram";
 import { FC } from "react";
 
 import AsyncLink from "../../components/AsyncLink";
@@ -47,6 +53,10 @@ const Level12: FC = () => {
       />
     );
   }
+
+  const ccsc = $item`candy cane sword cane`;
+  const haveCcsc = have(ccsc);
+  const ccscEquipped = haveEquipped(ccsc);
 
   const step = questStep("questL12War");
   const hippiesDefeated = get("hippiesDefeated");
@@ -123,6 +133,7 @@ const Level12: FC = () => {
           [Step.STARTED, ISLAND_PREWAR_URL],
           [1, ISLAND_WAR_URL],
         ])}
+        linkEntireTile={step === Step.UNSTARTED || step === 1}
         minLevel={12}
       >
         {atStep(step, [
@@ -130,6 +141,11 @@ const Level12: FC = () => {
           [
             Step.STARTED,
             <>
+              {haveCcsc && !ccscEquipped && (
+                <Line color="fg.error" command="equip candy cane sword cane">
+                  Equip your candy cane sword cane first!
+                </Line>
+              )}
               {!haveHippyFatigues && !haveFratFatigues ? (
                 <Line>
                   Acquire either war hippy fatigues or frat warrior fatigues.
@@ -160,37 +176,47 @@ const Level12: FC = () => {
               )}
               <Line>Run -combat and adventure in the enemy camp.</Line>
               <Line>
-                {turnsToSeeNoncombat(85, 3).toFixed(1)} turns expected.
+                {turnsToSeeNoncombat(85, haveCcsc ? 1 : 3).toFixed(1)} turns
+                expected.
               </Line>
             </>,
           ],
           [
             1,
-            <>
-              <Line>
-                Defeat {pluralEnemyCount(otherSideLeft, "more", otherSide)}. (
-                {plural(Math.ceil(otherSideLeft / defeatedPerCombat), "turn")}{" "}
-                remaining).
-              </Line>
-              {remainingSidequestNames.length > 0 && (
-                <>
-                  <Line>
-                    Quests to complete: {remainingSidequestNames.join(", ")}.
-                  </Line>
-                  {nextQuest && (
+            otherSideDefeated < 1000 ? (
+              <>
+                <Line>
+                  Defeat {pluralEnemyCount(otherSideLeft, "more", otherSide)}. (
+                  {plural(Math.ceil(otherSideLeft / defeatedPerCombat), "turn")}{" "}
+                  remaining).
+                </Line>
+                {remainingSidequestNames.length > 0 && (
+                  <>
                     <Line>
-                      {plural(turnsToThreshold, "turn")} (
-                      {pluralEnemyCount(enemiesToThreshold, null, otherSide)}){" "}
-                      until {nextQuest} opens.
+                      Quests to complete: {remainingSidequestNames.join(", ")}.
                     </Line>
-                  )}
-                </>
-              )}
-            </>,
+                    {nextQuest && (
+                      <Line>
+                        {plural(turnsToThreshold, "turn")} (
+                        {pluralEnemyCount(enemiesToThreshold, null, otherSide)}){" "}
+                        until {nextQuest} opens.
+                      </Line>
+                    )}
+                  </>
+                )}
+              </>
+            ) : (
+              <Line>
+                Defeat the{" "}
+                {hippiesLeft <= 0
+                  ? "Big Wisniewski in the Hippy Camp!"
+                  : "Man in the Frat House!"}
+              </Line>
+            ),
           ],
         ])}
       </QuestTile>
-      {step >= 1 && (
+      {step === 1 && (
         <>
           {get("sidequestArenaCompleted") === "none" && (
             <Arena disabled={!openQuests.includes("Arena")} />

@@ -6,7 +6,10 @@ import { FC } from "react";
 import ChevronsListIcon from "../../components/ChevronsListIcon";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
-import { turnsToSeeSingleNoncombatCapped } from "../../util/calc";
+import {
+  turnsToSeeSingleNoncombat,
+  turnsToSeeSingleNoncombatCapped,
+} from "../../util/calc";
 import { atStep, Step } from "../../util/quest";
 
 const Level6: FC = () => {
@@ -38,21 +41,16 @@ const Level6: FC = () => {
 
     if (ncCompleted >= 4) return null;
 
-    const progress = Math.max(
-      0,
-      zone.turnsSpent - zone.lastNoncombatTurnsSpent,
-    );
-    const cap = Math.max(0, (zoneQueue.length === 0 ? 6 : 5) - progress);
-    const expectedThisNc = turnsToSeeSingleNoncombatCapped(95, cap - progress);
+    const expectedThisNc = turnsToSeeSingleNoncombat(zone);
     const expected =
       expectedThisNc +
-      Math.max(0, 3 - ncCompleted) * turnsToSeeSingleNoncombatCapped(95, 5);
+      Math.max(0, 3 - ncCompleted) * turnsToSeeSingleNoncombatCapped(95, 6);
     return (
       <List.Item key={zoneName} pl="1">
         <ChevronsListIcon usesLeft={ncCompleted} totalUses={4} />
         <Text>
           <Strong>{zoneName}:</Strong>{" "}
-          {`${zoneQueue.length}/4 NCs (~${expected.toFixed(1)} turns remaining)`}
+          {`${ncCompleted}/4 NCs (${expected === 1 ? "1 turn" : `~${expected.toFixed(1)} turns`} remaining).`}
         </Text>
       </List.Item>
     );

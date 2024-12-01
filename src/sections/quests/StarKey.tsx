@@ -19,7 +19,7 @@ import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
-import { turnsToSeeNoncombat } from "../../util/calc";
+import { turnsToSeeSingleNoncombat } from "../../util/calc";
 import { parentPlaceLink } from "../../util/links";
 import { plural } from "../../util/text";
 
@@ -114,7 +114,8 @@ const StarKey: FC = () => {
               model rocketship.
             </Line>
             <Line>
-              {plural(turnsToSeeNoncombat(95, 1), "turn")} until noncombat.
+              {turnsToSeeSingleNoncombat(topFloor).toFixed(1)} turns until
+              noncombat.
             </Line>
           </>
         ) : (

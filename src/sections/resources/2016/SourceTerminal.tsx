@@ -86,6 +86,8 @@ const SourceTerminalTile = () => {
         <Tile
           header="Set Source Terminal Enquiry"
           imageUrl="/images/itemimages/sourceterminal.gif"
+          href={TERMINAL_URL}
+          linkEntireTile
         >
           <Line>Set an enquiry for rollover buffs.</Line>
           <Line>

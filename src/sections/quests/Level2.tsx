@@ -18,8 +18,8 @@ const Level2: FC = () => {
   const expectedTurns =
     progress >= 7
       ? 0
-      : 0.5 * turnsToSeeSingleNoncombatCapped(85, 7 - progress) +
-        0.5 * turnsToSeeSingleNoncombatCapped(85, 8 - progress);
+      : 0.5 * turnsToSeeSingleNoncombatCapped(85, 8 - progress) +
+        0.5 * turnsToSeeSingleNoncombatCapped(85, 9 - progress);
 
   if (step === Step.FINISHED) return null;
 

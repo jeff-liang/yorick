@@ -1,11 +1,13 @@
 import { Button, Container, Heading, Stack } from "@chakra-ui/react";
 import { Effect, Item, Location } from "kolmafia";
 import { KnownProperty } from "libram";
-import { ChangeEvent, FC, useCallback, useContext, useState } from "react";
+import { ChangeEvent, FC, useCallback, useContext } from "react";
 import { makePlaceholder, remoteCall } from "tome-kolmafia-lib";
 import { RefreshContext } from "tome-kolmafia-react";
 
-import { fireStorageListeners } from "../../hooks/useLocalStorage";
+import useLocalStorage, {
+  fireStorageListeners,
+} from "../../hooks/useLocalStorage";
 import effects from "../data/effects.json";
 import items from "../data/items.json";
 import locationsNoncombatQueue from "../data/noncombatQueue.json";
@@ -122,10 +124,10 @@ function resetAll() {
 
 const Layout = () => {
   useContext(RefreshContext);
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useLocalStorage<string>("filterRegex", "");
   const handleChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => setFilter(event.target.value),
-    [],
+    [setFilter],
   );
   let filterRegex: RegExp | null = null,
     filterValid = true;

@@ -1,58 +1,60 @@
-import { Group, Input, InputAddon, InputProps, Stack } from "@chakra-ui/react";
+import { Icon, Input, InputProps, Stack } from "@chakra-ui/react";
 import { Check, CircleAlert } from "lucide-react";
+import { useCallback } from "react";
 
 import { CloseButton } from "../../components/ui/close-button";
-import { Field } from "../../components/ui/field";
+import { InputGroup } from "../../components/ui/input-group";
 
 interface ValidatedInputProps extends InputProps {
   valid: boolean;
-  setValue?: (value: string) => void;
+  changeValue: (value: string) => void;
+  refresh?: () => void;
 }
 
 const ValidatedInput = ({
   valid,
   value,
-  setValue,
+  changeValue,
+  refresh,
   ...props
 }: ValidatedInputProps) => {
   const nonEmpty = !!(value && value !== "");
-  const iconProps = props.size === "sm" ? { w: 8, h: 8 } : {};
+  const colorProps =
+    valid && nonEmpty
+      ? { borderColor: "fg.success" }
+      : !valid && nonEmpty
+        ? { borderColor: "fg.error" }
+        : undefined;
+
+  const handleClear = useCallback(() => {
+    changeValue("");
+    if (refresh) refresh();
+  }, [changeValue, refresh]);
+
   return (
-    <Stack direction="row" alignItems="center">
-      <Group attached>
-        <Field invalid={!valid && nonEmpty}>
-          <Input
-            value={value}
-            borderColor={valid && nonEmpty ? "green.solid" : undefined}
-            _focus={
-              valid && nonEmpty
-                ? { borderColor: "green.solid" }
-                : !valid && nonEmpty
-                  ? { borderColor: "red.solid" }
-                  : undefined
-            }
-            _hover={
-              valid && nonEmpty
-                ? { borderColor: "green.solid" }
-                : !valid && nonEmpty
-                  ? { borderColor: "red.solid" }
-                  : undefined
-            }
-            {...props}
-          />
-        </Field>
-        {valid && nonEmpty && (
-          <InputAddon pointerEvents="none" {...iconProps}>
-            <Check color="green.solid" />
-          </InputAddon>
-        )}
-        {!valid && nonEmpty && (
-          <InputAddon pointerEvents="none" {...iconProps}>
-            <CircleAlert color="red.solid" />
-          </InputAddon>
-        )}
-      </Group>
-      {setValue && <CloseButton onClick={() => setValue("")} />}
+    <Stack direction="row" alignItems="center" gap={0.5}>
+      <InputGroup
+        endElement={
+          !nonEmpty ? undefined : valid ? (
+            <Icon asChild color="fg.success">
+              <Check />
+            </Icon>
+          ) : (
+            <Icon asChild color="fg.error">
+              <CircleAlert />
+            </Icon>
+          )
+        }
+      >
+        <Input
+          value={value}
+          {...colorProps}
+          _focus={colorProps}
+          _hover={colorProps}
+          {...props}
+        />
+      </InputGroup>
+      <CloseButton size={props.size} onClick={handleClear} />
     </Stack>
   );
 };

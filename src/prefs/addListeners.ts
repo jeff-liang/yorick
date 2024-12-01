@@ -5,26 +5,24 @@ import {
   OverrideListener,
 } from "tome-kolmafia-lib";
 
+import { jsName, maybeEmpty, overrideName } from "./util/overrides";
+
 export function addDevelopmentListeners() {
   addOverrideListener(<T>(name: string, args: unknown[]) => {
     const firstArg = args[0];
     if (name === "getProperty" && typeof firstArg === "string") {
-      const override = localStorage.getItem(firstArg);
-      if (override !== null) return { applied: true, value: override as T };
-    } else if (
-      name === "availableAmount" &&
-      isIdentifiedType(firstArg, "Item")
-    ) {
-      const override = localStorage.getItem(
-        `available_amount($item[${firstArg.identifierString}])`,
-      );
+      const override = localStorage.getItem(overrideName(name, args));
       if (override !== null) {
-        return { applied: true, value: parseInt(override) as T };
+        return {
+          applied: true,
+          value: maybeEmpty(override) as T,
+        };
       }
-    } else if (name === "haveEffect" && isIdentifiedType(firstArg, "Effect")) {
-      const override = localStorage.getItem(
-        `have_effect($effect[${firstArg.identifierString}])`,
-      );
+    } else if (
+      (name === "availableAmount" && isIdentifiedType(firstArg, "Item")) ||
+      (name === "haveEffect" && isIdentifiedType(firstArg, "Effect"))
+    ) {
+      const override = localStorage.getItem(overrideName(name, args));
       if (override !== null) {
         return { applied: true, value: parseInt(override) as T };
       }
@@ -39,10 +37,10 @@ export function addDevelopmentListeners() {
     let applied = false;
     if (isIdentifiedType(value, "Location")) {
       const turnsSpentOverride = localStorage.getItem(
-        `$location[${value.identifierString}].turns_spent`,
+        `${jsName(value)}.turnsSpent`,
       );
       const noncombatQueueOverride = localStorage.getItem(
-        `$location[${value.identifierString}].noncombat_queue`,
+        `${jsName(value)}.noncombatQueue`,
       );
       if (turnsSpentOverride !== null) {
         applied = true;
@@ -50,7 +48,10 @@ export function addDevelopmentListeners() {
       }
       if (noncombatQueueOverride !== null) {
         applied = true;
-        value = { ...value, noncombatQueue: noncombatQueueOverride };
+        value = {
+          ...value,
+          noncombatQueue: maybeEmpty(noncombatQueueOverride),
+        };
       }
     }
 

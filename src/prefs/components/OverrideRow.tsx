@@ -12,6 +12,11 @@ interface OverrideRowProps extends Table.RowProps {
   current: string;
 }
 
+function refresh() {
+  const yorickpane: Window | undefined = window.parent.frames.yorickpane;
+  yorickpane?.postMessage("refresh");
+}
+
 const OverrideRow: FC<OverrideRowProps> = ({
   label,
   override,
@@ -20,9 +25,8 @@ const OverrideRow: FC<OverrideRowProps> = ({
 }) => {
   const [value, setValue] = useState(localStorage.getItem(override) ?? "");
 
-  const handleChangeProperty = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const value = event.target.value;
+  const changeValue = useCallback(
+    (value: string) => {
       setValue(value);
       if (value === "") {
         localStorage.removeItem(override);
@@ -33,10 +37,12 @@ const OverrideRow: FC<OverrideRowProps> = ({
     [override],
   );
 
-  const handleBlur = useCallback(() => {
-    const yorickpane: Window | undefined = window.parent.frames.yorickpane;
-    yorickpane?.postMessage("refresh");
-  }, []);
+  const handleChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      changeValue(event.target.value);
+    },
+    [changeValue],
+  );
 
   const validity = validityType(override);
   const valid = validValue(validity, value);
@@ -52,8 +58,10 @@ const OverrideRow: FC<OverrideRowProps> = ({
         <ValidatedInput
           value={value}
           valid={valid}
-          onChange={handleChangeProperty}
-          onBlur={handleBlur}
+          onChange={handleChange}
+          onBlur={refresh}
+          changeValue={changeValue}
+          refresh={refresh}
           size="2xs"
           minW="6rem"
           placeholder={current}

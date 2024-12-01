@@ -10,6 +10,7 @@ import items from "../data/items.json";
 import locationsNoncombatQueue from "../data/noncombatQueue.json";
 import preferences from "../data/preferences.json";
 import locationsTurnsSpent from "../data/turnsSpent.json";
+import { overrideName } from "../util/overrides";
 
 import OverrideTable from "./OverrideTable";
 import ValidatedInput from "./ValidatedInput";
@@ -23,7 +24,7 @@ const PreferencesTable: FC<GenericTableProps> = ({ filterRegex }) => (
     heading="Preferences"
     filterRegex={filterRegex}
     data={preferences as KnownProperty[]}
-    getOverride={(property) => property}
+    getOverride={(property) => overrideName("getProperty", [property])}
     getCurrent={(property) => remoteCall("getProperty", [property], "", true)}
   />
 );
@@ -33,7 +34,9 @@ const TurnsSpentTable: FC<GenericTableProps> = ({ filterRegex }) => (
     heading="Turns Spent"
     filterRegex={filterRegex}
     data={locationsTurnsSpent}
-    getOverride={(location) => `$location[${location}].turns_spent`}
+    getOverride={(location) =>
+      `override:Location.get(${JSON.stringify(location)}).turnsSpent`
+    }
     getCurrent={(location) =>
       remoteCall<Location>(
         "toLocation",
@@ -50,7 +53,9 @@ const NoncombatQueueTable: FC<GenericTableProps> = ({ filterRegex }) => (
     heading="Noncombat Queue"
     filterRegex={filterRegex}
     data={locationsNoncombatQueue}
-    getOverride={(location) => `$location[${location}].noncombat_queue`}
+    getOverride={(location) =>
+      `override:Location.get(${JSON.stringify(location)}).noncombatQueue`
+    }
     getCurrent={(location) =>
       remoteCall<Location>(
         "toLocation",
@@ -67,7 +72,9 @@ const ItemsTable: FC<GenericTableProps> = ({ filterRegex }) => (
     heading="Items"
     filterRegex={filterRegex}
     data={items.filter((item) => Item.get(item))}
-    getOverride={(item) => `available_amount($item[${item}])`}
+    getOverride={(item) =>
+      `override:availableAmount(Item.get(${JSON.stringify(item)}))`
+    }
     getCurrent={(item) =>
       remoteCall<number>(
         "availableAmount",
@@ -84,7 +91,9 @@ const EffectsTable: FC<GenericTableProps> = ({ filterRegex }) => (
     heading="Effects"
     filterRegex={filterRegex}
     data={effects.filter((effect) => Effect.get(effect))}
-    getOverride={(effect) => `have_effect($effect[${effect}])`}
+    getOverride={(effect) =>
+      `override:haveEffect(Effect.get(${JSON.stringify(effect)}))`
+    }
     getCurrent={(effect) =>
       remoteCall<number>(
         "haveEffect",
@@ -116,7 +125,7 @@ const Layout = () => {
         <Heading textAlign="center">YORICK Development Overrides</Heading>
         <ValidatedInput
           value={filter}
-          setValue={setFilter}
+          changeValue={setFilter}
           valid={filterValid}
           onChange={handleChange}
           placeholder="Filter (regex)"

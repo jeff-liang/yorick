@@ -39,7 +39,7 @@ import { commaAnd, commaOr, plural } from "../../../util/text";
 const BEACH_URL = "/place.php?whichplace=desertbeach";
 const GNASIR_URL = "/place.php?whichplace=desertbeach&action=db_gnasir";
 
-const DesertQuest = () => {
+const Desert = () => {
   const step = questStep("questL11Desert");
 
   const desertExploration = get("desertExploration");
@@ -207,4 +207,4 @@ const DesertQuest = () => {
   );
 };
 
-export default DesertQuest;
+export default Desert;

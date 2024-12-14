@@ -46,10 +46,10 @@ const Island: FC = () => {
       !get("_workshedItemUsed")) ||
     takerspaceInstalled;
   const canMakePirateDinghy =
-    !get("_takerSpaceSuppliesDelivered", false) ||
-    (get("_takerSpaceAnchor", 0) >= 1 &&
-      get("_takerSpaceMast", 0) >= 1 &&
-      get("_takerSpaceSilk", 0) >= 1);
+    !get("_takerSpaceSuppliesDelivered") ||
+    (get("_takerSpaceAnchor") >= 1 &&
+      get("_takerSpaceMast") >= 1 &&
+      get("_takerSpaceSilk") >= 1);
 
   if (islandUnlocked) return null;
 

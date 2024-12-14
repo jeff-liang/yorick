@@ -1,4 +1,4 @@
-import { haveEquipped } from "kolmafia";
+import { availableAmount, haveEquipped } from "kolmafia";
 import {
   $item,
   $location,
@@ -11,6 +11,7 @@ import { FC } from "react";
 
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
+import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, plural } from "../../util/text";
 
@@ -57,6 +58,9 @@ const Level4: FC = () => {
     ({ pref }) => !get(pref),
   );
 
+  const sonar = $item`sonar-in-a-biscuit`;
+  const sonarCount = availableAmount(sonar);
+
   return (
     <QuestTile
       header="Explore the Bat Hole"
@@ -90,9 +94,10 @@ const Level4: FC = () => {
         [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
         [
           Step.STARTED,
-          <Line>
+          <Line href={sonarCount > 0 ? inventoryLink(sonar) : undefined}>
             Blow down {plural(3 - step, "bat hole wall")} by fighting Screambats
-            or using sonars-in-a-biscuit.
+            or using sonars-in-a-biscuit
+            {sonarCount > 0 && ` (you have ${sonarCount})`}.
           </Line>,
         ],
         [

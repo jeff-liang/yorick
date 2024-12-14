@@ -1,10 +1,19 @@
-import { availableAmount, haveEquipped, Item, myAscensions } from "kolmafia";
+import {
+  availableAmount,
+  getWorkshed,
+  haveEquipped,
+  isUnrestricted,
+  Item,
+  myAscensions,
+} from "kolmafia";
 import { $familiar, $item, get, have } from "libram";
 import { FC } from "react";
 
+import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { haveUnrestricted } from "../../util/available";
+import { inventoryLink } from "../../util/links";
 import { commaAnd, plural, pluralItem } from "../../util/text";
 
 const Island: FC = () => {
@@ -27,6 +36,20 @@ const Island: FC = () => {
         [item, count - availableAmount(item)] as [Item, number],
     )
     .filter(([, count]) => count > 0);
+
+  const takerspace = $item`TakerSpace letter of Marque`;
+  // true if either in inventory or in workshed
+  const takerspaceInstalled = getWorkshed() === takerspace;
+  const haveTakerspace =
+    (have(takerspace) &&
+      isUnrestricted(takerspace) &&
+      !get("_workshedItemUsed")) ||
+    takerspaceInstalled;
+  const canMakePirateDinghy =
+    !get("_takerSpaceSuppliesDelivered", false) ||
+    (get("_takerSpaceAnchor", 0) >= 1 &&
+      get("_takerSpaceMast", 0) >= 1 &&
+      get("_takerSpaceSilk", 0) >= 1);
 
   if (islandUnlocked) return null;
 
@@ -65,6 +88,19 @@ const Island: FC = () => {
             Use your dinghy plans to make a boat.
           </Line>
         ))}
+      {haveTakerspace && canMakePirateDinghy && (
+        <Line
+          href={
+            !takerspaceInstalled
+              ? inventoryLink(takerspace)
+              : "/campground.php?action=workshed"
+          }
+        >
+          Or {!takerspaceInstalled && "install TakerSpace and "} get a pirate
+          dinghy from your TakerSpace.{" "}
+          <AdviceTooltipIcon advice="Uses 1 anchor, 1 mast, and 1 silk." />
+        </Line>
+      )}
       {(haveUnrestricted($familiar`Puck Man`) ||
         haveUnrestricted($familiar`Ms. Puck Man`)) &&
         (pixelsNeeded.length > 0 ? (

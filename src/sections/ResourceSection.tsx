@@ -69,6 +69,7 @@ import PhotoBooth from "./resources/2024/PhotoBooth";
 import RomanCandelabra from "./resources/2024/RomanCandelabra";
 import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
 import SpringShoes from "./resources/2024/SpringShoes";
+import TakerSpace from "./resources/2024/TakerSpace";
 import TearawayPants from "./resources/2024/TearawayPants";
 import AvantGuard from "./resources/path/AvantGuard";
 import Numberology from "./resources/skill/Numberology";
@@ -172,6 +173,7 @@ const ResourceSection = () => (
       BatWings,
       PhotoBooth,
       PeaceTurkey,
+      TakerSpace,
 
       /* Nags only */
       BeatenUp,

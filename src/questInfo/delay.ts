@@ -51,7 +51,7 @@ export function delayZones(): ZoneDelay[] {
     },
     {
       zone: $location`The Middle Chamber`,
-      length: 9,
+      length: 10,
     },
     {
       zone: $location`The Castle in the Clouds in the Sky (Ground Floor)`,

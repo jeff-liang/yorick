@@ -172,7 +172,7 @@ const LordSpookyraven: FC = () => {
             recipe.
           </Line>
         )
-      ) : useFastRoute && haveWineBomb ? (
+      ) : useFastRoute && (haveWineBomb || step > 2) ? (
         <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
       ) : useFastRoute && haveUnstableFulminate ? (
         <>

@@ -14,7 +14,7 @@ const Farm: FC = () => {
     "Cornered Again!",
     "How Many Corners Does this Stupid Barn Have!?",
   ];
-  const seenNCs = barn.noncombatQueue.split(",");
+  const seenNCs = (barn.noncombatQueue ?? "").split(",");
   const ncsSeen = knownNCs.filter((nc) => seenNCs.includes(nc)).length;
 
   const chaosButterfly = have($item`chaos butterfly`);

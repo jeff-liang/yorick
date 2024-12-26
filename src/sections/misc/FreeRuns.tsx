@@ -59,6 +59,13 @@ const freeRunSources: FreeRunSource[] = [
     remaining: () => availableAmount($item`stuffed yam stinkbomb`),
   },
   {
+    source: $item`handful of split pea soup`,
+    thing: $item`handful of split pea soup`,
+    remaining: () =>
+      availableAmount($item`handful of split pea soup`) +
+      Math.floor(availableAmount($item`whirled peas`) / 2),
+  },
+  {
     source: $item`tennis ball`,
     thing: $item`tennis ball`,
     remaining: () => availableAmount($item`tennis ball`),

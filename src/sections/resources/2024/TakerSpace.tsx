@@ -32,7 +32,12 @@ const TakerSpace: FC = () => {
     gold: get("_takerSpaceGold"),
   };
 
-  if (!haveUnrestricted(takerSpace)) return null;
+  if (
+    !haveUnrestricted(takerSpace) ||
+    (!takerSpaceInstalled && get("_workshedItemUsed"))
+  ) {
+    return null;
+  }
 
   const makeableItems: { name: string; ingredients: Partial<Supplies> }[] = [
     { name: "pirate dinghy", ingredients: { anchor: 1, mast: 1, silk: 1 } },
@@ -49,8 +54,6 @@ const TakerSpace: FC = () => {
       ([key, value]) => supplies[key as Supply] >= value,
     );
   });
-
-  if (!haveUnrestricted(takerSpace)) return null;
 
   return (
     <Tile

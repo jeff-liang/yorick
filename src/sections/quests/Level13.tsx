@@ -5,11 +5,13 @@ import {
   Element,
   elementalResistance,
   ElementType,
+  equippedItem,
   Familiar,
   getIngredients,
   haveEquipped,
   initiativeModifier,
   Item,
+  itemType,
   myBuffedstat,
   myFamiliar,
   myHp,
@@ -26,6 +28,7 @@ import {
   $location,
   $path,
   $skill,
+  $slot,
   $stat,
   freeCrafts,
   get,
@@ -368,11 +371,30 @@ const Level13: FC = () => {
       [$familiar`Sludgepuppy`, 3],
       [$familiar`Mini-Crimbot`, 3],
     ];
+    const bestFamiliar = familiars.find(([familiar]) => have(familiar))?.[0];
 
-    const current =
-      getModifier("Thorns") +
+    const elements = ["Hot", "Cold", "Spooky", "Sleaze", "Stench"];
+    const elementalDamage = elements.filter(
+      (element) => numericModifier(`${element} Damage`) > 0,
+    ).length;
+
+    const buttSkill = have($skill`Headbutt`)
+      ? $skill`Headbutt`
+      : have($skill`Kneebutt`)
+        ? $skill`Kneebutt`
+        : have($skill`Shieldbutt`) &&
+            itemType(equippedItem($slot`off-hand`)) === "shield"
+          ? $skill`Shieldbutt`
+          : null;
+
+    const currentDirect =
+      1 +
+      elementalDamage +
+      +(buttSkill !== null) +
       getModifier("Damage Aura") +
       (familiars.find(([familiar]) => familiar === myFamiliar())?.[1] ?? 0);
+
+    const currentThorns = getModifier("Thorns");
 
     return (
       <Tile
@@ -392,7 +414,10 @@ const Level13: FC = () => {
             <Line href={parentPlaceLink($location`The Black Forest`)}>
               Find the beehive in the Black Forest (-combat), or towerkill.
             </Line>
-            <Line>Current damage per turn: {current}.</Line>
+            <Line>
+              Current damage per turn: {currentDirect} direct and{" "}
+              {currentThorns} thorns.
+            </Line>
             {effectSources.length > 0 && (
               <>
                 <Line>Get effects:</Line>
@@ -425,6 +450,11 @@ const Level13: FC = () => {
                 </List.Root>
               </>
             )}
+            {bestFamiliar && myFamiliar() !== bestFamiliar && (
+              <Line command={`familiar ${bestFamiliar.identifierString}`}>
+                Take your {bestFamiliar.identifierString}.
+              </Line>
+            )}
           </>
         )}
       </Tile>
@@ -434,16 +464,15 @@ const Level13: FC = () => {
   if (!pastTowerLevel2) {
     return (
       <Tile
-        header="Wall of Meat"
+        header="Defeat the Wall of Meat"
         id="level-13-quest"
         href={NSTOWER_URL}
         linkEntireTile
-        imageUrl="/images/adventureimages/ns_wall2.gif"
+        imageUrl="/images/itemimages/meat.gif"
       >
-        <Line>Defeat the Wall of Meat.</Line>
         <Line>
           <AdviceTooltipText advice="You need 526% meat drop to guarantee a one-turn kill.">
-            {`Current meat drop: ${getModifier("Meat Drop").toFixed(0)}`}
+            {`Current meat drop: ${getModifier("Meat Drop").toFixed(0)}/526%.`}
           </AdviceTooltipText>
         </Line>
       </Tile>
@@ -482,7 +511,7 @@ const Level13: FC = () => {
           (badEffects.length === 0 &&
             !(haveCcsc && slashAvailable && !haveCcscEquipped))
         }
-        imageUrl="/images/adventureimages/ns_wall3.gif"
+        imageUrl="/images/itemimages/elecbone.gif"
       >
         {haveBoningKnife ? (
           <Line>Use the electric boning knife against it.</Line>
@@ -496,19 +525,21 @@ const Level13: FC = () => {
               getModifier("Sporadic Thorns") +
               getModifier("Damage Aura") >
               0 && (
-              <Line color="red.solid">
-                Remove damaging equipment and effects.
-              </Line>
-            )}
-            {badEffects.length > 0 && (
-              <Line
-                command={badEffects
-                  .map((effect) => `shrug ${effect.name}`)
-                  .join("; ")}
-                color="red.solid"
-              >
-                Remove thorns effects: {commaAnd(badEffects)}.
-              </Line>
+              <>
+                <Line color="red.solid">
+                  Remove damaging equipment and effects.
+                </Line>
+                {badEffects.length > 0 && (
+                  <Line
+                    command={badEffects
+                      .map((effect) => `shrug ${effect.name}`)
+                      .join("; ")}
+                    color="red.solid"
+                  >
+                    Remove thorns effects: {commaAnd(badEffects)}.
+                  </Line>
+                )}
+              </>
             )}
             {haveCcsc && slashAvailable && (
               <>
@@ -523,7 +554,7 @@ const Level13: FC = () => {
             {haveSaucegeyser && (
               <Line>
                 Minimum Saucegeyser damage: {saucegeyserDamage.toFixed(0)}/
-                {haveCcsc ? 1667 : 5000}
+                {haveCcsc && slashAvailable ? 1667 : 5000}
               </Line>
             )}
           </>
@@ -535,7 +566,7 @@ const Level13: FC = () => {
   if (!pastTowerLevel4) {
     return (
       <Tile
-        header="Mirror"
+        header="Consider the Mirror"
         id="level-13-quest"
         href={NSTOWER_URL}
         linkEntireTile

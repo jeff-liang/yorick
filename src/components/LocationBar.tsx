@@ -96,8 +96,10 @@ const LocationBar: FC<StackProps> = (props) => {
 
   const location = myLocation();
   const nowhere = location === $location`none`;
-  const combatQueue = location.combatQueue.split(";").filter((s) => s);
-  const noncombatQueue = location.noncombatQueue.split(";").filter((s) => s);
+  const combatQueue = (location.combatQueue ?? "").split(";").filter((s) => s);
+  const noncombatQueue = (location.noncombatQueue ?? "")
+    .split(";")
+    .filter((s) => s);
 
   return (
     <Box

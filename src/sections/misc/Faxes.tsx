@@ -1,5 +1,5 @@
 import { availableAmount, isUnrestricted } from "kolmafia";
-import { $familiar, $item, get } from "libram";
+import { $familiar, $item, CombatLoversLocket, get } from "libram";
 import { FC, ReactNode } from "react";
 
 import Line from "../../components/Line";
@@ -77,6 +77,15 @@ const FAX_SOURCES: FaxSource[] = [
     render: () => (
       <Line href={inventoryLink($item`Cargo Cultist Shorts`)}>
         1 cargo pocket (limited).
+      </Line>
+    ),
+  },
+  {
+    name: "Locket",
+    remaining: () => CombatLoversLocket.reminiscesLeft(),
+    render: ({ remaining }) => (
+      <Line href="/inventory.php?reminisce=1">
+        {plural(remaining, "locket reminisce")}.
       </Line>
     ),
   },

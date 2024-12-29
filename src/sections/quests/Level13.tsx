@@ -49,6 +49,7 @@ import LinkBlock from "../../components/LinkBlock";
 import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
+import { monsterLevelWithPercent } from "../../util/calc";
 import { parentPlaceLink } from "../../util/links";
 import { questFinished, Step } from "../../util/quest";
 import {
@@ -395,6 +396,7 @@ const Level13: FC = () => {
       (familiars.find(([familiar]) => familiar === myFamiliar())?.[1] ?? 0);
 
     const currentThorns = getModifier("Thorns");
+    const ml = monsterLevelWithPercent();
 
     return (
       <Tile
@@ -414,6 +416,11 @@ const Level13: FC = () => {
             <Line href={parentPlaceLink($location`The Black Forest`)}>
               Find the beehive in the Black Forest (-combat), or towerkill.
             </Line>
+            {ml > 0 && (
+              <Line fontWeight="bold" color="red.solid">
+                Remove ML before fighting the Wall of Skin.
+              </Line>
+            )}
             <Line>
               Current damage per turn: {currentDirect} direct and{" "}
               {currentThorns} thorns.

@@ -5,6 +5,7 @@ import { FC } from "react";
 import ElementName from "../../components/ElementName";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
+import { monsterLevelWithPercent } from "../../util/calc";
 import { atStep, questFinished, Step } from "../../util/quest";
 import { commaAnd } from "../../util/text";
 
@@ -17,9 +18,7 @@ const Level3: FC = () => {
   const spooky = numericModifier("Spooky Damage");
   const sleaze = numericModifier("Sleaze Damage");
   const combat = numericModifier("Combat Rate");
-  const ml =
-    numericModifier("Monster Level") *
-    (1 + numericModifier("Monster Level Percent") / 100);
+  const ml = monsterLevelWithPercent();
 
   const all = Object.entries({ cold, hot, stench, spooky, sleaze });
   const needed = all.filter(([, value]) => value < 20);

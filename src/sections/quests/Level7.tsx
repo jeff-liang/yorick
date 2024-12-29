@@ -6,7 +6,6 @@ import {
   initiativeModifier,
   itemDropModifier,
   itemType,
-  monsterLevelAdjustment,
 } from "kolmafia";
 import {
   $item,
@@ -27,6 +26,7 @@ import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
 import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
+import { monsterLevelWithPercent } from "../../util/calc";
 import { atStep, Step } from "../../util/quest";
 import { plural } from "../../util/text";
 
@@ -181,7 +181,7 @@ const Level7: FC = () => {
           />,
         ])}
         {getZoneDisplay("Cranny", crannyEvil, "+ML, -combat", [
-          `~${Math.max(3, Math.sqrt(monsterLevelAdjustment())).toFixed(
+          `~${Math.max(3, Math.sqrt(monsterLevelWithPercent())).toFixed(
             1,
           )} evil per swarm of ghuol whelps`,
           "Pick 4th option in NC.",

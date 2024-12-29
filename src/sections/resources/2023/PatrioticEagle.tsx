@@ -1,4 +1,4 @@
-import { Heading, List, Strong, Text } from "@chakra-ui/react";
+import { List, Strong, Text } from "@chakra-ui/react";
 import {
   canAdventure,
   canEquip,
@@ -21,7 +21,6 @@ import {
 } from "libram";
 import { ReactNode } from "react";
 
-import H5 from "../../../components/H5";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
@@ -234,7 +233,9 @@ const PatrioticEagle = () => {
     <Tile linkedContent={patrioticEagle}>
       {showRwb && (
         <>
-          <H5>Fight {plural(fightsLeft, `more ${rwbMonster}`)}</H5>
+          <Line fontWeight="bold">
+            Fight {plural(fightsLeft, `more ${rwbMonster.identifierString}`)}
+          </Line>
           <Line>
             Copied by your eagle's blast. Will appear when you adventure in{" "}
             {possibleAppearanceLocations.join(", ")}.
@@ -249,7 +250,7 @@ const PatrioticEagle = () => {
       )}
       {showPhylum && (
         <>
-          <Heading as="h4" size="xs">
+          <Line fontWeight="bold">
             {screechRecharge > 0 ? (
               `${screechRecharge} combats (or freeruns) until your Patriotic Eagle can screech again.`
             ) : (
@@ -270,7 +271,7 @@ const PatrioticEagle = () => {
                 )}
               </>
             )}
-          </Heading>
+          </Line>
           <List.Root>{phylumOptions}</List.Root>
         </>
       )}

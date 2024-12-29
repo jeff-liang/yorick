@@ -7,7 +7,6 @@ import {
 import { FC, ReactNode } from "react";
 
 import Line from "../../../components/Line";
-import MainLink from "../../../components/MainLink";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { plural } from "../../../util/text";
@@ -203,14 +202,10 @@ const CombatLoversLocket: FC = () => {
   return (
     reminiscesLeft > 0 && (
       <Tile
+        header={plural(reminiscesLeft, "reminisce")}
         linkedContent={combatLoversLocket}
         href="/inventory.php?reminisce=1"
       >
-        <Line>
-          <MainLink href="/inventory.php?reminisce=1">
-            {plural(reminiscesLeft, "Combat lover's locket reminiscence")}.
-          </MainLink>
-        </Line>
         <Line>
           <Strong>Current enchantment: </Strong>
           {locketPhylum}.

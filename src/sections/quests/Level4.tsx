@@ -78,7 +78,7 @@ const Level4: FC = () => {
           {haveBatWings ? "bat wings NC" : "a beanbat"} for the level 10 quest.
         </Line>
       )}
-      {haveBatWings && availableLocations.length > 0 && (
+      {haveBatWings && availableLocations.length > 0 && step < 3 && (
         <Line>
           {haveBatWingsEquipped
             ? "Equip bat wings and adventure "
@@ -90,31 +90,28 @@ const Level4: FC = () => {
           .
         </Line>
       )}
-      {atStep(step, [
-        [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
-        [
-          Step.STARTED,
-          <Line href={sonarCount > 0 ? inventoryLink(sonar) : undefined}>
-            Blow down {plural(3 - step, "bat hole wall")} by fighting Screambats
-            or using sonars-in-a-biscuit
-            {sonarCount > 0 && ` (you have ${sonarCount})`}.
-          </Line>,
-        ],
-        [
-          3,
-          <Line>
-            Face the fearsome Boss Bat in his lair!{" "}
-            {bodyguards < 4
-              ? `You must fight at least ${Math.max(0, 4 - bodyguards)} bodyguards to find him.`
-              : bodyguards === 4
-                ? "Appears in the next three turns."
-                : bodyguards === 5
-                  ? "Appears in the next two turns."
-                  : "Appears next turn."}
-          </Line>,
-        ],
-        [4, <Line>Return to the council with news of your defeated foe.</Line>],
-      ])}
+      {step === Step.UNSTARTED ? (
+        <Line>Visit Council to start quest.</Line>
+      ) : step < 3 ? (
+        <Line href={sonarCount > 0 ? inventoryLink(sonar) : undefined}>
+          Blow down {plural(3 - step, "bat hole wall")} by fighting Screambats
+          or using sonars-in-a-biscuit
+          {sonarCount > 0 && ` (you have ${sonarCount})`}.
+        </Line>
+      ) : step === 3 ? (
+        <Line>
+          Face the fearsome Boss Bat in his lair!{" "}
+          {bodyguards < 4
+            ? `You must fight at least ${Math.max(0, 4 - bodyguards)} bodyguards to find him.`
+            : bodyguards === 4
+              ? "Appears in the next three turns."
+              : bodyguards === 5
+                ? "Appears in the next two turns."
+                : "Appears next turn."}
+        </Line>
+      ) : (
+        <Line>Return to the council with news of your defeated foe.</Line>
+      )}
     </QuestTile>
   );
 };

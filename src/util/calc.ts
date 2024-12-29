@@ -1,5 +1,5 @@
 import { combatRateModifier, Location } from "kolmafia";
-import { clamp, sum } from "libram";
+import { clamp, getModifier, sum } from "libram";
 
 export function turnsToSeeNoncombat(combatRate: number, encounters = 1) {
   const noncombatRate = 1 - (combatRate + combatRateModifier()) / 100;
@@ -37,6 +37,13 @@ export function turnsToSeeSingleNoncombat(location: Location) {
   if (cap <= 0 || p >= 1) return 1;
   if (p <= 0) return cap;
   return (1 / p) * (1 - Math.pow(1 - p, cap));
+}
+
+export function monsterLevelWithPercent() {
+  return (
+    getModifier("Monster Level") *
+    (1 + getModifier("Monster Level Percent") / 100)
+  );
 }
 
 export function range(hi: number): number[];

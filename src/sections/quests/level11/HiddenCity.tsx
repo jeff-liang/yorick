@@ -490,7 +490,7 @@ const HiddenCity = () => {
               (!have($item`stone wool`) ? (
                 <Line>Find some stone wool or otherwise get Stone-Faced.</Line>
               ) : (
-                <Line command="use stone wool">
+                <Line href={inventoryLink($item`stone wool`)}>
                   Use your stone wool and go to the Hidden Temple.
                 </Line>
               ))}

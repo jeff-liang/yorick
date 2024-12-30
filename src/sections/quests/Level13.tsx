@@ -601,7 +601,7 @@ const Level13: FC = () => {
         id="level-13-quest"
         href={NSTOWER_URL}
         linkEntireTile
-        imageUrl="/images/adventureimages/shadow.gif"
+        imageUrl="/images/adventureimages/shadowsealclubberf.gif"
       >
         <Line>Fight your shadow.</Line>
         {available.length > 0 && (

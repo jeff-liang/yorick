@@ -148,6 +148,7 @@ const HeroKeys: FC = () => {
     skeletonKeyCount + Math.min(potentialLooseTeeth, potentialSkeletonBones);
 
   const needMoreSkeletonKeysForDailyDungeon =
+    needKeys &&
     !dailyDungeonDone &&
     !have($item`Platinum Yendorian Express Card`) &&
     !have(pickOMaticLockpicks) &&
@@ -283,10 +284,14 @@ const HeroKeys: FC = () => {
   return (
     (needKeys || needSkeletonKeyForTower) && (
       <QuestTile
-        header={`Get ${plural(
-          neededTokensKeys,
-          "fat loot token",
-        )} or ${pluralJustDesc(neededTokensKeys, "key")}`}
+        header={
+          needKeys
+            ? `Get ${plural(
+                neededTokensKeys,
+                "fat loot token",
+              )} or ${pluralJustDesc(neededTokensKeys, "key")}`
+            : "Get skeleton key for tower"
+        }
         id="hero-key-quest"
         imageUrl="/images/itemimages/loottoken.gif"
       >

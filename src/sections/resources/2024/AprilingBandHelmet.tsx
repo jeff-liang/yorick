@@ -56,10 +56,10 @@ const AprilingBandHelmet = () => {
           <Tile
             header="Conduct the Apriling Band"
             imageUrl="/images/itemimages/aprilinghat.gif"
+            href={inventoryActionLink("apriling")}
+            linkEntireTile
           >
-            <Line href={inventoryActionLink("apriling")}>
-              You can change your tune to -combat!
-            </Line>
+            <Line>You can change your tune to -combat!</Line>
           </Tile>
         ),
     }),

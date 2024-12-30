@@ -38,6 +38,11 @@ const Level10: FC = () => {
     neededImmateria.length -
     airship.turnsSpent;
 
+  const needUmbrella =
+    !have($item`titanium assault umbrella`) &&
+    !haveUnrestricted($item`unbreakable umbrella`);
+  const needAmulet = have($item`amulet of extreme plot significance`);
+
   if (step === Step.FINISHED) return null;
 
   return (
@@ -92,6 +97,12 @@ const Level10: FC = () => {
                 Equip an umbrella or the amulet of extreme plot significance.
               </Line>
             )}
+          {needAmulet && !needUmbrella && (
+            <Line>
+              Fish (1/3) for the umbrella NC, and skip the amulet NC if you hit
+              that instead.
+            </Line>
+          )}
           <Line>Maximize -combat and adventure in the castle basement.</Line>
         </>
       ) : step < 9 ? (

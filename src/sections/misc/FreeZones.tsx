@@ -50,7 +50,8 @@ const FREE_ZONES: Source[] = [
             : inventoryLink($item`closed-circuit pay phone`)
         }
       >
-        {plural(remaining, "Shadow Affinity fight")} (backups/wanderers).
+        {plural(remaining, "Shadow Affinity fight")} (
+        {haveUnrestricted($item`backup camera`) && "backups/"}wanderers).
       </Line>
     ),
   },

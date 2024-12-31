@@ -127,6 +127,11 @@ const FREE_KILL_SOURCES: FreeKillSource[] = [
       ),
   },
   {
+    source: $item`groveling gravel`,
+    thing: $item`groveling gravel`,
+    remaining: () => availableAmount($item`groveling gravel`),
+  },
+  {
     source: $item`powdered madness`,
     thing: $item`powdered madness`,
     remaining: () =>

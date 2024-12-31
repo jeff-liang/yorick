@@ -3,9 +3,11 @@ import {
   canAdventure,
   getCampground,
   isUnrestricted,
+  myAscensions,
+  myClass,
   myPath,
 } from "kolmafia";
-import { $item, $location, $path, $skill, get, have } from "libram";
+import { $class, $item, $location, $path, $skill, get, have } from "libram";
 import { CircleHelp } from "lucide-react";
 import { FC } from "react";
 
@@ -104,6 +106,38 @@ const FREE_FIGHTS: Source[] = [
         }
       >
         {remaining} trick-or-treat fights.
+      </Line>
+    ),
+  },
+  {
+    name: "Seal Clubber Seals",
+    remaining() {
+      const inventorySummons = Math.min(
+        availableAmount($item`seal-blubber candle`),
+        availableAmount($item`figurine of a wretched-looking seal`),
+      );
+      const guildStoreOpen = get("lastGuildStoreOpen") >= myAscensions();
+      const fightsRemaining =
+        5 +
+        (+have($item`Claw of the Infernal Seal`) && 5) -
+        get("_sealFigurineUses");
+      return (
+        +(
+          myClass() === $class`Seal Clubber` &&
+          (inventorySummons > 0 || guildStoreOpen)
+        ) && fightsRemaining
+      );
+    },
+    render: ({ remaining }) => (
+      <Line
+        href={
+          have($item`seal-blubber candle`) &&
+          have($item`figurine of a wretched-looking seal`)
+            ? inventoryLink($item`figurine of a wretched-looking seal`)
+            : "/shop.php?whichshop=guildstore3"
+        }
+      >
+        {plural(remaining, "Seal Clubber seal")}.
       </Line>
     ),
   },

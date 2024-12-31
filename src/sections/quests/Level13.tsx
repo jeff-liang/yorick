@@ -130,7 +130,8 @@ const Race: FC<RaceProps> = ({ name, contestants, value, needed, percent }) =>
             color={value >= needed ? "fg.success" : "fg.error"}
             fontWeight={value >= needed ? undefined : "bold"}
           >
-            {value.toFixed(0)}/400{percent && "%"}
+            {value.toFixed(0)}/{needed}
+            {percent && "%"}
           </Text>
           .
         </>

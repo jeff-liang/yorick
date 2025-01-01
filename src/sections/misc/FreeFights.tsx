@@ -120,7 +120,7 @@ const FREE_FIGHTS: Source[] = [
       const fightsRemaining =
         5 +
         (+have($item`Claw of the Infernal Seal`) && 5) -
-        get("_sealFigurineUses");
+        get("_sealsSummoned");
       return (
         +(
           myClass() === $class`Seal Clubber` &&

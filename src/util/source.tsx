@@ -16,8 +16,10 @@ export function renderSourceList(sourceList: Source[]): {
     .filter(([, remaining]) => remaining > 0);
   return {
     total: sum(sources, ([, remaining]) => remaining),
-    rendered: sources.map(([{ name, render }, remaining]) => (
-      <Fragment key={name}>{render({ remaining })}</Fragment>
-    )),
+    rendered: sources
+      .sort(([, a], [, b]) => b - a)
+      .map(([{ name, render }, remaining]) => (
+        <Fragment key={name}>{render({ remaining })}</Fragment>
+      )),
   };
 }

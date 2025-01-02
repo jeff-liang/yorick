@@ -79,7 +79,7 @@ const Autumnaton = () => {
   }
   if (!autumnatonUpgrades.includes("rightarm1")) {
     upgradesToGet.push(
-      "Visit mid outdoor for +1 item (Vanya's Castle, Smut Orc Camp?)",
+      "Visit mid outdoor for +1 item (Vanya's Castle, Friars, Shadow Rift?)",
     );
   }
   if (!autumnatonUpgrades.includes("leftleg1")) {

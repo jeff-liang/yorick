@@ -97,7 +97,7 @@ const Layout = () => {
             direction={chatFrameOpen ? "right" : "left"}
             onClick={toggleChatFrame}
             position="absolute"
-            bottom={"50%"}
+            bottom="50%"
             right={1}
             zIndex={200}
           />

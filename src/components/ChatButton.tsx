@@ -13,12 +13,12 @@ const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
     _hover={{ bgColor: "bg.emphasized" }}
     bgColor="bg"
     p={1}
-    size={"xs"}
+    size="xs"
     variant="outline"
-    height={"fit-content"}
+    height="fit-content"
     {...props}
   >
-    <Text rotate={"-90deg"}>
+    <Text rotate="-90deg" scale={1.02}>
       Chat {direction === "left" ? <ChevronUp /> : <ChevronDown />}
     </Text>
   </Button>

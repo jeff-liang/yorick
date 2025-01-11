@@ -1,5 +1,5 @@
 import { Button, ButtonProps, Text } from "@chakra-ui/react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 
 export interface ChatButtonProps extends ButtonProps {
@@ -13,13 +13,14 @@ const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
     _hover={{ bgColor: "bg.emphasized" }}
     bgColor="bg"
     p={1}
+    pt={2}
     size="xs"
     variant="outline"
     height="fit-content"
     {...props}
   >
-    <Text rotate="-90deg" scale={1.02}>
-      Chat {direction === "left" ? <ChevronUp /> : <ChevronDown />}
+    <Text writingMode="vertical-rl" rotate={"180deg"}>
+      Chat {direction === "left" ? <ChevronRight /> : <ChevronLeft />}
     </Text>
   </Button>
 );

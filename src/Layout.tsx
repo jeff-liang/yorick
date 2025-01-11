@@ -98,7 +98,7 @@ const Layout = () => {
             onClick={toggleChatFrame}
             position="absolute"
             bottom="50%"
-            right={1}
+            right={5}
             zIndex={200}
           />
         </Flex>

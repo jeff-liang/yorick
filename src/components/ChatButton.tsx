@@ -19,7 +19,7 @@ const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
     height="fit-content"
     {...props}
   >
-    <Text writingMode="vertical-rl" rotate={"180deg"}>
+    <Text writingMode="vertical-rl" rotate="180deg">
       Chat {direction === "left" ? <ChevronRight /> : <ChevronLeft />}
     </Text>
   </Button>

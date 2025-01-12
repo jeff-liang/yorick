@@ -49,23 +49,15 @@ const LordSpookyraven: FC = () => {
   const hauntedBallroomAvailable = canAdventure(
     $location`The Haunted Ballroom`,
   );
-  const hauntedBallroomNoncombatNotDone =
-    !$location`The Haunted Ballroom`.noncombatQueue.includes(
-      "We'll All Be Flat",
-    );
   const delayRemaining = 5 - $location`The Haunted Ballroom`.turnsSpent;
 
   const haveSpectacles = have($item`Lord Spookyraven's spectacles`);
-  const haveSpectaclesEquipped = haveEquipped(
-    $item`Lord Spookyraven's spectacles`,
-  );
   const recipeWillBeAutoread =
     haveSpectacles && useFastRoute && get("autoCraft");
-  const recipeWasAutoreadWithGlasses =
+  const recipeWasReadWithGlasses =
     get("spookyravenRecipeUsed") === "with_glasses";
-  const recipeWasAutoread =
-    recipeWasAutoreadWithGlasses ||
-    get("spookyravenRecipeUsed") === "no_glasses";
+  const recipeWasRead =
+    recipeWasReadWithGlasses || get("spookyravenRecipeUsed") === "no_glasses";
 
   const haveWineBomb = have($item`wine bomb`);
   const haveUnstableFulminate = have($item`unstable fulminate`);
@@ -99,7 +91,7 @@ const LordSpookyraven: FC = () => {
       node: step < Step.FINISHED &&
         inBoilerRoom &&
         haveUnstableFulminate &&
-        !haveUnstableFulminateEquipped && (
+        (!haveUnstableFulminateEquipped || mlNeeded > 0) && (
           <Tile
             header="Make a wine bomb"
             imageUrl="/images/itemimages/wine2.gif"
@@ -108,12 +100,22 @@ const LordSpookyraven: FC = () => {
               href={inventoryLink($item`unstable fulminate`)}
               color="red.solid"
             >
-              Equip unstable fulminate.
+              {!haveUnstableFulminateEquipped && mlNeeded > 0
+                ? `Equip unstable fulminate and get ${Math.ceil(mlNeeded)} more ML.`
+                : !haveUnstableFulminateEquipped
+                  ? "Equip unstable fulminate."
+                  : `Get ${Math.ceil(mlNeeded)} more ML.`}
             </Line>
           </Tile>
         ),
     }),
-    [haveUnstableFulminate, haveUnstableFulminateEquipped, inBoilerRoom, step],
+    [
+      haveUnstableFulminate,
+      haveUnstableFulminateEquipped,
+      inBoilerRoom,
+      mlNeeded,
+      step,
+    ],
   );
 
   if (step === Step.FINISHED) return null;
@@ -130,18 +132,23 @@ const LordSpookyraven: FC = () => {
       }
       id="lord-spookyraven-quest"
       imageUrl="/images/adventureimages/lordspooky.gif"
+      href={
+        step < 1 ||
+        (useFastRoute && !haveSpectacles && !recipeWasReadWithGlasses)
+          ? "/place.php?whichplace=manor2"
+          : CELLAR_LINK
+      }
       minLevel={11}
       disabled={!hauntedBallroomAvailable}
     >
-      {hauntedBallroomNoncombatNotDone ? (
-        questFinished("questL11Black") ? (
+      {step < 1 &&
+        (questFinished("questL11Black") ? (
           <>
-            <Line href="/place.php?whichplace=manor2">
+            <Line href={parentPlaceLink($location`The Haunted Ballroom`)}>
               Run -combat in the Haunted Ballroom.
+              {delayRemaining > 0 &&
+                ` Delay for ${plural(delayRemaining, "turn")}.`}
             </Line>
-            {delayRemaining > 0 && (
-              <Line>Delay for {plural(delayRemaining, "turn")}.</Line>
-            )}
           </>
         ) : delayRemaining > 0 ? (
           <Line>
@@ -150,31 +157,75 @@ const LordSpookyraven: FC = () => {
           </Line>
         ) : (
           <Line>All delay burned. Find your dad's diary.</Line>
-        )
-      ) : useFastRoute && !haveSpectacles && !recipeWasAutoread ? (
-        <Line href={parentPlaceLink($location`The Haunted Bedroom`)}>
-          Acquire Lord Spookyraven's spectacles from the Haunted Bedroom.
-        </Line>
-      ) : !recipeWasAutoread &&
-        !have($item`recipe: mortar-dissolving solution`) ? (
-        recipeWillBeAutoread ? (
+        ))}
+      {step === 1 &&
+        (useFastRoute && !haveSpectacles && !recipeWasReadWithGlasses ? (
+          <Line href={parentPlaceLink($location`The Haunted Bedroom`)}>
+            Acquire Lord Spookyraven's spectacles from the Haunted Bedroom.
+          </Line>
+        ) : recipeWillBeAutoread ? (
           <Line href={CELLAR_LINK}>
             Click on the suspicious masonry in the basement.
-          </Line>
-        ) : useFastRoute && !haveSpectaclesEquipped ? (
-          <Line command="equip Lord Spookyraven's spectacles">
-            Equip Lord Spookyraven's Spectacles, click on the suspicious masonry
-            in the basement, then read the recipe.
           </Line>
         ) : (
           <Line href={CELLAR_LINK}>
             Click on the suspicious masonry in the basement, then read the
             recipe.
           </Line>
-        )
-      ) : useFastRoute && (haveWineBomb || step > 2) ? (
-        <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
-      ) : useFastRoute && haveUnstableFulminate ? (
+        ))}
+      {step === 2 &&
+        useFastRoute &&
+        (!recipeWasReadWithGlasses ? (
+          <Line href={parentPlaceLink($location`The Haunted Bedroom`)}>
+            Need to{" "}
+            {!haveSpectacles && "acquire Lord Spookyraven's spectacles and "}
+            read the recipe before you can use the quick route.
+          </Line>
+        ) : (
+          <>
+            {!haveChateauDeVinegar && (
+              <Line href={CELLAR_LINK}>
+                Find bottle of Chateau de Vinegar from possessed wine rack in
+                the Haunted Wine Cellar.
+              </Line>
+            )}
+            {!haveBlastingSoda && (
+              <Line href={CELLAR_LINK}>
+                Find blasting soda from the cabinet in the Haunted Laundry Room.
+              </Line>
+            )}
+            {haveChateauDeVinegar && haveBlastingSoda && (
+              <Line href="/craft.php?mode=cook">Cook unstable fulminate.</Line>
+            )}
+          </>
+        ))}
+      {step === 2 &&
+        !useFastRoute &&
+        (!recipeWasRead ? (
+          <Line href={inventoryLink($item`recipe: mortar-dissolving solution`)}>
+            Read the recipe.
+          </Line>
+        ) : missingSearchables.length > 0 ? (
+          <Line>
+            Go search in the Haunted{" "}
+            {commaOr(
+              missingSearchables.map(([location]) => (
+                <MainLink
+                  key={location}
+                  href={parentPlaceLink(Location.get(location))}
+                >
+                  location.replace("The Haunted ", "")
+                </MainLink>
+              )),
+            )}
+            .
+          </Line>
+        ) : (
+          <Line href={CELLAR_LINK}>
+            Use your mortar-dissolving ingredients to clear out the masonry.
+          </Line>
+        ))}
+      {haveUnstableFulminate && (
         <>
           <Line href={CELLAR_LINK}>
             Adventure in the haunted boiler room
@@ -185,65 +236,30 @@ const LordSpookyraven: FC = () => {
             fights to charge fulminate.
           </Line>
         </>
-      ) : useFastRoute && !recipeWasAutoreadWithGlasses ? (
-        <Line
-          command={
-            haveSpectacles ? "equip Lord Spookyraven's spectacles" : undefined
-          }
-        >
-          Need to {!haveSpectacles ? "acquire and " : ""}equip Lord
-          Spookyraven's spectacles and read the recipe before you can use the
-          quick route.
-        </Line>
-      ) : useFastRoute ? (
-        <>
-          {!haveChateauDeVinegar && (
-            <Line href={CELLAR_LINK}>
-              Find bottle of Chateau de Vinegar from possessed wine rack in the
-              Haunted Wine Cellar.
-            </Line>
-          )}
-          {!haveBlastingSoda && (
-            <Line href={CELLAR_LINK}>
-              Find blasting soda from the cabinet in the Haunted Laundry Room.
-            </Line>
-          )}
-          {haveChateauDeVinegar && haveBlastingSoda && (
-            <Line href="/craft.php?mode=cook">Cook unstable fulminate.</Line>
-          )}
-        </>
-      ) : missingSearchables.length > 0 ? (
-        <Line>
-          Go search in the Haunted{" "}
-          {commaOr(
-            missingSearchables.map(([location]) => (
-              <MainLink
-                key={location}
-                href={parentPlaceLink(Location.get(location))}
-              >
-                location.replace("The Haunted ", "")
-              </MainLink>
-            )),
-          )}
-          .
-        </Line>
-      ) : isPathActuallyEdTheUndying ? (
-        <Line href={CELLAR_LINK}>Talk to Lord Spookyraven.</Line>
-      ) : isPathVampire ? (
-        <Line href={CELLAR_LINK}>Fight the path-specific boss.</Line>
-      ) : (
-        <>
-          <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
-          {!have($effect`Red Door Syndrome`) &&
-            myMeat() > 1000 &&
-            !haveUnrestricted($item`can of black paint`) && (
-              <Line href="/shop.php?whichshop=blackmarket">
-                A can of black paint can help with fighting him.
-                {myMeat() < 20000 && " Bit pricy. (1k meat)"}
-              </Line>
-            )}
-        </>
       )}
+      {haveWineBomb && (
+        <Line href={CELLAR_LINK}>
+          Use the wine bomb to clear out the masonry.
+        </Line>
+      )}
+      {step === 3 &&
+        (isPathActuallyEdTheUndying ? (
+          <Line href={CELLAR_LINK}>Talk to Lord Spookyraven.</Line>
+        ) : isPathVampire ? (
+          <Line href={CELLAR_LINK}>Fight the path-specific boss.</Line>
+        ) : (
+          <>
+            <Line href={CELLAR_LINK}>Fight Lord Spookyraven.</Line>
+            {!have($effect`Red Door Syndrome`) &&
+              myMeat() > 1000 &&
+              !haveUnrestricted($item`can of black paint`) && (
+                <Line href="/shop.php?whichshop=blackmarket">
+                  A can of black paint can help with fighting him.
+                  {myMeat() < 20000 && " Bit pricy. (1k meat)"}
+                </Line>
+              )}
+          </>
+        ))}
     </QuestTile>
   );
 };

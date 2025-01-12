@@ -102,13 +102,15 @@ const Layout = () => {
             h="100vh"
             right={5}
             align="center"
-            zIndex={200}
+            pointerEvents="none"
             lineHeight={0}
             {...(!buttonsVisible && { display: "none" })}
           >
             <ChatButton
               direction={chatFrameOpen ? "right" : "left"}
               onClick={toggleChatFrame}
+              zIndex={200}
+              pointerEvents="auto"
             />
           </Flex>
         </Flex>

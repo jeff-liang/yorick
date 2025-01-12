@@ -5221,21 +5221,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia-lib@npm:^5.28118.0":
-  version: 5.28118.0
-  resolution: "tome-kolmafia-lib@npm:5.28118.0"
+"tome-kolmafia-lib@npm:^5.28276.0":
+  version: 5.28276.0
+  resolution: "tome-kolmafia-lib@npm:5.28276.0"
   dependencies:
     dataloader: "npm:^2.2.2"
-  checksum: 10c0/7c20262fd1c401c961eda6df2b4d14d3d132357762294819d75f8a6d6068f979fa5649a21274317d3a1223f4ad63c4c1830caf8f9bd847ef30c35b8344063887
+  checksum: 10c0/9aa6e4bc4c344ce886d4186f87abbe961472d32744798cbcacf3b0603398f52d9373bfe76ef4ba44dac5cd6a0dbfd4b189b983e70b7b21a728e5ce1c5fa45ac1
   languageName: node
   linkType: hard
 
-"tome-kolmafia-react@npm:^0.2.5":
-  version: 0.2.5
-  resolution: "tome-kolmafia-react@npm:0.2.5"
+"tome-kolmafia-react@npm:^0.2.6":
+  version: 0.2.6
+  resolution: "tome-kolmafia-react@npm:0.2.6"
   peerDependencies:
-    tome-kolmafia-lib: ^5.28107.2
-  checksum: 10c0/2263717683daae7014306c5a38cc5801e590f01044077359989698acf54f21793d94107f7fe3fdabfe0b3a29952d22116e7d8a4ca3b0c37b0757339588d400d5
+    tome-kolmafia-lib: ^5.28118.0
+  checksum: 10c0/046606400b1c4036b96147451b7eee8f3d768e96a6874911844716f29e446a7d1f530ae06ad020f5f75c31fabcb23403c7d23d4d27b9a8800142bea6feac5f0c
   languageName: node
   linkType: hard
 
@@ -5646,8 +5646,8 @@ __metadata:
     react-error-boundary: "npm:^4.0.13"
     react-icons: "npm:^5.3.0"
     react-router-dom: "npm:^6.26.1"
-    tome-kolmafia-lib: "npm:^5.28118.0"
-    tome-kolmafia-react: "npm:^0.2.5"
+    tome-kolmafia-lib: "npm:^5.28276.0"
+    tome-kolmafia-react: "npm:^0.2.6"
     ts-morph: "npm:^24.0.0"
     typescript: "npm:^5.6.3"
     typescript-eslint: "npm:^8.3.0"

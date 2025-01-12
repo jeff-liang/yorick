@@ -48,9 +48,9 @@ const Level2: FC = () => {
           ) : (
             <>
               <Line>Find NC for mosquito larva.</Line>
-              {progress >= 7 ? (
+              {progress >= 8 ? (
                 <Line>NC guaranteed next turn.</Line>
-              ) : progress === 6 ? (
+              ) : progress === 7 ? (
                 <Line>50% chance of guaranteed NC next turn.</Line>
               ) : (
                 <Line>

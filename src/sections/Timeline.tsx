@@ -18,7 +18,6 @@ import { FC, forwardRef } from "react";
 import MainLink from "../components/MainLink";
 import { Tooltip } from "../components/ui/tooltip";
 import { haveUnrestricted } from "../util/available";
-import { inDevMode } from "../util/env";
 import { plural } from "../util/text";
 
 const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
@@ -213,15 +212,7 @@ const Timeline: FC<StackProps> = (props) => {
 
   return (
     <Stack {...props}>
-      <Stack
-        flexFlow="row wrap"
-        // account for refresh button.
-        w={
-          inDevMode()
-            ? "calc(100% - 30px - 3 * var(--chakra-space-1))"
-            : "calc(100% - 15px - 2 * var(--chakra-space-1))"
-        }
-      >
+      <Stack flexFlow="row wrap">
         {elementsFiltered.map(({ name, turns, color, label }) => (
           <Tooltip key={name} content={label(turns)}>
             <Pill bgColor={color}>

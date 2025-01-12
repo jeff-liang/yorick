@@ -3,6 +3,7 @@ import { hiddenTempleUnlocked, myMeat } from "kolmafia";
 import { $item, have } from "libram";
 import { FC } from "react";
 
+import ForestNoncombatAdvice from "../../components/ForestNoncombatAdvice";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { inventoryLink } from "../../util/links";
@@ -10,37 +11,41 @@ import { inventoryLink } from "../../util/links";
 const HiddenTemple: FC = () => {
   if (hiddenTempleUnlocked()) return null;
 
-  const haveItems =
-    have($item`Spooky Temple map`) &&
-    have($item`Spooky-Gro fertilizer`) &&
-    have($item`spooky sapling`);
+  const needMap = !have($item`Spooky Temple map`);
+  const needCoin = !have($item`tree-holed coin`) && needMap;
+  const needFertilizer = !have($item`Spooky-Gro fertilizer`);
+  const needSapling = !have($item`spooky sapling`);
+
+  const ncsNeeded = +needMap + +needCoin + +needFertilizer + +needSapling;
 
   return (
     <QuestTile
       header="Find the Hidden Temple"
       imageUrl="/images/itemimages/map.gif"
-      href={haveItems ? inventoryLink($item`Spooky Temple map`) : "/woods.php"}
+      href={
+        ncsNeeded === 0 ? inventoryLink($item`Spooky Temple map`) : "/woods.php"
+      }
       linkEntireTile
     >
-      {!have($item`tree-holed coin`) && !have($item`Spooky Temple map`) && (
+      {needCoin && (
         <Line>
           Explore the stream → Squeeze into the cave to obtain the tree-holed
           coin.
         </Line>
       )}
-      {have($item`tree-holed coin`) && (
+      {needMap && !needCoin && (
         <Line>
           Brave the dark thicket → Follow the coin → Insert coin to continue to
           obtain the Spooky Temple map.
         </Line>
       )}
-      {!have($item`Spooky-Gro fertilizer`) && (
+      {needFertilizer && (
         <Line>
           Brave the dark thicket → Investigate the dense foliage to obtain
           Spooky-Gro fertilizer.
         </Line>
       )}
-      {!have($item`spooky sapling`) && (
+      {needSapling && (
         <Line>
           Follow the old road → Talk to the hunter → Buy a tree for 100 Meat to
           obtain the spooky sapling.
@@ -52,10 +57,10 @@ const HiddenTemple: FC = () => {
           ) : null}
         </Line>
       )}
-      {haveItems ? (
+      {ncsNeeded === 0 ? (
         <Line>Use your Spooky Temple map!</Line>
       ) : (
-        <Line>Maximize -combat to speed things up.</Line>
+        <ForestNoncombatAdvice />
       )}
     </QuestTile>
   );

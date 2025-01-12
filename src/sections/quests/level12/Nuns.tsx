@@ -2,6 +2,7 @@ import {
   availableAmount,
   effectModifier,
   haveEffect,
+  hiddenTempleUnlocked,
   isUnrestricted,
   meatDropModifier,
   myAscensions,
@@ -176,7 +177,7 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
       {!have($effect`Sinuses For Miles`) &&
         have($item`stone wool`) &&
         get("lastTempleAdventures") < myAscensions() &&
-        get("lastTempleUnlock") === myAscensions() &&
+        hiddenTempleUnlocked() &&
         turnRange.high > haveEffect($effect`Sinuses For Miles`) && (
           <Line>
             Potentially use stone wool and visit the hidden temple to extend

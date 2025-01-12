@@ -2,6 +2,7 @@ import { List } from "@chakra-ui/react";
 import {
   canInteract,
   fullnessLimit,
+  hiddenTempleUnlocked,
   inHardcore,
   isUnrestricted,
   Item,
@@ -127,7 +128,7 @@ const Pulls: FC = () => {
       description: "Advance desert exploration by 5.",
       needed: Number.POSITIVE_INFINITY,
     },
-    get("lastTempleUnlock") < myAscensions() && {
+    !hiddenTempleUnlocked() && {
       item: $item`Spooky-Gro fertilizer`,
       turns: 2,
       description: "One fewer Arboreal Respite encounter.",

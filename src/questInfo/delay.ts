@@ -1,5 +1,5 @@
-import { Location, myAscensions } from "kolmafia";
-import { $item, $location, get, questStep } from "libram";
+import { hiddenTempleUnlocked, Location } from "kolmafia";
+import { $item, $location, questStep } from "libram";
 
 import { haveUnrestricted } from "../util/available";
 import { questFinished } from "../util/quest";
@@ -20,9 +20,7 @@ export function delayZones(): ZoneDelay[] {
     {
       zone: $location`The Spooky Forest`,
       length: 5,
-      needed: () =>
-        !questFinished("questL02Larva") ||
-        get("lastTempleUnlock") < myAscensions(),
+      needed: () => !questFinished("questL02Larva") || !hiddenTempleUnlocked(),
     },
     {
       zone: $location`The Haunted Gallery`,

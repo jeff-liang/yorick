@@ -1,25 +1,15 @@
 import { $location, questStep } from "libram";
 import { FC } from "react";
 
+import ForestNoncombatAdvice from "../../components/ForestNoncombatAdvice";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
-import { turnsToSeeSingleNoncombatCapped } from "../../util/calc";
 import { atStep, Step } from "../../util/quest";
 import { plural } from "../../util/text";
 
 const Level2: FC = () => {
   const forest = $location`The Spooky Forest`;
   const step = questStep("questL02Larva");
-
-  const progress = Math.max(
-    0,
-    forest.turnsSpent - forest.lastNoncombatTurnsSpent,
-  );
-  const expectedTurns =
-    progress >= 7
-      ? 0
-      : 0.5 * turnsToSeeSingleNoncombatCapped(85, 8 - progress) +
-        0.5 * turnsToSeeSingleNoncombatCapped(85, 9 - progress);
 
   if (step === Step.FINISHED) return null;
 
@@ -48,15 +38,7 @@ const Level2: FC = () => {
           ) : (
             <>
               <Line>Find NC for mosquito larva.</Line>
-              {progress >= 8 ? (
-                <Line>NC guaranteed next turn.</Line>
-              ) : progress === 7 ? (
-                <Line>50% chance of guaranteed NC next turn.</Line>
-              ) : (
-                <Line>
-                  Expected {expectedTurns.toFixed(1)} turns until next NC.
-                </Line>
-              )}
+              <ForestNoncombatAdvice />
             </>
           ),
         ],

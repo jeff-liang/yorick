@@ -1,7 +1,8 @@
-import { Location } from "kolmafia";
-import { $item, $location } from "libram";
+import { Location, myAscensions } from "kolmafia";
+import { $item, $location, get, questStep } from "libram";
 
 import { haveUnrestricted } from "../util/available";
+import { questFinished } from "../util/quest";
 
 import { remainingSnakes } from "./copperhead";
 import { haveMachete, lianasCanBeFree } from "./hiddenCity";
@@ -19,26 +20,34 @@ export function delayZones(): ZoneDelay[] {
     {
       zone: $location`The Spooky Forest`,
       length: 5,
+      needed: () =>
+        !questFinished("questL02Larva") ||
+        get("lastTempleUnlock") < myAscensions(),
     },
     {
       zone: $location`The Haunted Gallery`,
       length: 5,
+      needed: () => !questFinished("questM21Dance"),
     },
     {
       zone: $location`The Haunted Bathroom`,
       length: 5,
+      needed: () => !questFinished("questM21Dance"),
     },
     {
       zone: $location`The Haunted Bedroom`,
       length: 6,
+      needed: () => !questFinished("questM21Dance"),
     },
     {
       zone: $location`The Haunted Ballroom`,
       length: 5,
+      needed: () => questStep("questL11Manor") < 1,
     },
     {
       zone: $location`The Penultimate Fantasy Airship`,
       length: haveUnrestricted($item`bat wings`) ? 20 : 25,
+      needed: () => questStep("questL10Garbage") < 8,
     },
     {
       zone: $location`The Hidden Park`,

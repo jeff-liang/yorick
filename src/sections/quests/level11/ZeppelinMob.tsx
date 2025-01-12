@@ -31,7 +31,9 @@ const ZeppelinMob = () => {
       ) : (
         <>
           {haveCcsc && !haveEquipped(candyCaneSwordCane) && (
-            <Line>Equip your candy cane sword cane!</Line>
+            <Line command="equip candy cane sword cane">
+              Equip your candy cane sword cane!
+            </Line>
           )}
           <Line>{80 - get("zeppelinProtestors")} protestors left.</Line>
           <Line>

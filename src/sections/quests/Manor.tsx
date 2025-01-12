@@ -295,7 +295,7 @@ const HauntedBallroom: FC = () => {
           </Line>
         </>
       )}
-      {ballroomDelay > 0 && (
+      {ballroomDelay > 0 && questStep("questL11Manor") < 1 && (
         <Line href={parentPlaceLink($location`The Haunted Ballroom`)}>
           Burn {plural(ballroomDelay, "turn")} of delay in the Ballroom.
         </Line>

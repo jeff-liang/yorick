@@ -102,6 +102,7 @@ const Leveling: React.FC = () => {
     {
       name: "Numberology",
       remaining: () =>
+        +haveUnrestricted($skill`Calculate the Universe`) &&
         Math.min(3, get("skillLevel144")) - get("_universeCalculated"),
       render: ({ remaining }) => (
         <List.Item>

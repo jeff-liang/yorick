@@ -277,7 +277,7 @@ const PatrioticEagle = () => {
       )}
       {showPledge && (
         <>
-          <Line>
+          <Line fontWeight="bold">
             <Text as="span" color="red.solid">
               Pledge
             </Text>{" "}

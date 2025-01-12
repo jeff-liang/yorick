@@ -105,6 +105,7 @@ const Copies: FC = () => {
             {get("_monsterHabitatsFightsLeft") > 0
               ? ` (current ${get("_monsterHabitatsMonster")})`
               : null}
+            .
           </Line>
         ),
       },

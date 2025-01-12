@@ -24,12 +24,13 @@ const TakerSpace: FC = () => {
   const takerSpace = $item`TakerSpace letter of Marque`;
   const takerSpaceInstalled = getWorkshed() === takerSpace;
   const supplies: Supplies = {
-    spice: get("_takerSpaceSpice"),
-    rum: get("_takerSpaceRum"),
-    anchor: get("_takerSpaceAnchor"),
-    mast: get("_takerSpaceMast"),
-    silk: get("_takerSpaceSilk"),
-    gold: get("_takerSpaceGold"),
+    spice: get("takerSpaceSpice") + +!get("_takerSpaceSuppliesDelivered") && 3,
+    rum: get("takerSpaceRum") + +!get("_takerSpaceSuppliesDelivered") && 3,
+    anchor:
+      get("takerSpaceAnchor") + +!get("_takerSpaceSuppliesDelivered") && 3,
+    mast: get("takerSpaceMast") + +!get("_takerSpaceSuppliesDelivered") && 3,
+    silk: get("takerSpaceSilk") + +!get("_takerSpaceSuppliesDelivered") && 1,
+    gold: get("takerSpaceGold") + +!get("_takerSpaceSuppliesDelivered") && 1,
   };
 
   if (

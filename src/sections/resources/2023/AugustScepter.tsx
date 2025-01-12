@@ -12,6 +12,7 @@ import {
   $path,
   $skill,
   byStat,
+  clamp,
   get,
   have,
   questStep,
@@ -77,10 +78,11 @@ const AugustScepter: FC = () => {
     Mysticality: 11,
     Moxie: 23,
   });
+  console.log("primestat", myPrimestat().toString());
 
   const usefulAugustSkills: [number, ReactNode][] = [];
 
-  if (get("questL13Final") !== "finished") {
+  if (myLevel() < 13 && get("questL13Final") !== "finished") {
     const statsGained = Math.floor(
       50 *
         myLevel() *
@@ -166,13 +168,14 @@ const AugustScepter: FC = () => {
     <Text>non-free reusable banishes{buffString}</Text>,
   ]);
 
-  const usefulOffhands = have($item`deck of lewd playing cards`);
-  const protestorsRemaining = Math.max(
-    0,
-    Math.min(80, 80 - get("zeppelinProtestors")),
-  );
+  const haveSleazeOffhand =
+    have($item`deck of lewd playing cards`) || have($item`disturbing fanfic`);
+  const protestorsRemaining = clamp(80 - get("zeppelinProtestors"), 0, 80);
 
-  if (usefulOffhands && protestorsRemaining > 10) {
+  if (
+    (haveSleazeOffhand && protestorsRemaining > 10) ||
+    haveUnrestricted($item`unbreakable umbrella`)
+  ) {
     usefulAugustSkills.push([
       13,
       <Text>

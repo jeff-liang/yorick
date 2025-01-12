@@ -161,7 +161,7 @@ const BookOfFacts = () => {
           <Line>Good targets include monsters you want 6 of:</Line>
           <Line>
             Dirty old lihc, fantasy bandit, eldritch tentacle, black crayon orc
-            if the stars align
+            if the stars align.
           </Line>
         </>
       )}

@@ -9,6 +9,7 @@ import {
   inebrietyLimit,
   myAscensions,
   myInebriety,
+  myLevel,
   myPath,
   myTurncount,
   numericModifier,
@@ -324,6 +325,7 @@ const Manor: FC = () => {
     <QuestTile
       header="Unlock Spookyraven Manor"
       imageUrl="/images/adventureimages/lordspooky.gif"
+      disabled={myAscensions() === 0 && myLevel() < 5}
     >
       {have($item`telegram from Lady Spookyraven`) && (
         <Line href={inventoryLink($item`telegram from Lady Spookyraven`)}>

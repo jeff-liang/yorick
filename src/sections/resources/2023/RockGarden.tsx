@@ -77,10 +77,10 @@ const RockGarden = () => {
             {availableGravels > 0 && (
               <List.Item>{gravelMessage(availableGravels)}</List.Item>
             )}
-            {availableWhetStones && (
+            {availableWhetStones > 0 && (
               <List.Item>{whetStoneMessage(availableWhetStones)}</List.Item>
             )}
-            {availableMilestones && desertProgress < 100 && (
+            {availableMilestones > 0 && desertProgress < 100 && (
               <List.Item>{milestoneMessage(availableMilestones)}</List.Item>
             )}
           </List.Root>

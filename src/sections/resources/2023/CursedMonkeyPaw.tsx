@@ -17,13 +17,14 @@ import {
   questStep,
 } from "libram";
 
+import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { inRunEffectWishes, WishInfo } from "../../../resourceInfo/wishes";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink, mainActionLink } from "../../../util/links";
 import { inRun, questFinished } from "../../../util/quest";
-import { plural } from "../../../util/text";
+import { plural, separate } from "../../../util/text";
 
 interface MonkeySkill {
   fingerCount: number;
@@ -273,37 +274,53 @@ const CursedMonkeysPaw = () => {
       linkedContent={cursedMonkeysPaw}
     >
       <Line href={mainActionLink("cmonk")}>
-        Return to monke. Wish for items or effects:
+        Return to monke. Wish for items or effects.
       </Line>
-      {options.length > 0 && (
-        <>
-          <Line fontWeight="bold">Possible wishes:</Line>
-          <List.Root>{options}</List.Root>
-        </>
-      )}
-      <Line fontWeight="bold">Monkey skills:</Line>
-      <List.Root>
-        {monkeySkills().map((skill) => (
-          <List.Item key={skill.fingerCount}>
-            <Strong>{plural(skill.fingerCount, "finger", "fingers")}:</Strong>{" "}
-            {skill.description}
-          </List.Item>
-        ))}
-      </List.Root>
+      <Line>
+        {separate(
+          [
+            options.length > 0 && (
+              <AdviceTooltipText advice={<List.Root>{options}</List.Root>}>
+                Possible Wishes
+              </AdviceTooltipText>
+            ),
+            monkeyWishesLeft > 0 && (
+              <AdviceTooltipText
+                advice={
+                  <List.Root>
+                    {monkeySkills().map((skill) => (
+                      <List.Item key={skill.fingerCount}>
+                        <Strong>
+                          {plural(skill.fingerCount, "finger", "fingers")}:
+                        </Strong>{" "}
+                        {skill.description}
+                      </List.Item>
+                    ))}
+                  </List.Root>
+                }
+              >
+                Monkey Skills
+              </AdviceTooltipText>
+            ),
+          ],
+          " • ",
+          [0, 1],
+        )}
+      </Line>
       {monkeyWishesLeft === 5 && (
         <>
           <Line
             href={
-              haveEquipped(cursedMonkeysPaw)
+              !haveEquipped(cursedMonkeysPaw)
                 ? inventoryLink(cursedMonkeysPaw)
                 : undefined
             }
           >
-            Turn-taking repeat-use banish. Lasts until you use it again!
+            <Strong>Monkey Slap:</Strong> Turn-taking repeat-use banish. Lasts
+            until you use it again!
+            {!haveEquipped(cursedMonkeysPaw) &&
+              " Equip your cursed monkey paw first."}
           </Line>
-          {!haveEquipped(cursedMonkeysPaw) && (
-            <Line>Equip your cursed monkey paw first.</Line>
-          )}
         </>
       )}
     </Tile>

@@ -78,7 +78,7 @@ const Layout = () => {
             gap={1}
             position="absolute"
             top={1}
-            right={1}
+            right={5}
             zIndex={200}
           >
             {inDevMode() && <PrefsButton />}
@@ -97,8 +97,8 @@ const Layout = () => {
             direction={chatFrameOpen ? "right" : "left"}
             onClick={toggleChatFrame}
             position="absolute"
-            bottom={1}
-            right={1}
+            bottom="50%"
+            right={5}
             zIndex={200}
           />
         </Flex>

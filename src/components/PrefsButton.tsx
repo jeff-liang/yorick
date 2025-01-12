@@ -12,6 +12,8 @@ const PrefsButton: FC = () => {
         }
       }}
       asChild
+      _hover={{ bgColor: "bg.emphasized" }}
+      bgColor="bg"
       aria-label="Open Overrides"
       size="2xs"
       p={1}

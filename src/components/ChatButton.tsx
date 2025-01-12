@@ -1,4 +1,4 @@
-import { ButtonProps, IconButton } from "@chakra-ui/react";
+import { Button, ButtonProps, Text } from "@chakra-ui/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC } from "react";
 
@@ -7,18 +7,22 @@ export interface ChatButtonProps extends ButtonProps {
 }
 
 const ChatButton: FC<ChatButtonProps> = ({ direction, ...props }) => (
-  <IconButton
+  <Button
     asChild
     aria-label="Refresh"
     _hover={{ bgColor: "bg.emphasized" }}
     bgColor="bg"
-    size="2xs"
     p={1}
+    pt={2}
+    size="xs"
     variant="outline"
+    height="fit-content"
     {...props}
   >
-    {direction === "left" ? <ChevronLeft /> : <ChevronRight />}
-  </IconButton>
+    <Text writingMode="vertical-rl" rotate="180deg">
+      Chat {direction === "left" ? <ChevronRight /> : <ChevronLeft />}
+    </Text>
+  </Button>
 );
 
 export default ChatButton;

@@ -42,6 +42,7 @@ const TakerSpace: FC = () => {
 
   const makeableItems: { name: string; ingredients: Partial<Supplies> }[] = [
     { name: "pirate dinghy", ingredients: { anchor: 1, mast: 1, silk: 1 } },
+    { name: "deft pirate hook", ingredients: { anchor: 1, mast: 1, gold: 1 } },
     {
       name: "anchor bomb",
       ingredients: { anchor: 3, rum: 1, mast: 1, gold: 1 },

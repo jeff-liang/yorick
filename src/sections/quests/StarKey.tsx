@@ -82,6 +82,8 @@ const StarKey: FC = () => {
   const starChartsNeeded = Math.max(0, 1 - availableAmount(starChart));
   const starsNeeded = Math.max(0, 8 - availableAmount(star));
   const linesNeeded = Math.max(0, 7 - availableAmount(line));
+  const needIngredients =
+    starChartsNeeded > 0 || starsNeeded > 0 || linesNeeded > 0;
 
   const holeInSky = $location`The Hole in the Sky`;
   const holeInSkyAvailable = canAdventure(holeInSky);
@@ -126,13 +128,21 @@ const StarKey: FC = () => {
         )
       ) : (
         <>
-          <Line href={parentPlaceLink(holeInSky)}>
-            Need Richard's star key.
-          </Line>
-          <Line>
-            Need: {plural(starChartsNeeded, starChart)},{" "}
-            {plural(starsNeeded, star)}, {plural(linesNeeded, line)}
-          </Line>
+          {needIngredients ? (
+            <>
+              <Line href={parentPlaceLink(holeInSky)}>
+                Need Richard's star key.
+              </Line>
+              <Line>
+                Need: {plural(starChartsNeeded, starChart)},{" "}
+                {plural(starsNeeded, star)}, {plural(linesNeeded, line)}
+              </Line>
+            </>
+          ) : (
+            <Line command="create Richard's star key">
+              Have all the ingredients. Make the star key.
+            </Line>
+          )}
           {starChartsNeeded === 1 &&
             starsNeeded === 0 &&
             linesNeeded === 0 &&

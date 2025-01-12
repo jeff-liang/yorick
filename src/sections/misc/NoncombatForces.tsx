@@ -121,7 +121,7 @@ const FORCE_SOURCES: Source[] = [
           get("_aprilBandInstruments") < 2) ||
         haveUnrestricted($item`Apriling band tuba`)
       ) && 3 - get("_aprilBandTubaUses"),
-    render: ({ remaining }) => {
+    render({ remaining }) {
       const tuba = $item`Apriling band tuba`;
       const helmet = $item`Apriling band helmet`;
       const haveTuba = haveUnrestricted($item`Apriling band tuba`);
@@ -129,6 +129,29 @@ const FORCE_SOURCES: Source[] = [
         <Line href={inventoryLink(haveTuba ? tuba : helmet)}>
           {plural(remaining, "Apriling band tuba force")}
           {haveTuba ? null : " (acquire tuba)"}.
+        </Line>
+      );
+    },
+  },
+  {
+    name: "McHugeLarge Avalanche",
+    remaining: () =>
+      +haveUnrestricted($item`McHugeLarge duffel bag`) &&
+      3 - get("_mcHugeLargeAvalancheUses"),
+    render({ remaining }) {
+      const leftSki = $item`McHugeLarge left ski`;
+      const haveSki = haveUnrestricted(leftSki);
+      const skiEquipped = haveEquipped(leftSki);
+      return (
+        <Line
+          href={
+            !skiEquipped
+              ? inventoryLink(haveSki ? leftSki : $item`McHugeLarge duffel bag`)
+              : undefined
+          }
+          color={!skiEquipped ? "gray.solid" : undefined}
+        >
+          {plural(remaining, "McHugeLarge Avalanche")}.
         </Line>
       );
     },

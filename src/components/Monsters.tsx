@@ -27,7 +27,7 @@ const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
     (monster) =>
       monster !== $monster`none` && !!appearanceRates(location)[monster.name],
   );
-  const queue = location.combatQueue
+  const queue = (location.combatQueue ?? "")
     .split("; ")
     .filter((s) => s)
     .map((name) => Monster.get(name));

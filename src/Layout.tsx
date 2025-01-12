@@ -20,6 +20,7 @@ import { setup3Frames, setup4Frames, visibleFrameCount } from "./util/frames";
 const Layout = () => {
   const { triggerHardRefresh } = useContext(RefreshContext);
   const tooltipRef = useRef<HTMLElement>();
+  const [buttonsVisible, setButtonsVisible] = useState(false);
 
   const [chatFrameOpen, setChatFrameOpen] = useState(visibleFrameCount() >= 4);
   const toggleChatFrame = useCallback(() => {
@@ -71,6 +72,8 @@ const Layout = () => {
         h="100vh"
         display="flex"
         flexDirection="column"
+        onMouseEnter={() => setButtonsVisible(true)}
+        onMouseLeave={() => setButtonsVisible(false)}
       >
         <Flex position="relative" minH={0}>
           <Stack
@@ -80,11 +83,12 @@ const Layout = () => {
             top={1}
             right={5}
             zIndex={200}
+            {...(!buttonsVisible && { display: "none" })}
           >
             {inDevMode() && <PrefsButton />}
             <RefreshButton onClick={triggerHardRefresh} />
           </Stack>
-          <Box overflow="scroll">
+          <Box overflow="scroll" flexGrow={1}>
             <BrandHeading />
             <Stack>
               <NagSection />
@@ -93,14 +97,20 @@ const Layout = () => {
               <ResourceSection />
             </Stack>
           </Box>
-          <ChatButton
-            direction={chatFrameOpen ? "right" : "left"}
-            onClick={toggleChatFrame}
+          <Flex
             position="absolute"
-            bottom="50%"
+            h="100vh"
             right={5}
+            align="center"
             zIndex={200}
-          />
+            lineHeight={0}
+            {...(!buttonsVisible && { display: "none" })}
+          >
+            <ChatButton
+              direction={chatFrameOpen ? "right" : "left"}
+              onClick={toggleChatFrame}
+            />
+          </Flex>
         </Flex>
         <LocationBar />
         <Toaster />

@@ -1,6 +1,7 @@
 import { Table, Text } from "@chakra-ui/react";
 import {
   availableAmount,
+  myFamiliar,
   myLevel,
   myPath,
   myPrimestat,
@@ -193,11 +194,11 @@ const AugustScepter: FC = () => {
       (have($skill`The Ode to Booze`) &&
         have($familiar`Frumious Bandersnatch`)))
   ) {
-    if (!have($item`astral pet sweater`)) {
+    if (!have($item`toy Cupid bow`) && myFamiliar() !== $familiar`none`) {
       usefulAugustSkills.push([
         28,
         <Text>
-          +10 weight familiar equipment{" "}
+          +10 weight/+1 xp familiar equip{" "}
           <Text as="span" fontSize="xs" color="gray.solid">
             (melting)
           </Text>

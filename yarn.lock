@@ -3073,13 +3073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-libram@npm:^0.4.21":
-  version: 0.4.21
-  resolution: "eslint-plugin-libram@npm:0.4.21"
+"eslint-plugin-libram@npm:^0.4.22":
+  version: 0.4.22
+  resolution: "eslint-plugin-libram@npm:0.4.22"
   dependencies:
     html-entities: "npm:^2.5.2"
     requireindex: "npm:~1.2.0"
-  checksum: 10c0/3c4770e2651fd92feb18e0f283b2136da478e597dfa6cfad6ea320769baad262ec2c145fb145d149489ee6f9c653ccba20176e55f99b3aa42b98c6bc03f3e636
+  checksum: 10c0/f632d4d2fa677c611b5bbe15345fa680e3e7198923d26d042292ab128ae36b417319074e1631462abc63b9193cdb4f7e284869303a0126a4f1b9a544412c513c
   languageName: node
   linkType: hard
 
@@ -5630,7 +5630,7 @@ __metadata:
     dataloader: "npm:^2.2.2"
     eslint: "npm:^9.9.1"
     eslint-plugin-import: "npm:^2.31.0"
-    eslint-plugin-libram: "npm:^0.4.21"
+    eslint-plugin-libram: "npm:^0.4.22"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     globals: "npm:^15.9.0"

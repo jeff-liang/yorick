@@ -1,5 +1,5 @@
 import { haveEffect, myFamiliar, myPath } from "kolmafia";
-import { $effect, $familiar, $item, $path, get, have } from "libram";
+import { $effect, $familiar, $item, $path, $skill, get, have } from "libram";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
@@ -52,6 +52,23 @@ const FREE_ZONES: Source[] = [
       >
         {plural(remaining, "Shadow Affinity fight")} (
         {haveUnrestricted($item`backup camera`) && "backups/"}wanderers).
+      </Line>
+    ),
+  },
+  {
+    name: "CyberRealm",
+    remaining: () =>
+      +(
+        haveUnrestricted($item`server room key`) &&
+        haveUnrestricted($skill`OVERCLOCK(10)`)
+      ) && 10 - get("_cyberFreeFights"),
+    render: ({ remaining }) => (
+      <Line href="/place.php?whichplace=serverroom">
+        {plural(remaining, "Server Room fight")} (
+        {haveUnrestricted($skill`Recall Facts: Monster Habitats`) &&
+          get("_monsterHabitatsRecalled") < 3 &&
+          "habitats/"}
+        wanderers).
       </Line>
     ),
   },

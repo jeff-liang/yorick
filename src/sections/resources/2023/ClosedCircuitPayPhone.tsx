@@ -102,6 +102,25 @@ const ClosedCircuitPayPhone = () => {
     [havePayPhone, rufusQuestState, riftAdvsUntilNC],
   );
 
+  useNag(
+    () => ({
+      id: "closed-circuit-pay-phone-shadow-affinity-nag",
+      priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/shadowaffin.gif",
+      node: shadowAffinityTurns > 0 && (
+        <Tile
+          header={plural(shadowAffinityTurns, "Shadow Affinity turn")}
+          imageUrl="/images/itemimages/shadowaffin.gif"
+          href="/place.php?whichplace=cemetery"
+          linkEntireTile
+        >
+          <Line>Adventure in a Shadow Rift.</Line>
+        </Tile>
+      ),
+    }),
+    [shadowAffinityTurns],
+  );
+
   if (!havePayPhone) return null;
 
   return (

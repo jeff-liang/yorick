@@ -158,7 +158,7 @@ const FREE_FIGHTS: Source[] = [
   {
     name: "Forest Tentacle",
     remaining: () =>
-      +(questStarted("questL02Larva") && questStarted("questG02Whitecastle")) &&
+      +(questStarted("questL02Larva") || questStarted("questG02Whitecastle")) &&
       1 - +get("_eldritchTentacleFought"),
     render: () => (
       <Line href="/place.php?whichplace=forestvillage&action=fv_scientist">

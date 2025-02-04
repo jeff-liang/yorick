@@ -1,5 +1,6 @@
 import { Badge, BadgeProps, Stack, StackProps, Strong } from "@chakra-ui/react";
 import {
+  getCounter,
   getWorkshed,
   haveEffect,
   haveEquipped,
@@ -19,6 +20,8 @@ import MainLink from "../components/MainLink";
 import { Tooltip } from "../components/ui/tooltip";
 import { haveUnrestricted } from "../util/available";
 import { plural } from "../util/text";
+
+import Flyers from "./misc/Flyers";
 
 const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
   ({ children, ...props }, ref) => (
@@ -148,6 +151,12 @@ const Timeline: FC<StackProps> = (props) => {
       label: (turns) =>
         `${plural(turns, "turn")} of Everything Looks Red, White and Blue.`,
     },
+    {
+      name: "ELBe",
+      turns: haveEffect($effect`Everything looks Beige`),
+      color: "yellow.fg",
+      label: (turns) => `${plural(turns, "turn")} of Everything Looks Beige`,
+    },
   ];
 
   if (returnCombats > 0) {
@@ -203,6 +212,16 @@ const Timeline: FC<StackProps> = (props) => {
     });
   }
 
+  if (getCounter("Spooky VHS Tape Monster") > 0) {
+    elements.push({
+      name: "VHS",
+      turns: getCounter("Spooky VHS Tape Monster"),
+      color: "gray.solid",
+      label: (turns) =>
+        `${plural(turns, "turn")} until VHS tape monster appears.`,
+    });
+  }
+
   const elementsFiltered = elements.filter(({ turns }) => turns > 0);
   elementsFiltered.sort(
     ({ turns: turnsA }, { turns: turnsB }) => turnsA - turnsB,
@@ -222,6 +241,7 @@ const Timeline: FC<StackProps> = (props) => {
         ))}
       </Stack>
       <CMCTimeline />
+      <Flyers />
     </Stack>
   );
 };

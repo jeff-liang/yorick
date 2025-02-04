@@ -54,6 +54,13 @@ const freeRunSources: FreeRunSource[] = [
     remaining: () => Math.floor(get("scrapbookCharges") / 100),
   },
   {
+    source: $item`mafia middle finger ring`,
+    thing: $skill`Show them your ring`,
+    caption: () => "middle finger banish",
+    captionPlural: () => "middle finger banishes",
+    remaining: () => +!get("_mafiaMiddleFingerRingUsed"),
+  },
+  {
     source: $item`stuffed yam stinkbomb`,
     thing: $item`stuffed yam stinkbomb`,
     remaining: () => availableAmount($item`stuffed yam stinkbomb`),

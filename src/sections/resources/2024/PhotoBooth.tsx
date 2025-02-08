@@ -25,6 +25,8 @@ const PhotoBooth: FC = () => {
     return null;
   }
 
+  if (photosRemaining === 0 && propsRemaining === 0) return null;
+
   return (
     <Tile
       header="Clan Photo Booth"

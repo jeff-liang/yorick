@@ -78,7 +78,7 @@ const MrStore2002Catalog = () => {
           imageUrl="/images/itemimages/2002vhs.gif"
         >
           {vhsMonsterTurn === 1 && (
-            <Line>Adventure in a delay zone next turn.</Line>
+            <Line>Adventure in a delay zone after 1 turn.</Line>
           )}
           {vhsMonsterTurn === 0 && <Line>Adventure in a delay zone now!</Line>}
         </Tile>

@@ -83,11 +83,12 @@ const Pyramid: FC = () => {
 
   if (questFinished("questL11MacGuffin")) return null;
 
+  const haveHeadpiece =
+    (have($item`[7963]ancient amulet`) && have($item`[7962]Eye of Ed`)) ||
+    have($item`headpiece of the Staff of Ed`);
   const haveStaffOfEd =
     have($item`[7961]Staff of Ed`) ||
-    (have($item`[7963]ancient amulet`) &&
-      have($item`[7962]Eye of Ed`) &&
-      have($item`[7964]Staff of Fats`));
+    (haveHeadpiece && have($item`[7964]Staff of Fats`));
 
   const upperChamberTurns = $location`The Upper Chamber`.turnsSpent;
   const middleChamberTurns = $location`The Middle Chamber`.turnsSpent;

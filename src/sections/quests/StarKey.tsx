@@ -108,7 +108,7 @@ const StarKey: FC = () => {
           : parentPlaceLink(holeInSky)
       }
     >
-      {!holeInSkyAvailable ? (
+      {!holeInSkyAvailable && needIngredients ? (
         canAdventure(topFloor) ? (
           <>
             <Line href={parentPlaceLink(topFloor)}>

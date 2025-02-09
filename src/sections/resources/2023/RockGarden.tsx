@@ -36,14 +36,16 @@ const milestoneMessage = (milestones: number) => {
 };
 
 const RockGarden = () => {
-  const gardenGravels = getCampground()["groveling gravel"];
-  const gardenMilestones = getCampground()["milestone"];
-  const gardenWhetstones = getCampground()["whet stone"];
   const desertProgress = get("desertExploration");
+  const gardenGravels = getCampground()["groveling gravel"];
+  const gardenWhetStones = availableAmount($item`whet stone`);
+  const gardenMilestones =
+    desertProgress < 100 ? availableAmount($item`milestone`) : 0;
 
   const availableGravels = availableAmount($item`groveling gravel`);
-  const availableMilestones = availableAmount($item`milestone`);
   const availableWhetStones = availableAmount($item`whet stone`);
+  const availableMilestones =
+    desertProgress < 100 ? availableAmount($item`milestone`) : 0;
 
   const isCommunityService = get("challengePath") === "Community Service";
   const canAccess = canAccessGarden();
@@ -52,7 +54,13 @@ const RockGarden = () => {
     isCommunityService ||
     !canAccess ||
     !inRun() ||
-    availableGravels + availableMilestones + availableWhetStones === 0
+    availableGravels +
+      availableMilestones +
+      availableWhetStones +
+      gardenGravels +
+      gardenMilestones +
+      gardenWhetStones ===
+      0
   ) {
     return null;
   }
@@ -87,7 +95,7 @@ const RockGarden = () => {
         </>
       )}
       {(gardenGravels > 0 ||
-        gardenWhetstones > 0 ||
+        gardenWhetStones > 0 ||
         (gardenMilestones > 0 && desertProgress < 100)) && (
         <>
           <Line>Harvest from your garden:</Line>
@@ -95,8 +103,8 @@ const RockGarden = () => {
             {gardenGravels > 0 && (
               <List.Item>{gravelMessage(gardenGravels)}</List.Item>
             )}
-            {gardenWhetstones > 0 && (
-              <List.Item>{whetStoneMessage(gardenWhetstones)}</List.Item>
+            {gardenWhetStones > 0 && (
+              <List.Item>{whetStoneMessage(gardenWhetStones)}</List.Item>
             )}
             {gardenMilestones > 0 && desertProgress < 100 && (
               <List.Item>{milestoneMessage(gardenMilestones)}</List.Item>

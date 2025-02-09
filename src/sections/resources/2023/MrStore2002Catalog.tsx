@@ -75,6 +75,7 @@ const MrStore2002Catalog = () => {
       node: vhsMonsterTurn >= 0 && vhsMonsterTurn <= 1 && (
         <Tile
           header={`Spooky VHS: ${plural(vhsMonsterTurn, "turn")}`}
+          id="2002-spooky-vhs-nag"
           imageUrl="/images/itemimages/2002vhs.gif"
         >
           {vhsMonsterTurn === 1 && (

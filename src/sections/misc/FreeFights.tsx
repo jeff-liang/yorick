@@ -156,6 +156,19 @@ const FREE_FIGHTS: Source[] = [
     ),
   },
   {
+    name: "Quad Tom Sandworms",
+    remaining: () =>
+      +haveUnrestricted($item`Apriling band quad tom`) &&
+      3 -
+        get("_aprilBandTomUses") -
+        +(get("desertExploration") < 100 && !(get("gnasirProgress") & 16)),
+    render: ({ remaining }) => (
+      <Line href={inventoryLink($item`Apriling band quad tom`)}>
+        {plural(remaining, "quad tom sandworm")}.
+      </Line>
+    ),
+  },
+  {
     name: "Forest Tentacle",
     remaining: () =>
       +(questStarted("questL02Larva") || questStarted("questG02Whitecastle")) &&

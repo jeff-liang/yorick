@@ -174,6 +174,8 @@ const LordSpookyraven: FC = () => {
           </Line>
         ))}
       {step === 2 &&
+        !haveUnstableFulminate &&
+        !haveWineBomb &&
         useFastRoute &&
         (!recipeWasReadWithGlasses ? (
           <Line href={parentPlaceLink($location`The Haunted Bedroom`)}>

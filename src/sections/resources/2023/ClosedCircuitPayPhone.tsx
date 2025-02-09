@@ -110,6 +110,7 @@ const ClosedCircuitPayPhone = () => {
       node: shadowAffinityTurns > 0 && (
         <Tile
           header={plural(shadowAffinityTurns, "Shadow Affinity turn")}
+          id="shadow-affinity-nag"
           imageUrl="/images/itemimages/shadowaffin.gif"
           href="/place.php?whichplace=cemetery"
           linkEntireTile

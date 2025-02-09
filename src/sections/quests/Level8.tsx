@@ -1,5 +1,20 @@
-import { itemAmount, myPath, numericModifier, toItem } from "kolmafia";
-import { $item, $location, $monster, $path, get, questStep } from "libram";
+import {
+  haveEquipped,
+  itemAmount,
+  myPath,
+  numericModifier,
+  toItem,
+} from "kolmafia";
+import {
+  $item,
+  $items,
+  $location,
+  $monster,
+  $path,
+  get,
+  have,
+  questStep,
+} from "libram";
 import { FC } from "react";
 
 import Line from "../../components/Line";
@@ -7,6 +22,7 @@ import Monsters from "../../components/Monsters";
 import QuestTile from "../../components/QuestTile";
 import { neededNinjaItems } from "../../questInfo/trapper";
 import faxLikes from "../../util/faxLikes";
+import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, commaOr, plural, truthy } from "../../util/text";
 
@@ -22,6 +38,17 @@ const Level8: FC = () => {
   const neededNinja = neededNinjaItems();
   const neededNinjaCount = neededNinja.length;
 
+  const haveDuffelBag = have($item`McHugeLarge duffel bag`);
+  const duffelPieces = $items`McHugeLarge duffel bag, McHugeLarge right pole, McHugeLarge left pole, McHugeLarge right ski, McHugeLarge left ski`;
+  const equippedDuffelPieces = duffelPieces.filter((item) =>
+    haveEquipped(item),
+  );
+  const outfitPieces = $items`snowboarder pants, eXtreme mittens, eXtreme scarf`;
+  const neededOutfitPieces = outfitPieces.filter((item) => !have(item));
+  const nonEquippedOutfitPieces = outfitPieces.filter(
+    (item) => !haveEquipped(item),
+  );
+
   const coldRes = Math.floor(numericModifier("Cold Resistance"));
 
   const yetiCount = Math.floor(
@@ -31,18 +58,14 @@ const Level8: FC = () => {
 
   if (step === Step.FINISHED) return null;
 
-  // TODO: Support eXtreme slope path.
   return (
     <QuestTile
       header="Trapper"
-      imageUrl={atStep(step, [
-        [Step.UNSTARTED, "/images/otherimages/thetrapper.gif"],
-      ])}
+      imageUrl="/images/otherimages/thetrapper.gif"
       href={atStep(step, [
         [Step.UNSTARTED, "/council.php"],
         [Step.STARTED, TRAPPER_URL],
-        [1, undefined],
-        [2, "/place.php?whichplace=mclargehuge"],
+        [1, "/place.php?whichplace=mclargehuge"],
       ])}
       minLevel={8}
     >
@@ -51,7 +74,6 @@ const Level8: FC = () => {
         [Step.STARTED, <Line>Visit the Trapper to get your assignment.</Line>],
         [
           1,
-
           goatCheese < 3 || ore < 3 ? (
             <>
               <Line href="/place.php?whichplace=mclargehuge">
@@ -82,23 +104,50 @@ const Level8: FC = () => {
         ],
         [
           2,
-          neededNinjaCount > 0 ? (
-            <Line>
-              Stack +combat and adventure for{" "}
-              {plural(
-                neededNinjaCount,
-                "ninja snowman assassin",
-                "ninja snowmen assassins",
-              )}
-              . Need {commaAnd(neededNinja)}.
-            </Line>
-          ) : (
+          neededNinjaCount === 0 || get("currentExtremity") === 3 ? (
             <Line>
               {coldRes >= 5
                 ? "Climb "
                 : `Get 5 cold resistance (+${5 - coldRes}) and climb `}
               the Icy Peak.
             </Line>
+          ) : neededOutfitPieces.length === 0 ||
+            have($item`McHugeLarge left pole`) ? (
+            <>
+              {have($item`McHugeLarge left pole`)
+                ? equippedDuffelPieces.length < 5 && (
+                    <Line>
+                      Equip{" "}
+                      {plural(
+                        5 - equippedDuffelPieces.length,
+                        "McHugeLarge item",
+                      )}{" "}
+                      before adventuring.
+                    </Line>
+                  )
+                : nonEquippedOutfitPieces.length > 0 && (
+                    <Line>
+                      Equip {commaAnd(nonEquippedOutfitPieces)} before
+                      adventuring.
+                    </Line>
+                  )}
+              <Line>
+                Get {plural(3 - get("currentExtremity"), "more NC")} on the
+                eXtreme slope.
+              </Line>
+            </>
+          ) : haveDuffelBag ? (
+            <Line href={inventoryLink($item`McHugeLarge duffel bag`)}>
+              Open duffel bag for outfit.
+            </Line>
+          ) : (
+            <>
+              <Line>
+                Complete your outfit: get {commaAnd(neededOutfitPieces)} from
+                NCs or from monsters on the eXtreme slope.
+              </Line>
+              <Line>Low drop rate, so try to get noncombats if you can.</Line>
+            </>
           ),
         ],
         [

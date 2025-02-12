@@ -71,6 +71,7 @@ import SeptEmberCenser from "./resources/2024/SeptEmberCenser";
 import SpringShoes from "./resources/2024/SpringShoes";
 import TakerSpace from "./resources/2024/TakerSpace";
 import TearawayPants from "./resources/2024/TearawayPants";
+import CyberRealm from "./resources/2025/CyberRealm";
 import McHugeLargeDuffelBag from "./resources/2025/McHugeLargeDuffelBag";
 import AvantGuard from "./resources/path/AvantGuard";
 import Numberology from "./resources/skill/Numberology";
@@ -177,6 +178,7 @@ const ResourceSection = () => (
       TakerSpace,
 
       /* 2025 */
+      CyberRealm,
       McHugeLargeDuffelBag,
 
       /* Nags only */

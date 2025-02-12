@@ -1,5 +1,5 @@
 import { List, ListItemProps } from "@chakra-ui/react";
-import { canAdventure, Location } from "kolmafia";
+import { Location } from "kolmafia";
 import { sum } from "libram";
 import { FC } from "react";
 
@@ -32,16 +32,10 @@ const ZoneList: FC<{
 );
 
 const Delay: FC = () => {
-  let allRemaining = remainingDelay()
-    .map(({ zone, remaining }) => ({
-      zone,
-      remaining,
-      available: canAdventure(zone),
-    }))
-    .sort(
-      ({ available: availableA }, { available: availableB }) =>
-        +availableB - +availableA,
-    );
+  let allRemaining = remainingDelay().sort(
+    ({ available: availableA }, { available: availableB }) =>
+      +availableB - +availableA,
+  );
   let truncated: Details[] = [];
   if (
     allRemaining.length > 7 &&

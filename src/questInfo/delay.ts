@@ -1,5 +1,5 @@
-import { hiddenTempleUnlocked, Item, Location } from "kolmafia";
-import { $item, $location, have } from "libram";
+import { canAdventure, hiddenTempleUnlocked, Item, Location } from "kolmafia";
+import { $item, $location, get, have } from "libram";
 
 import { haveUnrestricted } from "../util/available";
 import { questFinished, questPastStep } from "../util/quest";
@@ -11,6 +11,7 @@ interface ZoneDelay {
   zone: Location;
   length: number;
   needed?: () => boolean;
+  available?: () => boolean;
 }
 
 // In rough order of priority (does it open other zones?)
@@ -72,6 +73,7 @@ export function delayZones(): ZoneDelay[] {
           zone: locations[0],
           length: 3,
           needed: () => !have(Item.get(item)),
+          available: () => get("shenQuestItem") === item,
         }))
       : []),
     {
@@ -94,10 +96,11 @@ export function delayZones(): ZoneDelay[] {
 
 export function remainingDelay() {
   return delayZones()
-    .map(({ zone, length, needed }) => ({
+    .map(({ zone, length, needed, available }) => ({
       zone,
       remaining:
         needed === undefined || needed() ? length - zone.turnsSpent : 0,
+      available: canAdventure(zone) && (available === undefined || available()),
     }))
     .filter(({ remaining }) => remaining > 0);
 }

@@ -1,4 +1,11 @@
-import { Box, HStack, IconButton, StackProps, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Collapsible,
+  HStack,
+  IconButton,
+  StackProps,
+  VStack,
+} from "@chakra-ui/react";
 import { decode } from "html-entities";
 import { Familiar, Item, Skill } from "kolmafia";
 import { ChevronDown, ChevronUp } from "lucide-react";
@@ -67,7 +74,7 @@ const Tile: FC<TileProps> = ({
     );
   }
 
-  const [collapsed, setCollapsed] = useLocalStorage(
+  const [collapsed, setCollapsed] = useLocalStorage<boolean>(
     `collapse-${storageId}`,
     false,
   );
@@ -125,7 +132,11 @@ const Tile: FC<TileProps> = ({
           )}
         </HStack>
       </HStack>
-      {!collapsed && !disabled && children}
+      {!disabled && (
+        <Collapsible.Root unmountOnExit open={!collapsed}>
+          <Collapsible.Content>{children}</Collapsible.Content>
+        </Collapsible.Root>
+      )}
     </VStack>
   );
 

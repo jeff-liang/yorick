@@ -51,6 +51,7 @@ const Level11Palindome: FC = () => {
   return (
     <QuestTile
       header="Palindome"
+      href={talismanEquipped ? palindomeLink : undefined}
       imageUrl="/images/adventureimages/drawkward.gif"
       minLevel={11}
       disabled={!canStart}

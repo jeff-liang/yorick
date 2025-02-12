@@ -1,5 +1,5 @@
-import { getClanName, isUnrestricted } from "kolmafia";
-import { $item, $items, get, have } from "libram";
+import { getClanName, isUnrestricted, myPath } from "kolmafia";
+import { $item, $items, $path, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -16,7 +16,13 @@ const PhotoBooth: FC = () => {
   const propsRemaining = 3 - get("_photoBoothEquipment");
   const sheriffPieces = $items`Sheriff pistol, Sheriff badge, Sheriff moustache`;
   const sheriffPiecesMissing = sheriffPieces.filter((item) => !have(item));
-  const potentialSheriff = 3 - sheriffPiecesMissing.length + propsRemaining;
+  const sheriffOutfitAvailable =
+    0 < sheriffPiecesMissing.length &&
+    sheriffPiecesMissing.length <= propsRemaining &&
+    myPath() !== $path`Way of the Surprising Fist` &&
+    myPath() !== $path`G-Lover` &&
+    myPath() !== $path`Bees Hate You` &&
+    myPath() !== $path`Avant Guard`;
 
   if (
     !haveUnrestricted($item`Clan VIP Lounge key`) ||
@@ -45,7 +51,7 @@ const PhotoBooth: FC = () => {
           +combat buff.
         </Line>
       )}
-      {potentialSheriff === 3 && sheriffPiecesMissing.length > 0 && (
+      {sheriffOutfitAvailable ? (
         <Line>
           Get sheriff outift for 3 free kills. Need{" "}
           {commaAnd(
@@ -53,6 +59,8 @@ const PhotoBooth: FC = () => {
           )}
           .
         </Line>
+      ) : (
+        <Line>Get {propsRemaining} additional prop equipment.</Line>
       )}
     </Tile>
   );

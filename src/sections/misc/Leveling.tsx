@@ -13,9 +13,11 @@ import {
   myFamiliar,
   myLevel,
   myPrimestat,
+  mySpleenUse,
   numericModifier,
   pullsRemaining,
   Skill,
+  spleenLimit,
   toEffect,
 } from "kolmafia";
 import {
@@ -132,7 +134,7 @@ const Leveling: React.FC = () => {
           <>
             1 strange leaflet (Quests menu)
             {myLevel() < 9
-              ? " (after level 9)"
+              ? " (at level 9)"
               : !have($item`strange leaflet`) && " (visit council)"}
             .
           </>
@@ -196,7 +198,7 @@ const Leveling: React.FC = () => {
     skill($skill`Astral Shell`),
     skill($skill`Feel Peaceful`),
 
-    equipment($item`astronaut helmet`),
+    equipment($item`astronaut helmet`, () => get("_photoBoothEquipment") < 3),
     equipment(
       $item`Jurassic Parka`,
       () =>
@@ -219,6 +221,12 @@ const Leveling: React.FC = () => {
       $item`bottle of antifreeze`,
       () => canInteract() || pullsRemaining() > 0,
     ),
+    potion(
+      $item`Synapse Blaster`,
+      () =>
+        mySpleenUse() < spleenLimit() &&
+        haveUnrestricted($item`server room key`),
+    ),
     potion($item`scroll of minor invulnerability`, () =>
       haveUnrestricted($skill`Secret Door Awareness`),
     ),
@@ -235,7 +243,9 @@ const Leveling: React.FC = () => {
       $effect`Ready to Survive`,
       () =>
         haveUnrestricted($item`MayDay™ supply package`) ||
-        (get("hasMaydayContract") && !get("_maydayDropped")),
+        (isUnrestricted($item`MayDay™ supply package`) &&
+          get("hasMaydayContract") &&
+          !get("_maydayDropped")),
     ),
     effect(
       $effect`Double Hot Soupy Garbage`,

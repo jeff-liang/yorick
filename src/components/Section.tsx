@@ -16,7 +16,6 @@ const Section: FC<SectionProps> = ({ name, children, ...props }) => (
       _empty={{
         _after: {
           content: '"Nothing to display."',
-          px: 2,
           fontWeight: "bold",
           fontStyle: "italic",
         },

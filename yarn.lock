@@ -3073,13 +3073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-libram@npm:^0.4.21":
-  version: 0.4.21
-  resolution: "eslint-plugin-libram@npm:0.4.21"
+"eslint-plugin-libram@npm:^0.4.22":
+  version: 0.4.22
+  resolution: "eslint-plugin-libram@npm:0.4.22"
   dependencies:
     html-entities: "npm:^2.5.2"
     requireindex: "npm:~1.2.0"
-  checksum: 10c0/3c4770e2651fd92feb18e0f283b2136da478e597dfa6cfad6ea320769baad262ec2c145fb145d149489ee6f9c653ccba20176e55f99b3aa42b98c6bc03f3e636
+  checksum: 10c0/f632d4d2fa677c611b5bbe15345fa680e3e7198923d26d042292ab128ae36b417319074e1631462abc63b9193cdb4f7e284869303a0126a4f1b9a544412c513c
   languageName: node
   linkType: hard
 
@@ -4043,14 +4043,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.9.31":
-  version: 0.9.31
-  resolution: "libram@npm:0.9.31"
+"libram@npm:^0.9.32":
+  version: 0.9.32
+  resolution: "libram@npm:0.9.32"
   dependencies:
     html-entities: "npm:^2.5.2"
   peerDependencies:
     kolmafia: ^5.28100.0
-  checksum: 10c0/6a67612b58e383ac639a2f126e63c70340b2e9b330399f6a20994aae96dc5390e84037e7ed498d2531c22affac233baad06891618bcf8c1ff40c2fb752df82d4
+  checksum: 10c0/4985eeffc1ff91bcc22d9e2ee65f68c90825775fca5c030359db8ebb05f8ce5b9496f77333a7075bd671336a6f8e2cd0f2ff85efa585af0dca941b632500468a
   languageName: node
   linkType: hard
 
@@ -5630,13 +5630,13 @@ __metadata:
     dataloader: "npm:^2.2.2"
     eslint: "npm:^9.9.1"
     eslint-plugin-import: "npm:^2.31.0"
-    eslint-plugin-libram: "npm:^0.4.21"
+    eslint-plugin-libram: "npm:^0.4.22"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
     kolmafia: "npm:tome-kolmafia-mock@5.28118.0"
-    libram: "npm:^0.9.31"
+    libram: "npm:^0.9.32"
     lucide-react: "npm:^0.460.0"
     next-themes: "npm:^0.4.3"
     postcss: "npm:^8.4.41"

@@ -55,17 +55,19 @@ const OilPeak: FC = () => {
       href="/place.php?whichplace=highlands"
       disabled={step < 2}
     >
-      <Line>
-        <Em>
-          {commaSeparate([
-            "100ML",
-            needJar && "+item",
-            needJar &&
-              have($item`Duskwalker syringe`) &&
-              "use Duskwalker syringe in combat",
-          ])}
-        </Em>
-      </Line>
+      {needJar && ml < 100 && pressure > 0 && (
+        <Line>
+          <Em>
+            {commaSeparate([
+              "100ML",
+              needJar && "+item",
+              needJar &&
+                have($item`Duskwalker syringe`) &&
+                "use Duskwalker syringe in combat",
+            ])}
+          </Em>
+        </Line>
+      )}
       {((needJar && ml < 100) || pressure > 0) && (
         <Line>
           {ml} ML{ml >= 100 ? null : " of 20/50/100"}.
@@ -77,6 +79,9 @@ const OilPeak: FC = () => {
         <Line>
           +item for {} more bubbling' crude. ~{crudePA.toFixed(1)} crude/adv.
         </Line>
+      )}
+      {pressure === 0 && !lit && (
+        <Line>Adventure once more to light the peak!</Line>
       )}
     </QuestTile>
   );

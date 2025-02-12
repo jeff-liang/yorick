@@ -1,5 +1,6 @@
-import { Em } from "@chakra-ui/react";
-import { get, questStep } from "libram";
+import { Em, List, Strong } from "@chakra-ui/react";
+import { myBuffedstat } from "kolmafia";
+import { $stat, get, getModifier, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -19,6 +20,25 @@ const OrcChasm: FC = () => {
   ];
 
   const needMoreItems = lumberNeeded > 0 || fastenersNeeded > 0;
+
+  const musclePieces = Math.floor(
+    Math.sqrt(
+      ((myBuffedstat($stat`Muscle`) + getModifier("Weapon Damage")) / 15) *
+        (1 + getModifier("Weapon Damage Percent") / 100),
+    ),
+  );
+  const mysticalityPieces = Math.floor(
+    Math.sqrt(
+      ((myBuffedstat($stat`Mysticality`) + getModifier("Spell Damage")) / 15) *
+        (1 + getModifier("Spell Damage Percent") / 100),
+    ),
+  );
+  const moxiePieces = Math.floor(
+    Math.sqrt(
+      (myBuffedstat($stat`Moxie`) / 30) *
+        (1 + getModifier("Sleaze Resistance") * 0.69),
+    ),
+  );
 
   if (step >= 1) return null;
 
@@ -41,9 +61,29 @@ const OrcChasm: FC = () => {
               <Line>
                 Build a bridge. <Em>(+item, -ML)</Em>
               </Line>
-              <Line>
-                Overkill orcs with cold damage: {orcProgress}/15 to NC.
-              </Line>
+              {orcProgress < 15 ? (
+                <Line>
+                  Overkill orcs with cold damage: {orcProgress}/15 to NC.
+                </Line>
+              ) : (
+                <>
+                  <Line>Blech House next turn!</Line>
+                  <List.Root>
+                    <List.Item>
+                      <Strong>Muscle/Weapon Dmg:</Strong>{" "}
+                      {plural(musclePieces, "/14 piece")}.
+                    </List.Item>
+                    <List.Item>
+                      <Strong>Myst/Spell Dmg:</Strong>{" "}
+                      {plural(mysticalityPieces, "/14 piece")}.
+                    </List.Item>
+                    <List.Item>
+                      <Strong>Moxie/Sleaze Res:</Strong>{" "}
+                      {plural(moxiePieces, "/14 piece")}.
+                    </List.Item>
+                  </List.Root>
+                </>
+              )}
               <Line>{commaAnd(needs)} needed.</Line>
             </>
           ) : (

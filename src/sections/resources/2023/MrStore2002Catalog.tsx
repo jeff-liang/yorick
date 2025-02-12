@@ -1,13 +1,22 @@
 import { List, Text } from "@chakra-ui/react";
-import { availableAmount, myHash, totalTurnsPlayed } from "kolmafia";
+import {
+  availableAmount,
+  getCounter,
+  myHash,
+  totalTurnsPlayed,
+} from "kolmafia";
 import { $item, get, getTodaysHolidayWanderers, have } from "libram";
 
 import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
+import { NagPriority } from "../../../contexts/NagContext";
+import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
+import { plural } from "../../../util/text";
 
 const MrStore2002Catalog = () => {
+  const have2002 = haveUnrestricted($item`2002 Mr. Store Catalog`);
   const spookyVHSTape = $item`Spooky VHS Tape`;
   const loathingIdolMicrophone = $item`Loathing Idol Microphone`;
   const flashLiquidizerUltraDousingAccessory = $item`Flash Liquidizer Ultra Dousing Accessory`;
@@ -56,7 +65,34 @@ const MrStore2002Catalog = () => {
 
   const fludaOptions = ["goat cheese", "filthworm sweat glands"];
 
-  if (!haveUnrestricted($item`2002 Mr. Store Catalog`) || mr2002Credits <= 0) {
+  const vhsMonsterTurn = getCounter("Spooky VHS Tape Monster");
+
+  useNag(
+    () => ({
+      id: "2002-spooky-vhs-nag",
+      priority: vhsMonsterTurn === 0 ? NagPriority.ERROR : NagPriority.LOW,
+      imageUrl: "/images/itemimages/2002vhs.gif",
+      node: vhsMonsterTurn >= 0 && vhsMonsterTurn <= 1 && (
+        <Tile
+          header={
+            vhsMonsterTurn === 0
+              ? "Spooky VHS wanderer now!"
+              : `Spooky VHS: ${plural(vhsMonsterTurn, "turn")}`
+          }
+          id="2002-spooky-vhs-nag"
+          imageUrl="/images/itemimages/2002vhs.gif"
+        >
+          {vhsMonsterTurn === 1 && (
+            <Line>Adventure in a delay zone after 1 turn.</Line>
+          )}
+          {vhsMonsterTurn === 0 && <Line>Adventure in a delay zone now!</Line>}
+        </Tile>
+      ),
+    }),
+    [vhsMonsterTurn],
+  );
+
+  if (!have2002 || mr2002Credits <= 0) {
     return null;
   }
 
@@ -69,7 +105,6 @@ const MrStore2002Catalog = () => {
       <Line>{mr2002Credits} 2002 Mr. Store credits.</Line>
       {mr2002Credits > 0 && (
         <>
-          <Line>Spend credits on prehistoric IotMs!</Line>
           <List.Root>
             {!have(flashLiquidizerUltraDousingAccessory) && (
               <List.Item>

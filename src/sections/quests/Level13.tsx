@@ -184,7 +184,11 @@ const Level13: FC = () => {
           have(Item.get(name), count),
         ) &&
         statRaceModifier &&
-        getModifier(statRaceModifier, potion) > 0,
+        statRaceType &&
+        (getModifier(statRaceModifier, potion) > 0 ||
+          getModifier(
+            `${statRaceType.identifierString} Percent` as NumericModifier,
+          ) > 0),
     );
     return (
       <QuestTile
@@ -214,7 +218,7 @@ const Level13: FC = () => {
             <Race
               name={statRaceModifier ?? "Elemental"}
               contestants={get("nsContestants2")}
-              value={statRaceModifier ? getModifier(statRaceModifier) : 0}
+              value={statRaceType ? myBuffedstat(statRaceType) : 0}
               needed={600}
             />
             {statRaceModifier &&

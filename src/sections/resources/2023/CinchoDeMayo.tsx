@@ -2,6 +2,7 @@ import { List, Strong } from "@chakra-ui/react";
 import { getDwelling, myAscensions, totalFreeRests } from "kolmafia";
 import {
   $item,
+  $skill,
   BurningLeaves,
   ChateauMantegna,
   CinchoDeMayo as LibramCincho,
@@ -95,9 +96,12 @@ const CinchoDeMayo = () => {
             <List.Item>
               <Strong>Confetti Extravaganza (5%):</Strong> 2x stats, in-combat
             </List.Item>
-            <List.Item>
-              <Strong>Projectile Piñata (5%):</Strong> complex candy, in-combat
-            </List.Item>
+            {haveUnrestricted($skill`Sweet Synthesis`) && (
+              <List.Item>
+                <Strong>Projectile Piñata (5%):</Strong> complex candy,
+                in-combat
+              </List.Item>
+            )}
           </>
         )}
       </List.Root>

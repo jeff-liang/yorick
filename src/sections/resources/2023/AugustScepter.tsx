@@ -1,6 +1,7 @@
 import { Table, Text } from "@chakra-ui/react";
 import {
   availableAmount,
+  myFamiliar,
   myLevel,
   myPath,
   myPrimestat,
@@ -10,7 +11,6 @@ import {
   $familiar,
   $item,
   $path,
-  $skill,
   byStat,
   clamp,
   get,
@@ -78,7 +78,6 @@ const AugustScepter: FC = () => {
     Mysticality: 11,
     Moxie: 23,
   });
-  console.log("primestat", myPrimestat().toString());
 
   const usefulAugustSkills: [number, ReactNode][] = [];
 
@@ -187,23 +186,16 @@ const AugustScepter: FC = () => {
     ]);
   }
 
-  if (
-    have($skill`Transcendent Olfaction`) &&
-    (have($familiar`Pair of Stomping Boots`) ||
-      (have($skill`The Ode to Booze`) &&
-        have($familiar`Frumious Bandersnatch`)))
-  ) {
-    if (!have($item`astral pet sweater`)) {
-      usefulAugustSkills.push([
-        28,
-        <Text>
-          +10 weight familiar equipment{" "}
-          <Text as="span" fontSize="xs" color="gray.solid">
-            (melting)
-          </Text>
-        </Text>,
-      ]);
-    }
+  if (!have($item`toy Cupid bow`) && myFamiliar() !== $familiar`none`) {
+    usefulAugustSkills.push([
+      28,
+      <Text>
+        +10 weight/+1 xp familiar equip{" "}
+        <Text as="span" fontSize="xs" color="gray.solid">
+          (melting)
+        </Text>
+      </Text>,
+    ]);
   }
 
   const table = usefulAugustSkills

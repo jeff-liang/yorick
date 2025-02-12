@@ -10,7 +10,7 @@ import { commaAnd, plural } from "../../../util/text";
 const PhotoBooth: FC = () => {
   const clanName = getClanName();
   // TODO: Support other clans (but we'd have to check unlocks)
-  const hasPhotoBooth = clanName === "Bonus Adventures from Hell";
+  const clanHasPhotoBooth = clanName === "Bonus Adventures from Hell";
 
   const photosRemaining = 3 - get("_photoBoothEffects");
   const propsRemaining = 3 - get("_photoBoothEquipment");
@@ -20,8 +20,7 @@ const PhotoBooth: FC = () => {
 
   if (
     !haveUnrestricted($item`Clan VIP Lounge key`) ||
-    !isUnrestricted($item`photo booth sized crate`) ||
-    (photosRemaining === 0 && propsRemaining === 0)
+    !isUnrestricted($item`photo booth sized crate`)
   ) {
     return null;
   }
@@ -32,9 +31,10 @@ const PhotoBooth: FC = () => {
     <Tile
       header="Clan Photo Booth"
       href="/clan_viplounge.php?action=photobooth"
+      linkEntireTile={clanHasPhotoBooth} // otherwise there is a link to switch.
       imageUrl="/images/adventureimages/photobooth.gif"
     >
-      {!hasPhotoBooth && (
+      {!clanHasPhotoBooth && (
         <Line command="/whitelist Bonus Adventures from Hell">
           Switch to clan BAFH for photo booth.
         </Line>

@@ -20,7 +20,8 @@ const PhotoBooth: FC = () => {
 
   if (
     !haveUnrestricted($item`Clan VIP Lounge key`) ||
-    !isUnrestricted($item`photo booth sized crate`)
+    !isUnrestricted($item`photo booth sized crate`) ||
+    (photosRemaining === 0 && propsRemaining === 0)
   ) {
     return null;
   }

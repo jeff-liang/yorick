@@ -74,7 +74,11 @@ const MrStore2002Catalog = () => {
       imageUrl: "/images/itemimages/2002vhs.gif",
       node: vhsMonsterTurn >= 0 && vhsMonsterTurn <= 1 && (
         <Tile
-          header={`Spooky VHS: ${plural(vhsMonsterTurn, "turn")}`}
+          header={
+            vhsMonsterTurn === 0
+              ? "Spooky VHS wanderer now!"
+              : `Spooky VHS: ${plural(vhsMonsterTurn, "turn")}`
+          }
           id="2002-spooky-vhs-nag"
           imageUrl="/images/itemimages/2002vhs.gif"
         >
@@ -101,7 +105,6 @@ const MrStore2002Catalog = () => {
       <Line>{mr2002Credits} 2002 Mr. Store credits.</Line>
       {mr2002Credits > 0 && (
         <>
-          <Line>Spend credits on prehistoric IotMs!</Line>
           <List.Root>
             {!have(flashLiquidizerUltraDousingAccessory) && (
               <List.Item>

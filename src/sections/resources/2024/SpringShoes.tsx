@@ -48,16 +48,7 @@ const SpringShoes = () => {
     [haveELG, haveShoes, haveShoesEquipped, pathCheck, springShoes],
   );
 
-  if (!haveShoes) return null;
-
-  return (
-    <Tile linkedContent={springShoes}>
-      <Line>Spring Kick: All day banish, doesn't end combat.</Line>
-      {!haveShoesEquipped && (
-        <Line color="red.solid">Equip the spring shoes first.</Line>
-      )}
-    </Tile>
-  );
+  return null;
 };
 
 export default SpringShoes;

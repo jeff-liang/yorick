@@ -3,17 +3,21 @@ import { FC } from "react";
 
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
+import { inventoryLink } from "../../../util/links";
 
 const McHugeLargeDuffelBag: FC = () => {
-  if (
-    !haveUnrestricted($item`McHugeLarge duffel bag`) ||
-    have($item`McHugeLarge left ski`)
-  ) {
+  const duffelBag = $item`McHugeLarge duffel bag`;
+
+  if (!haveUnrestricted(duffelBag) || have($item`McHugeLarge left ski`)) {
     return null;
   }
 
   return (
-    <Tile linkedContent={$item`McHugeLarge duffel bag`}>
+    <Tile
+      header="McHugeLarge duffel bag"
+      href={inventoryLink(duffelBag)}
+      linkEntireTile
+    >
       Open your duffel bag for ski equipment!
     </Tile>
   );

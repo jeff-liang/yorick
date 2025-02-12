@@ -38,9 +38,9 @@ const milestoneMessage = (milestones: number) => {
 const RockGarden = () => {
   const desertProgress = get("desertExploration");
   const gardenGravels = getCampground()["groveling gravel"];
-  const gardenWhetStones = availableAmount($item`whet stone`);
+  const gardenWhetStones = getCampground()["whet stone"];
   const gardenMilestones =
-    desertProgress < 100 ? availableAmount($item`milestone`) : 0;
+    desertProgress < 100 ? getCampground()["milestone"] : 0;
 
   const availableGravels = availableAmount($item`groveling gravel`);
   const availableWhetStones = availableAmount($item`whet stone`);

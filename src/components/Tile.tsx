@@ -137,11 +137,12 @@ const Tile: FC<TileProps> = ({
           )}
         </HStack>
       </HStack>
-      {!collapsed && !disabled && linkEntireTile ? (
-        <MainLink href={href}>{collapseNode}</MainLink>
-      ) : (
-        collapseNode
-      )}
+      {!disabled &&
+        (linkEntireTile ? (
+          <MainLink href={href}>{collapseNode}</MainLink>
+        ) : (
+          collapseNode
+        ))}
     </VStack>
   );
 
@@ -178,7 +179,7 @@ const Tile: FC<TileProps> = ({
           />
         )}
       </Box>
-      {!disabled && tileContents}
+      {tileContents}
     </HStack>
   );
 };

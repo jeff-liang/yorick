@@ -60,7 +60,9 @@ const PhotoBooth: FC = () => {
           .
         </Line>
       ) : (
-        <Line>Get {propsRemaining} additional prop equipment.</Line>
+        propsRemaining > 0 && (
+          <Line>Get {propsRemaining} additional prop equipment.</Line>
+        )
       )}
     </Tile>
   );

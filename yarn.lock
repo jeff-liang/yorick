@@ -5230,12 +5230,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia-react@npm:^0.2.6":
-  version: 0.2.6
-  resolution: "tome-kolmafia-react@npm:0.2.6"
+"tome-kolmafia-react@npm:^0.2.7":
+  version: 0.2.7
+  resolution: "tome-kolmafia-react@npm:0.2.7"
   peerDependencies:
-    tome-kolmafia-lib: ^5.28118.0
-  checksum: 10c0/046606400b1c4036b96147451b7eee8f3d768e96a6874911844716f29e446a7d1f530ae06ad020f5f75c31fabcb23403c7d23d4d27b9a8800142bea6feac5f0c
+    tome-kolmafia-lib: ^5.28276.0
+  checksum: 10c0/1ed7a6bde4ec20ef9da885cb41f6af0f3bbe4038c12a26c67c3cf38306be4ed67b63ec099f52b603369c10b5558fe5afaa6f56fca109ecd33bcc54069488c389
   languageName: node
   linkType: hard
 
@@ -5647,7 +5647,7 @@ __metadata:
     react-icons: "npm:^5.3.0"
     react-router-dom: "npm:^6.26.1"
     tome-kolmafia-lib: "npm:^5.28276.0"
-    tome-kolmafia-react: "npm:^0.2.6"
+    tome-kolmafia-react: "npm:^0.2.7"
     ts-morph: "npm:^24.0.0"
     typescript: "npm:^5.6.3"
     typescript-eslint: "npm:^8.3.0"

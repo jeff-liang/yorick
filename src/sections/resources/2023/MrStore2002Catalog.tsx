@@ -1,11 +1,7 @@
 import { List, Text } from "@chakra-ui/react";
-import {
-  availableAmount,
-  getCounter,
-  myHash,
-  totalTurnsPlayed,
-} from "kolmafia";
+import { availableAmount, myHash, totalTurnsPlayed } from "kolmafia";
 import { $item, get, getTodaysHolidayWanderers, have } from "libram";
+import { remoteCall } from "tome-kolmafia-lib";
 
 import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
@@ -65,7 +61,12 @@ const MrStore2002Catalog = () => {
 
   const fludaOptions = ["goat cheese", "filthworm sweat glands"];
 
-  const vhsMonsterTurn = getCounter("Spooky VHS Tape Monster");
+  // have to manually call, otherwise a nag always pops up.
+  const vhsMonsterTurn = remoteCall<number>(
+    "getCounter",
+    ["Spooky VHS Tape Monster"],
+    -1,
+  );
 
   useNag(
     () => ({

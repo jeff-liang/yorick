@@ -37,6 +37,7 @@ const UndergroundFireworksShop = () => {
       header="Underground Fireworks Shop"
       imageUrl="/images/itemimages/fwrocket2.gif"
       href="/clan_viplounge.php?action=fwshop&whichfloor=2"
+      linkEntireTile
     >
       <Line>
         Buy a rocket for {prices.rockets} meat:{" "}

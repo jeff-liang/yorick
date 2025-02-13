@@ -89,11 +89,16 @@ const Tile: FC<TileProps> = ({
 
   const imageSize = collapsed || disabled ? "20px" : "30px";
 
+  const collapseNode = (
+    <Collapsible.Root unmountOnExit open={!collapsed} overflow="visible">
+      <Collapsible.Content overflow="visible">{children}</Collapsible.Content>
+    </Collapsible.Root>
+  );
   const tileContents = (
     <VStack align="start" gap={0.5}>
       <HStack gap={1} align="center">
         <H3 lineHeight="tall">
-          {!collapsed && !disabled && !linkEntireTile && href ? (
+          {!collapsed && !disabled && href ? (
             <MainLink href={href}>{heading}</MainLink>
           ) : (
             heading
@@ -132,10 +137,10 @@ const Tile: FC<TileProps> = ({
           )}
         </HStack>
       </HStack>
-      {!disabled && (
-        <Collapsible.Root unmountOnExit open={!collapsed}>
-          <Collapsible.Content>{children}</Collapsible.Content>
-        </Collapsible.Root>
+      {!collapsed && !disabled && linkEntireTile ? (
+        <MainLink href={href}>{collapseNode}</MainLink>
+      ) : (
+        collapseNode
       )}
     </VStack>
   );
@@ -173,11 +178,7 @@ const Tile: FC<TileProps> = ({
           />
         )}
       </Box>
-      {!collapsed && !disabled && linkEntireTile ? (
-        <MainLink href={href}>{tileContents}</MainLink>
-      ) : (
-        tileContents
-      )}
+      {!disabled && tileContents}
     </HStack>
   );
 };

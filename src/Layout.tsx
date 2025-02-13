@@ -5,6 +5,7 @@ import { RefreshContext } from "tome-kolmafia-react";
 
 import BrandHeading from "./components/BrandHeading";
 import ChatButton from "./components/ChatButton";
+import CloseIconButton from "./components/CloseIconButton";
 import LocationBar from "./components/LocationBar";
 import PrefsButton from "./components/PrefsButton";
 import RefreshButton from "./components/RefreshButton";
@@ -15,7 +16,12 @@ import NagSection from "./sections/NagSection";
 import QuestSection from "./sections/QuestSection";
 import ResourceSection from "./sections/ResourceSection";
 import { inDevMode } from "./util/env";
-import { setup3Frames, setup4Frames, visibleFrameCount } from "./util/frames";
+import {
+  close,
+  setup3Frames,
+  setup4Frames,
+  visibleFrameCount,
+} from "./util/frames";
 
 const Layout = () => {
   const { triggerHardRefresh } = useContext(RefreshContext);
@@ -76,6 +82,16 @@ const Layout = () => {
         onMouseLeave={() => setButtonsVisible(false)}
       >
         <Flex position="relative" minH={0} flexGrow={1}>
+          <Stack
+            direction="row"
+            position="absolute"
+            top={1}
+            left={1}
+            zIndex={200}
+            {...(!buttonsVisible && { display: "none" })}
+          >
+            <CloseIconButton onClick={close} />
+          </Stack>
           <Stack
             direction="row"
             gap={1}

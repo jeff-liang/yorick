@@ -51,3 +51,13 @@ export function setup3Frames(): void {
   const cols = rootset.cols.split(",");
   rootset.cols = [...cols.slice(0, 2), "25%"].join(",");
 }
+
+export function close(): void {
+  if (getFrames().length === 0) return;
+
+  setup3Frames();
+
+  const allFrames = getFrames();
+  allFrames.yorickpane?.frameElement?.remove();
+  delete allFrames.yorickpane;
+}

@@ -92,7 +92,13 @@ const Tile: FC<TileProps> = ({
 
   const collapseNode = (
     <Collapsible.Root unmountOnExit open={!collapsed} overflow="visible">
-      <Collapsible.Content overflow="visible">{children}</Collapsible.Content>
+      <Collapsible.Content overflow="visible">
+        {href && linkEntireTile ? (
+          <LinkBlock href={href}>{children}</LinkBlock>
+        ) : (
+          children
+        )}
+      </Collapsible.Content>
     </Collapsible.Root>
   );
   const tileContents = (
@@ -138,12 +144,7 @@ const Tile: FC<TileProps> = ({
           )}
         </HStack>
       </HStack>
-      {!disabled &&
-        (linkEntireTile ? (
-          <LinkBlock href={href}>{collapseNode}</LinkBlock>
-        ) : (
-          collapseNode
-        ))}
+      {!disabled && collapseNode}
     </VStack>
   );
 

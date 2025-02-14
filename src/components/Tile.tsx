@@ -17,6 +17,7 @@ import { capitalizeWords } from "../util/text";
 
 import ContentButtons from "./ContentButtons";
 import H3 from "./H3";
+import LinkBlock from "./LinkBlock";
 import MainLink from "./MainLink";
 import TileImage from "./TileImage";
 
@@ -139,7 +140,7 @@ const Tile: FC<TileProps> = ({
       </HStack>
       {!disabled &&
         (linkEntireTile ? (
-          <MainLink href={href}>{collapseNode}</MainLink>
+          <LinkBlock href={href}>{collapseNode}</LinkBlock>
         ) : (
           collapseNode
         ))}

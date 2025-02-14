@@ -15,6 +15,7 @@ const McHugeLargeDuffelBag: FC = () => {
   return (
     <Tile
       header="McHugeLarge duffel bag"
+      imageUrl="/images/itemimages/skibag2.gif"
       href={inventoryLink(duffelBag)}
       linkEntireTile
     >

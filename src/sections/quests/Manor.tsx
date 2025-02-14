@@ -95,8 +95,15 @@ const HauntedKitchen: FC = () => {
       )}
       <Line>
         {drawersPerTurn.toFixed(1)} drawers per turn.{" "}
-        {hotResistance >= 9 && stenchResistance >= 9 ? "" : "~"}
-        {plural(drawersNeeded, "drawer")} ({plural(kitchenTurns, "turn")}) left.
+        {drawersNeeded > 0 ? (
+          <>
+            {hotResistance >= 9 && stenchResistance >= 9 ? "" : "~"}
+            {plural(drawersNeeded, "drawer")} ({plural(kitchenTurns, "turn")})
+            left.
+          </>
+        ) : (
+          "Key next turn."
+        )}
       </Line>
       {inebrietyLimit() > 10 && myInebriety() < 10 && (
         <Line>Try not to drink past ten, the billiards room is next.</Line>

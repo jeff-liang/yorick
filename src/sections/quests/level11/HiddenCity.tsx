@@ -54,7 +54,7 @@ const Unlock: FC<UnlockProps> = ({ shrine, location }) => {
   const lianasLeft = 3 - lianasFought(shrine);
   return (
     <Line href={CITY_LINK}>
-      Unlock {location.identifierString} ({lianasLeft === 0 ? "no" : lianasLeft}{" "}
+      Unlock {location.identifierString} ({lianasLeft <= 0 ? "no" : lianasLeft}{" "}
       lianas left).
     </Line>
   );
@@ -66,7 +66,7 @@ const Machete = () => {
   const canadiaSign = canAdventure($location`Outskirts of Camp Logging Camp`);
   const janitorsRelocated = get("relocatePygmyJanitor") === myAscensions();
   const doneWithCursedPunch =
-    get("hiddenApartmentProgress") >= 8 ||
+    get("hiddenApartmentProgress") >= 7 ||
     have($effect`Thrice-Cursed`) ||
     (have($item`candy cane sword cane`) &&
       !get("candyCaneSwordApartmentBuilding") &&
@@ -188,6 +188,7 @@ const Apartment = () => {
           )}
         </>,
       ],
+      [7, <Line href={CITY_LINK}>Return the sphere to the NW shrine.</Line>],
     ]) ?? null
   );
 };

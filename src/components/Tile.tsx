@@ -96,7 +96,9 @@ const Tile: FC<TileProps> = ({
         {href && linkEntireTile ? (
           <LinkBlock href={href}>{children}</LinkBlock>
         ) : (
-          children
+          <VStack align="start" gap={0.5}>
+            {children}
+          </VStack>
         )}
       </Collapsible.Content>
     </Collapsible.Root>

@@ -73,8 +73,11 @@ const LUCKY_SOURCES: LuckySource[] = [
   {
     name: "August Scepter",
     remaining: () =>
-      +haveUnrestricted($skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`) &&
-      +!get("_aug2Cast"),
+      +(
+        haveUnrestricted($skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`) &&
+        !get("_aug2Cast") &&
+        get("_augSkillsCast") < 5
+      ),
     render: () => {
       const aug2Skill = $skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`;
       return <Line href={skillLink(aug2Skill)}>1 August 16th use.</Line>;

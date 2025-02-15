@@ -98,7 +98,7 @@ const Copperhead: FC = () => {
                 <AdviceTooltipIcon advice="This delay count does not include the meetings with Shen." />
               </Line>
             )}
-            {copperheadTurns === 14 && shenMeetings === 3 && (
+            {turnsUntilMeeting === 1 && (
               <Line
                 href={
                   couldUseDisguise
@@ -107,7 +107,8 @@ const Copperhead: FC = () => {
                 }
               >
                 50% chance of meeting Shen this turn.
-                {couldUseDisguise &&
+                {shenMeetings === 3 &&
+                  couldUseDisguise &&
                   "Use a crappy waiter disguise for 25% chance of a turn saved."}
               </Line>
             )}

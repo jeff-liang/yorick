@@ -21,10 +21,9 @@ import Line from "../../components/Line";
 import Monsters from "../../components/Monsters";
 import QuestTile from "../../components/QuestTile";
 import { neededNinjaItems } from "../../questInfo/trapper";
-import faxLikes from "../../util/faxLikes";
 import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
-import { commaAnd, commaOr, plural, truthy } from "../../util/text";
+import { commaAnd, plural, truthy } from "../../util/text";
 
 const TRAPPER_URL = "/place.php?whichplace=mclargehuge&action=trappercabin";
 
@@ -93,9 +92,6 @@ const Level8: FC = () => {
                     target={$monster`dairy goat`}
                   />
                 </Line>
-              )}
-              {ore < 3 && faxLikes.length > 0 && (
-                <Line>Could use {commaOr(faxLikes())} for a mountain man.</Line>
               )}
             </>
           ) : (

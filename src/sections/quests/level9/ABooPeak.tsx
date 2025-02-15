@@ -3,6 +3,7 @@ import {
   availableAmount,
   Element,
   elementalResistance,
+  haveEquipped,
   itemDropModifier,
   myHp,
 } from "kolmafia";
@@ -28,7 +29,8 @@ const ABooPeak: FC = () => {
   const lit = get("booPeakLit");
   const clue = $item`A-Boo clue`;
   const clueCount = availableAmount(clue);
-  const itemDrop = itemDropModifier();
+  const itemDrop =
+    itemDropModifier() + +(haveEquipped($item`Everfull Dart Holster`) && 30);
   const cluePerAdv = Math.min(1, ((100 + itemDrop) * 0.15) / 100);
 
   const turnsTo90 = Math.ceil((haunt - 90) / 2);

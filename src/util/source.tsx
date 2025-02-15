@@ -10,16 +10,17 @@ export interface Source {
 export function renderSourceList(sourceList: Source[]): {
   total: number;
   rendered: ReactNode[];
+  keys: string[];
 } {
   const sources = sourceList
     .map((source): [Source, number] => [source, source.remaining()])
-    .filter(([, remaining]) => remaining > 0);
+    .filter(([, remaining]) => remaining > 0)
+    .sort(([, a], [, b]) => b - a);
   return {
     total: sum(sources, ([, remaining]) => remaining),
-    rendered: sources
-      .sort(([, a], [, b]) => b - a)
-      .map(([{ name, render }, remaining]) => (
-        <Fragment key={name}>{render({ remaining })}</Fragment>
-      )),
+    rendered: sources.map(([{ name, render }, remaining]) => (
+      <Fragment key={name}>{render({ remaining })}</Fragment>
+    )),
+    keys: sources.map(([{ name }]) => name),
   };
 }

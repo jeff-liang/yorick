@@ -27,6 +27,7 @@ const Level3: FC = () => {
       {Math.ceil(20 - value)} more <ElementName element={name as ElementType} />
     </>
   ));
+  const keys = needed.map(([name]) => name);
 
   if (step === Step.FINISHED) return null;
 
@@ -52,7 +53,7 @@ const Level3: FC = () => {
           <>
             <Line>Explore the cellar to find the rat faucet.</Line>
             {needed.length > 0 && (
-              <Line>Need {commaAnd(description)} damage.</Line>
+              <Line>Need {commaAnd(description, keys)} damage.</Line>
             )}
             {combat > -25 && <Line>Need {25 + combat}% more -combat.</Line>}
             {ml < 300 && <Line>Could use up to {300 - ml} more ML.</Line>}

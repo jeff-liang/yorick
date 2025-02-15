@@ -212,13 +212,11 @@ const LordSpookyraven: FC = () => {
             Go search in the Haunted{" "}
             {commaOr(
               missingSearchables.map(([location]) => (
-                <MainLink
-                  key={location}
-                  href={parentPlaceLink(Location.get(location))}
-                >
+                <MainLink href={parentPlaceLink(Location.get(location))}>
                   location.replace("The Haunted ", "")
                 </MainLink>
               )),
+              missingSearchables.map(([location]) => location),
             )}
             .
           </Line>

@@ -78,18 +78,21 @@ const HauntedKitchen: FC = () => {
       {(hotResistance < 9 || stenchResistance < 9) && (
         <Line>
           Run{" "}
-          {commaAnd([
-            hotResistance < 9 && (
-              <Text as="span">
-                {9 - hotResistance} more <Hot /> resistance
-              </Text>
-            ),
-            stenchResistance < 9 && (
-              <Text as="span">
-                {9 - stenchResistance} more <Stench /> resistance
-              </Text>
-            ),
-          ])}{" "}
+          {commaAnd(
+            [
+              hotResistance < 9 && (
+                <Text as="span">
+                  {9 - hotResistance} more <Hot /> resistance
+                </Text>
+              ),
+              stenchResistance < 9 && (
+                <Text as="span">
+                  {9 - stenchResistance} more <Stench /> resistance
+                </Text>
+              ),
+            ],
+            ["hot", "stench"],
+          )}{" "}
           to search faster.
         </Line>
       )}

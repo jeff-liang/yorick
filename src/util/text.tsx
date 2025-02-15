@@ -108,6 +108,10 @@ function commaListInternal(
   values = values.map((x) => (isIdentified(x) ? x.identifierString : x));
   // Show only truthy values.
   values = truthy(values);
+  keys = keys?.filter((key, index) => values[index]) as
+    | string[]
+    | number[]
+    | undefined;
   if (values.length === 0) return "none";
   else if (values.length === 1) return values[0];
   else if (values.length === 2) {
@@ -161,6 +165,11 @@ export function commaList(
   return commaListInternal(values, connector, keys);
 }
 
+export function commaAnd(values: (string | AnyIdentified | Falsey)[]): string;
+export function commaAnd(
+  values: ReactNode[],
+  keys: string[] | number[],
+): ReactNode;
 export function commaAnd(
   values: (string | AnyIdentified | Falsey)[] | ReactNode[],
   keys?: string[] | number[],
@@ -168,6 +177,11 @@ export function commaAnd(
   return commaListInternal(values, "and", keys);
 }
 
+export function commaOr(values: (string | AnyIdentified | Falsey)[]): string;
+export function commaOr(
+  values: ReactNode[],
+  keys: string[] | number[],
+): ReactNode;
 export function commaOr(
   values: (string | AnyIdentified | Falsey)[] | ReactNode[],
   keys?: string[] | number[],

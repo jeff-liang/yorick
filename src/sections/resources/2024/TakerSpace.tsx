@@ -68,14 +68,17 @@ const TakerSpace: FC = () => {
     >
       <Line>
         Current Supplies:{" "}
-        {commaAnd([
-          supplies.spice && plural(supplies.spice, "stolen spice"),
-          supplies.rum && `${supplies.rum} robbed rum`,
-          supplies.anchor && plural(supplies.anchor, "absconded-with anchor"),
-          supplies.mast && plural(supplies.mast, "misappropriated mainmast"),
-          supplies.silk && plural(supplies.silk, "snatched silk"),
-          supplies.gold && plural(supplies.gold, "gaffled gold"),
-        ])}
+        {commaAnd(
+          [
+            supplies.spice && plural(supplies.spice, "stolen spice"),
+            supplies.rum && `${supplies.rum} robbed rum`,
+            supplies.anchor && plural(supplies.anchor, "absconded-with anchor"),
+            supplies.mast && plural(supplies.mast, "misappropriated mainmast"),
+            supplies.silk && plural(supplies.silk, "snatched silk"),
+            supplies.gold && plural(supplies.gold, "gaffled gold"),
+          ],
+          Object.keys(supplies),
+        )}
         .
       </Line>
       {makeableItems.length > 0 && (

@@ -222,6 +222,7 @@ const Level13: FC = () => {
               needed={600}
             />
             {statRaceModifier &&
+              get("nsContestants3") < 0 &&
               getModifier(statRaceModifier) < 600 &&
               availablePotions.length > 0 &&
               freeCrafts("food") > 0 && (
@@ -379,10 +380,17 @@ const Level13: FC = () => {
     ];
     const bestFamiliar = familiars.find(([familiar]) => have(familiar))?.[0];
 
-    const elements = ["Hot", "Cold", "Spooky", "Sleaze", "Stench"];
-    const elementalDamage = elements.filter(
-      (element) => numericModifier(`${element} Damage`) > 0,
-    ).length;
+    const elements: ElementType[] = [
+      "hot",
+      "cold",
+      "spooky",
+      "sleaze",
+      "stench",
+    ];
+    const missingElements = elements.filter(
+      (element) => numericModifier(`${capitalize(element)} Damage`) <= 0,
+    );
+    const elementalDamage = 5 - missingElements.length;
 
     const buttSkill = have($skill`Headbutt`)
       ? $skill`Headbutt`
@@ -430,6 +438,18 @@ const Level13: FC = () => {
               Current damage per turn: {currentDirect} direct and{" "}
               {currentThorns} thorns.
             </Line>
+            {elementalDamage < 5 && (
+              <Line>
+                Need elements{" "}
+                {commaAnd(
+                  missingElements.map((element) => (
+                    <ElementName element={element} />
+                  )),
+                  missingElements,
+                )}
+                .
+              </Line>
+            )}
             {effectSources.length > 0 && (
               <>
                 <Line>Get effects:</Line>

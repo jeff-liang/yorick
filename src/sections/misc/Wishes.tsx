@@ -45,10 +45,10 @@ const WISH_SOURCES: Source[] = [
     name: "Genie Wish",
     remaining: () => sum(GENIE_SOURCES, ({ remaining }) => remaining()),
     render: () => {
-      const { total, rendered } = renderSourceList(GENIE_SOURCES);
+      const { total, rendered, keys } = renderSourceList(GENIE_SOURCES);
       return (
         <Line href={inventoryUseLink($item`pocket wish`)}>
-          {plural(total, "wish", "wishes")} ({commaAnd(rendered)}).
+          {plural(total, "wish", "wishes")} ({commaAnd(rendered, keys)}).
         </Line>
       );
     },

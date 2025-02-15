@@ -1,4 +1,4 @@
-import { combatRateModifier, Location } from "kolmafia";
+import { combatRateModifier, Location, meatDropModifier } from "kolmafia";
 import { clamp, getModifier, sum } from "libram";
 
 export function turnsToSeeNoncombat(combatRate: number, encounters = 1) {
@@ -97,4 +97,51 @@ export function bitCount(n: number): number {
   n = n - ((n >> 1) & 0x55555555);
   n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
   return (((n + (n >> 4)) & 0xf0f0f0f) * 0x1010101) >> 24;
+}
+
+// Triangle distribution is used for meat drops.
+// An 800-1200 meat drop e.g. is distributed as 800 + 2d(0-100).
+export function trianglePdf(low: number, high: number, desired: number) {
+  if (Math.floor(desired) !== desired) return 0;
+  if (desired < low || desired > high) return 0;
+
+  const range = high - low;
+  const distanceFromEdge = Math.min(desired - low, high - desired);
+  return (distanceFromEdge + 1) / Math.pow(range / 2 + 1, 2);
+}
+
+// What is the probability that low + 2d(high - low), inclusive <= desired?
+export function triangleCdf(low: number, high: number, desired: number) {
+  if (desired < low) return 0;
+  if (desired >= high) return 1;
+
+  // result of distribution X is always an integer, so X <= n iff X <= floor(n)
+  desired = Math.floor(desired);
+
+  const range = high - low;
+  const mid = (low + high) / 2;
+  if (desired <= mid) {
+    // Sum of arithmetic sequence from 1 to (desired-low+1)
+    const n = desired - low + 1;
+    return (n * (n + 1)) / 2 / Math.pow(range / 2 + 1, 2);
+  } else {
+    // 1 minus sum of arithmetic sequence from 1 to (high-desired)
+    const n = high - desired;
+    return 1 - (n * (n + 1)) / 2 / Math.pow(range / 2 + 1, 2);
+  }
+}
+
+// What is the probability that low + 2d(high - low), inclusive >= desired?
+export function triangleAtLeast(low: number, high: number, desired: number) {
+  return 1 - triangleCdf(low, high, desired - 1);
+}
+
+export function meatAtLeast(
+  low: number,
+  high: number,
+  meatNeeded: number,
+  meatModifier?: number,
+) {
+  if (meatModifier === undefined) meatModifier = meatDropModifier();
+  return triangleAtLeast(low, high, meatNeeded / (1 + meatModifier / 100));
 }

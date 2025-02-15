@@ -15,6 +15,7 @@ import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
+import { meatAtLeast } from "../../../util/calc";
 import { plural } from "../../../util/text";
 
 interface Range {
@@ -115,15 +116,10 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
           </>
         )}
       <Line>{turnRangeString(turnRange)}.</Line>
-      {turnRange.low === 1 && turnRange.high === 2 && (
+      {turnRange.low === 1 && (
         <Line>
-          {Math.floor(
-            (1.0 -
-              (meatRemaining + 1 - brigandMeatDropRange.low) /
-                (brigandMeatDropRange.high - brigandMeatDropRange.low)) *
-              100,
-          )}
-          % chance of completing in one turn.
+          {meatAtLeast(800, 1200, meatRemaining).toFixed(0)}% chance of
+          completing in one turn.
         </Line>
       )}
       {have($item`Rufus's shadow lodestone`) &&

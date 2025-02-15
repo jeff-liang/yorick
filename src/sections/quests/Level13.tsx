@@ -12,6 +12,7 @@ import {
   initiativeModifier,
   Item,
   itemType,
+  meatDropModifier,
   myBuffedstat,
   myClass,
   myFamiliar,
@@ -42,7 +43,6 @@ import {
 import { FC } from "react";
 
 import AdviceTooltipIcon from "../../components/AdviceTooltipIcon";
-import AdviceTooltipText from "../../components/AdviceTooltipText";
 import AsyncLink from "../../components/AsyncLink";
 import ElementName from "../../components/ElementName";
 import Line from "../../components/Line";
@@ -50,7 +50,7 @@ import LinkBlock from "../../components/LinkBlock";
 import QuestTile from "../../components/QuestTile";
 import Tile from "../../components/Tile";
 import { haveUnrestricted } from "../../util/available";
-import { monsterLevelWithPercent } from "../../util/calc";
+import { meatAtLeast, monsterLevelWithPercent } from "../../util/calc";
 import { parentPlaceLink } from "../../util/links";
 import { questFinished, Step } from "../../util/quest";
 import {
@@ -495,6 +495,8 @@ const Level13: FC = () => {
   }
 
   if (!pastTowerLevel2) {
+    const meat = meatDropModifier();
+    const chance = meatAtLeast(160, 240, 1000);
     return (
       <Tile
         header="Defeat the Wall of Meat"
@@ -503,11 +505,18 @@ const Level13: FC = () => {
         linkEntireTile
         imageUrl="/images/itemimages/meat.gif"
       >
-        <Line>
-          <AdviceTooltipText advice="You need 526% meat drop to guarantee a one-turn kill.">
-            {`Current meat drop: ${getModifier("Meat Drop").toFixed(0)}/526%.`}
-          </AdviceTooltipText>
-        </Line>
+        <Line>Current meat drop: {meat.toFixed(0)}/525%.</Line>
+        {meat < 525 ? (
+          <>
+            <Line>You need 525% meat drop to guarantee a one-turn kill.</Line>
+            <Line>
+              Right now, {(100 * chance).toFixed(0)}% chance to complete in one
+              turn.
+            </Line>
+          </>
+        ) : (
+          <Line>You will kill the Wall of Meat in one turn.</Line>
+        )}
       </Tile>
     );
   }

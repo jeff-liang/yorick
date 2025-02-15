@@ -7,7 +7,7 @@ import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
 import { bridgeItemsNeeded } from "../../../questInfo/bridgeItemsNeeded";
 import { atStep, Step } from "../../../util/quest";
-import { commaAnd, plural } from "../../../util/text";
+import { commaAnd, plural, pluralJustDesc } from "../../../util/text";
 
 const OrcChasm: FC = () => {
   const step = questStep("questL09Topping");
@@ -21,22 +21,32 @@ const OrcChasm: FC = () => {
 
   const needMoreItems = lumberNeeded > 0 || fastenersNeeded > 0;
 
-  const musclePieces = Math.floor(
-    Math.sqrt(
-      ((myBuffedstat($stat`Muscle`) + getModifier("Weapon Damage")) / 15) *
-        (1 + getModifier("Weapon Damage Percent") / 100),
+  const musclePieces = Math.min(
+    14,
+    Math.floor(
+      Math.sqrt(
+        ((myBuffedstat($stat`Muscle`) + getModifier("Weapon Damage")) / 15) *
+          (1 + getModifier("Weapon Damage Percent") / 100),
+      ),
     ),
   );
-  const mysticalityPieces = Math.floor(
-    Math.sqrt(
-      ((myBuffedstat($stat`Mysticality`) + getModifier("Spell Damage")) / 15) *
-        (1 + getModifier("Spell Damage Percent") / 100),
+  const mysticalityPieces = Math.min(
+    14,
+    Math.floor(
+      Math.sqrt(
+        ((myBuffedstat($stat`Mysticality`) + getModifier("Spell Damage")) /
+          15) *
+          (1 + getModifier("Spell Damage Percent") / 100),
+      ),
     ),
   );
-  const moxiePieces = Math.floor(
-    Math.sqrt(
-      (myBuffedstat($stat`Moxie`) / 30) *
-        (1 + getModifier("Sleaze Resistance") * 0.69),
+  const moxiePieces = Math.min(
+    14,
+    Math.floor(
+      Math.sqrt(
+        (myBuffedstat($stat`Moxie`) / 30) *
+          (1 + getModifier("Sleaze Resistance") * 0.69),
+      ),
     ),
   );
 
@@ -70,16 +80,16 @@ const OrcChasm: FC = () => {
                   <Line>Blech House next turn!</Line>
                   <List.Root>
                     <List.Item>
-                      <Strong>Muscle/Weapon Dmg:</Strong>{" "}
-                      {plural(musclePieces, "/14 piece")}.
+                      <Strong>Muscle/Weapon Dmg:</Strong> {musclePieces}/14{" "}
+                      {pluralJustDesc(musclePieces, "piece")}.
                     </List.Item>
                     <List.Item>
-                      <Strong>Myst/Spell Dmg:</Strong>{" "}
-                      {plural(mysticalityPieces, "/14 piece")}.
+                      <Strong>Myst/Spell Dmg:</Strong> {mysticalityPieces}/14{" "}
+                      {pluralJustDesc(mysticalityPieces, "piece")}.
                     </List.Item>
                     <List.Item>
-                      <Strong>Moxie/Sleaze Res:</Strong>{" "}
-                      {plural(moxiePieces, "/14 piece")}.
+                      <Strong>Moxie/Sleaze Res:</Strong> {moxiePieces}/14{" "}
+                      {pluralJustDesc(moxiePieces, "piece")}.
                     </List.Item>
                   </List.Root>
                 </>

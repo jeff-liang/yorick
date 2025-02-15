@@ -25,7 +25,7 @@ interface Range {
 
 function turnRangeString(range: Range) {
   return range.low === range.high
-    ? `${plural(range.low, "turn")} remaining.`
+    ? `${plural(range.low, "turn")} remaining`
     : `[${range.low} to ${range.high}] turns remaining`;
 }
 
@@ -118,7 +118,7 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
       <Line>{turnRangeString(turnRange)}.</Line>
       {turnRange.low === 1 && (
         <Line>
-          {meatAtLeast(800, 1200, meatRemaining).toFixed(0)}% chance of
+          {(100 * meatAtLeast(800, 1200, meatRemaining)).toFixed(0)}% chance of
           completing in one turn.
         </Line>
       )}

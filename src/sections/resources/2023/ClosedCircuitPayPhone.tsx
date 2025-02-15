@@ -1,6 +1,11 @@
 import { List, Text } from "@chakra-ui/react";
-import { availableAmount, canAdventure, haveEffect } from "kolmafia";
-import { $effect, $item, $location, get } from "libram";
+import {
+  availableAmount,
+  canAdventure,
+  haveEffect,
+  myLocation,
+} from "kolmafia";
+import { $effect, $item, $location, get, have } from "libram";
 
 import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
@@ -120,6 +125,28 @@ const ClosedCircuitPayPhone = () => {
       ),
     }),
     [shadowAffinityTurns],
+  );
+
+  const haveLodestone = have($item`Rufus's shadow lodestone`);
+  const haveShadowWaters = have($effect`Shadow Waters`);
+  const atNuns = myLocation() === $location`The Themthar Hills`;
+  useNag(
+    () => ({
+      id: "nuns-shadow-waters-nag",
+      priority: NagPriority.ERROR,
+      imageUrl: "/images/itemimages/shadowvenom.gif",
+      node: atNuns && haveLodestone && !haveShadowWaters && (
+        <Tile
+          header="Get Shadow Waters"
+          imageUrl="/images/itemimages/shadowvenom.gif"
+          href="/plains.php"
+          linkEntireTile
+        >
+          <Line>Use your lodestone to get Shadow Waters for +meat.</Line>
+        </Tile>
+      ),
+    }),
+    [atNuns, haveLodestone, haveShadowWaters],
   );
 
   if (!havePayPhone) return null;

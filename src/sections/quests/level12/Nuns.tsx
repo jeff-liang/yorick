@@ -6,28 +6,15 @@ import {
   isUnrestricted,
   meatDropModifier,
   myAscensions,
-  myLocation,
   myPath,
   numericModifier,
   pullsRemaining,
 } from "kolmafia";
-import {
-  $effect,
-  $item,
-  $location,
-  $path,
-  $skill,
-  get,
-  have,
-  SongBoom,
-} from "libram";
+import { $effect, $item, $path, $skill, get, have, SongBoom } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
-import Tile from "../../../components/Tile";
-import { NagPriority } from "../../../contexts/NagContext";
-import useNag from "../../../hooks/useNag";
 import { plural } from "../../../util/text";
 
 interface Range {
@@ -107,28 +94,6 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
   };
 
   const potentialPulls = getPotentialPulls(meatRemaining);
-
-  const haveLodestone = have($item`Rufus's shadow lodestone`);
-  const haveShadowWaters = have($effect`Shadow Waters`);
-  const atNuns = myLocation() === $location`The Themthar Hills`;
-  useNag(
-    () => ({
-      id: "nuns-shadow-waters-nag",
-      priority: NagPriority.ERROR,
-      imageUrl: "/images/itemimages/shadowvenom.gif",
-      node: atNuns && haveLodestone && !haveShadowWaters && (
-        <Tile
-          header="Get Shadow Waters"
-          imageUrl="/images/itemimages/shadowvenom.gif"
-          href="/plains.php"
-          linkEntireTile
-        >
-          <Line>Use your lodestone to get Shadow Waters for +meat.</Line>
-        </Tile>
-      ),
-    }),
-    [atNuns, haveLodestone, haveShadowWaters],
-  );
 
   return (
     <QuestTile

@@ -29,7 +29,8 @@ const Copperhead: FC = () => {
       [3, 2],
       [5, 3],
     ]) ?? 0;
-  const turnsUntilMeeting = (shenMeetings + 1) * 5 - copperheadTurns;
+  const turnsUntilMeeting = shenMeetings * 5 - copperheadTurns;
+  const remainingDelay = 14 - (3 - shenMeetings) - copperheadTurns;
 
   const disguised = have($effect`Crappily Disguised as a Waiter`);
   const couldUseDisguise =
@@ -91,8 +92,8 @@ const Copperhead: FC = () => {
                   {!item || !have(Item.get(item))
                     ? "Or work on burning"
                     : "Still need to burn"}{" "}
-                  {plural(14 - (3 - shenMeetings) - copperheadTurns, "turn")} of
-                  delay in the Copperhead Club.
+                  {plural(remainingDelay, "turn")} of delay in the Copperhead
+                  Club.
                 </MainLink>{" "}
                 <AdviceTooltipIcon advice="This delay count does not include the meetings with Shen." />
               </Line>

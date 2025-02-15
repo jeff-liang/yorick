@@ -13,6 +13,7 @@ import {
   Item,
   itemType,
   myBuffedstat,
+  myClass,
   myFamiliar,
   myHp,
   myMaxhp,
@@ -620,13 +621,15 @@ const Level13: FC = () => {
   if (!pastTowerLevel5) {
     const items = $items`gauze garter, filthy poultice, scented massage oil, red pixel potion`;
     const available = items.filter(have);
+    const classId = myClass().id;
+    const image = classId >= 1 && classId < 6 ? `${classId}1` : "11";
     return (
       <Tile
         header="Your Shadow"
         id="level-13-quest"
         href={NSTOWER_URL}
         linkEntireTile
-        imageUrl="/images/adventureimages/shadowsealclubberf.gif"
+        imageUrl={`/images/otherimages/shadows/${image}.gif`}
       >
         <Line>Fight your shadow.</Line>
         {available.length > 0 && (
@@ -655,7 +658,7 @@ const Level13: FC = () => {
         id="level-13-quest"
         href={NSTOWER_URL}
         linkEntireTile
-        imageUrl="/images/adventureimages/ns.gif"
+        imageUrl="/images/adventureimages/sorcform1.gif"
         disabled={!have($item`Wand of Nagamar`)}
       >
         <Line>Defeat the Naughty Sorceress.</Line>

@@ -9,7 +9,7 @@ import QuestTile from "../../../components/QuestTile";
 import { currentSnake, SHEN_DAYS } from "../../../questInfo/copperhead";
 import { inventoryLink, parentPlaceLink } from "../../../util/links";
 import { atStep, questFinished, Step } from "../../../util/quest";
-import { commaList } from "../../../util/text";
+import { commaList, plural } from "../../../util/text";
 
 const Copperhead: FC = () => {
   const step = questStep("questL11Shen");
@@ -79,14 +79,20 @@ const Copperhead: FC = () => {
               </Line>
             ) : (
               <Line href={parentPlaceLink(copperhead)}>
-                Return {item} to Shen.
+                Return {item} to Shen
+                {turnsUntilMeeting > 0 &&
+                  ` in ${plural(turnsUntilMeeting, "turn")}`}
+                .
               </Line>
             )}
             {copperheadTurns < 14 && (
               <Line>
                 <MainLink href={parentPlaceLink(copperhead)}>
-                  Or work on burning {14 - (3 - shenMeetings) - copperheadTurns}{" "}
-                  turns of delay in the Copperhead Club.
+                  {!item || !have(Item.get(item))
+                    ? "Or work on burning"
+                    : "Still need to burn"}{" "}
+                  {plural(14 - (3 - shenMeetings) - copperheadTurns, "turn")} of
+                  delay in the Copperhead Club.
                 </MainLink>{" "}
                 <AdviceTooltipIcon advice="This delay count does not include the meetings with Shen." />
               </Line>

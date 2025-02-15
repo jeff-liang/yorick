@@ -82,7 +82,7 @@ const Copperhead: FC = () => {
               <Line href={parentPlaceLink(copperhead)}>
                 Return {item} to Shen
                 {turnsUntilMeeting > 0 &&
-                  ` in ${plural(turnsUntilMeeting, "turn")}`}
+                  ` in ${plural(turnsUntilMeeting - 0.5, "turn")}`}
                 .
               </Line>
             )}

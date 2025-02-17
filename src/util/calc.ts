@@ -1,5 +1,7 @@
 import { combatRateModifier, Location, meatDropModifier } from "kolmafia";
-import { clamp, getModifier, sum } from "libram";
+import { clamp, getModifier, sum, sumNumbers } from "libram";
+
+import { sumTriangleDistributions } from "./triangle";
 
 export function turnsToSeeNoncombat(combatRate: number, encounters = 1) {
   const noncombatRate = 1 - (combatRate + combatRateModifier()) / 100;
@@ -110,30 +112,28 @@ export function trianglePdf(low: number, high: number, desired: number) {
   return (distanceFromEdge + 1) / Math.pow(range / 2 + 1, 2);
 }
 
-// What is the probability that low + 2d(high - low), inclusive <= desired?
-export function triangleCdf(low: number, high: number, desired: number) {
-  if (desired < low) return 0;
-  if (desired >= high) return 1;
+// What is the probability that T_n <= desired?
+export function triangleCdf(n: number, desired: number) {
+  if (desired < -n) return 0;
+  if (desired >= n) return 1;
 
   // result of distribution X is always an integer, so X <= n iff X <= floor(n)
   desired = Math.floor(desired);
 
-  const range = high - low;
-  const mid = (low + high) / 2;
-  if (desired <= mid) {
-    // Sum of arithmetic sequence from 1 to (desired-low+1)
-    const n = desired - low + 1;
-    return (n * (n + 1)) / 2 / Math.pow(range / 2 + 1, 2);
+  if (desired <= 0) {
+    // Sum of arithmetic sequence from 1 to (desired+n+1)
+    const k = desired + n + 1;
+    return (k * (k + 1)) / 2 / Math.pow(n + 1, 2);
   } else {
-    // 1 minus sum of arithmetic sequence from 1 to (high-desired)
-    const n = high - desired;
-    return 1 - (n * (n + 1)) / 2 / Math.pow(range / 2 + 1, 2);
+    // 1 minus sum of arithmetic sequence from 1 to (n-desired)
+    const k = n - desired;
+    return 1 - (k * (k + 1)) / 2 / Math.pow(n + 1, 2);
   }
 }
 
-// What is the probability that low + 2d(high - low), inclusive >= desired?
-export function triangleAtLeast(low: number, high: number, desired: number) {
-  return 1 - triangleCdf(low, high, desired - 1);
+// What is the probability that T_n >= desired?
+export function triangleAtLeast(n: number, desired: number) {
+  return 1 - triangleCdf(n, desired - 1);
 }
 
 export function meatAtLeast(
@@ -143,5 +143,37 @@ export function meatAtLeast(
   meatModifier?: number,
 ) {
   if (meatModifier === undefined) meatModifier = meatDropModifier();
-  return triangleAtLeast(low, high, meatNeeded / (1 + meatModifier / 100));
+  const mid = Math.round((high + low) / 2);
+  const n = Math.round((high - low) / 2);
+  return triangleAtLeast(n, meatNeeded / (1 + meatModifier / 100) - mid);
+}
+
+export function meatTurnPdf(
+  low: number,
+  high: number,
+  meatNeeded: number,
+  meatModifier?: number,
+) {
+  if (meatModifier === undefined) meatModifier = meatDropModifier();
+  const mid = Math.round((high + low) / 2);
+  const n = Math.round((high - low) / 2);
+
+  const maxTurns = Math.ceil(meatNeeded / low);
+  const turnCdf = [];
+  turnCdf.push(meatNeeded <= 0 ? 1 : 0);
+
+  for (let i = 1; i <= Math.min(20, maxTurns); i++) {
+    const [x, pdf] = sumTriangleDistributions(n, i);
+    const target = meatNeeded / (1 + meatModifier / 100) - i * mid;
+    const startIdx = Math.max(0, Math.ceil(target - x));
+    turnCdf.push(sumNumbers(pdf.slice(startIdx)));
+  }
+
+  const result = [];
+  result.push(turnCdf[0]);
+  for (let i = 1; i < turnCdf.length; i++) {
+    result.push(turnCdf[i] - turnCdf[i - 1]);
+  }
+
+  return result;
 }

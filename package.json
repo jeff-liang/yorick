@@ -16,6 +16,7 @@
     "eslint-plugin-libram": "^0.4.22",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "fft.js": "^4.0.4",
     "globals": "^15.9.0",
     "html-entities": "^2.5.2",
     "kolmafia": "npm:tome-kolmafia-mock@5.28118.0",

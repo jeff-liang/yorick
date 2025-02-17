@@ -11,11 +11,11 @@ import {
   pullsRemaining,
 } from "kolmafia";
 import { $effect, $item, $path, $skill, get, have, SongBoom } from "libram";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 
 import Line from "../../../components/Line";
 import QuestTile from "../../../components/QuestTile";
-import { meatAtLeast } from "../../../util/calc";
+import { meatTurnPdf } from "../../../util/calc";
 import { plural } from "../../../util/text";
 
 interface Range {
@@ -96,6 +96,22 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
 
   const potentialPulls = getPotentialPulls(meatRemaining);
 
+  const songReady =
+    SongBoom.have() && SongBoom.song() === "Total Eclipse of Your Meat";
+  const meatModifier = meatDropModifier();
+  const turnPdf = useMemo(
+    () =>
+      turnRange.high <= 20
+        ? meatTurnPdf(
+            songReady ? 825 : 800,
+            songReady ? 1225 : 1200,
+            meatRemaining,
+            meatModifier,
+          )
+        : [],
+    [turnRange.high, songReady, meatRemaining, meatModifier],
+  );
+
   return (
     <QuestTile
       header="Island War Nuns"
@@ -112,16 +128,23 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
               <Line>Change BoomBox song to Total Eclipse of Your Meat.</Line>
             )}
             <Line>Be sure to Sing Along with your BoomBox every turn.</Line>
-            <Line>{turnRangeString(singTurnRange)}, if you sing.</Line>
+            {(singTurnRange.high !== turnRange.high ||
+              singTurnRange.low !== turnRange.low) && (
+              <Line>{turnRangeString(singTurnRange)}, if you sing.</Line>
+            )}
           </>
         )}
       <Line>{turnRangeString(turnRange)}.</Line>
-      {turnRange.low === 1 && (
-        <Line>
-          {(100 * meatAtLeast(800, 1200, meatRemaining)).toFixed(0)}% chance of
-          completing in one turn.
-        </Line>
-      )}
+      {turnRange.high <= 20 &&
+        turnPdf.slice(1).map(
+          (p, i) =>
+            p > 0.001 && (
+              <Line key={i}>
+                {(p * 100).toFixed(0)}% chance of completing in{" "}
+                {plural(i + 1, "turn")}.
+              </Line>
+            ),
+        )}
       {have($item`Rufus's shadow lodestone`) &&
         !have($effect`Shadow Waters`) && (
           <Line href="/plains.php" fontWeight="bold">

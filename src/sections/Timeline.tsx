@@ -145,6 +145,12 @@ const Timeline: FC<StackProps> = (props) => {
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Yellow.`,
     },
     {
+      name: "ELB",
+      turns: haveEffect($effect`Everything Looks Blue`),
+      color: "blue.solid",
+      label: (turns) => `${plural(turns, "turn")} of Everything Looks Blue.`,
+    },
+    {
       name: "ELRWB",
       turns: haveEffect($effect`Everything Looks Red, White and Blue`),
       color: "purple.solid",

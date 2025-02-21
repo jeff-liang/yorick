@@ -4031,12 +4031,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kolmafia@npm:tome-kolmafia-mock@5.28118.0":
-  version: 5.28118.0
-  resolution: "tome-kolmafia-mock@npm:5.28118.0"
+"kolmafia@npm:tome-kolmafia-mock@5.28378.0":
+  version: 5.28378.0
+  resolution: "tome-kolmafia-mock@npm:5.28378.0"
   peerDependencies:
-    tome-kolmafia-lib: ^5.28118.0
-  checksum: 10c0/7f411a62eae0455af740b4eacfcf63a1da66a43582ff7c706be68475855c451b9c30e2d5240b63464ab6c3f33b2529a5194a7014a065cc868d6b748b6f54157a
+    tome-kolmafia-lib: ^5.28378.0
+  checksum: 10c0/e1e313275e01667c0daaba20e79f5994700280423a7c757b397ae124781b599b867bda79c9be2c58cda00eaf456afee2b580ba011131eae4b85ce2a45a85cc8b
   languageName: node
   linkType: hard
 
@@ -4050,14 +4050,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.9.32":
-  version: 0.9.32
-  resolution: "libram@npm:0.9.32"
+"libram@npm:^0.10.0":
+  version: 0.10.0
+  resolution: "libram@npm:0.10.0"
   dependencies:
     html-entities: "npm:^2.5.2"
   peerDependencies:
     kolmafia: ^5.28100.0
-  checksum: 10c0/4985eeffc1ff91bcc22d9e2ee65f68c90825775fca5c030359db8ebb05f8ce5b9496f77333a7075bd671336a6f8e2cd0f2ff85efa585af0dca941b632500468a
+  checksum: 10c0/618df4563770a2ee1d40d2885fe0a5b3acccfca270872c36dcb51a3afe0bd1d58db51592a63a39501f48134e1855066917b2230d4f853dd5e90471d473d7ff48
   languageName: node
   linkType: hard
 
@@ -5228,12 +5228,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tome-kolmafia-lib@npm:^5.28276.0":
-  version: 5.28276.0
-  resolution: "tome-kolmafia-lib@npm:5.28276.0"
+"tome-kolmafia-lib@npm:^5.28378.0":
+  version: 5.28378.0
+  resolution: "tome-kolmafia-lib@npm:5.28378.0"
   dependencies:
     dataloader: "npm:^2.2.2"
-  checksum: 10c0/9aa6e4bc4c344ce886d4186f87abbe961472d32744798cbcacf3b0603398f52d9373bfe76ef4ba44dac5cd6a0dbfd4b189b983e70b7b21a728e5ce1c5fa45ac1
+  checksum: 10c0/46e473c4fdb129c370fa3a1d318949a85d0516b8a1ae4f7de5029bf6ce5500a5819d6883b8c79c62119988dd7915c06a118d75152e2bbb12c3061f4a72a1528e
   languageName: node
   linkType: hard
 
@@ -5643,8 +5643,8 @@ __metadata:
     fft.js: "npm:^4.0.4"
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
-    kolmafia: "npm:tome-kolmafia-mock@5.28118.0"
-    libram: "npm:^0.9.32"
+    kolmafia: "npm:tome-kolmafia-mock@5.28378.0"
+    libram: "npm:^0.10.0"
     lucide-react: "npm:^0.460.0"
     next-themes: "npm:^0.4.3"
     postcss: "npm:^8.4.41"
@@ -5654,7 +5654,7 @@ __metadata:
     react-error-boundary: "npm:^4.0.13"
     react-icons: "npm:^5.3.0"
     react-router-dom: "npm:^6.26.1"
-    tome-kolmafia-lib: "npm:^5.28276.0"
+    tome-kolmafia-lib: "npm:^5.28378.0"
     tome-kolmafia-react: "npm:^0.2.9"
     ts-morph: "npm:^24.0.0"
     typescript: "npm:^5.6.3"

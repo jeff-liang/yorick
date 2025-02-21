@@ -102,7 +102,7 @@ const Pyramid: FC = () => {
       href={atStep(step, [
         [
           Step.UNSTARTED,
-          haveStaffOfEd ? "/place.php?whichplace=desertbeach" : undefined,
+          "/place.php?whichplace=desertbeach&action=db_pyramid1",
         ],
         [Step.STARTED, PYRAMID_URL],
         [Step.FINISHED, "/council.php"],

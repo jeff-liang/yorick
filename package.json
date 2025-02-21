@@ -13,7 +13,7 @@
     "dataloader": "^2.2.2",
     "eslint": "^9.9.1",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-libram": "^0.4.22",
+    "eslint-plugin-libram": "^0.4.23",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "fft.js": "^4.0.4",

@@ -3073,13 +3073,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-libram@npm:^0.4.22":
-  version: 0.4.22
-  resolution: "eslint-plugin-libram@npm:0.4.22"
+"eslint-plugin-libram@npm:^0.4.23":
+  version: 0.4.23
+  resolution: "eslint-plugin-libram@npm:0.4.23"
   dependencies:
     html-entities: "npm:^2.5.2"
     requireindex: "npm:~1.2.0"
-  checksum: 10c0/f632d4d2fa677c611b5bbe15345fa680e3e7198923d26d042292ab128ae36b417319074e1631462abc63b9193cdb4f7e284869303a0126a4f1b9a544412c513c
+  checksum: 10c0/0460939b59e829e20b2ad83555c9301a48db74b359d08f971ab16010a054b8a21d4276249460e903225cd865c500dafc883a2cd4d37a3a52377afe35c1d6b357
   languageName: node
   linkType: hard
 
@@ -5637,7 +5637,7 @@ __metadata:
     dataloader: "npm:^2.2.2"
     eslint: "npm:^9.9.1"
     eslint-plugin-import: "npm:^2.31.0"
-    eslint-plugin-libram: "npm:^0.4.22"
+    eslint-plugin-libram: "npm:^0.4.23"
     eslint-plugin-react-hooks: "npm:^5.0.0"
     eslint-plugin-unused-imports: "npm:^4.1.4"
     fft.js: "npm:^4.0.4"

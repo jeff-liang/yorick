@@ -4,9 +4,11 @@ import {
   getWorkshed,
   haveEffect,
   haveEquipped,
+  myClass,
   totalTurnsPlayed,
 } from "kolmafia";
 import {
+  $class,
   $effect,
   $item,
   AutumnAton,
@@ -145,12 +147,6 @@ const Timeline: FC<StackProps> = (props) => {
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Yellow.`,
     },
     {
-      name: "ELB",
-      turns: haveEffect($effect`Everything Looks Blue`),
-      color: "blue.solid",
-      label: (turns) => `${plural(turns, "turn")} of Everything Looks Blue.`,
-    },
-    {
       name: "ELRWB",
       turns: haveEffect($effect`Everything Looks Red, White and Blue`),
       color: "purple.solid",
@@ -164,6 +160,15 @@ const Timeline: FC<StackProps> = (props) => {
       label: (turns) => `${plural(turns, "turn")} of Everything Looks Beige`,
     },
   ];
+
+  if (myClass() === $class`Zootomist` || myClass() === $class`Jazz Agent`) {
+    elements.push({
+      name: "ELB",
+      turns: haveEffect($effect`Everything Looks Blue`),
+      color: "blue.solid",
+      label: (turns) => `${plural(turns, "turn")} of Everything Looks Blue.`,
+    });
+  }
 
   if (returnCombats > 0) {
     elements.push({

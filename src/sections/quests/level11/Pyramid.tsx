@@ -18,7 +18,7 @@ const UpperChamber: FC<ChamberProps> = () => {
   const upperChamberTurns = $location`The Upper Chamber`.turnsSpent;
   const turnsRemaining = Math.max(0, 6 - upperChamberTurns);
   return (
-    <Line href={PYRAMID_URL}>
+    <Line>
       Adventure in the Upper Chamber for {plural(turnsRemaining, "more turn")}{" "}
       to unlock the Middle Chamber. Use -combat and free run skills if
       available.
@@ -32,7 +32,7 @@ const MiddleChamber: FC<ChamberProps> = ({ extraSpinsNeeded }) => {
   const tangles = availableAmount($item`tangle of rat tails`);
   return (
     <>
-      <Line href={PYRAMID_URL}>
+      <Line>
         Adventure in the Middle Chamber for{" "}
         {plural(turnsRemaining, "more turn")} to unlock the Control Room. Use
         free runs if available.{" "}
@@ -60,12 +60,12 @@ const ControlRoom: FC<ControlRoomProps> = ({
 }) => (
   <>
     {spinsNeeded > 0 ? (
-      <Line href={PYRAMID_URL}>
+      <Line>
         Spin the pyramid {spinsNeeded} time{spinsNeeded !== 1 ? "s" : ""}, then{" "}
         {task}.
       </Line>
     ) : (
-      <Line href={PYRAMID_URL}>{capitalize(task)}.</Line>
+      <Line>{capitalize(task)}.</Line>
     )}
     {extraSpinsNeeded > 0 && (
       <Line>
@@ -99,6 +99,15 @@ const Pyramid: FC = () => {
     <QuestTile
       header="Descend the Pyramid"
       imageUrl="/images/itemimages/nemes.gif"
+      href={atStep(step, [
+        [
+          Step.UNSTARTED,
+          haveStaffOfEd ? "/place.php?whichplace=desertbeach" : undefined,
+        ],
+        [Step.STARTED, PYRAMID_URL],
+        [Step.FINISHED, "/council.php"],
+      ])}
+      linkEntireTile
       minLevel={11}
       disabled={!haveStaffOfEd && step < Step.STARTED}
     >
@@ -108,9 +117,7 @@ const Pyramid: FC = () => {
           !haveStaffOfEd ? (
             <Line>Find the Staff of Ed before starting the Pyramid.</Line>
           ) : (
-            <Line href={PYRAMID_URL}>
-              Visit the Pyramid to start the quest.
-            </Line>
+            <Line>Visit the Pyramid to start the quest.</Line>
           ),
         ],
         [
@@ -130,9 +137,7 @@ const Pyramid: FC = () => {
         [
           Step.FINISHED,
           questStep("questL11MacGuffin") === 2 && (
-            <Line href="/council.php">
-              Return the Holy MacGuffin to the Council!
-            </Line>
+            <Line>Return the Holy MacGuffin to the Council!</Line>
           ),
         ],
       ])}

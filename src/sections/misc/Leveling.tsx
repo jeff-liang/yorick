@@ -10,6 +10,7 @@ import {
   isUnrestricted,
   Item,
   myBasestat,
+  myClass,
   myFamiliar,
   myLevel,
   myPrimestat,
@@ -21,6 +22,7 @@ import {
   toEffect,
 } from "kolmafia";
 import {
+  $class,
   $effect,
   $familiar,
   $item,
@@ -93,7 +95,7 @@ function effect(effect: Effect, effectAvailable = () => true): ColdResSource {
 }
 
 const Leveling: React.FC = () => {
-  if (myLevel() >= 12) return null;
+  if (myLevel() >= 12 || myClass() === $class`Zootomist`) return null;
 
   const multiplier =
     1 +

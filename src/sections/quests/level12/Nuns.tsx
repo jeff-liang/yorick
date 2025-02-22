@@ -2,6 +2,7 @@ import {
   availableAmount,
   effectModifier,
   haveEffect,
+  haveEquipped,
   hiddenTempleUnlocked,
   isUnrestricted,
   meatDropModifier,
@@ -79,7 +80,11 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
   const currentPath = myPath();
   const meatGotten = get("currentNunneryMeat");
   const meatRemaining = 100000 - meatGotten;
-  const meatDropMultiplier = meatDropModifier() / 100.0 + 1.0;
+  const meatDropMultiplier =
+    1.0 +
+    (meatDropModifier() +
+      (+haveEquipped($item`Everfull Dart Holster`) && 55.0)) /
+      100.0;
   const brigandMeatDropRange: Range = {
     low: 800 * meatDropMultiplier,
     high: 1200 * meatDropMultiplier,
@@ -134,11 +139,15 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
             )}
           </>
         )}
+      {haveEquipped($item`Everfull Dart Holster`) && (
+        <Line>Throw a dart at its torso each turn.</Line>
+      )}
       <Line>{turnRangeString(turnRange)}.</Line>
       {turnRange.high <= 20 &&
         turnPdf.slice(1).map(
           (p, i) =>
-            p > 0.001 && (
+            p > 0.001 &&
+            p < 0.999 && (
               <Line key={i}>
                 {(p * 100).toFixed(0)}% chance of completing in{" "}
                 {plural(i + 1, "turn")}.

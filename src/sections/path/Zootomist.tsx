@@ -115,11 +115,14 @@ const Zootomist: FC = () => {
     get("zootGraftedShoulderLeftFamiliar"),
     get("zootGraftedShoulderRightFamiliar"),
   ];
-  const butt = [get("zootGraftedButtCheekLeftFamiliar"), get("zoot")];
+  const butt = [
+    get("zootGraftedButtCheekLeftFamiliar"),
+    get("zootGraftedButtCheekRightFamiliar"),
+  ];
   const headShouldersButt = truthy([head, ...shoulders, ...butt]);
 
   const suggestedHead =
-    $familiars`Mechanical Songbird, Exotic Parrot, Baby Z-Rex, Smiling Rat, Jumpsuited Hound Dog, Ragamuffin Imp`
+    $familiars`Mechanical Songbird, Exotic Parrot, Baby Z-Rex, Smiling Rat, Jumpsuited Hound Dog, Ghuol Whelp, Ragamuffin Imp`
       .filter(haveUnrestricted)
       .slice(0, 6 - headShouldersButt.length);
   const suggestedLeftNipple = filterHave({

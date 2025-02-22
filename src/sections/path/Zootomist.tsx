@@ -1,10 +1,12 @@
 import { List } from "@chakra-ui/react";
 import { Familiar, myClass, myLevel } from "kolmafia";
-import { $class, $familiars, get } from "libram";
-import { FC } from "react";
+import { $class, $effect, $familiars, get, have } from "libram";
+import { FC, useMemo } from "react";
 
 import Line from "../../components/Line";
 import Tile from "../../components/Tile";
+import { NagPriority } from "../../contexts/NagContext";
+import useNag from "../../hooks/useNag";
 import { haveUnrestricted } from "../../util/available";
 import { commaSeparate, plural, separate, truthy } from "../../util/text";
 
@@ -39,7 +41,74 @@ function familiarsWithGoals(header: string, goals: Record<string, Familiar[]>) {
 }
 
 const Zootomist: FC = () => {
-  if (myClass() !== $class`Zootomist` || myLevel() >= 13) return null;
+  const enable = myClass() === $class`Zootomist`;
+
+  const yrFamiliars = $familiars`Quantum Entangler, Foul Ball`;
+  const banishFamiliars = $familiars`Phantom Limb, Dire Cassava`;
+  const leftFoot = get("zootGraftedFootLeftFamiliar");
+  const rightFoot = get("zootGraftedFootRightFamiliar");
+  const hasYR =
+    leftFoot && yrFamiliars.includes(leftFoot)
+      ? "left"
+      : rightFoot && yrFamiliars.includes(rightFoot)
+        ? "right"
+        : null;
+  const hasBanish =
+    leftFoot && banishFamiliars.includes(leftFoot)
+      ? "left"
+      : rightFoot && banishFamiliars.includes(rightFoot)
+        ? "right"
+        : null;
+  const feet = useMemo(
+    () => ({ left: leftFoot, right: rightFoot }),
+    [leftFoot, rightFoot],
+  );
+  const hasELY = have($effect`Everything Looks Yellow`);
+  const hasELB = have($effect`Everything Looks Blue`);
+
+  useNag(
+    () => ({
+      id: "zootomist-ely-nag",
+      priority: NagPriority.IMMEDIATE,
+      imageUrl:
+        hasYR && feet[hasYR] ? `/images/itemimages/${feet[hasYR].image}` : "",
+      node: enable && hasYR && feet[hasYR] && !hasELY && (
+        <Tile
+          header={`Use ${hasYR} kick YR`}
+          imageUrl={`/images/itemimages/${feet[hasYR].image}`}
+        >
+          <Line color={"yellow.700"} _dark={{ color: "yellow.300" }}>
+            Free kill and force monster drops.
+          </Line>
+        </Tile>
+      ),
+    }),
+    [enable, feet, hasELY, hasYR],
+  );
+
+  useNag(
+    () => ({
+      id: "zootomist-elb-nag",
+      priority: NagPriority.IMMEDIATE,
+      imageUrl:
+        hasBanish && feet[hasBanish]
+          ? `/images/itemimages/${feet[hasBanish].image}`
+          : "",
+      node: enable && hasBanish && feet[hasBanish] && !hasELB && (
+        <Tile
+          header={`Use ${hasBanish} kick banish`}
+          imageUrl={`/images/itemimages/${feet[hasBanish].image}`}
+        >
+          <Line color="blue.solid">
+            Free fight and banish monster for 100 turns.
+          </Line>
+        </Tile>
+      ),
+    }),
+    [enable, feet, hasBanish, hasELB],
+  );
+
+  if (!enable || myLevel() >= 13) return null;
 
   const head = get("zootGraftedHeadFamiliar");
   const shoulders = [
@@ -64,12 +133,8 @@ const Zootomist: FC = () => {
     item: $familiars`Ragamuffin Imp, Misshapen Animal Skeleton, Ghuol Whelp`,
   });
 
-  const suggestedLeftKick = $familiars`Quantum Entangler, Foul Ball`.filter(
-    haveUnrestricted,
-  );
-  const suggestedRightKick = $familiars`Phantom Limb, Dire Cassava`.filter(
-    haveUnrestricted,
-  );
+  const suggestedLeftKick = yrFamiliars.filter(haveUnrestricted);
+  const suggestedRightKick = banishFamiliars.filter(haveUnrestricted);
 
   return (
     <Tile

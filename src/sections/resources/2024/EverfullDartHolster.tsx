@@ -30,7 +30,7 @@ const EverfullDartHolster = () => {
       imageUrl: "/images/itemimages/dartholster.gif",
       node: !haveELR && haveHolster && (
         <Tile
-          header="Throw a Bullseye"
+          header="Throw a bullseye"
           id="bullseye-nag"
           linkedContent={everfullDartHolster}
         >

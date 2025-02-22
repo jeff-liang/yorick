@@ -25,7 +25,7 @@ const SpringShoes = () => {
       imageUrl: "/images/itemimages/springshoes.gif",
       node: haveShoes && pathCheck && !haveELG && (
         <Tile
-          header="Run With Spring Shoes"
+          header="Run with spring shoes"
           id="spring-shoes-nag"
           linkedContent={springShoes}
         >

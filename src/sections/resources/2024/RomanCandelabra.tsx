@@ -21,37 +21,16 @@ const RomanCandelabra = () => {
 
   useNag(
     () => ({
-      id: "roman-candelabra-nag",
-      priority: haveSpringShoes ? NagPriority.MID : NagPriority.IMMEDIATE,
+      id: "roman-candelabra-green-nag",
+      priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/romcandel.gif",
-      node: haveCandelabra && (!haveELP || (!haveELG && !haveSpringShoes)) && (
-        <Tile
-          header="Candelabra monster chain"
-          linkedContent={romanCandelabra}
-          id="roman-candelabra-nag"
-        >
-          {!haveELG && !haveSpringShoes && (
-            <>
-              <Line color="green.solid">Green candle runaway!</Line>
-              {candelabraEquipped ? (
-                <Line color="green.solid">Candelabra equipped.</Line>
-              ) : (
-                <Line color="red.solid">Equip the Roman Candelabra first.</Line>
-              )}
-            </>
-          )}
-          {!haveELP && (
-            <>
-              {candelabraEquipped ? (
-                <Line color="purple.solid">
-                  Equipped, blow your purple candle!
-                </Line>
-              ) : (
-                <Line color="red.solid">
-                  Equip the candelabra and purple ray.
-                </Line>
-              )}
-            </>
+      node: haveCandelabra && !haveELG && !haveSpringShoes && (
+        <Tile header="Run away with Candelabra" linkedContent={romanCandelabra}>
+          <Line color="green.solid">Green candle runaway!</Line>
+          {!candelabraEquipped && (
+            <Line color="red.solid" command="equip Roman Candelabra">
+              Equip the Roman Candelabra first.
+            </Line>
           )}
         </Tile>
       ),
@@ -62,8 +41,31 @@ const RomanCandelabra = () => {
       haveELG,
       haveSpringShoes,
       candelabraEquipped,
-      haveELP,
     ],
+  );
+
+  useNag(
+    () => ({
+      id: "roman-candelabra-purple-nag",
+      priority: NagPriority.MID,
+      imageUrl: "/images/itemimages/romcandel.gif",
+      node: haveCandelabra && !haveELP && (
+        <Tile
+          header="Candelabra monster chain"
+          linkedContent={romanCandelabra}
+          id="roman-candelabra-purple-nag"
+        >
+          {candelabraEquipped ? (
+            <Line color="purple.solid">Equipped, blow your purple candle!</Line>
+          ) : (
+            <Line color="red.solid" command="equip Roman Candelabra">
+              Equip the candelabra and purple ray.
+            </Line>
+          )}
+        </Tile>
+      ),
+    }),
+    [haveCandelabra, romanCandelabra, candelabraEquipped, haveELP],
   );
 
   return null;

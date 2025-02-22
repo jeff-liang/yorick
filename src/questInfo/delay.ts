@@ -73,7 +73,7 @@ export function delayZones(): ZoneDelay[] {
           zone: locations[0],
           length: 3,
           needed: () => !have(Item.get(item)),
-          available: () => get("shenQuestItem") === item,
+          available: () => get("shenQuestItem")?.identifierString === item,
         }))
       : []),
     {

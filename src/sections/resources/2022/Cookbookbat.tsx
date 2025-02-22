@@ -2,7 +2,6 @@ import { List, Strong } from "@chakra-ui/react";
 import {
   availableAmount,
   fullnessLimit,
-  Item,
   myDaycount,
   myFullness,
   myPath,
@@ -46,9 +45,7 @@ const Cookbookbat = () => {
 
   const questMonster = get("_cookbookbatQuestMonster");
   const questLocation = get("_cookbookbatQuestLastLocation");
-  const questIngredientName = get("_cookbookbatQuestIngredient");
-  const questIngredient =
-    questIngredientName === "" ? null : Item.get(questIngredientName);
+  const questIngredient = get("_cookbookbatQuestIngredient");
 
   const path = myPath();
   const daycount = myDaycount();

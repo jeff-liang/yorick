@@ -24,13 +24,13 @@ const CommerceGhost = () => {
       header="Ghost of Crimbo Commerce"
       imageUrl="/images/itemimages/cghost_commerce.gif"
     >
-      {commerceGhostItem !== "" ? (
+      {commerceGhostItem !== null ? (
         <Line
           href={`/mall.php?justitems=0&pudnuggler=%22${commerceGhostItem}%22`}
         >
-          Buy a {commerceGhostItem} from the mall, then use the commerce ghost
-          in a combat for {20 * currentLevel} - {25 * currentLevel} of each
-          substat.
+          Buy a {commerceGhostItem.identifierString} from the mall, then use the
+          commerce ghost in a combat for {20 * currentLevel} -{" "}
+          {25 * currentLevel} of each substat.
         </Line>
       ) : (
         <Line>

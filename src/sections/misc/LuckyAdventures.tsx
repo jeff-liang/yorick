@@ -1,5 +1,5 @@
 import { List } from "@chakra-ui/react";
-import { availableAmount, toItem } from "kolmafia";
+import { availableAmount } from "kolmafia";
 import {
   $effect,
   $item,
@@ -154,7 +154,7 @@ const luckyAdventureUses: [string, () => ReactNode][] = [
     "Itznotyerzitz Mine",
     () =>
       questStep("questL08Trapper") <= 1 &&
-      availableAmount(toItem(get("trapperOre") || "none")) < 3 && (
+      availableAmount(get("trapperOre") ?? $item.none) < 3 && (
         <MainLink href={parentPlaceLink($location`Itznotyerzitz Mine`)}>
           Mine: Get one of each type of ore.
         </MainLink>

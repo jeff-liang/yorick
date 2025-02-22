@@ -127,7 +127,7 @@ const ModelTrainSet = () => {
     const oreNeeded = get("trapperOre");
     const haveAllOreNeeded =
       get("questL08Trapper") === "finished" ||
-      (oreNeeded !== "" && availableAmount($item`${oreNeeded}`) >= 3) ||
+      (oreNeeded !== null && availableAmount(oreNeeded) >= 3) ||
       (availableAmount($item`asbestos ore`) >= 3 &&
         availableAmount($item`chrome ore`) >= 3 &&
         availableAmount($item`linoleum ore`) >= 3);

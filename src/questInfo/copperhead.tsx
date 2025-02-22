@@ -65,7 +65,7 @@ export function remainingSnakes(): Snake[] | undefined {
   const day = shenDay();
   if (day === undefined) return;
   const questItem = get("shenQuestItem");
-  const index = day.findIndex((s) => s.item === questItem);
+  const index = day.findIndex((s) => s.item === questItem?.identifierString);
   if (index < 0) return;
   return day.slice(index);
 }

@@ -80,11 +80,9 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
   const currentPath = myPath();
   const meatGotten = get("currentNunneryMeat");
   const meatRemaining = 100000 - meatGotten;
-  const meatDropMultiplier =
-    1.0 +
-    (meatDropModifier() +
-      (+haveEquipped($item`Everfull Dart Holster`) && 55.0)) /
-      100.0;
+  const meatModifier =
+    meatDropModifier() + (+haveEquipped($item`Everfull Dart Holster`) && 55.0);
+  const meatDropMultiplier = 1.0 + meatModifier / 100.0;
   const brigandMeatDropRange: Range = {
     low: 800 * meatDropMultiplier,
     high: 1200 * meatDropMultiplier,
@@ -103,7 +101,6 @@ const Nuns: FC<NunsProps> = ({ disabled }) => {
 
   const songReady =
     SongBoom.have() && SongBoom.song() === "Total Eclipse of Your Meat";
-  const meatModifier = meatDropModifier();
   const turnPdf = useMemo(
     () =>
       turnRange.high <= 20

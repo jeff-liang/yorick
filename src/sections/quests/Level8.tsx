@@ -1,10 +1,4 @@
-import {
-  haveEquipped,
-  itemAmount,
-  myPath,
-  numericModifier,
-  toItem,
-} from "kolmafia";
+import { haveEquipped, itemAmount, myPath, numericModifier } from "kolmafia";
 import {
   $item,
   $items,
@@ -31,8 +25,8 @@ const Level8: FC = () => {
   const step = questStep("questL08Trapper");
 
   const goatCheese = itemAmount($item`goat cheese`);
-  const oreType = get("trapperOre") || "none";
-  const ore = oreType !== "none" ? itemAmount(toItem(oreType)) : 0;
+  const oreType = get("trapperOre");
+  const ore = oreType !== null ? itemAmount(oreType) : 0;
 
   const neededNinja = neededNinjaItems();
   const neededNinjaCount = neededNinja.length;

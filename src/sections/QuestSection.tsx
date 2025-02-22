@@ -5,6 +5,7 @@ import TileSection from "../components/TileSection";
 import { inRun } from "../util/quest";
 
 import Leveling from "./misc/Leveling";
+import Zootomist from "./path/Zootomist";
 import Delay from "./quests/Delay";
 import DigitalKey from "./quests/DigitalKey";
 import HeroKeys from "./quests/HeroKeys";
@@ -40,6 +41,7 @@ const QuestSection = () => {
         ...(showStandardQuests
           ? [
               Level1,
+              Zootomist,
               Leveling,
               Delay,
               Manor,

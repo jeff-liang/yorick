@@ -4050,14 +4050,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"libram@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "libram@npm:0.10.0"
+"libram@npm:^0.10.1":
+  version: 0.10.1
+  resolution: "libram@npm:0.10.1"
   dependencies:
     html-entities: "npm:^2.5.2"
   peerDependencies:
     kolmafia: ^5.28100.0
-  checksum: 10c0/618df4563770a2ee1d40d2885fe0a5b3acccfca270872c36dcb51a3afe0bd1d58db51592a63a39501f48134e1855066917b2230d4f853dd5e90471d473d7ff48
+  checksum: 10c0/3deb0d6c3df6a1fe0ca39372904f73d956341c6dbeac523cc2f51b22bea1aff883867a07be3247784819b791f3aad4e23a8d59cf1135842ae8d9fd1398e92db3
   languageName: node
   linkType: hard
 
@@ -5644,7 +5644,7 @@ __metadata:
     globals: "npm:^15.9.0"
     html-entities: "npm:^2.5.2"
     kolmafia: "npm:tome-kolmafia-mock@5.28378.0"
-    libram: "npm:^0.10.0"
+    libram: "npm:^0.10.1"
     lucide-react: "npm:^0.460.0"
     next-themes: "npm:^0.4.3"
     postcss: "npm:^8.4.41"

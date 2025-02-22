@@ -11,10 +11,10 @@ import {
 } from "libram";
 import { FC } from "react";
 
-import Line from "../../../components/Line";
-import Tile from "../../../components/Tile";
-import { NagPriority } from "../../../contexts/NagContext";
-import useNag from "../../../hooks/useNag";
+import Line from "../../components/Line";
+import Tile from "../../components/Tile";
+import { NagPriority } from "../../contexts/NagContext";
+import useNag from "../../hooks/useNag";
 
 const AvantGuard: FC = () => {
   const pathCheck = myPath() === $path`Avant Guard`;

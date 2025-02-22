@@ -12,6 +12,7 @@ import LuckyAdventures from "./misc/LuckyAdventures";
 import NoncombatForces from "./misc/NoncombatForces";
 import Pulls from "./misc/Pulls";
 import Wishes from "./misc/Wishes";
+import AvantGuard from "./path/AvantGuard";
 import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
 import PuckMan from "./resources/2015/PuckMan";
@@ -73,7 +74,6 @@ import TakerSpace from "./resources/2024/TakerSpace";
 import TearawayPants from "./resources/2024/TearawayPants";
 import CyberRealm from "./resources/2025/CyberRealm";
 import McHugeLargeDuffelBag from "./resources/2025/McHugeLargeDuffelBag";
-import AvantGuard from "./resources/path/AvantGuard";
 import Numberology from "./resources/skill/Numberology";
 import TranscendentOlfaction from "./resources/skill/TranscendentOlfaction";
 

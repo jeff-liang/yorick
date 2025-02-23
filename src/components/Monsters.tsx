@@ -15,17 +15,17 @@ import { separate } from "../util/text";
 
 import { Tooltip } from "./ui/tooltip";
 
-export interface MonstersLineProps {
+export interface MonstersProps {
   location: Location;
   target?: Monster | Monster[];
 }
 
-const Monsters: FC<MonstersLineProps> = ({ location, target = [] }) => {
+const Monsters: FC<MonstersProps> = ({ location, target = [] }) => {
   const targets = Array.isArray(target) ? target : [target];
   const monsters = getMonsters(location);
   const appearingMonsters = monsters.filter(
     (monster) =>
-      monster !== $monster`none` && !!appearanceRates(location)[monster.name],
+      monster !== $monster`none` && appearanceRates(location)[monster.name] > 0,
   );
   const queue = (location.combatQueue ?? "")
     .split("; ")

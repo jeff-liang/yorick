@@ -1,5 +1,5 @@
-import { Box, Stack, StackProps, Text } from "@chakra-ui/react";
-import { myLocation } from "kolmafia";
+import { Box, Flex, Stack, StackProps, Text } from "@chakra-ui/react";
+import { appearanceRates, myLocation } from "kolmafia";
 import { $location } from "libram";
 import {
   ChangeEvent,
@@ -19,9 +19,9 @@ import { parentPlaceLink, parentPlaceNameLink } from "../util/links";
 import { plural } from "../util/text";
 
 import AutocompleteInput from "./AutocompleteInput";
-import Line from "./Line";
+import DetailedMonsters from "./DetailedMonsters";
+import H2 from "./H2";
 import MainLink from "./MainLink";
-import Monsters from "./Monsters";
 
 const MAX_AUTOCOMPLETE = 10;
 const LOCATION_NAMES = LOCATION_DATA.filter(
@@ -101,35 +101,44 @@ const LocationBar: FC<StackProps> = (props) => {
     .split(";")
     .filter((s) => s);
 
+  const isOpen = showDetails || autoHasFocus;
+
   return (
-    <Box
+    <Flex
+      direction="column"
       w="100%"
+      maxH="100vh"
       onMouseOver={() => setShowDetails(true)}
       onMouseOut={() => setShowDetails(false)}
       backgroundColor="white"
     >
       <Stack
         w="100%"
+        minH={0}
+        flex="0 1 auto"
         py={2}
         px={3}
-        zIndex={300}
         borderTop="1px solid"
         borderColor="gray.muted"
         fontSize="xs"
-        display={showDetails || autoHasFocus ? "flex" : "none"}
+        display={isOpen ? "flex" : "none"}
       >
-        <Line>
-          <Monsters location={location} />
-        </Line>
+        <H2>{location.identifierString}</H2>
+        <Box flex="0 1 auto" overflow="scroll">
+          <DetailedMonsters location={location} />
+        </Box>
         <Text>
           Combat Queue:{" "}
           {combatQueue.length === 0 ? "empty" : combatQueue.join(" → ")}
         </Text>
-        <Text>
-          Noncombat Queue:{" "}
-          {noncombatQueue.length === 0 ? "empty" : noncombatQueue.join(" → ")}
-        </Text>
+        {(appearanceRates(location).none ?? 0) > 0 && (
+          <Text>
+            Noncombat Queue:{" "}
+            {noncombatQueue.length === 0 ? "empty" : noncombatQueue.join(" → ")}
+          </Text>
+        )}
         <AutocompleteInput
+          placeholder="Go To Location (press \)"
           allValues={LOCATION_NAMES}
           maxOptions={MAX_AUTOCOMPLETE}
           value={autoValue}
@@ -161,7 +170,7 @@ const LocationBar: FC<StackProps> = (props) => {
         </Text>
         {!nowhere && <Text>{plural(location.turnsSpent, "turn")} spent</Text>}
       </Stack>
-    </Box>
+    </Flex>
   );
 };
 

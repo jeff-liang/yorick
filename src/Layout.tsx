@@ -81,7 +81,7 @@ const Layout = () => {
         onMouseEnter={() => setButtonsVisible(true)}
         onMouseLeave={() => setButtonsVisible(false)}
       >
-        <Flex position="relative" minH={0} flexGrow={1}>
+        <Flex position="relative" minH={0} flex="1 1 auto">
           <Stack
             direction="row"
             position="absolute"

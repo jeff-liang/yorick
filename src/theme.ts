@@ -35,6 +35,7 @@ const config = defineConfig({
   globalCss: {
     html: {
       lineHeight: "moderate",
+      overflow: "hidden",
     },
   },
   theme: {

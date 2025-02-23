@@ -2,8 +2,10 @@ import { myBasestat, myPath } from "kolmafia";
 import { $path, $stat } from "libram";
 
 import TileSection from "../components/TileSection";
+import { inDevMode } from "../util/env";
 import { inRun } from "../util/quest";
 
+import Development from "./misc/Development";
 import Leveling from "./misc/Leveling";
 import Zootomist from "./path/Zootomist";
 import Delay from "./quests/Delay";
@@ -38,6 +40,7 @@ const QuestSection = () => {
     <TileSection
       name="Quests"
       tiles={[
+        ...(inDevMode() ? [Development] : []),
         ...(showStandardQuests
           ? [
               Level1,

@@ -22,15 +22,33 @@ export interface DetailedMonstersProps {
 }
 
 const importantItems = [
+  "Knob Goblin harem pants",
+  "Knob Goblin harem veil",
+  "evil eye",
+  "A-Boo clue",
+  "rusty hedge trimmers",
+  "bubblin' crude",
+  "Mohawk wig",
+  "amulet of extreme plot significance",
+  "stunt nuts",
   "bird rib",
   "lion oil",
-  "A-Boo clue",
-  "evil eye",
-  "bubblin' crude",
-  "stunt nuts",
+  "killing jar",
+  "goat cheese",
+  "sonar-in-a-biscuit",
+  "bowling ball",
+  "book of matches",
+  "cigarette lighter",
+  "glark cable",
+  "blasting soda",
+  "bottle of Chateau de Vinegar",
+  "tomb ratchet",
   "filthworm hatchling scent gland",
   "filthworm drone scent gland",
   "filthworm royal guard scent gland",
+  "star",
+  "line",
+  "shadow brick",
 ];
 
 const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {

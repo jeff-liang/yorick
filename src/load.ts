@@ -18,7 +18,7 @@ declare global {
   }
 }
 
-const SINCE_REVISION = 28383;
+const SINCE_REVISION = 28385;
 
 function load() {
   const revision = window.parent.parent.revision;

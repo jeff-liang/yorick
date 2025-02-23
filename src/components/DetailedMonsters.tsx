@@ -22,6 +22,8 @@ export interface DetailedMonstersProps {
 }
 
 const importantItems = [
+  "sonar-in-a-biscuit",
+  "concentrated cooking",
   "Knob Goblin harem pants",
   "Knob Goblin harem veil",
   "evil eye",
@@ -35,7 +37,7 @@ const importantItems = [
   "lion oil",
   "killing jar",
   "goat cheese",
-  "sonar-in-a-biscuit",
+  "forest tears",
   "bowling ball",
   "book of matches",
   "cigarette lighter",

@@ -22,8 +22,10 @@ import SourceTerminal from "./resources/2016/SourceTerminal";
 import Thanksgarden from "./resources/2016/Thanksgarden";
 import AsdonMartin from "./resources/2017/AsdonMartin";
 import TunnelOfLove from "./resources/2017/TunnelOfLove";
+import VotingBooth from "./resources/2018/VotingBooth";
 import Zatara from "./resources/2018/Zatara";
 import KramcoSausageOMatic from "./resources/2019/KramcoSausageOMatic";
+import CargoCultistShorts from "./resources/2020/CargoCultistShorts";
 import Cartography from "./resources/2020/Cartography";
 import CommerceGhost from "./resources/2020/CommerceGhost";
 import Melodramedary from "./resources/2020/Melodramedary";
@@ -115,6 +117,7 @@ const ResourceSection = () => (
 
       /* 2018 */
       Zatara,
+      VotingBooth,
 
       /* 2019 */
       KramcoSausageOMatic,
@@ -122,6 +125,7 @@ const ResourceSection = () => (
       /* 2020 */
       PowerfulGlove,
       Melodramedary,
+      CargoCultistShorts,
       Cartography,
       CommerceGhost,
 

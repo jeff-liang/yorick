@@ -90,11 +90,11 @@ const VotingBooth = () => {
     () => ({
       id: "voting-lfm-nag",
       priority: NagPriority.MID,
-      imageUrl: "/images/itemimages/votereg.gif",
+      imageUrl: "/images/itemimages/vrform.gif",
       node: canDoLFMTrick && votingMonster && (
         <Tile
           header="Lobsterfrogman Voting Macrometeorite Trick"
-          imageUrl="/images/itemimages/votereg.gif"
+          imageUrl="/images/itemimages/vrform.gif"
           href={
             equippedAmount(iVotedSticker) === 0
               ? "inventory.php?ftext=i+voted!"
@@ -120,7 +120,7 @@ const VotingBooth = () => {
   return (
     <Tile
       header="Voting Booth"
-      imageUrl="/images/itemimages/votereg.gif"
+      imageUrl="/images/itemimages/vrform.gif"
       linkedContent={haveSticker ? iVotedSticker : undefined}
       href={
         !haveSticker

@@ -1,6 +1,6 @@
 import { List } from "@chakra-ui/react";
-import { Familiar, myClass, myLevel } from "kolmafia";
-import { $class, $effect, $familiars, get, have } from "libram";
+import { Familiar, myClass, myFamiliar, myLevel } from "kolmafia";
+import { $class, $effect, $familiar, $familiars, get, have } from "libram";
 import { FC, useMemo } from "react";
 
 import Line from "../../components/Line";
@@ -139,6 +139,9 @@ const Zootomist: FC = () => {
   const suggestedLeftKick = yrFamiliars.filter(haveUnrestricted);
   const suggestedRightKick = banishFamiliars.filter(haveUnrestricted);
 
+  const currentXp = myFamiliar().experience;
+  const threshold = (myLevel() + 2) ** 2;
+
   return (
     <Tile
       header="Z is for Zootomist"
@@ -150,6 +153,17 @@ const Zootomist: FC = () => {
         Graft {plural(12 - myLevel(), "additional familiar")} to yourself to hit
         level 13.
       </Line>
+      {myFamiliar() !== $familiar`none` &&
+        (currentXp < threshold ? (
+          <Line>
+            Need {threshold - currentXp} XP on {myFamiliar().identifierString}{" "}
+            to graft.
+          </Line>
+        ) : (
+          <Line fontWeight="bold">
+            Could graft {myFamiliar().identifierString} now!
+          </Line>
+        ))}
       {!get("zootGraftedNippleLeftFamiliar") &&
         familiarsWithGoals("Left Nipple", suggestedLeftNipple)}
       {!get("zootGraftedNippleRightFamiliar") &&

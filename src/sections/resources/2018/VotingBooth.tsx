@@ -3,6 +3,7 @@ import {
   canAdventure,
   equippedAmount,
   getCounter,
+  isUnrestricted,
   totalTurnsPlayed,
 } from "kolmafia";
 import { $item, $location, $skill, get, have } from "libram";
@@ -17,7 +18,8 @@ import { plural } from "../../../util/text";
 
 const VotingBooth = () => {
   const iVotedSticker = $item`"I Voted!" sticker`;
-  const canVote = get("voteAlways") || get("_voteToday");
+  const canVote =
+    isUnrestricted(iVotedSticker) && (get("voteAlways") || get("_voteToday"));
   const haveSticker = haveUnrestricted(iVotedSticker);
 
   const votingMonster = get("_voteMonster");

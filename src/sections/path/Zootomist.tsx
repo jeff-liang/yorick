@@ -131,7 +131,7 @@ const Zootomist: FC = () => {
     item: $familiars`Stab Bat, Syncopated Turtle, Mechanical Songbird, Scary Death Orb`,
   });
   const suggestedRightNipple = filterHave({
-    "+combat": $familiars`Syncopated Turtle, Stinky Gravy Fairy, Topiary Skunk, Killer Bee`,
+    "+combat": $familiars`Syncopated Turtle, Stinky Gravy Fairy, Topiary Skunk`,
     "fam xp": $familiars`Killer Bee, Mosquito`,
     item: $familiars`Ragamuffin Imp, Misshapen Animal Skeleton, Ghuol Whelp`,
   });

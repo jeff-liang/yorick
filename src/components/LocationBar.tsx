@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, StackProps, Text } from "@chakra-ui/react";
-import { appearanceRates, myLocation } from "kolmafia";
-import { $location } from "libram";
+import { appearanceRates, combatRateModifier, myLocation } from "kolmafia";
+import { $location, clamp } from "libram";
 import {
   ChangeEvent,
   FC,
@@ -100,6 +100,8 @@ const LocationBar: FC<StackProps> = (props) => {
   const noncombatQueue = (location.noncombatQueue ?? "")
     .split(";")
     .filter((s) => s);
+  const combatModifier = combatRateModifier();
+  const combatRate = clamp(location.combatPercent + combatModifier, 0, 100);
 
   const isOpen = showDetails || autoHasFocus;
 
@@ -163,10 +165,19 @@ const LocationBar: FC<StackProps> = (props) => {
         fontSize="xs"
         {...props}
       >
-        <Text>
+        <Text
+          maxW="40%"
+          whiteSpace="nowrap"
+          overflow="hidden"
+          textOverflow="ellipsis"
+        >
           <MainLink href={parentPlaceLink(location)}>
             {nowhere ? "No Location" : location.identifierString}
           </MainLink>
+        </Text>
+        <Text>
+          {combatRate}% C ({combatModifier > 0 && "+"}
+          {combatModifier}%)
         </Text>
         {!nowhere && <Text>{plural(location.turnsSpent, "turn")} spent</Text>}
       </Stack>

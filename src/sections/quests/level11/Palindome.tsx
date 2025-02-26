@@ -45,6 +45,10 @@ const Level11Palindome: FC = () => {
   const neededStewIngredients = $items`bird rib, lion oil`.filter(
     (item) => !have(item),
   );
+  const haveOrCanMakeWetStew =
+    have($item`wet stew`) || neededStewIngredients.length === 0;
+  const haveOrCanMakeWetStuntNutStew =
+    haveOrCanMakeWetStew && have($item`stunt nuts`);
 
   if (step === Step.FINISHED) return null;
 
@@ -128,9 +132,11 @@ const Level11Palindome: FC = () => {
         [
           3,
           <>
-            <Line href={WHITEYS_GROVE_URL}>
-              Acquire and make wet stunt nut stew:
-            </Line>
+            {!haveOrCanMakeWetStuntNutStew && (
+              <Line href={WHITEYS_GROVE_URL}>
+                Acquire and make wet stunt nut stew:
+              </Line>
+            )}
             {!have($item`stunt nuts`) && (
               <Line href={palindomeLink}>
                 Acquire stunt nuts from Bob Racecar or Racecar Bob in Palindome.

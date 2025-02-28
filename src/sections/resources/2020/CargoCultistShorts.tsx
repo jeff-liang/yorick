@@ -13,7 +13,7 @@ const POCKETS = [
     needed: () => get("sidequestOrchardCompleted") !== "none",
     render: () => (
       <Line>
-        <Strong color="red.500">343 - Filthworm Drone Stench:</Strong> Stinky!
+        <Strong>Filthworm Drone Stench (343):</Strong> Stinky!
       </Line>
     ),
   },
@@ -22,8 +22,7 @@ const POCKETS = [
     needed: () => true,
     render: () => (
       <Line>
-        <Strong color="red.500">666 - Smut Orc Pervert:</Strong> 5 bridge
-        fasteners/lumber.
+        <Strong>Smut Orc Pervert (666):</Strong> 5 bridge fasteners/lumber.
         {have($familiar`Grey Goose`) && " Use a goose drone to copy the box."}
       </Line>
     ),
@@ -35,8 +34,7 @@ const POCKETS = [
       availableAmount($item`Richard's star key`) === 0,
     render: () => (
       <Line>
-        <Strong color="red.500">533 - Greasy Desk Bell:</Strong> Star key
-        components.
+        <Strong>Greasy Desk Bell (533):</Strong> Star key components.
       </Line>
     ),
   },
@@ -45,7 +43,7 @@ const POCKETS = [
     needed: () => !canAdventure($location`The eXtreme Slope`),
     render: () => (
       <Line>
-        <Strong color="red.500">565 - Mountain Man:</Strong> YR for 2x ore.
+        <Strong>Mountain Man (565):</Strong> YR for 2x ore.
       </Line>
     ),
   },
@@ -54,8 +52,8 @@ const POCKETS = [
     needed: () => !canAdventure($location`The Battlefield (Frat Uniform)`),
     render: () => (
       <Line>
-        <Strong color="red.500">589 - Green Ops Soldier:</Strong> Olfact for
-        funny meme strategies.
+        <Strong>Green Ops Soldier (589):</Strong> Olfact for funny meme
+        strategies.
       </Line>
     ),
   },
@@ -71,8 +69,9 @@ const CargoCultistShorts: FC = () => {
   return (
     <Tile
       header="Cargo Cultist Shorts"
-      imageUrl="/images/itemimages/cargoshorts.gif"
-      href="inventory.php?action=pocket"
+      imageUrl="/images/itemimages/cultistshorts.gif"
+      href="/inventory.php?action=pocket"
+      linkEntireTile
     >
       <Line>Pick a pocket for something useful!</Line>
       {myPath() !== $path`Community Service` && (

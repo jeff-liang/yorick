@@ -113,6 +113,7 @@ const LocationBar: FC<StackProps> = (props) => {
       onMouseOver={() => setShowDetails(true)}
       onMouseOut={() => setShowDetails(false)}
       backgroundColor="white"
+      fontSize={["2xs", "xs"]}
     >
       <Stack
         w="100%"
@@ -122,7 +123,6 @@ const LocationBar: FC<StackProps> = (props) => {
         px={3}
         borderTop="1px solid"
         borderColor="gray.muted"
-        fontSize="xs"
         display={isOpen ? "flex" : "none"}
       >
         <H2>{location.identifierString}</H2>
@@ -162,7 +162,6 @@ const LocationBar: FC<StackProps> = (props) => {
         justify="space-between"
         borderTop="1px solid"
         borderColor="gray.muted"
-        fontSize="xs"
         {...props}
       >
         <Text
@@ -176,8 +175,14 @@ const LocationBar: FC<StackProps> = (props) => {
           </MainLink>
         </Text>
         <Text>
-          {combatRate}% C ({combatModifier > 0 && "+"}
-          {combatModifier}%)
+          {[0, 100].includes(location.combatPercent) ? (
+            `${location.combatPercent}% C`
+          ) : (
+            <>
+              {combatRate}% C ({combatModifier > 0 && "+"}
+              {combatModifier}%)
+            </>
+          )}
         </Text>
         {!nowhere && <Text>{plural(location.turnsSpent, "turn")} spent</Text>}
       </Stack>

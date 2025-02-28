@@ -1,5 +1,5 @@
 import { List } from "@chakra-ui/react";
-import { getWorkshed } from "kolmafia";
+import { getWorkshed, myAscensions } from "kolmafia";
 import { $item, get } from "libram";
 import { FC } from "react";
 
@@ -7,7 +7,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink } from "../../../util/links";
-import { commaAnd, plural } from "../../../util/text";
+import { commaAnd, plural, truthy } from "../../../util/text";
 
 interface Supplies {
   spice: number;
@@ -39,22 +39,29 @@ const TakerSpace: FC = () => {
     return null;
   }
 
-  const makeableItems: { name: string; ingredients: Partial<Supplies> }[] = [
-    { name: "pirate dinghy", ingredients: { anchor: 1, mast: 1, silk: 1 } },
-    { name: "deft pirate hook", ingredients: { anchor: 1, mast: 1, gold: 1 } },
-    {
-      name: "anchor bomb",
-      ingredients: { anchor: 3, rum: 1, mast: 1, gold: 1 },
-    },
-    { name: "groggles", ingredients: { rum: 6 } },
-    { name: "silky pirate drawers", ingredients: { silk: 2 } },
-    { name: "tankard of spiced rum", ingredients: { spice: 1, rum: 2 } },
-    { name: "cursed Aztec tamale", ingredients: { spice: 2 } },
-  ].filter((item) => {
-    return Object.entries(item.ingredients).every(
-      ([key, value]) => supplies[key as Supply] >= value,
-    );
-  });
+  const makeableItems: { name: string; ingredients: Partial<Supplies> }[] =
+    truthy([
+      get("lastIslandUnlock") < myAscensions() && {
+        name: "pirate dinghy",
+        ingredients: { anchor: 1, mast: 1, silk: 1 },
+      },
+      {
+        name: "deft pirate hook",
+        ingredients: { anchor: 1, mast: 1, gold: 1 },
+      },
+      {
+        name: "anchor bomb",
+        ingredients: { anchor: 3, rum: 1, mast: 1, gold: 1 },
+      },
+      { name: "groggles", ingredients: { rum: 6 } },
+      { name: "silky pirate drawers", ingredients: { silk: 2 } },
+      { name: "tankard of spiced rum", ingredients: { spice: 1, rum: 2 } },
+      { name: "cursed Aztec tamale", ingredients: { spice: 2 } },
+    ]).filter((item) => {
+      return Object.entries(item.ingredients).every(
+        ([key, value]) => supplies[key as Supply] >= value,
+      );
+    });
 
   return (
     <Tile
@@ -67,7 +74,7 @@ const TakerSpace: FC = () => {
       }
     >
       <Line>
-        Current Supplies:{" "}
+        Supplies:{" "}
         {commaAnd(
           [
             supplies.spice && plural(supplies.spice, "stolen spice"),

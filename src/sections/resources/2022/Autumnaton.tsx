@@ -1,4 +1,4 @@
-import { Heading, List, Strong, Text, VStack } from "@chakra-ui/react";
+import { List, Strong, Text, VStack } from "@chakra-ui/react";
 import {
   availableAmount,
   canAdventure,
@@ -18,6 +18,7 @@ import {
 } from "libram";
 
 import AdviceTooltipText from "../../../components/AdviceTooltipText";
+import H4 from "../../../components/H4";
 import ItemButtons from "../../../components/ItemButtons";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -175,7 +176,7 @@ const Autumnaton = () => {
         <AdviceTooltipText
           advice={
             <VStack align="start">
-              <Heading size="sm">Potential Targets</Heading>
+              <H4>Potential Targets</H4>
               {potentialTargets.map(([item, location], index) => (
                 <Text key={`autumnaton-target-${index}`}>
                   <ItemButtons linkedContent={$item`${item}`} /> ({location})

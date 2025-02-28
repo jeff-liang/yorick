@@ -93,7 +93,7 @@ const AvantGuard: FC = () => {
               Your bodyguard is ready to talk to you.
               {bodyguardOut && " Take them with you."} Recommended chats:
             </Line>
-            <List.Root fontSize="xs">
+            <List.Root fontSize={["2xs", "xs"]}>
               {recommended.map((monster) => (
                 <List.Item key={monster.id}>{monster.name}</List.Item>
               ))}

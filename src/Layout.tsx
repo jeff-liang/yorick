@@ -74,7 +74,7 @@ const Layout = () => {
       <Container
         maxW="4xl"
         paddingX={0}
-        fontSize="sm"
+        fontSize={["xs", "sm"]}
         h="100vh"
         display="flex"
         flexDirection="column"

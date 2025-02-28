@@ -236,14 +236,19 @@ const AugustScepter: FC = () => {
                 <Table.Row key={skillNumber}>
                   <Table.Cell
                     textAlign="center"
-                    fontSize="xs"
+                    fontSize={["2xs", "xs"]}
                     px={1}
                     py={0}
                     color={lineColor}
                   >
                     {skillNumber}
                   </Table.Cell>
-                  <Table.Cell fontSize="xs" px={1} py={0} color={lineColor}>
+                  <Table.Cell
+                    fontSize={["2xs", "xs"]}
+                    px={1}
+                    py={0}
+                    color={lineColor}
+                  >
                     {skillDesc}
                   </Table.Cell>
                 </Table.Row>

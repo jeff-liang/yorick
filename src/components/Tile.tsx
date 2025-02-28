@@ -123,7 +123,10 @@ const Tile: FC<TileProps> = ({
         >
           {!collapsed && tooltip}
           {!collapsed && linkedContent && !linkHide && (
-            <ContentButtons linkedContent={linkedContent} />
+            <ContentButtons
+              linkedContent={linkedContent}
+              smDown={{ display: "none" }}
+            />
           )}
           {!collapsed && extraLinks}
           {disabled || nonCollapsible || (
@@ -159,6 +162,7 @@ const Tile: FC<TileProps> = ({
       <Box
         w="30px"
         flexShrink={0}
+        smDown={{ display: "none" }}
         css={{
           ".chakra-portal &": {
             display: "none",

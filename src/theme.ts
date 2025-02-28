@@ -39,6 +39,9 @@ const config = defineConfig({
     },
   },
   theme: {
+    breakpoints: {
+      sm: "360px",
+    },
     tokens: {
       lineHeights: {
         none: { value: 1 },

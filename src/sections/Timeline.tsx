@@ -31,6 +31,8 @@ const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
       borderRadius="2px"
       color="white"
       bgColor="gray.solid"
+      lineHeight={["12px", "16px"]}
+      px={["4px", "6px"]}
       ref={ref}
       {...props}
     >
@@ -80,7 +82,7 @@ const CMCTimeline: FC = () => {
             key={index}
             w="14px"
             px={0}
-            fontSize="xs"
+            fontSize={["2xs", "xs"]}
             color="white"
             bgColor={ENV_COLORS[c]}
             alignItems="center"

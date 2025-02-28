@@ -1,19 +1,11 @@
 import { Card, Image, Stack, Text } from "@chakra-ui/react";
 import { decode } from "html-entities";
-import {
-  appearanceRates,
-  getMonsters,
-  isBanished,
-  itemDropsArray,
-  Location,
-  Monster,
-  trackCopyCount,
-  trackIgnoreQueue,
-} from "kolmafia";
-import { $monster, getBanishedMonsters, sum } from "libram";
+import { itemDropsArray, Location } from "kolmafia";
+import { getBanishedMonsters } from "libram";
 import { FC } from "react";
 
 import { dropRateModifier } from "../util/item";
+import { monsterFrequencyAndQueue } from "../util/monsters";
 
 import { Tooltip } from "./ui/tooltip";
 
@@ -54,31 +46,7 @@ const importantItems = [
 ];
 
 const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
-  const monsters = getMonsters(location);
-  const appearingMonsters = monsters.filter(
-    (monster) =>
-      monster !== $monster`none` && appearanceRates(location)[monster.name] > 0,
-  );
-  const queue = (location.combatQueue ?? "")
-    .split("; ")
-    .filter((s) => s)
-    .map((name) => Monster.get(name));
-
-  const monsterCopies = appearingMonsters.map((monster) => {
-    const copies = isBanished(monster) ? 0 : 1 + trackCopyCount(monster);
-    const reject = !trackIgnoreQueue(monster);
-    const copiesWithQueue =
-      (reject && queue.includes(monster) ? 0.25 : 1) * copies;
-    return { monster, copiesWithQueue };
-  });
-
-  const totalCopiesWithQueue = sum(monsterCopies, "copiesWithQueue");
-  const monsterFrequency = monsterCopies.map(
-    ({ monster, copiesWithQueue }) => ({
-      monster,
-      frequency: copiesWithQueue / totalCopiesWithQueue,
-    }),
-  );
+  const { monsterFrequency, queue } = monsterFrequencyAndQueue(location);
 
   const banishedMonsters = [...getBanishedMonsters().entries()];
 
@@ -97,7 +65,7 @@ const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
 
         const title = (
           <Card.Title
-            fontSize="sm"
+            fontSize={["xs", "sm"]}
             lineHeight="1.2"
             color={banisher ? "fg.subtle" : undefined}
           >
@@ -113,7 +81,8 @@ const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
         );
         return (
           <Card.Root
-            w="calc(50% - var(--chakra-spacing-2) / 2)"
+            w="100%"
+            sm={{ w: "calc(50% - var(--chakra-spacing-2) / 2)" }}
             key={monster.id}
           >
             <Card.Body p={2} gap={1}>
@@ -131,7 +100,7 @@ const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
               ) : (
                 title
               )}
-              <Card.Description fontSize="xs">
+              <Card.Description fontSize={["2xs", "xs"]}>
                 {itemDropsArray(monster)
                   .filter(({ type }) => type !== "p" && type !== "a")
                   .map(({ drop, rate }) => (

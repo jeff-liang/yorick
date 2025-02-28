@@ -9,6 +9,7 @@ import FreeKills from "./misc/FreeKills";
 import FreeRuns from "./misc/FreeRuns";
 import FreeZones from "./misc/FreeZones";
 import LuckyAdventures from "./misc/LuckyAdventures";
+import Muffin from "./misc/Muffin";
 import NoncombatForces from "./misc/NoncombatForces";
 import Pulls from "./misc/Pulls";
 import Wishes from "./misc/Wishes";
@@ -188,6 +189,7 @@ const ResourceSection = () => (
       /* Nags only */
       BeatenUp,
       AvantGuard,
+      Muffin,
     ]}
   />
 );

@@ -1,5 +1,5 @@
 import { List } from "@chakra-ui/react";
-import { Monster, myFamiliar, myPath } from "kolmafia";
+import { myFamiliar, myPath } from "kolmafia";
 import {
   $familiar,
   $item,
@@ -15,6 +15,7 @@ import Line from "../../components/Line";
 import Tile from "../../components/Tile";
 import { NagPriority } from "../../contexts/NagContext";
 import useNag from "../../hooks/useNag";
+import { truthy } from "../../util/text";
 
 const AvantGuard: FC = () => {
   const pathCheck = myPath() === $path`Avant Guard`;
@@ -37,7 +38,7 @@ const AvantGuard: FC = () => {
 
     const recipeRead = get("spookyravenRecipeUsed") === "with_glasses";
 
-    const recommended = [
+    const recommended = truthy([
       questStep("questM21Dance") < 3 &&
         !have($item`Lady Spookyraven's finest gown`) &&
         $monster`animated ornate nightstand`,
@@ -73,7 +74,7 @@ const AvantGuard: FC = () => {
       questStep("questL12War") === 1 && $monster`War Frat 151st Infantryman`,
       questStep("questL11Palindome") >= 1 && $monster`white lion`,
       questStep("questL08Trapper") >= 1 && $monster`whitesnake`,
-    ].filter(Boolean) as Monster[];
+    ]);
 
     return {
       id: "bodyguard-chat-nag",
@@ -95,7 +96,9 @@ const AvantGuard: FC = () => {
             </Line>
             <List.Root fontSize={["2xs", "xs"]}>
               {recommended.map((monster) => (
-                <List.Item key={monster.id}>{monster.name}</List.Item>
+                <List.Item key={monster.identifierString}>
+                  {monster.identifierString}
+                </List.Item>
               ))}
             </List.Root>
           </Tile>

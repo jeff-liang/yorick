@@ -47,13 +47,15 @@ const SourceTerminalTile = () => {
 
   useNag(
     () => ({
-      id: "source-terminal-learn-skills",
+      id: "source-terminal-learn-skills-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/sourceterminal.gif",
       node: haveTerminal && skillsNeeded > 0 && (
         <Tile
           header="Source Terminal Skills"
           imageUrl="/images/itemimages/sourceterminal.gif"
+          href={TERMINAL_URL}
+          linkEntireTile
         >
           <Line>
             Learn {skillsNeeded} skill{skillsNeeded > 1 ? "s" : ""}. Maybe{" "}

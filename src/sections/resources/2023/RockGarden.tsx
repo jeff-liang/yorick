@@ -54,6 +54,7 @@ const RockGarden = () => {
     isCommunityService ||
     !canAccess ||
     !inRun() ||
+    !getCampground()["packet of rock seeds"] ||
     availableGravels +
       availableMilestones +
       availableWhetStones +

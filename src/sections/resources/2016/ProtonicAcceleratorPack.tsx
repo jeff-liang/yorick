@@ -36,6 +36,7 @@ const ELEMENTS_TO_RESIST: Record<string, ElementType> = {
 const ProtonicAcceleratorPack = () => {
   const protonPack = $item`protonic accelerator pack`;
   const haveProtonPack = haveUnrestricted(protonPack);
+  const shouldFightGhosts = myPath() !== $path`Avant Guard`;
   const protonPackEquipped = haveEquipped(protonPack);
   const nextGhostTurn = get("nextParanormalActivity");
   const nextGhostTimer = nextGhostTurn - totalTurnsPlayed();
@@ -47,17 +48,25 @@ const ProtonicAcceleratorPack = () => {
       id: "protonic-pack-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/protonpack.gif",
-      node: haveProtonPack && nextGhostTurn <= totalTurnsPlayed() && (
-        <Tile header="It's ghost bustin' time!" linkedContent={protonPack}>
-          {!protonPackEquipped ? (
-            <Line color="red.solid">Equip the protopack first.</Line>
-          ) : (
-            <Line color="blue.solid">Who you gonna call? You!</Line>
-          )}
-        </Tile>
-      ),
+      node: haveProtonPack &&
+        shouldFightGhosts &&
+        nextGhostTurn <= totalTurnsPlayed() && (
+          <Tile header="It's ghost bustin' time!" linkedContent={protonPack}>
+            {!protonPackEquipped ? (
+              <Line color="red.solid">Equip the protopack first.</Line>
+            ) : (
+              <Line color="blue.solid">Who you gonna call? You!</Line>
+            )}
+          </Tile>
+        ),
     }),
-    [haveProtonPack, nextGhostTurn, protonPack, protonPackEquipped],
+    [
+      haveProtonPack,
+      nextGhostTurn,
+      protonPack,
+      protonPackEquipped,
+      shouldFightGhosts,
+    ],
   );
 
   useNag(
@@ -68,6 +77,7 @@ const ProtonicAcceleratorPack = () => {
       node: questStarted("questPAGhost") &&
         ghostLocation !== null &&
         haveProtonPack &&
+        shouldFightGhosts &&
         canAdventure(ghostLocation) && (
           <Tile
             header={`Defeat the ghost in ${ghostLocation.identifierString}`}
@@ -104,11 +114,18 @@ const ProtonicAcceleratorPack = () => {
           </Tile>
         ),
     }),
-    [ghostLocation, haveProtonPack, protonPack, protonPackEquipped],
+    [
+      ghostLocation,
+      haveProtonPack,
+      protonPack,
+      protonPackEquipped,
+      shouldFightGhosts,
+    ],
   );
 
   if (
     !haveProtonPack ||
+    !shouldFightGhosts ||
     (!(nextGhostTurn > totalTurnsPlayed()) &&
       !(!streamsCrossed && inRun() && myPath() !== $path`G-Lover`))
   ) {

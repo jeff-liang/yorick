@@ -13,6 +13,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
+import { inventoryLink } from "../../../util/links";
 import { plural } from "../../../util/text";
 
 interface ShadowBrickLocation {
@@ -79,7 +80,8 @@ const ClosedCircuitPayPhone = () => {
         <Tile
           header="Rufus quest done"
           imageUrl="/images/itemimages/rufusphone.gif"
-          linkedContent={closedCircuitPayPhone}
+          href={inventoryLink(closedCircuitPayPhone)}
+          linkEntireTile
         >
           <Line>Call Rufus and get a lodestone.</Line>
         </Tile>

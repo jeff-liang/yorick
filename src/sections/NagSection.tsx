@@ -11,7 +11,7 @@ import NagContext from "../contexts/NagContext";
 
 import Timeline from "./Timeline";
 
-const NAG_DISPLAY_LIMIT = 5;
+const NAG_DISPLAY_LIMIT = 6;
 
 const NagSection = () => {
   const { nags } = useContext(NagContext);
@@ -19,6 +19,10 @@ const NagSection = () => {
     ([, { priority: priorityA }], [, { priority: priorityB }]) =>
       -(priorityA - priorityB),
   );
+  const displayCount =
+    nagsList.length > NAG_DISPLAY_LIMIT
+      ? NAG_DISPLAY_LIMIT - 1
+      : nagsList.length;
   return (
     <Stack
       top={0}
@@ -33,33 +37,31 @@ const NagSection = () => {
       <Timeline px={2} />
       {nagsList.length > 0 ? (
         <Section name={`Day ${myDaycount()} / Turn ${myTurncount()}`}>
-          {nagsList.slice(0, NAG_DISPLAY_LIMIT).map(([id, { node }]) => (
+          {nagsList.slice(0, displayCount).map(([id, { node }]) => (
             <TileErrorBoundary key={id} name={id}>
               {node}
             </TileErrorBoundary>
           ))}
           {nagsList.length > NAG_DISPLAY_LIMIT && (
             <Stack flexFlow="row wrap">
-              {nagsList
-                .slice(NAG_DISPLAY_LIMIT)
-                .map(([id, { imageUrl, node }]) => {
-                  return (
-                    <Tooltip
-                      key={id}
-                      interactive
-                      contentProps={{
-                        color: "black",
-                        bgColor: "white",
-                        border: "1px solid black",
-                        rounded: "md",
-                        p: 2,
-                      }}
-                      content={<Box>{node}</Box>}
-                    >
-                      <TileImage imageUrl={imageUrl} />
-                    </Tooltip>
-                  );
-                })}
+              {nagsList.slice(displayCount).map(([id, { imageUrl, node }]) => {
+                return (
+                  <Tooltip
+                    key={id}
+                    interactive
+                    contentProps={{
+                      color: "black",
+                      bgColor: "white",
+                      border: "1px solid black",
+                      rounded: "md",
+                      p: 2,
+                    }}
+                    content={<Box>{node}</Box>}
+                  >
+                    <TileImage imageUrl={imageUrl} />
+                  </Tooltip>
+                );
+              })}
             </Stack>
           )}
         </Section>

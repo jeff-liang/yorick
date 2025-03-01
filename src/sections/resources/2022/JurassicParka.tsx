@@ -1,6 +1,6 @@
 import { Strong } from "@chakra-ui/react";
 import { canEquip, haveEquipped, myPath } from "kolmafia";
-import { $effect, $item, $path, $skill, clamp, get, have } from "libram";
+import { $effect, $item, $paths, $skill, clamp, get, have } from "libram";
 import { FC } from "react";
 
 import AsyncButton from "../../../components/AsyncButton";
@@ -20,7 +20,7 @@ const JurassicParka: FC = () => {
   const canEquipParka = canEquip(jurassicParka);
   const haveELY = have($effect`Everything Looks Yellow`);
   const haveFondeluge = have($skill`Fondeluge`);
-  const inCs = myPath() === $path`Community Service`;
+  const inBadPath = $paths`Community Service, Avant Guard`.includes(myPath());
 
   useNag(
     () => ({
@@ -29,7 +29,7 @@ const JurassicParka: FC = () => {
       imageUrl: "/images/itemimages/jparka3.gif",
       node: haveParka &&
         canEquipParka &&
-        !inCs &&
+        !inBadPath &&
         !haveELY &&
         !haveFondeluge && (
           <Tile
@@ -59,12 +59,12 @@ const JurassicParka: FC = () => {
     [
       haveParka,
       canEquipParka,
-      inCs,
+      inBadPath,
       haveELY,
       haveFondeluge,
       jurassicParka,
-      parkaEquipped,
       parkaMode,
+      parkaEquipped,
     ],
   );
 

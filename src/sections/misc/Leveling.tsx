@@ -291,13 +291,12 @@ const Leveling: React.FC = () => {
     Math.floor((septEmbers - neededBembershootsEven) / 2);
 
   const coldRes = numericModifier("Cold Resistance");
-  const mouthwashMainstat = 7 * Math.pow(coldRes, 1.7);
+  const mouthwashMainstat = Math.round(multiplier * 7 * Math.pow(coldRes, 1.7));
 
   const statName = myPrimestat().identifierString;
   const substat = $stat`Sub${statName === "none" ? "Muscle" : statName}`;
   const currentSubstat = myBasestat(substat);
-  const endingSubstat =
-    currentSubstat + multiplier * mouthwashMainstat * potentialMouthwash;
+  const endingSubstat = currentSubstat + mouthwashMainstat * potentialMouthwash;
   const endingStat = Math.sqrt(endingSubstat);
   const endingLevel = Math.sqrt(endingStat - 4) + 1;
 

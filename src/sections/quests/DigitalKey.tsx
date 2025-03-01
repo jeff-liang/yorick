@@ -93,7 +93,7 @@ const DigitalKeyQuest: FC = () => {
         id="digital-key-quest"
         imageUrl="/images/itemimages/pixelkey.gif"
         href="/place.php?whichplace=forestvillage&action=fv_mystic"
-        minLevel={5}
+        minLevel={2}
       >
         <Line>Visit the crackpot mystic for your transfunctioner.</Line>
       </QuestTile>

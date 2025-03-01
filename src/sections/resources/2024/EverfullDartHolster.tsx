@@ -1,6 +1,6 @@
 import { Text } from "@chakra-ui/react";
-import { haveEquipped } from "kolmafia";
-import { $effect, $item, get, have } from "libram";
+import { haveEquipped, myPath } from "kolmafia";
+import { $effect, $item, $path, get, have } from "libram";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
@@ -22,13 +22,14 @@ const EverfullDartHolster = () => {
   const dartsNeededForNextPerk =
     Math.floor(Math.sqrt(dartSkill) + 1) ** 2 - dartSkill;
   const holsterEquipped = haveEquipped(everfullDartHolster);
+  const inAvantGuard = myPath() === $path`Avant Guard`;
 
   useNag(
     () => ({
       id: "everfull-dart-holster-nag",
       priority: NagPriority.IMMEDIATE,
       imageUrl: "/images/itemimages/dartholster.gif",
-      node: !haveELR && haveHolster && (
+      node: !haveELR && haveHolster && !inAvantGuard && (
         <Tile
           header="Throw a bullseye"
           id="bullseye-nag"
@@ -42,7 +43,14 @@ const EverfullDartHolster = () => {
         </Tile>
       ),
     }),
-    [haveELR, haveHolster, everfullDartHolster, dartCooldown, holsterEquipped],
+    [
+      haveELR,
+      haveHolster,
+      inAvantGuard,
+      everfullDartHolster,
+      holsterEquipped,
+      dartCooldown,
+    ],
   );
 
   if (!haveHolster || dartSkill >= 401) return null;

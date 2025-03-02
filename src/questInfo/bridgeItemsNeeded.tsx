@@ -29,5 +29,10 @@ export function bridgeItemsNeeded() {
     0,
     bridgeNeeded - bridgeProgress - numLumber - numExtras,
   );
-  return { fastenersNeeded, lumberNeeded };
+
+  const possibleProgress = bridgeProgress + Math.min(numFasteners, numLumber);
+  const needBatWings =
+    have($item`bat wings`) && possibleProgress >= 25 && possibleProgress < 30;
+
+  return { fastenersNeeded, lumberNeeded, needBatWings };
 }

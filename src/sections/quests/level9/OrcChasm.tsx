@@ -1,6 +1,6 @@
 import { Em, List, Strong } from "@chakra-ui/react";
-import { myBuffedstat } from "kolmafia";
-import { $stat, get, getModifier, questStep } from "libram";
+import { haveEquipped, myBuffedstat } from "kolmafia";
+import { $item, $stat, get, getModifier, questStep } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -12,7 +12,7 @@ import { commaAnd, plural, pluralJustDesc } from "../../../util/text";
 const OrcChasm: FC = () => {
   const step = questStep("questL09Topping");
   const orcProgress = get("smutOrcNoncombatProgress");
-  const { fastenersNeeded, lumberNeeded } = bridgeItemsNeeded();
+  const { fastenersNeeded, lumberNeeded, needBatWings } = bridgeItemsNeeded();
 
   const needs = [
     fastenersNeeded > 0 && plural(fastenersNeeded, "fastener"),
@@ -59,50 +59,56 @@ const OrcChasm: FC = () => {
       minLevel={9}
       href={atStep(step, [
         [Step.UNSTARTED, "/council.php"],
-        [Step.STARTED, "/place.php?whichplace=orc_chasm"],
-      ])}
-    >
-      {atStep(step, [
-        [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
         [
           Step.STARTED,
-          needMoreItems ? (
-            <>
-              <Line>
-                Build a bridge. <Em>(+item, -ML)</Em>
-              </Line>
-              {orcProgress < 15 ? (
-                <Line>
-                  Overkill orcs with cold damage: {orcProgress}/15 to NC.
-                </Line>
-              ) : (
-                <>
-                  <Line>Blech House next turn!</Line>
-                  <List.Root>
-                    <List.Item>
-                      <Strong>Muscle/Weapon Dmg:</Strong> {musclePieces}/14{" "}
-                      {pluralJustDesc(musclePieces, "piece")}.
-                    </List.Item>
-                    <List.Item>
-                      <Strong>Myst/Spell Dmg:</Strong> {mysticalityPieces}/14{" "}
-                      {pluralJustDesc(mysticalityPieces, "piece")}.
-                    </List.Item>
-                    <List.Item>
-                      <Strong>Moxie/Sleaze Res:</Strong> {moxiePieces}/14{" "}
-                      {pluralJustDesc(moxiePieces, "piece")}.
-                    </List.Item>
-                  </List.Root>
-                </>
-              )}
-              <Line>{commaAnd(needs)} needed.</Line>
-            </>
-          ) : (
-            <Line href="/place.php?whichplace=orc_chasm&action=label1">
-              Build the bridge!
-            </Line>
-          ),
+          needMoreItems
+            ? "/place.php?whichplace=orc_chasm"
+            : "/place.php?whichplace=orc_chasm&action=label1",
         ],
       ])}
+      linkEntireTile={
+        !(!needMoreItems && needBatWings && !haveEquipped($item`bat wings`))
+      }
+    >
+      {step === Step.UNSTARTED && <Line>Visit Council to start quest.</Line>}
+      {step === Step.STARTED &&
+        (needMoreItems ? (
+          <>
+            <Line>
+              Build a bridge. <Em>(+item, -ML)</Em>
+            </Line>
+            {orcProgress < 15 ? (
+              <Line>
+                Overkill orcs with cold damage: {orcProgress}/15 to NC.
+              </Line>
+            ) : (
+              <>
+                <Line>Blech House next turn!</Line>
+                <List.Root>
+                  <List.Item>
+                    <Strong>Muscle/Weapon Dmg:</Strong> {musclePieces}/14{" "}
+                    {pluralJustDesc(musclePieces, "piece")}.
+                  </List.Item>
+                  <List.Item>
+                    <Strong>Myst/Spell Dmg:</Strong> {mysticalityPieces}/14{" "}
+                    {pluralJustDesc(mysticalityPieces, "piece")}.
+                  </List.Item>
+                  <List.Item>
+                    <Strong>Moxie/Sleaze Res:</Strong> {moxiePieces}/14{" "}
+                    {pluralJustDesc(moxiePieces, "piece")}.
+                  </List.Item>
+                </List.Root>
+              </>
+            )}
+            <Line>{commaAnd(needs)} needed.</Line>
+          </>
+        ) : needBatWings && !haveEquipped($item`bat wings`) ? (
+          <Line command="equip bat wings">
+            Equip your bat wings and build the bridge!
+          </Line>
+        ) : (
+          <Line>Build the bridge!</Line>
+        ))}
     </QuestTile>
   );
 };

@@ -17,7 +17,10 @@ const PuckMan = () => {
   if (!have(puckMan) || !(powerPillDrops < powerPillMaxDrops)) return null;
 
   return (
-    <Tile linkedContent={puckMan} imageUrl="/images/itemimages/puckman.gif">
+    <Tile
+      linkedContent={puckMan}
+      imageUrl={`/images/itemimages/${puckMan.image || "puckman.gif"}`}
+    >
       {powerPillDrops < powerPillMaxDrops && (
         <Line>
           {powerPillDrops}/{powerPillMaxDrops} power pill{" "}

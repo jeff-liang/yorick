@@ -1,10 +1,9 @@
-import { haveEquipped, itemAmount, myPath, numericModifier } from "kolmafia";
+import { haveEquipped, itemAmount, numericModifier } from "kolmafia";
 import {
   $item,
   $items,
   $location,
   $monster,
-  $path,
   get,
   have,
   questStep,
@@ -14,7 +13,7 @@ import { FC } from "react";
 import Line from "../../components/Line";
 import Monsters from "../../components/Monsters";
 import QuestTile from "../../components/QuestTile";
-import { neededNinjaItems } from "../../questInfo/trapper";
+import { neededNinjaItems, yetiCount } from "../../questInfo/trapper";
 import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
 import { commaAnd, plural, truthy } from "../../util/text";
@@ -43,11 +42,6 @@ const Level8: FC = () => {
   );
 
   const coldRes = Math.floor(numericModifier("Cold Resistance"));
-
-  const yetiCount = Math.floor(
-    $location`Mist-Shrouded Peak`.turnsSpent /
-      (myPath() === $path`Avant Guard` ? 2 : 1),
-  );
 
   if (step === Step.FINISHED) return null;
 
@@ -146,8 +140,8 @@ const Level8: FC = () => {
             {coldRes >= 5
               ? "Fight "
               : `Get 5 cold resistance (+${5 - coldRes}) and fight `}
-            {yetiCount < 3
-              ? `${plural(3 - yetiCount, "yeti")} and Groar`
+            {yetiCount() < 3
+              ? `${plural(3 - yetiCount(), "yeti")} and Groar`
               : "Groar"}
             .
           </Line>,

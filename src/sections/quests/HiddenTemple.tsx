@@ -1,22 +1,19 @@
 import { Strong } from "@chakra-ui/react";
-import { hiddenTempleUnlocked, myMeat } from "kolmafia";
-import { $item, have } from "libram";
+import { myMeat } from "kolmafia";
+import { $item } from "libram";
 import { FC } from "react";
 
 import ForestNoncombatAdvice from "../../components/ForestNoncombatAdvice";
 import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
+import { hiddenTempleInfo } from "../../questInfo/hiddenTemple";
 import { inventoryLink } from "../../util/links";
 
 const HiddenTemple: FC = () => {
-  if (hiddenTempleUnlocked()) return null;
+  const info = hiddenTempleInfo();
+  if (info.completed) return null;
 
-  const needMap = !have($item`Spooky Temple map`);
-  const needCoin = !have($item`tree-holed coin`) && needMap;
-  const needFertilizer = !have($item`Spooky-Gro fertilizer`);
-  const needSapling = !have($item`spooky sapling`);
-
-  const ncsNeeded = +needMap + +needCoin + +needFertilizer + +needSapling;
+  const { needMap, needCoin, needFertilizer, needSapling, ncsNeeded } = info;
 
   return (
     <QuestTile
@@ -49,7 +46,7 @@ const HiddenTemple: FC = () => {
         <Line>
           Follow the old road → Talk to the hunter → Buy a tree for 100 Meat to
           obtain the spooky sapling.
-          {myMeat() < 100 ? (
+          {needSapling && myMeat() < 100 ? (
             <>
               {" "}
               <Strong color="red.solid">You need 100 meat!</Strong>

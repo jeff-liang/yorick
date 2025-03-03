@@ -14,12 +14,12 @@ import {
   AutumnAton,
   get,
   getKramcoWandererChance,
-  maxBy,
 } from "libram";
 import { FC, forwardRef } from "react";
 
 import MainLink from "../components/MainLink";
 import { Tooltip } from "../components/ui/tooltip";
+import { ENV_COLORS, getCMCInfo } from "../resourceInfo/cmc";
 import { haveUnrestricted } from "../util/available";
 import { plural } from "../util/text";
 
@@ -41,43 +41,14 @@ const Pill = forwardRef<HTMLSpanElement, BadgeProps>(
   ),
 );
 
-const ENV_COLORS: Record<string, string> = {
-  X: "gray.solid",
-  U: "red.solid",
-  I: "blue.solid",
-  O: "yellow.solid",
-};
-
-const ENV_RESULTS: Record<string, string> = {
-  X: "Fleshazole™",
-  U: "Breathitin™",
-  I: "Extrovermectin™",
-  O: "Homebodyl™",
-};
-
 const CMCTimeline: FC = () => {
-  const cabinet = $item`cold medicine cabinet`;
-  const workshed = getWorkshed();
-  const consults = get("_coldMedicineConsults");
-
-  if (workshed !== cabinet || consults >= 5) return null;
-
-  const nextConsult = get("_nextColdMedicineConsult");
-  const turnsToConsult = nextConsult - totalTurnsPlayed();
-
-  const environments = [...get("lastCombatEnvironments").toUpperCase()];
-  const counts: Record<string, number> = {};
-  for (const c of environments) {
-    counts[c] = (counts[c] ?? 0) + 1;
-  }
-  const maxEnvironment = maxBy(Object.keys(ENV_RESULTS), (c) => counts[c] ?? 0);
-  const result =
-    counts[maxEnvironment] >= 11 ? ENV_RESULTS[maxEnvironment] : ENV_RESULTS.X;
+  const cmcInfo = getCMCInfo();
+  if (!cmcInfo.available) return null;
 
   return (
     <Stack gap={1} align="flex-start">
       <Stack flexFlow="row wrap" gap={0.5} align="center">
-        {environments.map((c, index) => (
+        {cmcInfo.environments.map((c, index) => (
           <Badge
             key={index}
             w="14px"
@@ -94,19 +65,24 @@ const CMCTimeline: FC = () => {
       </Stack>
       <MainLink
         href={
-          turnsToConsult <= 0 ? "/campground.php?action=workshed" : undefined
+          cmcInfo.turnsToConsult <= 0
+            ? "/campground.php?action=workshed"
+            : undefined
         }
       >
         <Stack flexFlow="row wrap" gap={1} align="center">
           <Strong>
-            {turnsToConsult > 0 ? plural(turnsToConsult, "turn") : "NOW"}:
+            {cmcInfo.turnsToConsult > 0
+              ? plural(cmcInfo.turnsToConsult, "turn")
+              : "NOW"}
+            :
           </Strong>
           <Badge
             fontSize="xs"
             color="white"
-            bgColor={ENV_COLORS[maxEnvironment]}
+            bgColor={ENV_COLORS[cmcInfo.maxEnvironment]}
           >
-            {result}
+            {cmcInfo.result}
           </Badge>
         </Stack>
       </MainLink>

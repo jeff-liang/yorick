@@ -49,13 +49,6 @@ import { questStarted, Step } from "../../util/quest";
 import { renderSourceList, Source } from "../../util/source";
 import { plural } from "../../util/text";
 
-// Don't show items in cold res list if we already have them or if they're unavailable.
-function haveOrRestricted(thing: Item | Skill | Familiar): boolean {
-  // isUnrestricted has overloads for Item, Skill, Familiar.
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return !isUnrestricted(thing as any) || have(thing);
-}
-
 interface ColdResSource {
   thing: Skill | Item | Effect | Familiar | string;
   available: () => boolean;
@@ -66,14 +59,14 @@ function skill(skill: Skill): ColdResSource {
   const effect = toEffect(skill);
   return {
     thing: effect,
-    available: () => haveOrRestricted(skill) && !have(effect),
+    available: () => !haveUnrestricted(skill) && !have(effect),
   };
 }
 
 function equipment(item: Item, itemAvailable = () => true): ColdResSource {
   return {
     thing: item,
-    available: () => itemAvailable() && !haveOrRestricted(item),
+    available: () => itemAvailable() && !haveUnrestricted(item),
   };
 }
 
@@ -232,8 +225,12 @@ const Leveling: React.FC = () => {
     potion($item`scroll of minor invulnerability`, () =>
       haveUnrestricted($skill`Secret Door Awareness`),
     ),
-    potion($item`lotion of hotness`),
-    potion($item`lotion of spookiness`),
+    potion($item`lotion of hotness`, () =>
+      have($skill`Advanced Saucecrafting`),
+    ),
+    potion($item`lotion of spookiness`, () =>
+      have($skill`Advanced Saucecrafting`),
+    ),
     potion($item`cold powder`),
     potion($item`cyan seashell`, () => haveUnrestricted($item`Beach Comb`)),
 

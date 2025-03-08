@@ -14,6 +14,7 @@ import Line from "../../components/Line";
 import QuestTile from "../../components/QuestTile";
 import { haveUnrestricted } from "../../util/available";
 import { inventoryLink } from "../../util/links";
+import { isNormalCampgroundPath } from "../../util/paths";
 import { commaAnd, plural, pluralItem } from "../../util/text";
 
 const Island: FC = () => {
@@ -43,6 +44,7 @@ const Island: FC = () => {
   const haveTakerspace =
     (have(takerspace) &&
       isUnrestricted(takerspace) &&
+      isNormalCampgroundPath() &&
       !get("_workshedItemUsed")) ||
     takerspaceInstalled;
   const canMakePirateDinghy =

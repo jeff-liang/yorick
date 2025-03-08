@@ -117,7 +117,7 @@ const TinyStillsuit = () => {
     18: 1282,
   };
 
-  if (!haveStillsuit) return null;
+  if (!haveStillsuit || !canGuzzleSweat) return null;
 
   return (
     <Tile

@@ -7,6 +7,7 @@ import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { haveUnrestricted } from "../../../util/available";
 import { inventoryLink } from "../../../util/links";
+import { isNormalCampgroundPath } from "../../../util/paths";
 import { commaAnd, plural, truthy } from "../../../util/text";
 
 interface Supplies {
@@ -34,7 +35,8 @@ const TakerSpace: FC = () => {
 
   if (
     !haveUnrestricted(takerSpace) ||
-    (!takerSpaceInstalled && get("_workshedItemUsed"))
+    (!takerSpaceInstalled && get("_workshedItemUsed")) ||
+    !isNormalCampgroundPath()
   ) {
     return null;
   }

@@ -1,6 +1,6 @@
 import { Strong } from "@chakra-ui/react";
 import { haveEquipped } from "kolmafia";
-import { $item, $skill, get, have } from "libram";
+import { $effect, $item, $skill, get, have } from "libram";
 import { FC } from "react";
 
 import Line from "../../../components/Line";
@@ -50,7 +50,7 @@ const TranscendentOlfaction: FC = () => {
   const { total, rendered } = renderSourceList(TRACK_SOURCES);
   if (total === 0) return null;
 
-  const tracked = get("olfactedMonster");
+  const tracked = have($effect`On the Trail`) && get("olfactedMonster");
 
   return (
     <Tile

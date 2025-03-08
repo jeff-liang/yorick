@@ -119,9 +119,14 @@ const BlackForest: FC = () => {
         [
           Step.STARTED,
           <>
-            {turnsUntilNC > 0 && combatRate < 5 && (
-              <Line color="red.solid">Run +5% combat to avoid NC.</Line>
+            {blackForest.turnsSpent === 0 && (
+              <Line>Intro NC first to get black map.</Line>
             )}
+            {blackForest.turnsSpent > 0 &&
+              turnsUntilNC > 0 &&
+              combatRate < 5 && (
+                <Line color="red.solid">Run +5% combat to avoid NC.</Line>
+              )}
             {!haveGaloshes &&
               (have($item`blackberry`, 3) ? (
                 <Line>

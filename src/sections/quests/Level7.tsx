@@ -6,6 +6,7 @@ import {
   initiativeModifier,
   itemDropModifier,
   itemType,
+  myLocation,
 } from "kolmafia";
 import {
   $item,
@@ -85,7 +86,7 @@ const Level7: FC = () => {
   const swordEquipped = itemType(equippedItem($slot`weapon`)) === "sword";
   const inCyrpt =
     $locations`The Defiled Nook, The Defiled Niche, The Defiled Cranny, The Defiled Alcove`.includes(
-      get("lastAdventure") ?? $location.none,
+      myLocation(),
     );
 
   // get all current evilness

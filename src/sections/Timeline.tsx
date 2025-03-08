@@ -169,7 +169,7 @@ const Timeline: FC<StackProps> = (props) => {
       turns: turnsToNextGuaranteedFight,
       color: "purple.solid",
       label: (turns) =>
-        `${plural(turns, "turn")} until guaranteed Kramco fight.`,
+        `${plural(turns, "turn")} until guaranteed Kramco fight (${(100 * getKramcoWandererChance()).toFixed(0)}% now).`,
     });
   }
 

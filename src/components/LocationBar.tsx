@@ -1,6 +1,6 @@
 import { Box, Flex, Stack, StackProps, Text } from "@chakra-ui/react";
 import { appearanceRates, combatRateModifier, myLocation } from "kolmafia";
-import { $location, clamp } from "libram";
+import { $location } from "libram";
 import {
   ChangeEvent,
   FC,
@@ -101,7 +101,6 @@ const LocationBar: FC<StackProps> = (props) => {
     .split(";")
     .filter((s) => s);
   const combatModifier = combatRateModifier();
-  const combatRate = clamp(location.combatPercent + combatModifier, 0, 100);
 
   const isOpen = showDetails || autoHasFocus;
 
@@ -179,7 +178,7 @@ const LocationBar: FC<StackProps> = (props) => {
             `${location.combatPercent}% C`
           ) : (
             <>
-              {combatRate}% C ({combatModifier > 0 && "+"}
+              {location.combatPercent}% C ({combatModifier > 0 && "+"}
               {combatModifier}%)
             </>
           )}

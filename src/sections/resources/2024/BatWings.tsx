@@ -45,7 +45,7 @@ const BatWings: FC = () => {
   return (
     <Tile linkedContent={batWings}>
       {batWingsEquipped && (
-        <Line color="purple.solid">Nanananananananana Battyman!</Line>
+        <Line color="purple.solid">Nanananananananana Bat-like man!</Line>
       )}
       {!batWingsEquipped &&
         !canAdventure(

@@ -50,7 +50,13 @@ const BlackForest: FC = () => {
         haveGaloshes && !haveGaloshesEquipped,
         <Line>Equip your blackberry galoshes.</Line>,
       ],
-      [combatRate < 5, <Line>Ensure you have +5% combat.</Line>],
+      [
+        !haveGaloshes &&
+          blackForest.turnsSpent > 0 &&
+          turnsUntilNC > 0 &&
+          combatRate < 5,
+        <Line>Ensure you have +5% combat.</Line>,
+      ],
       [turnsUntilNC === 0, <Line>Noncombat guaranteed next turn.</Line>],
     ];
     return {
@@ -112,23 +118,34 @@ const BlackForest: FC = () => {
         ],
         [3, "/adventure.php?snarfblat=355"],
       ])}
+      linkEntireTile
       minLevel={11}
     >
-      {atStep(step, [
-        [Step.UNSTARTED, <Line>Visit Council to start quest.</Line>],
-        [
-          Step.STARTED,
-          <>
-            {blackForest.turnsSpent === 0 && (
-              <Line>Intro NC first to get black map.</Line>
+      {step === Step.UNSTARTED && <Line>Visit Council to start quest.</Line>}
+      {step === Step.STARTED && (
+        <>
+          {blackForest.turnsSpent === 0 && (
+            <Line>Intro NC first to get black map.</Line>
+          )}
+          <Line>
+            Noncombat guaranteed{" "}
+            {turnsUntilNC === 0
+              ? "next turn"
+              : `in ${plural(turnsUntilNC, "turn")}`}
+            .
+          </Line>
+          {haveGaloshes &&
+            blackForest.turnsSpent > 0 &&
+            turnsUntilNC > 0 &&
+            combatRate < 5 && (
+              <Line color="red.solid">Run +5% combat to avoid NC.</Line>
             )}
-            {blackForest.turnsSpent > 0 &&
-              turnsUntilNC > 0 &&
-              combatRate < 5 && (
-                <Line color="red.solid">Run +5% combat to avoid NC.</Line>
+          {!haveGaloshes && (
+            <>
+              {turnsUntilNC > 0 && combatRate > -25 && (
+                <Line>Run -25% combat to find NC.</Line>
               )}
-            {!haveGaloshes &&
-              (have($item`blackberry`, 3) ? (
+              {have($item`blackberry`, 3) ? (
                 <Line>
                   Bring 3 blackberries to the cobbler for blackberry galoshes.
                 </Line>
@@ -141,35 +158,27 @@ const BlackForest: FC = () => {
                   )}{" "}
                   from blackberry bush.
                 </Line>
-              ))}
-            <Line>Black Forest exploration: ~{forestProgress * 20}%.</Line>
-            <Line>
-              Noncombat guaranteed{" "}
-              {turnsUntilNC === 0
-                ? "next turn"
-                : `in ${plural(turnsUntilNC, "turn")}`}
-              .
-            </Line>
-          </>,
-        ],
-        [
-          2,
-          have($item`forged identification documents`) ? (
-            <Line>Take a trip at The Shore, Inc.</Line>
-          ) : (
-            <>
-              <Line>
-                Buy the forged identification documents for{" "}
-                {npcPrice($item`forged identification documents`)} meat.
-              </Line>
-              <Line>
-                Consider buying a can of black paint for desert exploration.
-              </Line>
+              )}
             </>
-          ),
-        ],
-        [3, <Line>Take a trip at The Shore, Inc.</Line>],
-      ])}
+          )}
+          <Line>Black Forest exploration: ~{forestProgress * 20}%.</Line>
+        </>
+      )}
+      {[1, 2].includes(step) &&
+        (have($item`forged identification documents`) ? (
+          <Line>Take a trip at The Shore, Inc.</Line>
+        ) : (
+          <>
+            <Line>
+              Buy the forged identification documents for{" "}
+              {npcPrice($item`forged identification documents`)} meat.
+            </Line>
+            <Line>
+              Consider buying a can of black paint for desert exploration.
+            </Line>
+          </>
+        ))}
+      {step === 3 && <Line>Take a trip at The Shore, Inc.</Line>}
     </QuestTile>
   );
 };

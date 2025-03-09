@@ -42,18 +42,20 @@ const Leprecondo = () => {
       id: "leprecondo-setup-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/leprecondo.gif",
-      node: haveLeprecondo && furniture.every((f) => f === "empty") && (
-        <Tile
-          header="Set up Leprecondo"
-          imageUrl="/images/itemimages/leprecondo.gif"
-          href={inventoryActionLink("leprecondo")}
-          linkEntireTile
-        >
-          Install furniture in your Leprecondo for bonuses.
-        </Tile>
-      ),
+      node: haveLeprecondo &&
+        rearrangesLeft > 0 &&
+        furniture.every((f) => f === "empty") && (
+          <Tile
+            header="Set up Leprecondo"
+            imageUrl="/images/itemimages/leprecondo.gif"
+            href={inventoryActionLink("leprecondo")}
+            linkEntireTile
+          >
+            Install furniture in your Leprecondo for bonuses.
+          </Tile>
+        ),
     }),
-    [furniture, haveLeprecondo],
+    [furniture, haveLeprecondo, rearrangesLeft],
   );
 
   if (!haveLeprecondo) return null;

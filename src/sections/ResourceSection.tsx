@@ -17,6 +17,7 @@ import AvantGuard from "./path/AvantGuard";
 import FrumiousBandersnatch from "./resources/2009/FrumiousBandersnatch";
 import DeckOfEveryCard from "./resources/2015/DeckOfEveryCard";
 import PuckMan from "./resources/2015/PuckMan";
+import DetectiveSchool from "./resources/2016/DetectiveSchool";
 import Floundry from "./resources/2016/Floundry";
 import ProtonicAcceleratorPack from "./resources/2016/ProtonicAcceleratorPack";
 import SourceTerminal from "./resources/2016/SourceTerminal";
@@ -76,7 +77,6 @@ import SpringShoes from "./resources/2024/SpringShoes";
 import TakerSpace from "./resources/2024/TakerSpace";
 import TearawayPants from "./resources/2024/TearawayPants";
 import CyberRealm from "./resources/2025/CyberRealm";
-import Leprecondo from "./resources/2025/Leprecondo";
 import McHugeLargeDuffelBag from "./resources/2025/McHugeLargeDuffelBag";
 import Numberology from "./resources/skill/Numberology";
 import TranscendentOlfaction from "./resources/skill/TranscendentOlfaction";
@@ -109,8 +109,9 @@ const ResourceSection = () => (
 
       /* 2016 */
       Floundry,
-      ProtonicAcceleratorPack,
       SourceTerminal,
+      DetectiveSchool,
+      ProtonicAcceleratorPack,
       Thanksgarden,
 
       /* 2017 */
@@ -186,7 +187,6 @@ const ResourceSection = () => (
       /* 2025 */
       CyberRealm,
       McHugeLargeDuffelBag,
-      Leprecondo,
 
       /* Nags only */
       BeatenUp,

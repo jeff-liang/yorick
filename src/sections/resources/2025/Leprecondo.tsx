@@ -1,14 +1,33 @@
 import { List } from "@chakra-ui/react";
 import { Item, totalTurnsPlayed } from "kolmafia";
 import { $item, clamp, get, Leprecondo as LeprecondoLibram } from "libram";
+import { ReactNode } from "react";
 
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
-import { inventoryActionLink } from "../../../util/links";
-import { commaOr, plural } from "../../../util/text";
+import { inventoryActionLink, inventoryUseLink } from "../../../util/links";
+import { capitalizeWords, commaOr, plural } from "../../../util/text";
+
+function renderNeedBonus(
+  need: LeprecondoLibram.Need,
+  bonus?: LeprecondoLibram.Result,
+): ReactNode {
+  return (
+    <>
+      {capitalizeWords(need)}:{" "}
+      {!bonus
+        ? "nothing."
+        : bonus instanceof Item
+          ? `${bonus.identifierString}.`
+          : Array.isArray(bonus)
+            ? `${commaOr(bonus)}.`
+            : `${bonus.effect.identifierString} (${bonus.duration} turns).`}
+    </>
+  );
+}
 
 const Leprecondo = () => {
   const leprecondo = $item`Leprecondo`;
@@ -29,6 +48,7 @@ const Leprecondo = () => {
       : unusedNeeds;
 
   const furniture = LeprecondoLibram.installedFurniture();
+  const furnitureEmpty = furniture.every((f) => f === "empty");
   const bonuses = LeprecondoLibram.furnitureBonuses();
   const nextBenefits = nextNeedPossibilities.map(
     (need): [LeprecondoLibram.Need, LeprecondoLibram.Result | undefined] => [
@@ -42,20 +62,18 @@ const Leprecondo = () => {
       id: "leprecondo-setup-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/leprecondo.gif",
-      node: haveLeprecondo &&
-        rearrangesLeft > 0 &&
-        furniture.every((f) => f === "empty") && (
-          <Tile
-            header="Set up Leprecondo"
-            imageUrl="/images/itemimages/leprecondo.gif"
-            href={inventoryActionLink("leprecondo")}
-            linkEntireTile
-          >
-            Install furniture in your Leprecondo for bonuses.
-          </Tile>
-        ),
+      node: haveLeprecondo && rearrangesLeft > 0 && furnitureEmpty && (
+        <Tile
+          header="Set up Leprecondo"
+          imageUrl="/images/itemimages/leprecondo.gif"
+          href={inventoryActionLink("leprecondo")}
+          linkEntireTile
+        >
+          Install furniture in your Leprecondo for bonuses.
+        </Tile>
+      ),
     }),
-    [furniture, haveLeprecondo, rearrangesLeft],
+    [furnitureEmpty, haveLeprecondo, rearrangesLeft],
   );
 
   if (!haveLeprecondo) return null;
@@ -64,25 +82,24 @@ const Leprecondo = () => {
     <Tile
       header="Leprecondo"
       imageUrl="/images/itemimages/leprecondo.gif"
-      href="/inv_use.php?whichitem=11861"
+      href={inventoryUseLink(leprecondo)}
     >
       <Line>
-        Next need check in {plural(nextNeedCheck, "turn")}. Possibilities:
+        Next need check in {plural(nextNeedCheck, "turn")}.
+        {nextBenefits.length > 0 &&
+          (nextBenefits.length > 1 ? (
+            " Possibilities:"
+          ) : (
+            <> {renderNeedBonus(nextBenefits[0][0], nextBenefits[0][1])}</>
+          ))}
       </Line>
-      <List.Root>
-        {nextBenefits.map(
-          ([need, bonus]) =>
-            bonus && (
-              <List.Item key={need}>
-                {bonus instanceof Item
-                  ? `${bonus.identifierString}.`
-                  : Array.isArray(bonus)
-                    ? `${commaOr(bonus)}.`
-                    : `${bonus.effect.identifierString} (${bonus.duration} turns).`}
-              </List.Item>
-            ),
-        )}
-      </List.Root>
+      {nextBenefits.length > 1 && (
+        <List.Root>
+          {nextBenefits.map(([need, bonus]) => (
+            <List.Item key={need}>{renderNeedBonus(need, bonus)}</List.Item>
+          ))}
+        </List.Root>
+      )}
 
       {rearrangesLeft > 0 && (
         <Line>

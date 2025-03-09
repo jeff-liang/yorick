@@ -28,6 +28,7 @@ const Leprecondo = () => {
       ? [needOrder[needIndex + 1]]
       : unusedNeeds;
 
+  const furniture = LeprecondoLibram.installedFurniture();
   const bonuses = LeprecondoLibram.furnitureBonuses();
   const nextBenefits = nextNeedPossibilities.map(
     (need): [LeprecondoLibram.Need, LeprecondoLibram.Result | undefined] => [
@@ -41,7 +42,7 @@ const Leprecondo = () => {
       id: "leprecondo-setup-nag",
       priority: NagPriority.LOW,
       imageUrl: "/images/itemimages/leprecondo.gif",
-      node: haveLeprecondo && rearrangesLeft === 3 && (
+      node: haveLeprecondo && furniture.every((f) => f === "empty") && (
         <Tile
           header="Set up Leprecondo"
           imageUrl="/images/itemimages/leprecondo.gif"
@@ -52,7 +53,7 @@ const Leprecondo = () => {
         </Tile>
       ),
     }),
-    [haveLeprecondo, rearrangesLeft],
+    [furniture, haveLeprecondo],
   );
 
   if (!haveLeprecondo) return null;

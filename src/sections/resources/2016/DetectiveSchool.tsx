@@ -2,6 +2,7 @@ import { availableAmount, isUnrestricted } from "kolmafia";
 import { $item, get, have } from "libram";
 
 import Line from "../../../components/Line";
+import LinkBlock from "../../../components/LinkBlock";
 import Tile from "../../../components/Tile";
 import { canPossiblyDrink, canPossiblyEat } from "../../../util/player";
 import { inRun } from "../../../util/quest";
@@ -62,16 +63,14 @@ const DetectiveSchool = () => {
       )}
 
       {inRun() && copDollarsHave > 0 && buyables.length > 0 && (
-        <>
-          <Line href="/shop.php?whichshop=detective">
-            You have {plural(copDollarsHave, copDollar)}.
-          </Line>
+        <LinkBlock href="/shop.php?whichshop=detective">
+          <Line>You have {plural(copDollarsHave, copDollar)}.</Line>
           {buyables.length > 0 && (
             <Line>
               Buy {buyables.length === 1 ? buyables[0] : buyables.join(" or ")}.
             </Line>
           )}
-        </>
+        </LinkBlock>
       )}
     </Tile>
   );

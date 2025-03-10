@@ -1,3 +1,4 @@
+import { decodeEntity } from "html-entities";
 import { canAdventure, Item, Location, Skill } from "kolmafia";
 import { questStep } from "libram";
 import { getHashIfAvailable } from "tome-kolmafia-lib";
@@ -13,6 +14,7 @@ function urlFilter(filter: string | Item) {
     filter = filter.identifierString;
     filter = filter.replace(/^\[[0-9]+\]/, "");
   }
+  filter = decodeEntity(filter);
   return encodeURIComponent(filter);
 }
 
@@ -44,6 +46,7 @@ export function skillLink(filter: string | Skill) {
   if (typeof filter !== "string") {
     filter = filter.identifierString;
   }
+  filter = decodeEntity(filter);
   return `/skillz.php#:~:text=${encodeURIComponent(filter)}`;
 }
 

@@ -9,10 +9,10 @@ export interface SectionProps extends StackProps {
 }
 
 const Section: FC<SectionProps> = ({ name, children, ...props }) => (
-  <Stack gap={2} align="stretch" px={2} pb={1} {...props}>
+  <Stack gap={[1, 2]} align="stretch" px={2} pb={1} {...props}>
     <H2>{name}</H2>
     <Stack
-      gap={2}
+      gap={[1, 2]}
       _empty={{
         _after: {
           content: '"Nothing to display."',

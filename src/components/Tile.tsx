@@ -104,7 +104,7 @@ const Tile: FC<TileProps> = ({
     </Collapsible.Root>
   );
   const tileContents = (
-    <VStack align="start" gap={0.5}>
+    <VStack align="start" gap={["1px", 0.5]}>
       <HStack gap={1} align="center">
         <H3 lineHeight="tall">
           {!collapsed && !disabled && href ? (

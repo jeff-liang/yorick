@@ -105,6 +105,7 @@ const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
                   .filter(({ type }) => type !== "p" && type !== "a")
                   .map(({ drop, rate }) => (
                     <Text
+                      key={drop.name}
                       {...(importantItems.includes(drop.name)
                         ? { bg: "cyan.subtle", fontWeight: "bold" }
                         : undefined)}

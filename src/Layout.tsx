@@ -16,27 +16,17 @@ import NagSection from "./sections/NagSection";
 import QuestSection from "./sections/QuestSection";
 import ResourceSection from "./sections/ResourceSection";
 import { inDevMode } from "./util/env";
-import {
-  close,
-  setup3Frames,
-  setup4Frames,
-  visibleFrameCount,
-} from "./util/frames";
+import { close, isChatPaneVisible, toggleChatPane } from "./util/frames";
 
 const Layout = () => {
   const { triggerHardRefresh } = useContext(RefreshContext);
   const tooltipRef = useRef<HTMLElement>();
   const [buttonsVisible, setButtonsVisible] = useState(false);
 
-  const [chatFrameOpen, setChatFrameOpen] = useState(visibleFrameCount() >= 4);
+  const [chatFrameOpen, setChatFrameOpen] = useState(isChatPaneVisible());
   const toggleChatFrame = useCallback(() => {
-    if (visibleFrameCount() >= 4) {
-      setup3Frames();
-      setChatFrameOpen(false);
-    } else {
-      setup4Frames();
-      setChatFrameOpen(true);
-    }
+    const isVisible = toggleChatPane();
+    setChatFrameOpen(isVisible);
   }, []);
 
   useEffect(() => {

@@ -6,6 +6,9 @@ import {
   setupFrameWidths,
 } from "./util/frames";
 
+/**
+ * Type declarations for global window properties used by YORICK
+ */
 declare global {
   interface Window {
     revision?: number;
@@ -18,53 +21,67 @@ declare global {
   }
 }
 
-const SINCE_REVISION = 28385;
+const MINIMUM_REVISION = 28385;
 
+/**
+ * Initializes or reloads the YORICK interface
+ * This function handles:
+ * 1. Version compatibility check
+ * 2. Frame setup and management
+ * 3. Integration with existing chat pane
+ */
 function load() {
-  const revision = window.parent.parent.revision;
-  // Skip version check for custom build.
-  if (revision !== undefined && 0 < revision && revision < SINCE_REVISION) {
-    document.body.innerHTML = `<h1>Need KoLmafia at least version ${SINCE_REVISION} for YORICK (you have ${revision}).</h1>`;
+  // Check KoLmafia version compatibility
+  const currentRevision = window.parent.parent.revision;
+  if (
+    currentRevision !== undefined &&
+    0 < currentRevision &&
+    currentRevision < MINIMUM_REVISION
+  ) {
+    document.body.innerHTML = `<h1>Need KoLmafia at least version ${MINIMUM_REVISION} for YORICK (you have ${currentRevision}).</h1>`;
     return;
   }
 
+  // Verify frames are available
   const allFrames = getFrames();
   if (!allFrames) {
     console.error("YORICK: Failed to load. Can't find frames.");
     return;
   }
 
-  const yorickPane = allFrames.yorickpane;
-  if (yorickPane) {
-    // Already opened YORICK. Reload pane.
-    // eslint-disable-next-line no-self-assign
-    yorickPane.location.href = yorickPane.location.href;
+  const existingYorickPane = allFrames.yorickpane;
+  if (existingYorickPane) {
+    // Reload existing YORICK pane
+    existingYorickPane.location.reload();
   } else {
-    // Find chat pane and its parent frameset
+    // Initialize new YORICK pane
     const { pane: chatPane, parent: framesetParent } = findChatPane();
     if (!chatPane || !framesetParent) {
       console.error("YORICK: Failed to load. Can't find chat pane.");
       return;
     }
 
-    // Create yorick frame
-    const frameElement = getParent().document.createElement("frame");
-    frameElement.id = "yorickpane";
-    frameElement.src = "/yorick/index.html";
+    // Create and configure YORICK frame
+    const yorickFrame = getParent().document.createElement("frame");
+    yorickFrame.id = "yorickpane";
+    yorickFrame.src = "/yorick/index.html";
 
-    // Insert before chat pane
-    framesetParent.insertBefore(frameElement, chatPane.frameElement);
+    // Insert YORICK frame before chat pane
+    framesetParent.insertBefore(yorickFrame, chatPane.frameElement);
 
-    // Setup frame widths
+    // Configure frame layout
     setupFrameWidths(framesetParent, chatIsCurrentlyActive(chatPane));
 
-    if (frameElement.contentWindow) {
-      allFrames.yorickpane = frameElement.contentWindow;
+    // Register YORICK frame in global frames
+    if (yorickFrame.contentWindow) {
+      allFrames.yorickpane = yorickFrame.contentWindow;
     }
   }
 
-  const mainpane = getParent().frames.mainpane;
-  if (mainpane) mainpane.location.href = "/main.php";
+  // Refresh main pane
+  const mainPane = getParent().frames.mainpane;
+  if (mainPane) mainPane.location.href = "/main.php";
 }
 
+// Initialize YORICK
 load();

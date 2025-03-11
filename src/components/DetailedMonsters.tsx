@@ -103,9 +103,9 @@ const DetailedMonsters: FC<DetailedMonstersProps> = ({ location }) => {
               <Card.Description fontSize={["2xs", "xs"]}>
                 {itemDropsArray(monster)
                   .filter(({ type }) => type !== "p" && type !== "a")
-                  .map(({ drop, rate }) => (
+                  .map(({ drop, rate }, index) => (
                     <Text
-                      key={drop.name}
+                      key={index} // these arrays shouldn't change.
                       {...(importantItems.includes(drop.name)
                         ? { bg: "cyan.subtle", fontWeight: "bold" }
                         : undefined)}

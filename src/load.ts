@@ -56,7 +56,7 @@ function load() {
   } else {
     // Initialize new YORICK pane
     const { pane: chatPane, parent: framesetParent } = findChatPane();
-    if (!chatPane || !framesetParent) {
+    if (!chatPane?.frameElement || !framesetParent) {
       console.error("YORICK: Failed to load. Can't find chat pane.");
       return;
     }
@@ -66,11 +66,26 @@ function load() {
     yorickFrame.id = "yorickpane";
     yorickFrame.src = "/yorick/index.html";
 
+    const chatPaneElement = chatPane.frameElement;
+    const chatPaneIndex = [...framesetParent.childNodes].indexOf(
+      chatPaneElement,
+    );
+    if (chatPaneIndex <= 0) {
+      console.error(
+        "YORICK: Failed to load. Can't find chat pane frame element.",
+      );
+      return;
+    }
+
     // Insert YORICK frame before chat pane
     framesetParent.insertBefore(yorickFrame, chatPane.frameElement);
 
     // Configure frame layout
-    setupFrameWidths(framesetParent, chatIsCurrentlyActive(chatPane));
+    setupFrameWidths(
+      framesetParent,
+      chatPaneIndex,
+      chatIsCurrentlyActive(chatPane),
+    );
 
     // Register YORICK frame in global frames
     if (yorickFrame.contentWindow) {

@@ -66,19 +66,16 @@ export function findChatPane(): {
  */
 export function setupFrameWidths(
   parent: HTMLFrameSetElement,
+  chatPaneIndex: number,
   chatActive: boolean,
 ): void {
-  if (!parent) return;
-
   const columnWidths = parent.cols.split(",");
-  const chatPaneIndex = columnWidths.length - 1;
-  const yorickPaneIndex = chatPaneIndex;
 
   // Set chat pane width based on active state
   columnWidths[chatPaneIndex] = chatActive ? columnWidths[chatPaneIndex] : "0";
 
   // Insert yorick width before chat pane
-  columnWidths.splice(yorickPaneIndex, 0, DEFAULT_YORICK_WIDTH);
+  columnWidths.splice(chatPaneIndex, 0, DEFAULT_YORICK_WIDTH);
 
   parent.cols = columnWidths.join(",");
 }
@@ -92,9 +89,7 @@ export function toggleChatPane(): boolean {
   if (!chatPane?.frameElement || !framesetParent) return false;
 
   const columnWidths = framesetParent.cols.split(",");
-  const chatIndex = Array.from(framesetParent.children).indexOf(
-    chatPane.frameElement,
-  );
+  const chatIndex = [...framesetParent.children].indexOf(chatPane.frameElement);
 
   if (chatIndex < 0) return false;
 
@@ -117,9 +112,7 @@ export function isChatPaneVisible(): boolean {
   if (!chatPane?.frameElement || !framesetParent) return false;
 
   const columnWidths = framesetParent.cols.split(",");
-  const chatIndex = Array.from(framesetParent.children).indexOf(
-    chatPane.frameElement,
-  );
+  const chatIndex = [...framesetParent.children].indexOf(chatPane.frameElement);
 
   return chatIndex >= 0 && columnWidths[chatIndex] !== "0";
 }

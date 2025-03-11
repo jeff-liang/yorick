@@ -1,9 +1,9 @@
 import {
   chatIsCurrentlyActive,
+  findChatPane,
   getFrames,
   getParent,
-  setup3Frames,
-  setup4Frames,
+  setupFrameWidths,
 } from "./util/frames";
 
 declare global {
@@ -31,36 +31,32 @@ function load() {
   const allFrames = getFrames();
   if (!allFrames) {
     console.error("YORICK: Failed to load. Can't find frames.");
+    return;
   }
 
   const yorickPane = allFrames.yorickpane;
   if (yorickPane) {
+    // Already opened YORICK. Reload pane.
     // eslint-disable-next-line no-self-assign
     yorickPane.location.href = yorickPane.location.href;
   } else {
-    const rootset = allFrames.rootset;
-    if (!rootset) {
-      console.error("YORICK: Failed to load. Can't find rootset.");
+    // Find chat pane and its parent frameset
+    const { pane: chatPane, parent: framesetParent } = findChatPane();
+    if (!chatPane || !framesetParent) {
+      console.error("YORICK: Failed to load. Can't find chat pane.");
       return;
     }
 
-    const chatpane = allFrames.chatpane;
-    if (chatpane === undefined) {
-      console.error("YORICK: Failed to load. Can't find chatpane.");
-      return;
-    }
-
+    // Create yorick frame
     const frameElement = getParent().document.createElement("frame");
     frameElement.id = "yorickpane";
     frameElement.src = "/yorick/index.html";
 
-    rootset.insertBefore(frameElement, chatpane.frameElement);
+    // Insert before chat pane
+    framesetParent.insertBefore(frameElement, chatPane.frameElement);
 
-    if (chatIsCurrentlyActive()) {
-      setup4Frames();
-    } else {
-      setup3Frames();
-    }
+    // Setup frame widths
+    setupFrameWidths(framesetParent, chatIsCurrentlyActive(chatPane));
 
     if (frameElement.contentWindow) {
       allFrames.yorickpane = frameElement.contentWindow;

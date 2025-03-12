@@ -8,7 +8,7 @@ import Tile from "../../../components/Tile";
 import { NagPriority } from "../../../contexts/NagContext";
 import useNag from "../../../hooks/useNag";
 import { haveUnrestricted } from "../../../util/available";
-import { inventoryActionLink, inventoryUseLink } from "../../../util/links";
+import { inventoryUseLink } from "../../../util/links";
 import { capitalizeWords, commaOr, plural } from "../../../util/text";
 
 function renderNeedBonus(
@@ -66,14 +66,14 @@ const Leprecondo = () => {
         <Tile
           header="Set up Leprecondo"
           imageUrl="/images/itemimages/leprecondo.gif"
-          href={inventoryActionLink("leprecondo")}
+          href={inventoryUseLink(leprecondo)}
           linkEntireTile
         >
           Install furniture in your Leprecondo for bonuses.
         </Tile>
       ),
     }),
-    [furnitureEmpty, haveLeprecondo, rearrangesLeft],
+    [furnitureEmpty, haveLeprecondo, leprecondo, rearrangesLeft],
   );
 
   if (!haveLeprecondo) return null;

@@ -59,7 +59,7 @@ function skill(skill: Skill): ColdResSource {
   const effect = toEffect(skill);
   return {
     thing: effect,
-    available: () => !haveUnrestricted(skill) && !have(effect),
+    available: () => haveUnrestricted(skill) && !have(effect),
   };
 }
 

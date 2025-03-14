@@ -34,8 +34,11 @@ const Leprecondo = () => {
   const haveLeprecondo = haveUnrestricted(leprecondo);
 
   const rearrangesLeft = LeprecondoLibram.rearrangesRemaining();
-  const nextNeedCheck =
-    clamp(totalTurnsPlayed() - get("leprecondoLastNeedChange"), 0, 4) % 5;
+  const nextNeedCheck = clamp(
+    5 - (totalTurnsPlayed() - get("leprecondoLastNeedChange")),
+    0,
+    5,
+  );
   const needOrder = LeprecondoLibram.needOrder();
   const currentNeed = LeprecondoLibram.currentNeed();
   const needIndex = needOrder.indexOf(currentNeed);

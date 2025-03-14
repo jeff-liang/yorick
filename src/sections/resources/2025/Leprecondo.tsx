@@ -46,7 +46,7 @@ const Leprecondo = () => {
     (need) => !needOrder.includes(need),
   );
   const nextNeedPossibilities =
-    needIndex >= 0 && needIndex + 1 < needOrder.length
+    needIndex >= 0 && (needIndex + 1) % 6 < needOrder.length
       ? [needOrder[needIndex + 1]]
       : unusedNeeds;
 

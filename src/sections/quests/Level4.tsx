@@ -10,6 +10,7 @@ import {
 import { FC } from "react";
 
 import Line from "../../components/Line";
+import LinkBlock from "../../components/LinkBlock";
 import QuestTile from "../../components/QuestTile";
 import { inventoryLink } from "../../util/links";
 import { atStep, Step } from "../../util/quest";
@@ -44,6 +45,7 @@ const BAT_WINGS_LOCATIONS: BatWingLocation[] = [
   },
 ];
 
+const BAT_HOLE_URL = "/place.php?whichplace=bathole";
 const Level4: FC = () => {
   const step = questStep("questL04Bat");
   const bodyguards = $location`The Boss Bat's Lair`.turnsSpent;
@@ -67,29 +69,34 @@ const Level4: FC = () => {
       imageUrl="/images/adventureimages/bossbat.gif"
       href={atStep(step, [
         [Step.UNSTARTED, "/council.php"],
-        [Step.STARTED, "/place.php?whichplace=bathole"],
+        [Step.STARTED, BAT_HOLE_URL],
         [4, "/council.php"],
       ])}
       minLevel={4}
     >
-      {step >= 0 && !have($item`enchanted bean`) && !beanstalk && (
-        <Line>
-          Get an enchanted bean from{" "}
-          {haveBatWings ? "bat wings NC" : "a beanbat"} for the level 10 quest.
-        </Line>
-      )}
-      {haveBatWings && availableLocations.length > 0 && step < 3 && (
-        <Line>
-          {haveBatWingsEquipped
-            ? "Equip bat wings and adventure "
-            : "Adventure"}{" "}
-          for stuff in{" "}
-          {commaAnd(
-            availableLocations.map(({ name, item }) => `${name} (${item})`),
-          )}
-          .
-        </Line>
-      )}
+      <LinkBlock
+        href={haveBatWingsEquipped ? BAT_HOLE_URL : inventoryLink(batWings)}
+      >
+        {step >= 0 && !have($item`enchanted bean`) && !beanstalk && (
+          <Line>
+            Get an enchanted bean from{" "}
+            {haveBatWings ? "bat wings NC" : "a beanbat"} for the level 10
+            quest.
+          </Line>
+        )}
+        {haveBatWings && availableLocations.length > 0 && step < 3 && (
+          <Line>
+            {!haveBatWingsEquipped
+              ? "Equip bat wings and adventure "
+              : "Adventure"}{" "}
+            for stuff in{" "}
+            {commaAnd(
+              availableLocations.map(({ name, item }) => `${name} (${item})`),
+            )}
+            .
+          </Line>
+        )}
+      </LinkBlock>
       {step === Step.UNSTARTED ? (
         <Line>Visit Council to start quest.</Line>
       ) : step < 3 ? (

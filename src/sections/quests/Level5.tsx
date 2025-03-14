@@ -1,4 +1,4 @@
-import { haveOutfit, isWearingOutfit } from "kolmafia";
+import { haveEquipped } from "kolmafia";
 import { $effect, $item, $location, get, have, questStep } from "libram";
 import { FC } from "react";
 
@@ -13,9 +13,11 @@ const Level5: FC = () => {
 
   const turnsSpent = $location`The Outskirts of Cobb's Knob`.turnsSpent;
   const haveKey = have($item`Knob Goblin Encryption Key`);
-  const outfit = haveOutfit("Knob Goblin Harem Girl Disguise");
+  const veil = $item`Knob Goblin harem veil`;
+  const pants = $item`Knob Goblin harem pants`;
+  const outfit = have(veil) && have(pants);
   const havePerfume = have($effect`Knob Goblin Perfume`);
-  const equippedOutfit = isWearingOutfit("Knob Goblin Harem Girl Disguise");
+  const equippedOutfit = haveEquipped(veil) && haveEquipped(pants);
   const haveFireExtinguisher = have($item`industrial fire extinguisher`);
   const fireExtinguisherCharge = get("_fireExtinguisherCharge");
   const haremExtinguished = get("fireExtinguisherHaremUsed");

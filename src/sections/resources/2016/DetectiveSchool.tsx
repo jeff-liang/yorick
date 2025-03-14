@@ -44,6 +44,14 @@ const DetectiveSchool = () => {
     buyables.push("a -combat potion (50 turns)");
   }
 
+  if (
+    casesRemaining === 0 &&
+    haveBadge &&
+    !(inRun() && copDollarsHave > 0 && buyables.length > 0)
+  ) {
+    return null;
+  }
+
   return (
     <Tile
       header="Detective School"

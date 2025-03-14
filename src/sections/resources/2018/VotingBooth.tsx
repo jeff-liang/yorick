@@ -115,7 +115,7 @@ const VotingBooth = () => {
   );
 
   if (!canVote && !haveSticker) return null;
-  if (voteFreeFightsLeft === 0) return null;
+  if (haveSticker && voteFreeFightsLeft === 0) return null;
 
   return (
     <Tile
@@ -134,7 +134,7 @@ const VotingBooth = () => {
           delay.
         </Line>
       )}
-      {voteFreeFightsLeft > 0 && !voteFightNow && (
+      {voteFreeFightsLeft > 0 && (
         <Line>
           Voting monster appears in {plural(turnsBeforeVoteFight, "turn")}.{" "}
           <AdviceTooltipIcon

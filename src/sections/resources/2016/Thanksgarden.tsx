@@ -2,6 +2,7 @@ import { Box, Text } from "@chakra-ui/react";
 import {
   availableAmount,
   getCampground,
+  isUnrestricted,
   mySpleenUse,
   spleenLimit,
 } from "kolmafia";
@@ -11,6 +12,7 @@ import AdviceTooltipText from "../../../components/AdviceTooltipText";
 import Line from "../../../components/Line";
 import Tile from "../../../components/Tile";
 import { inventoryLink } from "../../../util/links";
+import { canAccessGarden } from "../../../util/paths";
 import { commaAnd, commaSeparate, plural } from "../../../util/text";
 
 const Thanksgarden = () => {
@@ -36,6 +38,8 @@ const Thanksgarden = () => {
     $location`The Haunted Ballroom`,
     $location`The Boss Bat's Lair`,
   ].filter((l) => l.turnsSpent >= 1);
+
+  if (!canAccessGarden() || !isUnrestricted(cornucopia)) return null;
 
   if (
     !have(cornucopia) &&

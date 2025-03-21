@@ -16,7 +16,8 @@ const Level5: FC = () => {
   const veil = $item`Knob Goblin harem veil`;
   const pants = $item`Knob Goblin harem pants`;
   const outfit = have(veil) && have(pants);
-  const havePerfume = have($effect`Knob Goblin Perfume`);
+  const havePerfume = have($item`Knob Goblin perfume`);
+  const havePerfumeEffect = have($effect`Knob Goblin Perfume`);
   const equippedOutfit = haveEquipped(veil) && haveEquipped(pants);
   const haveFireExtinguisher = have($item`industrial fire extinguisher`);
   const fireExtinguisherCharge = get("_fireExtinguisherCharge");
@@ -68,15 +69,24 @@ const Level5: FC = () => {
                       disguise.
                     </Line>
                   )}
+                {!havePerfume && (
+                  <Line>Get perfume if you can from a Knob Goblin Madam.</Line>
+                )}
               </>
             ) : !equippedOutfit ? (
               <Line href={inventoryLink("Knob Goblin harem")}>
                 Equip the Harem Girl Disguise.
               </Line>
-            ) : !havePerfume ? (
-              <Line>
-                Adventure in the Harem to get the Knob Goblin Perfume effect.
-              </Line>
+            ) : !havePerfumeEffect ? (
+              havePerfume ? (
+                <Line href={inventoryLink($item`Knob Goblin perfume`)}>
+                  Use Knob Goblin perfume to get effect.
+                </Line>
+              ) : (
+                <Line href={parentPlaceLink($location`Cobb's Knob Harem`)}>
+                  Adventure in the Harem to get the Knob Goblin Perfume effect.
+                </Line>
+              )
             ) : (
               <Line>Fight the Knob Goblin King!</Line>
             ),

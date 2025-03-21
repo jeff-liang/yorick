@@ -80,7 +80,7 @@ const LUCKY_SOURCES: LuckySource[] = [
       ),
     render: () => {
       const aug2Skill = $skill`Aug. 2nd: Find an Eleven-Leaf Clover Day`;
-      return <Line href={skillLink(aug2Skill)}>1 August 16th use.</Line>;
+      return <Line href={skillLink(aug2Skill)}>1 August 2nd use.</Line>;
     },
   },
   {

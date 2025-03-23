@@ -14,6 +14,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: "build",
+    minify: false,
     rollupOptions: {
       input: {
         index: path.resolve(__dirname, "./index.html"),

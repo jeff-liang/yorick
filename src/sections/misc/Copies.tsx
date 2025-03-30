@@ -151,6 +151,15 @@ const Copies: FC = () => {
           );
         },
       },
+      {
+        name: "phosphor traces",
+        remaining: () => get("phosphorTracesUses"),
+        render: ({ remaining }) => (
+          <Line>
+            {pluralCopies(remaining, "phosphor traces")}.
+          </Line>
+        ),
+      },
     ],
     [maxObservedProfWeight],
   );

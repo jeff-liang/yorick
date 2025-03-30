@@ -87,6 +87,11 @@ const freeRunSources: FreeRunSource[] = [
     thing: $item`Louder Than Bomb`,
     remaining: () => availableAmount($item`Louder Than Bomb`),
   },
+  {
+    source: $skill`Punch Out your Foe`,
+    thing: $skill`Punch Out your Foe`,
+    remaining: () => get("preworkoutPowderUses"),
+  },
 ];
 
 const FreeRuns: FC = () => {

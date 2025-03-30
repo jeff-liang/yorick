@@ -47,7 +47,7 @@ const Leprecondo = () => {
   );
   const nextNeedPossibilities =
     needIndex >= 0 && (needIndex + 1) % 6 < needOrder.length
-      ? [needOrder[needIndex + 1]]
+      ? [needOrder[(needIndex + 1) % 6]]
       : unusedNeeds;
 
   const furniture = LeprecondoLibram.installedFurniture();

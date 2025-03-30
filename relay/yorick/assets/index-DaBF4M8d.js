@@ -49567,7 +49567,7 @@ const Leprecondo = () => {
   const unusedNeeds = NEEDS.filter(
     (need) => !needOrder$1.includes(need)
   );
-  const nextNeedPossibilities = needIndex >= 0 && (needIndex + 1) % 6 < needOrder$1.length ? [needOrder$1[needIndex + 1]] : unusedNeeds;
+  const nextNeedPossibilities = needIndex >= 0 && (needIndex + 1) % 6 < needOrder$1.length ? [needOrder$1[(needIndex + 1) % 6]] : unusedNeeds;
   const furniture = installedFurniture();
   const furnitureEmpty = furniture.every((f2) => f2 === "empty");
   const bonuses = furnitureBonuses();

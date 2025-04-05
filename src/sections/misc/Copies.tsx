@@ -153,15 +153,15 @@ const Copies: FC = () => {
       },
       {
         name: "phosphor traces",
-        remaining: () => get("phosphorTracesUses") + clamp(
-          availableAmount($item`phosphor traces`),
-          0,
-          Math.floor((spleenLimit() - mySpleenUse()) / 3),
-        ),
+        remaining: () =>
+          get("phosphorTracesUses") +
+          clamp(
+            availableAmount($item`phosphor traces`),
+            0,
+            Math.floor((spleenLimit() - mySpleenUse()) / 3),
+          ),
         render: ({ remaining }) => (
-          <Line>
-            {pluralCopies(remaining, "phosphor trace")}.
-          </Line>
+          <Line>{pluralCopies(remaining, "phosphor trace")}.</Line>
         ),
       },
     ],
